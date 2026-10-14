@@ -46,3 +46,6 @@ scratch/
 network-test.mjs
 test-rls-auth.mjs
 supabase/.temp/
+
+.vercel
+.env*
