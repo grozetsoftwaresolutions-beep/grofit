@@ -170,10 +170,10 @@ export default function CalorieCalculatorPage() {
             <Flame className="h-6 w-6" />
           </div>
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white md:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
               Calorie Calculator
             </h1>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 md:text-base">
+            <p className="text-sm text-zinc-400 md:text-base">
               Calculate your basal metabolic rate (BMR), maintenance energy (TDEE), and daily nutrition targets using the scientific Mifflin–St Jeor equation.
             </p>
           </div>

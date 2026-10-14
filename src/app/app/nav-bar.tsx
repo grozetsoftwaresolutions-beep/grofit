@@ -13,11 +13,13 @@ import {
   CheckSquare,
   Flame,
   LogOut,
+  Home,
 } from 'lucide-react';
 import { signout } from '@/app/auth/actions';
 import { STRINGS } from '@/lib/i18n/strings';
 
 const DESKTOP_NAV_ITEMS = [
+  { href: '/app', label: 'Dashboard', matchExact: true },
   { href: '/app/workout-plans', label: STRINGS.nav.workoutPlans },
   { href: '/app/my-workout-plan', label: STRINGS.nav.myWorkoutPlan },
   { href: '/app/diet-foods', label: STRINGS.nav.dietFoods },
@@ -26,6 +28,12 @@ const DESKTOP_NAV_ITEMS = [
 ];
 
 const MOBILE_DOCK_ITEMS = [
+  {
+    href: '/app',
+    label: 'Home',
+    icon: Home,
+    matchExact: true,
+  },
   {
     href: '/app/workout-plans',
     label: 'Workouts',
@@ -48,12 +56,6 @@ const MOBILE_DOCK_ITEMS = [
     href: '/app/habits',
     label: 'Habits',
     icon: CheckSquare,
-    matchExact: false,
-  },
-  {
-    href: '/app/calorie-calculator',
-    label: 'Calories',
-    icon: Flame,
     matchExact: false,
   },
 ];
@@ -102,7 +104,9 @@ export function AppNavBar() {
               className="hidden md:flex items-center gap-1.5 lg:gap-2 text-sm font-medium"
             >
               {DESKTOP_NAV_ITEMS.map((item) => {
-                const isActive = pathname.startsWith(item.href);
+                const isActive = item.matchExact
+                  ? pathname === item.href
+                  : (item.href === '/app' ? pathname === '/app' : pathname.startsWith(item.href));
                 return (
                   <Link
                     key={item.href}
@@ -180,7 +184,9 @@ export function AppNavBar() {
           >
             <nav aria-label="Mobile Drawer Navigation" className="flex flex-col gap-1">
               {DESKTOP_NAV_ITEMS.map((item) => {
-                const isActive = pathname.startsWith(item.href);
+                const isActive = item.matchExact
+                  ? pathname === item.href
+                  : (item.href === '/app' ? pathname === '/app' : pathname.startsWith(item.href));
                 return (
                   <Link
                     key={item.href}

@@ -11,10 +11,10 @@ export default function SettingsLandingPage() {
   return (
     <div className="max-w-4xl mx-auto space-y-6">
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           {STRINGS.settings.title}
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-xs sm:text-sm text-zinc-400">
           {STRINGS.settings.subtitle}
         </p>
       </div>

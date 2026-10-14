@@ -230,10 +230,10 @@ function TemplateDetailContent(props: {
               </span>
               <span className="text-xs text-zinc-500 dark:text-zinc-400">Source: {template.sourceReference}</span>
             </div>
-            <h1 className="mt-2 text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white">
+            <h1 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">
               {template.name}
             </h1>
-            <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+            <p className="mt-1 text-xs sm:text-sm text-zinc-400">
               {template.description}
             </p>
           </div>

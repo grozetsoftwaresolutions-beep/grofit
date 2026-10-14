@@ -567,7 +567,7 @@ function HabitTrackerContent() {
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
             <Sparkles className="h-4 w-4" /> Daily Routine &amp; Streaks
           </div>
-          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">Habit Tracker</h1>
+          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Habit Tracker</h1>
           <p className="mt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-lg">
             Track daily habits, build momentum, and review continuous streaks in your local timezone.
           </p>

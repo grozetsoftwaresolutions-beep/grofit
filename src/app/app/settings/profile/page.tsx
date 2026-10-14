@@ -122,10 +122,10 @@ export default function ProfileSettingsPage() {
       </div>
 
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-zinc-50">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           {STRINGS.profile.title}
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400">
+        <p className="mt-1 text-xs sm:text-sm text-zinc-400">
           {STRINGS.profile.subtitle}
         </p>
       </div>

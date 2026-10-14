@@ -130,10 +130,10 @@ export default function WorkoutPlansPage() {
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
           Workout Plans
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-1 text-xs sm:text-sm text-zinc-400">
           Discover vetted workout programmes and browse the canonical exercise library.
         </p>
       </div>

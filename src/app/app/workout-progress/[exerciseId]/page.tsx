@@ -436,7 +436,7 @@ function ProgressContent(props: {
               </span>
               <span className="text-xs text-zinc-500 dark:text-zinc-400">Independent Performance History</span>
             </div>
-            <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+            <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
               {exercise?.name || 'Exercise Progress'}
             </h1>
             {exercise?.description && (

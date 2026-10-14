@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #000000;
   --foreground: #ffffff;
@@ -11,6 +13,26 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+/* Enforce crisp high-contrast headings and text */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff !important;
+}
+
+h1[class*="text-zinc-"],
+h2[class*="text-zinc-"],
+h3[class*="text-zinc-"],
+h4[class*="text-zinc-"],
+h5[class*="text-zinc-"],
+h6[class*="text-zinc-"] {
+  color: #ffffff !important;
+}
+
+.dark p.text-zinc-900,
+.dark span.text-zinc-900,
+.dark div.text-zinc-900 {
+  color: #ffffff !important;
 }
 
 body {

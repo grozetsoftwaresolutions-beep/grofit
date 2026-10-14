@@ -524,7 +524,7 @@ export default function MyWorkoutPlanPage() {
       {/* Top Header & Plan Actions */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+          <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
             My Workout Plan
           </h1>
           <p className="mt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">

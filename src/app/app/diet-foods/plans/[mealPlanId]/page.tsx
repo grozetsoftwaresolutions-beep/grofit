@@ -289,9 +289,9 @@ function SavedPlanContent({ planId }: { planId: string }) {
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
               <Utensils className="h-4 w-4" /> Personal Meal Plan
             </div>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">{plan.name}</h1>
-            <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
-              Daily Target: <strong className="text-zinc-900 dark:text-white">{plan.targetKcal ? `${plan.targetKcal} kcal` : 'Not specified'}</strong>
+            <h1 className="mt-1 text-2xl font-bold tracking-tight text-white">{plan.name}</h1>
+            <p className="mt-1 text-xs text-zinc-400">
+              Daily Target: <strong className="text-white">{plan.targetKcal ? `${plan.targetKcal} kcal` : 'Not specified'}</strong>
             </p>
           </div>
 

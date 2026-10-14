@@ -475,10 +475,10 @@ function DietFoodsContent() {
           <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
             <Utensils className="h-4 w-4 text-zinc-900 dark:text-white" /> Nutrition & Planning
           </div>
-          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-3xl">
+          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
             Diet Foods Catalogue & Meal Planning
           </h1>
-          <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl">
+          <p className="mt-1 text-xs sm:text-sm text-zinc-400 max-w-2xl">
             Verified Indian Food Composition Tables (IFCT 2017) and USDA nutrition records tailored for authentic Tamil Nadu eating patterns.
           </p>
         </div>
