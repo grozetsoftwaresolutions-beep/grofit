@@ -10,7 +10,7 @@ export const STRINGS = {
   nav: {
     skipToMain: 'Skip to main content',
     calorieCalculator: 'Calorie Calculator',
-    workoutPlans: 'Workout Plans',
+    workoutPlans: 'Workout Templates',
     myWorkoutPlan: 'My Workout Plan',
     habitTracker: 'Habit Tracker',
     dietFoods: 'Diet Foods',

@@ -191,7 +191,7 @@ function TemplateDetailContent(props: {
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white min-h-[44px] py-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Workout Plans
+          Back to Workout Templates
         </Link>
         <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
           {error || 'Template not found.'}
@@ -209,7 +209,7 @@ function TemplateDetailContent(props: {
           className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white min-h-[44px] py-2"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Workout Plans
+          Back to Workout Templates
         </Link>
 
         <button

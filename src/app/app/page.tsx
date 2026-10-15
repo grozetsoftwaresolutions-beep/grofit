@@ -315,7 +315,7 @@ export default function AppPage() {
           >
             <span className="flex items-center gap-2 truncate">
               <Dumbbell className="h-4 w-4 text-white shrink-0" />
-              <span className="truncate">Workout Plans</span>
+              <span className="truncate">Workout Templates</span>
             </span>
             <ChevronRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-white shrink-0 ml-1" />
           </Link>
@@ -756,14 +756,14 @@ export default function AppPage() {
                 <Dumbbell className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
-                Workout Plans
+                Workout Templates
               </h3>
               <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
                 Browse canonical exercise rankings, EMG studies, and full routine templates with video tutorials.
               </p>
             </div>
             <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
-              <span>Explore Plans</span>
+              <span>Explore Templates</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
           </Link>
