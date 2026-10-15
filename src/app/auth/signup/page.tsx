@@ -5,7 +5,7 @@ import Link from 'next/link'
 async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: string }> }) {
   const message = (await searchParams).message
   return (
-    <form className="flex flex-col gap-4">
+    <form action={signup} className="flex flex-col gap-4">
       {message && (
         <div
           role="status"
@@ -24,6 +24,7 @@ async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: 
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           placeholder="name@example.com"
           required
         />
@@ -37,11 +38,13 @@ async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: 
           id="password"
           name="password"
           type="password"
+          autoComplete="new-password"
           placeholder="••••••••"
           required
         />
       </div>
       <button
+        type="submit"
         formAction={signup}
         className="mt-2 flex min-h-[46px] w-full items-center justify-center rounded-xl bg-white py-2.5 text-sm font-bold text-black transition hover:bg-zinc-200 active:scale-95 shadow-md shadow-white/5 cursor-pointer"
       >

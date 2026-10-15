@@ -11,7 +11,7 @@ async function LoginForm({ searchParams }: { searchParams: Promise<{ message?: s
     )
   )
   return (
-    <form className="flex flex-col gap-4">
+    <form action={login} className="flex flex-col gap-4">
       {message && (
         <div
           role="status"
@@ -34,6 +34,7 @@ async function LoginForm({ searchParams }: { searchParams: Promise<{ message?: s
           id="email"
           name="email"
           type="email"
+          autoComplete="email"
           placeholder="name@example.com"
           required
         />
@@ -47,11 +48,13 @@ async function LoginForm({ searchParams }: { searchParams: Promise<{ message?: s
           id="password"
           name="password"
           type="password"
+          autoComplete="current-password"
           placeholder="••••••••"
           required
         />
       </div>
       <button
+        type="submit"
         formAction={login}
         className="mt-2 flex min-h-[46px] w-full items-center justify-center rounded-xl bg-white py-2.5 text-sm font-bold text-black transition hover:bg-zinc-200 active:scale-95 shadow-md shadow-white/5 cursor-pointer"
       >
