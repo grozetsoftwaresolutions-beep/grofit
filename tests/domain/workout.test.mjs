@@ -6,7 +6,9 @@ import {
   validateName,
   validateSortOrder,
   validateApplyTemplateMode,
-  isValidUUID
+  isValidUUID,
+  normalizeVideoUrl,
+  validateVideoUrl
 } from "../../src/lib/workout/domain.ts";
 
 test("validateSets respects domain rules (DP-2 / Section 5.3)", () => {
@@ -88,4 +90,29 @@ test("isValidUUID validates UUID v4 strings", () => {
   assert.equal(isValidUUID(""), false);
   assert.equal(isValidUUID(null), false);
   assert.equal(isValidUUID(12345), false);
+});
+
+test("normalizeVideoUrl adds https scheme and trims whitespace", () => {
+  assert.equal(normalizeVideoUrl(null), null);
+  assert.equal(normalizeVideoUrl(""), null);
+  assert.equal(normalizeVideoUrl("   "), null);
+  assert.equal(normalizeVideoUrl("https://www.youtube.com/watch?v=123"), "https://www.youtube.com/watch?v=123");
+  assert.equal(normalizeVideoUrl("http://www.youtube.com/watch?v=123"), "http://www.youtube.com/watch?v=123");
+  assert.equal(normalizeVideoUrl("youtu.be/abc"), "https://youtu.be/abc");
+  assert.equal(normalizeVideoUrl("www.youtube.com/watch?v=abc"), "https://www.youtube.com/watch?v=abc");
+});
+
+test("validateVideoUrl validates URLs properly and enforces limits", () => {
+  assert.deepEqual(validateVideoUrl(null), { valid: true, value: null });
+  assert.deepEqual(validateVideoUrl(""), { valid: true, value: null });
+  assert.deepEqual(validateVideoUrl("  "), { valid: true, value: null });
+  assert.deepEqual(validateVideoUrl("https://youtube.com/shorts/abc"), { valid: true, value: "https://youtube.com/shorts/abc" });
+  assert.deepEqual(validateVideoUrl("youtu.be/xyz"), { valid: true, value: "https://youtu.be/xyz" });
+
+  // Excessive length (> 500 chars)
+  const tooLong = "https://youtube.com/watch?v=" + "a".repeat(500);
+  assert.equal(validateVideoUrl(tooLong).valid, false);
+
+  // Non-string
+  assert.equal(validateVideoUrl(12345).valid, false);
 });

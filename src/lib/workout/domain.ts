@@ -112,3 +112,38 @@ export function isValidUUID(id: unknown): boolean {
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   return uuidRegex.test(id);
 }
+
+/**
+ * Normalizes video URL (e.g. YouTube link) by trimming and ensuring https:// protocol.
+ */
+export function normalizeVideoUrl(url: unknown): string | null {
+  if (url === null || url === undefined || url === '') return null;
+  if (typeof url !== 'string') return null;
+  const trimmed = url.trim();
+  if (trimmed.length === 0) return null;
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed;
+  }
+  return `https://${trimmed}`;
+}
+
+/**
+ * Validates video URL if present (must be under 500 characters).
+ */
+export function validateVideoUrl(url: unknown): { valid: boolean; value: string | null; error?: string } {
+  if (url === null || url === undefined || url === '') {
+    return { valid: true, value: null };
+  }
+  if (typeof url !== 'string') {
+    return { valid: false, value: null, error: 'Video URL must be a valid text string.' };
+  }
+  const normalized = normalizeVideoUrl(url);
+  if (!normalized) {
+    return { valid: true, value: null };
+  }
+  if (normalized.length > 500) {
+    return { valid: false, value: null, error: 'Video URL cannot exceed 500 characters.' };
+  }
+  return { valid: true, value: normalized };
+}
+

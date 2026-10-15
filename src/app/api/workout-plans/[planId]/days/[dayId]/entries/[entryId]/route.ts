@@ -1,6 +1,12 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedSupabaseClient } from '@/lib/supabase/auth-helper';
-import { isValidUUID, validateSets, validateReps, validateSortOrder } from '@/lib/workout/domain';
+import {
+  isValidUUID,
+  validateSets,
+  validateReps,
+  validateSortOrder,
+  validateVideoUrl,
+} from '@/lib/workout/domain';
 
 export async function PATCH(
   request: Request,
@@ -41,10 +47,11 @@ export async function PATCH(
       );
     }
 
-    const { sets, reps, sortOrder } = body as {
+    const { sets, reps, sortOrder, videoUrl } = body as {
       sets?: unknown;
       reps?: unknown;
       sortOrder?: unknown;
+      videoUrl?: unknown;
     };
 
     const updates: Record<string, unknown> = {};
@@ -100,6 +107,27 @@ export async function PATCH(
       updates.sort_order = sortValidation.value;
     }
 
+    if (videoUrl !== undefined) {
+      if (videoUrl === null || videoUrl === '') {
+        updates.video_url = null;
+      } else {
+        const videoVal = validateVideoUrl(videoUrl);
+        if (!videoVal.valid) {
+          return NextResponse.json(
+            {
+              error: {
+                code: 'VALIDATION_ERROR',
+                message: videoVal.error || 'Invalid video URL.',
+                fieldErrors: { videoUrl: videoVal.error || 'Invalid video URL.' },
+              },
+            },
+            { status: 400 }
+          );
+        }
+        updates.video_url = videoVal.value;
+      }
+    }
+
     if (Object.keys(updates).length === 0) {
       return NextResponse.json(
         { error: { code: 'VALIDATION_ERROR', message: 'No valid fields provided for update.' } },
@@ -113,7 +141,7 @@ export async function PATCH(
       .eq('id', entryId)
       .eq('workout_plan_day_id', dayId)
       .eq('user_id', user.id)
-      .select('id, exercise_id, exercise_name_snapshot, sets, reps, sort_order, updated_at')
+      .select('id, exercise_id, exercise_name_snapshot, video_url, sets, reps, sort_order, updated_at')
       .single();
 
     if (error || !updatedEntry) {
@@ -128,6 +156,7 @@ export async function PATCH(
         id: updatedEntry.id,
         exerciseId: updatedEntry.exercise_id,
         exerciseName: updatedEntry.exercise_name_snapshot,
+        videoUrl: updatedEntry.video_url,
         sets: updatedEntry.sets,
         reps: updatedEntry.reps,
         sortOrder: updatedEntry.sort_order,

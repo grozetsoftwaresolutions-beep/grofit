@@ -99,6 +99,7 @@ export default function MyWorkoutPlanPage() {
 
   // Exercise picker modal
   const [addExerciseModalOpen, setAddExerciseModalOpen] = useState(false);
+  const [addExerciseTab, setAddExerciseTab] = useState<'curated' | 'custom'>('curated');
   const [targetDayId, setTargetDayId] = useState<string | null>(null);
   const [canonicalExercises, setCanonicalExercises] = useState<CanonicalExercise[]>([]);
   const [selectedExerciseId, setSelectedExerciseId] = useState<string>('');
@@ -108,6 +109,14 @@ export default function MyWorkoutPlanPage() {
   const [exerciseSearchQuery, setExerciseSearchQuery] = useState<string>('');
   const [selectedMuscleFilter, setSelectedMuscleFilter] = useState<string>('All');
   const [topRankedOnlyFilter, setTopRankedOnlyFilter] = useState<boolean>(true);
+
+  // Custom workout states
+  const [customWorkoutName, setCustomWorkoutName] = useState<string>('');
+  const [customMuscleGroup, setCustomMuscleGroup] = useState<string>('Full Body');
+  const [customVideoUrl, setCustomVideoUrl] = useState<string>('');
+  const [customSetsInput, setCustomSetsInput] = useState<string>('3');
+  const [customRepsInput, setCustomRepsInput] = useState<string>('10');
+  const [isSubmittingCustom, setIsSubmittingCustom] = useState<boolean>(false);
 
   const exerciseMuscleGroups = [
     'All',
@@ -132,6 +141,7 @@ export default function MyWorkoutPlanPage() {
     exerciseName: string;
     sets: string;
     reps: string;
+    videoUrl: string;
   } | null>(null);
   const [editEntryError, setEditEntryError] = useState<string | null>(null);
 
@@ -337,6 +347,12 @@ export default function MyWorkoutPlanPage() {
     setExerciseSearchQuery('');
     setSelectedMuscleFilter('All');
     setTopRankedOnlyFilter(true);
+    setAddExerciseTab('curated');
+    setCustomWorkoutName('');
+    setCustomMuscleGroup('Full Body');
+    setCustomVideoUrl('');
+    setCustomSetsInput('3');
+    setCustomRepsInput('10');
     setAddExerciseModalOpen(true);
 
     try {
@@ -367,7 +383,7 @@ export default function MyWorkoutPlanPage() {
     }
   }
 
-  // Add exercise to day
+  // Add curated exercise to day
   async function handleAddExercise() {
     if (!currentPlan || !targetDayId || !selectedExerciseId) return;
     setAddEntryError(null);
@@ -409,7 +425,65 @@ export default function MyWorkoutPlanPage() {
     }
   }
 
-  // Save edited sets & reps
+  // Add custom workout to day
+  async function handleAddCustomWorkout() {
+    if (!currentPlan || !targetDayId) return;
+    setAddEntryError(null);
+
+    const nameVal = validateName(customWorkoutName, 'Workout name');
+    if (!nameVal.valid) {
+      setAddEntryError(nameVal.error || 'Please enter a valid workout name');
+      return;
+    }
+
+    const setsValidation = validateSets(customSetsInput);
+    if (!setsValidation.valid) {
+      setAddEntryError(setsValidation.error || 'Invalid sets value (must be 1–20)');
+      return;
+    }
+
+    const repsValidation = validateReps(customRepsInput);
+    if (!repsValidation.valid) {
+      setAddEntryError(repsValidation.error || 'Invalid reps value (must be 1–200)');
+      return;
+    }
+
+    try {
+      setIsSubmittingCustom(true);
+      const res = await fetch(
+        `/api/workout-plans/${currentPlan.id}/days/${targetDayId}/entries`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            customExerciseName: nameVal.value,
+            muscleGroup: customMuscleGroup,
+            videoUrl: customVideoUrl.trim() || null,
+            sets: setsValidation.value,
+            reps: repsValidation.value,
+          }),
+        }
+      );
+
+      if (!res.ok) {
+        const errJson = await res.json();
+        throw new Error(errJson.error?.message || 'Failed to add custom workout.');
+      }
+
+      setAddExerciseModalOpen(false);
+      setCustomWorkoutName('');
+      setCustomVideoUrl('');
+      setCustomSetsInput('3');
+      setCustomRepsInput('10');
+      await loadCurrentPlan(currentPlan.id);
+    } catch (err: unknown) {
+      setAddEntryError(err instanceof Error ? err.message : 'Error adding custom workout.');
+    } finally {
+      setIsSubmittingCustom(false);
+    }
+  }
+
+  // Save edited sets, reps & videoUrl
   async function handleSaveEditedEntry() {
     if (!currentPlan || !editingEntry) return;
     setEditEntryError(null);
@@ -435,10 +509,14 @@ export default function MyWorkoutPlanPage() {
           body: JSON.stringify({
             sets: setsValidation.value,
             reps: repsValidation.value,
+            videoUrl: editingEntry.videoUrl ? editingEntry.videoUrl.trim() : null,
           }),
         }
       );
-      if (!res.ok) throw new Error('Failed to update exercise.');
+      if (!res.ok) {
+        const errJson = await res.json();
+        throw new Error(errJson.error?.message || 'Failed to update exercise.');
+      }
       setEditEntryModalOpen(false);
       setEditingEntry(null);
       await loadCurrentPlan(currentPlan.id);
@@ -722,13 +800,18 @@ export default function MyWorkoutPlanPage() {
                                 <span className="text-sm font-semibold text-zinc-900 dark:text-white">
                                   {entry.exerciseName}
                                 </span>
+                                {entry.sourceLabel === 'Custom' && (
+                                  <span className="rounded-full bg-amber-500/10 border border-amber-500/30 px-2 py-0.5 text-[10px] font-bold text-amber-500 dark:text-amber-400">
+                                    Custom
+                                  </span>
+                                )}
                                 {entry.muscleGroup && (
                                   <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
                                     {entry.muscleGroup}
                                   </span>
                                 )}
                               </div>
-                              {entry.sourceLabel && entry.sourceLabel !== entry.exerciseName && (
+                              {entry.sourceLabel && entry.sourceLabel !== entry.exerciseName && entry.sourceLabel !== 'Custom' && (
                                 <span className="text-xs text-zinc-400">
                                   Label: {entry.sourceLabel}
                                 </span>
@@ -755,11 +838,12 @@ export default function MyWorkoutPlanPage() {
                                 href={entry.videoUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 min-h-[32px]"
+                                className="inline-flex items-center gap-1.5 rounded-lg border border-red-500/20 bg-red-500/10 px-2.5 py-1 text-xs font-semibold text-red-600 hover:bg-red-500/20 active:scale-95 dark:border-red-500/30 dark:bg-red-950/40 dark:text-red-400 min-h-[32px]"
+                                title="Watch YouTube Tutorial"
                               >
-                                <Play className="h-3 w-3 text-red-600 fill-red-600" />
-                                <span>Demo</span>
-                                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                                <Play className="h-3 w-3 text-red-600 fill-red-600 dark:text-red-400 dark:fill-red-400" />
+                                <span>Tutorial</span>
+                                <ExternalLink className="h-3 w-3 opacity-60" />
                               </a>
                             )}
 
@@ -800,14 +884,15 @@ export default function MyWorkoutPlanPage() {
                                   dayId: day.id,
                                   entryId: entry.id,
                                   exerciseName: entry.exerciseName,
-                                  sets: entry.sets?.toString() || '',
-                                  reps: entry.reps?.toString() || '',
+                                  sets: entry.sets?.toString() || '3',
+                                  reps: entry.reps?.toString() || '10',
+                                  videoUrl: entry.videoUrl || '',
                                 });
                                 setEditEntryError(null);
                                 setEditEntryModalOpen(true);
                               }}
-                              className="rounded p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-white"
-                              title="Edit Sets/Reps"
+                              className="rounded p-1 text-zinc-400 hover:text-zinc-700 dark:hover:text-white min-h-[32px] min-w-[32px] flex items-center justify-center"
+                              title="Edit Prescription & Video"
                             >
                               <Edit2 className="h-3.5 w-3.5" />
                             </button>
@@ -937,7 +1022,7 @@ export default function MyWorkoutPlanPage() {
         </div>
       )}
 
-      {/* Modal: Evidence-Based Exercise Picker */}
+      {/* Modal: Exercise Picker & Custom Workout Creator */}
       {addExerciseModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm">
           <div className="flex h-[92vh] max-h-[820px] w-full max-w-4xl flex-col rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
@@ -949,11 +1034,11 @@ export default function MyWorkoutPlanPage() {
                     <Sparkles className="h-3.5 w-3.5" />
                   </span>
                   <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-                    Select Evidence-Based Workout
+                    Add Workout to Plan
                   </h3>
                 </div>
                 <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                  Sports-science ranked movements for maximal hypertrophy (at least 5 top-ranked workouts per muscle group).
+                  Select an evidence-based exercise or create your own custom workout with a YouTube tutorial.
                 </p>
               </div>
               <button
@@ -964,272 +1049,464 @@ export default function MyWorkoutPlanPage() {
               </button>
             </div>
 
-            {/* Filter & Search Bar */}
-            <div className="border-b border-zinc-200 bg-zinc-50/70 p-4 dark:border-zinc-800 dark:bg-zinc-900/50">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
-                  <input
-                    type="text"
-                    value={exerciseSearchQuery}
-                    onChange={(e) => setExerciseSearchQuery(e.target.value)}
-                    placeholder="Search exercise, muscle target, or mechanism..."
-                    className="w-full rounded-lg border border-zinc-200 bg-white py-1.5 pl-9 pr-3 text-xs text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:focus:border-white"
-                  />
-                </div>
-
-                {/* Top 5 Ranked Toggle */}
-                <button
-                  type="button"
-                  onClick={() => setTopRankedOnlyFilter(!topRankedOnlyFilter)}
-                  className={`flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
-                    topRankedOnlyFilter
-                      ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                      : 'border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
-                  }`}
-                >
-                  <Award className="h-3.5 w-3.5" />
-                  <span>Top 5 Hypertrophy Ranked</span>
-                  {topRankedOnlyFilter && <span className="ml-0.5 text-[10px] opacity-80">(Active)</span>}
-                </button>
-              </div>
-
-              {/* Muscle Group Horizontal Filter Pills */}
-              <div className="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
-                <Filter className="mr-1 h-3.5 w-3.5 shrink-0 text-zinc-400" />
-                {exerciseMuscleGroups.map((muscle) => (
-                  <button
-                    key={muscle}
-                    type="button"
-                    onClick={() => setSelectedMuscleFilter(muscle)}
-                    className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition ${
-                      selectedMuscleFilter === muscle
-                        ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
-                        : 'bg-white text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700'
-                    }`}
-                  >
-                    {muscle}
-                  </button>
-                ))}
-              </div>
+            {/* Tab Switcher */}
+            <div className="flex border-b border-zinc-200 bg-zinc-50/70 px-5 pt-2 dark:border-zinc-800 dark:bg-zinc-900/50">
+              <button
+                type="button"
+                onClick={() => {
+                  setAddExerciseTab('curated');
+                  setAddEntryError(null);
+                }}
+                className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs sm:text-sm font-semibold transition ${
+                  addExerciseTab === 'curated'
+                    ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white'
+                    : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+                }`}
+              >
+                <Award className="h-4 w-4" />
+                <span>Evidence-Based Library</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAddExerciseTab('custom');
+                  setAddEntryError(null);
+                }}
+                className={`flex items-center gap-2 border-b-2 px-4 py-2.5 text-xs sm:text-sm font-semibold transition ${
+                  addExerciseTab === 'custom'
+                    ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white'
+                    : 'border-transparent text-zinc-500 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200'
+                }`}
+              >
+                <Plus className="h-4 w-4" />
+                <span>+ Custom Workout</span>
+              </button>
             </div>
 
-            {/* Error message */}
-            {addEntryError && (
-              <div className="mx-4 mt-3 rounded-lg border border-red-200 bg-red-50 p-2.5 text-xs text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
-                {addEntryError}
-              </div>
-            )}
+            {/* Tab Content */}
+            {addExerciseTab === 'custom' ? (
+              /* Custom Workout Form */
+              <div className="flex-1 overflow-y-auto p-6 sm:p-8">
+                <div className="mx-auto max-w-xl space-y-5">
+                  <div className="rounded-2xl border border-zinc-200 bg-gradient-to-br from-zinc-50 to-zinc-100/60 p-4 sm:p-5 dark:border-zinc-800 dark:from-zinc-900 dark:to-zinc-800/40">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-900 text-white shadow dark:bg-white dark:text-zinc-900">
+                        <Dumbbell className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-bold text-zinc-900 dark:text-white">
+                          Create Customized Workout
+                        </h4>
+                        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                          Add your own custom movement (e.g. Jumping, Box Jumps), attach a YouTube video tutorial link, and set your target sets and reps.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-            {/* Exercise Selection Cards List */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-2.5">
-              {(() => {
-                const filtered = canonicalExercises.filter((ex) => {
-                  let matchesMuscle = true;
-                  if (selectedMuscleFilter !== 'All') {
-                    const targetM = selectedMuscleFilter.toLowerCase();
-                    const exM = (ex.muscleGroup || '').toLowerCase();
-                    if (targetM === 'shoulders' || targetM === 'shoulder') {
-                      matchesMuscle = exM === 'shoulder' || exM === 'shoulders';
-                    } else if (targetM === 'forearms' || targetM === 'forearm') {
-                      matchesMuscle = exM === 'forearm' || exM === 'forearms';
-                    } else if (targetM === 'legs') {
-                      matchesMuscle = ['legs', 'quads', 'hamstrings', 'glutes', 'calves'].includes(exM);
-                    } else {
-                      matchesMuscle = exM === targetM;
-                    }
-                  }
+                  {/* Error Message */}
+                  {addEntryError && (
+                    <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-xs text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+                      {addEntryError}
+                    </div>
+                  )}
 
-                  const query = exerciseSearchQuery.trim().toLowerCase();
-                  const matchesSearch =
-                    !query ||
-                    ex.name.toLowerCase().includes(query) ||
-                    (ex.targetHead && ex.targetHead.toLowerCase().includes(query)) ||
-                    (ex.biomechanicalAdvantage && ex.biomechanicalAdvantage.toLowerCase().includes(query)) ||
-                    (ex.muscleGroup && ex.muscleGroup.toLowerCase().includes(query));
-
-                  const matchesRank = !topRankedOnlyFilter || (ex.rank !== null && ex.rank !== undefined && ex.rank <= 5);
-
-                  return matchesMuscle && matchesSearch && matchesRank;
-                });
-
-                if (filtered.length === 0) {
-                  return (
-                    <div className="rounded-xl border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
-                      <Dumbbell className="mx-auto h-8 w-8 text-zinc-400" />
-                      <p className="mt-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">
-                        No exercises match your filter criteria
-                      </p>
-                      <p className="mt-1 text-xs text-zinc-500">
-                        Try switching muscle group to &quot;All&quot; or clearing your search term.
+                  <div className="space-y-4">
+                    {/* Workout Name */}
+                    <div>
+                      <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                        Workout Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        value={customWorkoutName}
+                        onChange={(e) => setCustomWorkoutName(e.target.value)}
+                        placeholder="e.g. Jumping, Box Jumps, Burpees, Cable Fly"
+                        className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                      />
+                      <p className="mt-1 text-[11px] text-zinc-500">
+                        Give your workout an identifiable title.
                       </p>
                     </div>
-                  );
-                }
 
-                return (
-                  <div className="grid gap-2.5 sm:grid-cols-2">
-                    {filtered.map((ex) => {
-                      const isSelected = selectedExerciseId === ex.id;
-                      return (
-                        <div
-                          key={ex.id}
-                          onClick={() => handleSelectExerciseItem(ex)}
-                          className={`group relative flex cursor-pointer flex-col justify-between rounded-xl border p-3.5 transition-all ${
-                            isSelected
-                              ? 'border-zinc-900 bg-zinc-50/90 ring-2 ring-zinc-900 dark:border-white dark:bg-zinc-800/90 dark:ring-white'
-                              : 'border-zinc-200 bg-white hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-zinc-700'
-                          }`}
-                        >
-                          <div>
-                            {/* Badges Row */}
-                            <div className="flex flex-wrap items-center justify-between gap-1.5">
-                              <div className="flex items-center gap-1.5">
-                                {ex.rank ? (
-                                  <span
-                                    className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                                      ex.rank === 1
-                                        ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
-                                        : ex.rank === 2
-                                        ? 'bg-zinc-200 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100'
-                                        : ex.rank === 3
-                                        ? 'bg-zinc-200/80 text-zinc-800 dark:bg-zinc-700/80 dark:text-zinc-200'
-                                        : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
-                                    }`}
-                                  >
-                                    {ex.rank === 1 ? '👑' : ex.rank === 2 ? '🥈' : ex.rank === 3 ? '🥉' : '#' + ex.rank}
-                                    Rank #{ex.rank} • {ex.tier || 'S-Tier'}
-                                  </span>
-                                ) : (
-                                  <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
-                                    Exercise
-                                  </span>
-                                )}
+                    {/* Muscle Group / Category */}
+                    <div>
+                      <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                        Muscle Group / Category
+                      </label>
+                      <select
+                        value={customMuscleGroup}
+                        onChange={(e) => setCustomMuscleGroup(e.target.value)}
+                        className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                      >
+                        {[
+                          'Full Body',
+                          'Chest',
+                          'Back',
+                          'Shoulders',
+                          'Biceps',
+                          'Triceps',
+                          'Quads',
+                          'Hamstrings',
+                          'Glutes',
+                          'Calves',
+                          'Abs',
+                          'Forearms',
+                          'Cardio',
+                        ].map((m) => (
+                          <option key={m} value={m}>
+                            {m}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-                                {ex.hypertrophyScore && (
-                                  <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-                                    {ex.hypertrophyScore}/100 Score
-                                  </span>
-                                )}
-                              </div>
-
-                              <span className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400">
-                                {ex.muscleGroup || 'General'}
-                              </span>
-                            </div>
-
-                            {/* Name & Target Head */}
-                            <div className="mt-2">
-                              <h4 className="text-sm font-bold text-zinc-900 dark:text-white group-hover:text-black dark:group-hover:text-white">
-                                {ex.name}
-                              </h4>
-                              {ex.targetHead && (
-                                <p className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
-                                  Target: <span className="text-zinc-900 dark:text-zinc-200">{ex.targetHead}</span>
-                                </p>
-                              )}
-                            </div>
-
-                            {/* Biomechanical advantage badge */}
-                            {ex.biomechanicalAdvantage && (
-                              <div className="mt-2 inline-flex items-center gap-1 rounded border border-zinc-200 bg-zinc-100/80 px-2 py-0.5 text-[10px] font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200">
-                                <span>⚡</span>
-                                <span>{ex.biomechanicalAdvantage}</span>
-                              </div>
-                            )}
-
-                            {/* Evidence Rationale */}
-                            {ex.evidenceRationale && (
-                              <p className="mt-2 text-[11px] leading-relaxed text-zinc-600 line-clamp-2 dark:text-zinc-400">
-                                {ex.evidenceRationale}
-                              </p>
-                            )}
-                          </div>
-
-                          {/* Footer of Card */}
-                          <div className="mt-3 flex items-center justify-between border-t border-zinc-100 pt-2 text-[11px] dark:border-zinc-800">
-                            {ex.recommendedRepRange ? (
-                              <span className="rounded bg-zinc-100 px-2 py-0.5 font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
-                                Sug: {ex.recommendedSets || 3} sets × {ex.recommendedRepRange}
-                              </span>
-                            ) : (
-                              <span className="text-[10px] text-zinc-400">3 sets × 10 reps</span>
-                            )}
-
-                            <div className="flex items-center gap-1 font-semibold">
-                              {isSelected ? (
-                                <span className="inline-flex items-center gap-1 text-zinc-900 dark:text-white">
-                                  <CheckCircle2 className="h-4 w-4" />
-                                  Selected
-                                </span>
-                              ) : (
-                                <span className="text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-                                  Select
-                                </span>
-                              )}
-                            </div>
-                          </div>
+                    {/* YouTube Video URL */}
+                    <div>
+                      <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                        YouTube Tutorial Link <span className="font-normal text-zinc-400">(Optional)</span>
+                      </label>
+                      <div className="relative mt-1.5">
+                        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                          <Play className="h-4 w-4 fill-red-500 text-red-500" />
                         </div>
-                      );
-                    })}
-                  </div>
-                );
-              })()}
-            </div>
+                        <input
+                          type="url"
+                          value={customVideoUrl}
+                          onChange={(e) => setCustomVideoUrl(e.target.value)}
+                          placeholder="https://www.youtube.com/watch?v=... or https://youtu.be/..."
+                          className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-9 pr-3.5 text-xs sm:text-sm text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                        />
+                      </div>
+                      <p className="mt-1 text-[11px] text-zinc-500">
+                        A &quot;Tutorial&quot; button will appear next to this exercise so you can watch form and execution anytime.
+                      </p>
+                    </div>
 
-            {/* Footer with Sets, Reps and Add button */}
-            <div className="border-t border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <div>
-                  <div className="text-xs font-semibold text-zinc-900 dark:text-white">
-                    {canonicalExercises.find((e) => e.id === selectedExerciseId)?.name || 'No exercise selected'}
-                  </div>
-                  <p className="text-[11px] text-zinc-500">
-                    Configure sets and reps for this workout entry.
-                  </p>
-                </div>
+                    {/* Target Sets & Reps */}
+                    <div className="grid grid-cols-2 gap-3 pt-1">
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                          Target Sets (1–20)
+                        </label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={customSetsInput}
+                          onChange={(e) => setCustomSetsInput(e.target.value)}
+                          className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                        />
+                      </div>
 
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Sets:</label>
-                    <input
-                      type="number"
-                      min="1"
-                      max="20"
-                      value={entrySetsInput}
-                      onChange={(e) => setEntrySetsInput(e.target.value)}
-                      className="w-16 rounded-lg border border-zinc-300 bg-white px-2 py-1 text-center text-xs font-bold text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
-                    />
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Reps:</label>
-                    <input
-                      type="number"
-                      min="1"
-                      max="200"
-                      value={entryRepsInput}
-                      onChange={(e) => setEntryRepsInput(e.target.value)}
-                      className="w-16 rounded-lg border border-zinc-300 bg-white px-2 py-1 text-center text-xs font-bold text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
-                    />
+                      <div>
+                        <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                          Target Reps (1–200)
+                        </label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="200"
+                          value={customRepsInput}
+                          onChange={(e) => setCustomRepsInput(e.target.value)}
+                          className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                        />
+                      </div>
+                    </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={handleAddExercise}
-                    disabled={!selectedExerciseId}
-                    className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-zinc-800 disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
-                  >
-                    Add Exercise to Day
-                  </button>
+                  {/* Actions Footer */}
+                  <div className="flex items-center justify-end gap-3 border-t border-zinc-200 pt-4 dark:border-zinc-800">
+                    <button
+                      type="button"
+                      onClick={() => setAddExerciseModalOpen(false)}
+                      className="rounded-xl border border-zinc-200 px-4 py-2.5 text-xs font-semibold text-zinc-600 hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-800 min-h-[44px]"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleAddCustomWorkout}
+                      disabled={isSubmittingCustom || !customWorkoutName.trim()}
+                      className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-5 py-2.5 text-xs font-bold text-white shadow hover:bg-zinc-800 active:scale-95 disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+                    >
+                      <Plus className="h-4 w-4" />
+                      <span>{isSubmittingCustom ? 'Adding Workout...' : 'Add Custom Workout to Day'}</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              /* Curated Library View */
+              <>
+                {/* Filter & Search Bar */}
+                <div className="border-b border-zinc-200 bg-zinc-50/70 p-4 dark:border-zinc-800 dark:bg-zinc-900/50">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="relative flex-1">
+                      <Search className="absolute left-3 top-2.5 h-4 w-4 text-zinc-400" />
+                      <input
+                        type="text"
+                        value={exerciseSearchQuery}
+                        onChange={(e) => setExerciseSearchQuery(e.target.value)}
+                        placeholder="Search exercise, muscle target, or mechanism..."
+                        className="w-full rounded-lg border border-zinc-200 bg-white py-1.5 pl-9 pr-3 text-xs text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:focus:border-white"
+                      />
+                    </div>
+
+                    {/* Top 5 Ranked Toggle */}
+                    <button
+                      type="button"
+                      onClick={() => setTopRankedOnlyFilter(!topRankedOnlyFilter)}
+                      className={`flex items-center justify-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-semibold transition ${
+                        topRankedOnlyFilter
+                          ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
+                          : 'border-zinc-200 bg-white text-zinc-600 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700'
+                      }`}
+                    >
+                      <Award className="h-3.5 w-3.5" />
+                      <span>Top 5 Hypertrophy Ranked</span>
+                      {topRankedOnlyFilter && <span className="ml-0.5 text-[10px] opacity-80">(Active)</span>}
+                    </button>
+                  </div>
+
+                  {/* Muscle Group Horizontal Filter Pills */}
+                  <div className="mt-3 flex items-center gap-1.5 overflow-x-auto pb-1 text-xs">
+                    <Filter className="mr-1 h-3.5 w-3.5 shrink-0 text-zinc-400" />
+                    {exerciseMuscleGroups.map((muscle) => (
+                      <button
+                        key={muscle}
+                        type="button"
+                        onClick={() => setSelectedMuscleFilter(muscle)}
+                        className={`shrink-0 rounded-full px-3 py-1 text-xs font-medium transition ${
+                          selectedMuscleFilter === muscle
+                            ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                            : 'bg-white text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 border border-zinc-200 dark:border-zinc-700'
+                        }`}
+                      >
+                        {muscle}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Error message */}
+                {addEntryError && (
+                  <div className="mx-4 mt-3 rounded-lg border border-red-200 bg-red-50 p-2.5 text-xs text-red-600 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+                    {addEntryError}
+                  </div>
+                )}
+
+                {/* Exercise Selection Cards List */}
+                <div className="flex-1 overflow-y-auto p-4 space-y-2.5">
+                  {(() => {
+                    const filtered = canonicalExercises.filter((ex) => {
+                      let matchesMuscle = true;
+                      if (selectedMuscleFilter !== 'All') {
+                        const targetM = selectedMuscleFilter.toLowerCase();
+                        const exM = (ex.muscleGroup || '').toLowerCase();
+                        if (targetM === 'shoulders' || targetM === 'shoulder') {
+                          matchesMuscle = exM === 'shoulder' || exM === 'shoulders';
+                        } else if (targetM === 'forearms' || targetM === 'forearm') {
+                          matchesMuscle = exM === 'forearm' || exM === 'forearms';
+                        } else if (targetM === 'legs') {
+                          matchesMuscle = ['legs', 'quads', 'hamstrings', 'glutes', 'calves'].includes(exM);
+                        } else {
+                          matchesMuscle = exM === targetM;
+                        }
+                      }
+
+                      const query = exerciseSearchQuery.trim().toLowerCase();
+                      const matchesSearch =
+                        !query ||
+                        ex.name.toLowerCase().includes(query) ||
+                        (ex.targetHead && ex.targetHead.toLowerCase().includes(query)) ||
+                        (ex.biomechanicalAdvantage && ex.biomechanicalAdvantage.toLowerCase().includes(query)) ||
+                        (ex.muscleGroup && ex.muscleGroup.toLowerCase().includes(query));
+
+                      const matchesRank = !topRankedOnlyFilter || (ex.rank !== null && ex.rank !== undefined && ex.rank <= 5);
+
+                      return matchesMuscle && matchesSearch && matchesRank;
+                    });
+
+                    if (filtered.length === 0) {
+                      return (
+                        <div className="rounded-xl border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-zinc-900">
+                          <Dumbbell className="mx-auto h-8 w-8 text-zinc-400" />
+                          <p className="mt-2 text-sm font-semibold text-zinc-700 dark:text-zinc-300">
+                            No exercises match your filter criteria
+                          </p>
+                          <p className="mt-1 text-xs text-zinc-500">
+                            Try switching muscle group to &quot;All&quot; or clearing your search term, or switch to the &quot;+ Custom Workout&quot; tab to add your own.
+                          </p>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div className="grid gap-2.5 sm:grid-cols-2">
+                        {filtered.map((ex) => {
+                          const isSelected = selectedExerciseId === ex.id;
+                          return (
+                            <div
+                              key={ex.id}
+                              onClick={() => handleSelectExerciseItem(ex)}
+                              className={`group relative flex cursor-pointer flex-col justify-between rounded-xl border p-3.5 transition-all ${
+                                isSelected
+                                  ? 'border-zinc-900 bg-zinc-50/90 ring-2 ring-zinc-900 dark:border-white dark:bg-zinc-800/90 dark:ring-white'
+                                  : 'border-zinc-200 bg-white hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900/60 dark:hover:border-zinc-700'
+                              }`}
+                            >
+                              <div>
+                                {/* Badges Row */}
+                                <div className="flex flex-wrap items-center justify-between gap-1.5">
+                                  <div className="flex items-center gap-1.5">
+                                    {ex.rank ? (
+                                      <span
+                                        className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                                          ex.rank === 1
+                                            ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900'
+                                            : ex.rank === 2
+                                            ? 'bg-zinc-200 text-zinc-900 dark:bg-zinc-700 dark:text-zinc-100'
+                                            : ex.rank === 3
+                                            ? 'bg-zinc-200/80 text-zinc-800 dark:bg-zinc-700/80 dark:text-zinc-200'
+                                            : 'bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+                                        }`}
+                                      >
+                                        {ex.rank === 1 ? '👑' : ex.rank === 2 ? '🥈' : ex.rank === 3 ? '🥉' : '#' + ex.rank}
+                                        Rank #{ex.rank} • {ex.tier || 'S-Tier'}
+                                      </span>
+                                    ) : (
+                                      <span className="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-semibold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-400">
+                                        Exercise
+                                      </span>
+                                    )}
+
+                                    {ex.hypertrophyScore && (
+                                      <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                                        {ex.hypertrophyScore}/100 Score
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  <span className="text-[11px] font-medium text-zinc-500 dark:text-zinc-400">
+                                    {ex.muscleGroup || 'General'}
+                                  </span>
+                                </div>
+
+                                {/* Name & Target Head */}
+                                <div className="mt-2">
+                                  <h4 className="text-sm font-bold text-zinc-900 dark:text-white group-hover:text-black dark:group-hover:text-white">
+                                    {ex.name}
+                                  </h4>
+                                  {ex.targetHead && (
+                                    <p className="text-[11px] font-medium text-zinc-600 dark:text-zinc-400">
+                                      Target: <span className="text-zinc-900 dark:text-zinc-200">{ex.targetHead}</span>
+                                    </p>
+                                  )}
+                                </div>
+
+                                {/* Biomechanical advantage badge */}
+                                {ex.biomechanicalAdvantage && (
+                                  <div className="mt-2 inline-flex items-center gap-1 rounded border border-zinc-200 bg-zinc-100/80 px-2 py-0.5 text-[10px] font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800/80 dark:text-zinc-200">
+                                    <span>⚡</span>
+                                    <span>{ex.biomechanicalAdvantage}</span>
+                                  </div>
+                                )}
+
+                                {/* Evidence Rationale */}
+                                {ex.evidenceRationale && (
+                                  <p className="mt-2 text-[11px] leading-relaxed text-zinc-600 line-clamp-2 dark:text-zinc-400">
+                                    {ex.evidenceRationale}
+                                  </p>
+                                )}
+                              </div>
+
+                              {/* Footer of Card */}
+                              <div className="mt-3 flex items-center justify-between border-t border-zinc-100 pt-2 text-[11px] dark:border-zinc-800">
+                                {ex.recommendedRepRange ? (
+                                  <span className="rounded bg-zinc-100 px-2 py-0.5 font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                                    Sug: {ex.recommendedSets || 3} sets × {ex.recommendedRepRange}
+                                  </span>
+                                ) : (
+                                  <span className="text-[10px] text-zinc-400">3 sets × 10 reps</span>
+                                )}
+
+                                <div className="flex items-center gap-1 font-semibold">
+                                  {isSelected ? (
+                                    <span className="inline-flex items-center gap-1 text-zinc-900 dark:text-white">
+                                      <CheckCircle2 className="h-4 w-4" />
+                                      Selected
+                                    </span>
+                                  ) : (
+                                    <span className="text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+                                      Select
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  })()}
+                </div>
+
+                {/* Footer with Sets, Reps and Add button */}
+                <div className="border-t border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-white">
+                        {canonicalExercises.find((e) => e.id === selectedExerciseId)?.name || 'No exercise selected'}
+                      </div>
+                      <p className="text-[11px] text-zinc-500">
+                        Configure sets and reps for this workout entry.
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1.5">
+                        <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Sets:</label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="20"
+                          value={entrySetsInput}
+                          onChange={(e) => setEntrySetsInput(e.target.value)}
+                          className="w-16 rounded-lg border border-zinc-300 bg-white px-2 py-1 text-center text-xs font-bold text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                        />
+                      </div>
+
+                      <div className="flex items-center gap-1.5">
+                        <label className="text-xs font-medium text-zinc-600 dark:text-zinc-400">Reps:</label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="200"
+                          value={entryRepsInput}
+                          onChange={(e) => setEntryRepsInput(e.target.value)}
+                          className="w-16 rounded-lg border border-zinc-300 bg-white px-2 py-1 text-center text-xs font-bold text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={handleAddExercise}
+                        disabled={!selectedExerciseId}
+                        className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-bold text-white shadow transition hover:bg-zinc-800 disabled:opacity-50 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+                      >
+                        Add Exercise to Day
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
       )}
 
-      {/* Modal: Edit Sets & Reps */}
+      {/* Modal: Edit Sets, Reps & YouTube Tutorial Link */}
       {editEntryModalOpen && editingEntry && (
         <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
           <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
@@ -1274,6 +1551,27 @@ export default function MyWorkoutPlanPage() {
                   className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
                 />
               </div>
+            </div>
+
+            {/* YouTube Tutorial Link Field */}
+            <div className="mt-3.5">
+              <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                YouTube Tutorial Link (optional)
+              </label>
+              <div className="relative mt-1">
+                <input
+                  type="url"
+                  value={editingEntry.videoUrl}
+                  onChange={(e) =>
+                    setEditingEntry({ ...editingEntry, videoUrl: e.target.value })
+                  }
+                  placeholder="https://www.youtube.com/watch?v=..."
+                  className="w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                />
+              </div>
+              <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+                Provide or update the YouTube tutorial URL for this movement.
+              </p>
             </div>
 
             <div className="mt-6 flex justify-end gap-2.5 border-t border-zinc-100 pt-3 dark:border-zinc-800">
