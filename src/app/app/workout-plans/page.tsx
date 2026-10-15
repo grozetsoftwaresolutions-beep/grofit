@@ -219,7 +219,11 @@ export default function WorkoutPlansPage() {
                     {tpl.sourceReference && (
                       <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-800/80 px-2.5 py-1 rounded-lg border border-zinc-700/80 font-medium min-w-0">
                         <span className="font-semibold text-white shrink-0">Credits:</span>
-                        <span className="truncate min-w-0 text-zinc-300">{tpl.sourceReference}</span>
+                        <span className="truncate min-w-0 text-zinc-300">
+                          {tpl.name.includes('6-Day')
+                            ? 'Jeff Nippard, RP, Scott Herman, Squat Univ & more'
+                            : tpl.sourceReference}
+                        </span>
                       </div>
                     )}
 

@@ -76,6 +76,7 @@ export async function GET(
       reps: number | null;
       source_label: string | null;
       video_url: string | null;
+      source_reference: string | null;
       source_prescription_text: string | null;
       exercises: { name: string; muscle_group: string | null } | null;
     }> = [];
@@ -92,6 +93,7 @@ export async function GET(
           reps,
           source_label,
           video_url,
+          source_reference,
           source_prescription_text,
           exercises (name, muscle_group)
         `)
@@ -122,6 +124,8 @@ export async function GET(
           reps: e.reps,
           sourceLabel: e.source_label,
           videoUrl: e.video_url,
+          videoCredit: e.source_reference,
+          sourceReference: e.source_reference,
           sourcePrescriptionText: e.source_prescription_text,
           sortOrder: e.sort_order,
         }));

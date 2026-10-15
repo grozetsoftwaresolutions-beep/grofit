@@ -479,7 +479,7 @@ export default function HomePage() {
               </div>
               <h3 className="mt-5 text-xl font-bold text-white">Sourced Hypertrophy & Calisthenics Splits</h3>
               <p className="mt-2.5 text-sm text-zinc-400 leading-relaxed">
-                Choose between the 6-Day Push/Pull/Legs Hypertrophy Split, the 4-Day DADBODS Science Split, or the 3-Day Home Calisthenics routine. Each movement features verified form tutorials with full attribution to premier educators like Calisthenicmovement, FitnessFAQs, and Max Euceda.
+                Choose between the 6-Day Push/Pull/Legs Hypertrophy Split, the 4-Day DADBODS Science Split, or the 3-Day Home Calisthenics routine. Each movement features verified form tutorials with full attribution to premier educators like Jeff Nippard, Renaissance Periodization, Scott Herman, Squat University, ATHLEAN-X, and Calisthenicmovement.
               </p>
               <ul className="mt-4 space-y-2 text-xs text-zinc-300 font-medium">
                 <li className="flex items-center gap-2">

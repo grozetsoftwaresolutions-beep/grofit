@@ -27,6 +27,8 @@ interface TemplateEntry {
   sets: number | null;
   reps: number | null;
   videoUrl: string | null;
+  videoCredit?: string | null;
+  sourceReference?: string | null;
   sourceLabel: string | null;
   sourcePrescriptionText: string | null;
 }
@@ -373,6 +375,55 @@ function TemplateDetailContent(props: {
         </div>
       )}
 
+      {/* 6-Day Split Form Demonstrations & Channel Credits Banner */}
+      {(template.name.toLowerCase().includes('6-day') ||
+        template.name.toLowerCase().includes('finalized')) && (
+        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+            <div className="space-y-1.5 max-w-2xl">
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-bold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                  Verified Video Demonstrations
+                </span>
+                <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                  Evidence-Based Coach Credits
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                Curated Form Tutorials & Channel Attribution
+              </h3>
+              <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
+                All exercise form demonstrations and biomechanical cues in this 6-day split link directly to high-definition tutorials by premier fitness educators: <strong>Jeff Nippard</strong>, <strong>Renaissance Periodization</strong>, <strong>Scott Herman Fitness</strong>, <strong>Jeremy Ethier</strong>, <strong>Squat University</strong>, <strong>ATHLEAN-X™</strong>, and <strong>DeltaBolic</strong>.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                Jeff Nippard
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                Renaissance Periodization
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                Scott Herman
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                Squat University
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                ATHLEAN-X™
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                Jeremy Ethier
+              </span>
+              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
+                DeltaBolic
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Days Breakdown */}
       <div className="space-y-6">
         <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
@@ -416,78 +467,120 @@ function TemplateDetailContent(props: {
 
               {/* Exercises List */}
               <div className="mt-4 divide-y divide-zinc-100 dark:divide-zinc-800/60">
-                {day.entries.map((entry, idx) => (
-                  <div
-                    key={entry.id}
-                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
-                  >
-                    <div className="flex items-start gap-3">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 mt-0.5">
-                        {idx + 1}
-                      </span>
-                      <div>
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-sm font-semibold text-zinc-900 dark:text-white">
-                            {entry.exerciseName}
-                          </span>
-                          {entry.muscleGroup && (
-                            <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
-                              {entry.muscleGroup}
+                {day.entries.map((entry, idx) => {
+                  const EXERCISE_CREATOR_CREDITS: Record<string, string> = {
+                    'barbell row': 'DeltaBolic',
+                    'lat pull down': 'Jeff Nippard',
+                    'lat focused row': 'DeltaBolic',
+                    'close grip lat pulldown': 'ThriveTraining',
+                    'dumbell hammer curl': 'Scott Herman Fitness',
+                    'incline dumbell curl': 'Scott Herman Fitness',
+                    'wrist curl': 'Renaissance Periodization',
+                    'reverse wrist curl': 'Scott Herman Fitness',
+                    'incline dumbell press': 'Renaissance Periodization',
+                    'flat dumbell press': 'Jeremy Ethier',
+                    'pec fly machine': 'DeltaBolic',
+                    'skull crushers': 'Renaissance Periodization',
+                    'skull crushers ×4': 'Renaissance Periodization',
+                    'cable pushdown': 'Scott Herman Fitness',
+                    'cable pushdown ×4': 'Scott Herman Fitness',
+                    'overhead tricep extension': 'Renaissance Periodization',
+                    'crunches': 'Scott Herman Fitness',
+                    'plank': 'Squat University',
+                    'shoulder press': 'Scott Herman Fitness',
+                    'lateral rises': 'Renaissance Periodization',
+                    'face pull': 'ATHLEAN-X™',
+                    'squats': 'Squat University',
+                    'leg press': 'Scott Herman Fitness',
+                    'leg extension': 'Jeff Nippard',
+                    'hamstring curls': 'Renaissance Periodization',
+                    'calves': 'Jeff Nippard',
+                  };
+
+                  const credit = (entry.videoCredit && entry.videoCredit !== 'Finalized Workout.pdf')
+                    ? entry.videoCredit
+                    : (EXERCISE_CREATOR_CREDITS[entry.sourceLabel?.toLowerCase().trim() || ''] ||
+                       EXERCISE_CREATOR_CREDITS[entry.exerciseName?.toLowerCase().trim() || ''] ||
+                       entry.sourceReference);
+
+                  return (
+                    <div
+                      key={entry.id}
+                      className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
+                    >
+                      <div className="flex items-start gap-3">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 mt-0.5">
+                          {idx + 1}
+                        </span>
+                        <div>
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                              {entry.exerciseName}
                             </span>
+                            {entry.muscleGroup && (
+                              <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                                {entry.muscleGroup}
+                              </span>
+                            )}
+                          </div>
+                          {entry.sourceLabel && entry.sourceLabel !== entry.exerciseName && (
+                            <div className="text-xs text-zinc-400">
+                              Source label: {entry.sourceLabel}
+                            </div>
+                          )}
+                          {entry.sourcePrescriptionText && (
+                            <div className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium">
+                              {entry.sourcePrescriptionText}
+                            </div>
                           )}
                         </div>
-                        {entry.sourceLabel && entry.sourceLabel !== entry.exerciseName && (
-                          <div className="text-xs text-zinc-400">
-                            Source label: {entry.sourceLabel}
-                          </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 pl-9 sm:pl-0 flex-wrap">
+                        {/* Sets & Reps Prescriptions */}
+                        {entry.sets !== null || entry.reps !== null ? (
+                          <span className="rounded-lg border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+                            {entry.sets ? `${entry.sets} sets` : ''}{' '}
+                            {entry.reps ? `× ${entry.reps} reps` : ''}
+                          </span>
+                        ) : (
+                          <span className="text-[11px] font-medium italic text-zinc-400">
+                            Prescription unset in source
+                          </span>
                         )}
-                        {entry.sourcePrescriptionText && (
-                          <div className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium">
-                            {entry.sourcePrescriptionText}
-                          </div>
+
+                        {/* Video Demonstration Link with Channel Credit */}
+                        {entry.videoUrl && (
+                          <a
+                            href={entry.videoUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px] transition"
+                            title={`Watch tutorial video${credit && credit !== 'Finalized Workout.pdf' ? ` (${credit})` : ''}`}
+                          >
+                            <Play className="h-3 w-3 text-red-600 fill-red-600 shrink-0" />
+                            <span>Video</span>
+                            {credit && credit !== 'Finalized Workout.pdf' && (
+                              <span className="text-[11px] font-normal text-zinc-500 dark:text-zinc-400">
+                                ({credit})
+                              </span>
+                            )}
+                            <ExternalLink className="h-3 w-3 text-zinc-400 shrink-0" />
+                          </a>
                         )}
+                        {/* View Progress History */}
+                        <Link
+                          href={`/app/workout-progress/${entry.exerciseId}`}
+                          className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px]"
+                          title="View performance progress"
+                        >
+                          <TrendingUp className="h-3 w-3" />
+                          <span>Progress</span>
+                        </Link>
                       </div>
                     </div>
-
-                    <div className="flex items-center gap-2 pl-9 sm:pl-0 flex-wrap">
-                      {/* Sets & Reps Prescriptions */}
-                      {entry.sets !== null || entry.reps !== null ? (
-                        <span className="rounded-lg border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
-                          {entry.sets ? `${entry.sets} sets` : ''}{' '}
-                          {entry.reps ? `× ${entry.reps} reps` : ''}
-                        </span>
-                      ) : (
-                        <span className="text-[11px] font-medium italic text-zinc-400">
-                          Prescription unset in source
-                        </span>
-                      )}
-
-                      {/* Video Demonstration Link */}
-                      {entry.videoUrl && (
-                        <a
-                          href={entry.videoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px]"
-                          title="Watch demonstration video"
-                        >
-                          <Play className="h-3 w-3 text-red-600 fill-red-600" />
-                          <span>Video</span>
-                          <ExternalLink className="h-3 w-3 text-zinc-400" />
-                        </a>
-                      )}
-                      {/* View Progress History */}
-                      <Link
-                        href={`/app/workout-progress/${entry.exerciseId}`}
-                        className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px]"
-                        title="View performance progress"
-                      >
-                        <TrendingUp className="h-3 w-3" />
-                        <span>Progress</span>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           ))}

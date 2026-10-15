@@ -51,7 +51,8 @@ test("Source fidelity: Day 1 & Day 4 (Back/Biceps/Forearm) exercises and warmups
     day.entries.forEach(e => {
       assert.equal(e.sets, null, `Sets should be null for ${e.sourceLabel}`);
       assert.equal(e.reps, null, `Reps should be null for ${e.sourceLabel}`);
-      assert.ok(e.videoUrl.startsWith("https://youtube.com/shorts/"));
+      assert.ok(e.videoUrl.startsWith("https://www.youtube.com/") || e.videoUrl.startsWith("https://youtube.com/"));
+      assert.ok(typeof e.videoCredit === "string" && e.videoCredit.length > 0);
     });
   }
 });
@@ -122,7 +123,8 @@ test("Source fidelity: Day 3 & Day 6 (Shoulder/Leg) exercises and warmups", () =
     day.entries.forEach(e => {
       assert.equal(e.sets, null, `Sets should be null for ${e.sourceLabel}`);
       assert.equal(e.reps, null, `Reps should be null for ${e.sourceLabel}`);
-      assert.ok(e.videoUrl.startsWith("https://youtube.com/shorts/"));
+      assert.ok(e.videoUrl.startsWith("https://www.youtube.com/") || e.videoUrl.startsWith("https://youtube.com/"));
+      assert.ok(typeof e.videoCredit === "string" && e.videoCredit.length > 0);
     });
   }
 });

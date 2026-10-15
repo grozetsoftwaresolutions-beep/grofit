@@ -622,84 +622,84 @@ SET name = EXCLUDED.name,
 -- 7.5 Template Entries (Day 1 - Monday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000001', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000001', 0, NULL, NULL, 'barbell row', 'https://youtube.com/shorts/pYcpY3sA42I?si=Wp3X0H33m4E4L2U1', 'Finalized Workout.pdf', 'te_d1_0'),
-  ('d1000000-0000-0000-0000-000000000002', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000002', 1, NULL, NULL, 'lat pull down', 'https://youtube.com/shorts/Jgnb6xH_8Q4?si=q8Z-eW7kXJ29g2wS', 'Finalized Workout.pdf', 'te_d1_1'),
-  ('d1000000-0000-0000-0000-000000000003', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000003', 2, NULL, NULL, 'lat focused row', 'https://youtube.com/shorts/5uH_Q2oXp0Q?si=7qU_iWdZ3b0DqD-r', 'Finalized Workout.pdf', 'te_d1_2'),
-  ('d1000000-0000-0000-0000-000000000004', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000004', 3, NULL, NULL, 'close grip lat pulldown', 'https://youtube.com/shorts/a0B_u4Vj4Y0?si=Fw0pG4c3r4F9v2A_', 'Finalized Workout.pdf', 'te_d1_3'),
-  ('d1000000-0000-0000-0000-000000000005', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000005', 4, NULL, NULL, 'dumbell hammer curl', 'https://youtube.com/shorts/0Z8hYQ6H-zI?si=M3c5gC0A6gU5vG7y', 'Finalized Workout.pdf', 'te_d1_4'),
-  ('d1000000-0000-0000-0000-000000000006', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000006', 5, NULL, NULL, 'incline dumbell curl', 'https://youtube.com/shorts/soxrZlIl35U?si=GzK1e9GvY_DqP4j_', 'Finalized Workout.pdf', 'te_d1_5'),
-  ('d1000000-0000-0000-0000-000000000007', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000007', 6, NULL, NULL, 'wrist curl', 'https://youtube.com/shorts/8UeR9oQ9T6g?si=J0fW5fD0L2mN_Q7v', 'Finalized Workout.pdf', 'te_d1_6'),
-  ('d1000000-0000-0000-0000-000000000008', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000008', 7, NULL, NULL, 'reverse wrist curl', 'https://youtube.com/shorts/bF6s0X_T8e8?si=Z_K7e3m_J5yU6bF8', 'Finalized Workout.pdf', 'te_d1_7')
+  ('d1000000-0000-0000-0000-000000000001', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000001', 0, NULL, NULL, 'barbell row', 'https://www.youtube.com/shorts/HRo7m_Dfpxw', 'DeltaBolic', 'te_d1_0'),
+  ('d1000000-0000-0000-0000-000000000002', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000002', 1, NULL, NULL, 'lat pull down', 'https://www.youtube.com/watch?v=O94yEoGXtBY', 'Jeff Nippard', 'te_d1_1'),
+  ('d1000000-0000-0000-0000-000000000003', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000003', 2, NULL, NULL, 'lat focused row', 'https://www.youtube.com/shorts/q8E9XaizZpY', 'DeltaBolic', 'te_d1_2'),
+  ('d1000000-0000-0000-0000-000000000004', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000004', 3, NULL, NULL, 'close grip lat pulldown', 'https://www.youtube.com/watch?v=hkZWmvkbNNQ', 'ThriveTraining', 'te_d1_3'),
+  ('d1000000-0000-0000-0000-000000000005', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000005', 4, NULL, NULL, 'dumbell hammer curl', 'https://www.youtube.com/watch?v=8XLxfXROrTo', 'Scott Herman Fitness', 'te_d1_4'),
+  ('d1000000-0000-0000-0000-000000000006', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000006', 5, NULL, NULL, 'incline dumbell curl', 'https://www.youtube.com/watch?v=soxrZlIl35U', 'Scott Herman Fitness', 'te_d1_5'),
+  ('d1000000-0000-0000-0000-000000000007', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000007', 6, NULL, NULL, 'wrist curl', 'https://www.youtube.com/watch?v=2wPpcJBe03o', 'Renaissance Periodization', 'te_d1_6'),
+  ('d1000000-0000-0000-0000-000000000008', 'b1000000-0000-0000-0000-000000000001', 'c1000000-0000-0000-0000-000000000008', 7, NULL, NULL, 'reverse wrist curl', 'https://www.youtube.com/watch?v=FW7URAaC-vE', 'Scott Herman Fitness', 'te_d1_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
 -- 7.6 Template Entries (Day 2 - Tuesday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_prescription_text, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000009', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000009', 0, NULL, NULL, 'incline dumbell press', 'https://youtube.com/shorts/0G2_k9X0k8Y?si=U1w4V4P0M9pQ3r_s', 'Finalized Workout.pdf', NULL, 'te_d2_0'),
-  ('d1000000-0000-0000-0000-000000000010', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000010', 1, NULL, NULL, 'flat dumbell press', 'https://youtube.com/shorts/X6L_j7H0fM0?si=L7qZ8k0rM3nP6bV_', 'Finalized Workout.pdf', NULL, 'te_d2_1'),
-  ('d1000000-0000-0000-0000-000000000011', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000011', 2, NULL, NULL, 'pec fly machine', 'https://youtube.com/shorts/2K9V8m4P7w0?si=Q3kZ9pL0M7nB5cV_', 'Finalized Workout.pdf', NULL, 'te_d2_2'),
-  ('d1000000-0000-0000-0000-000000000012', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000012', 3, 4, NULL, 'skull crushers ×4', 'https://youtube.com/shorts/8bW0M6j4k2Y?si=S0w3V7p0N9qL5r_t', 'Finalized Workout.pdf', '×4', 'te_d2_3'),
-  ('d1000000-0000-0000-0000-000000000013', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000013', 4, 4, NULL, 'Cable pushdown ×4', 'https://youtube.com/shorts/9fT0L5k3m1Y?si=R9p2X6q0N8oM4r_u', 'Finalized Workout.pdf', '×4', 'te_d2_4'),
-  ('d1000000-0000-0000-0000-000000000014', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000014', 5, NULL, NULL, 'overhead tricep extension', 'https://youtube.com/shorts/4jP0K8m2n3Y?si=P8o1V5q0M7nL3r_v', 'Finalized Workout.pdf', NULL, 'te_d2_5'),
-  ('d1000000-0000-0000-0000-000000000015', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000015', 6, NULL, NULL, 'crunches', 'https://youtube.com/shorts/3hN0J7l1m2Y?si=O7n0U4p0L6mM2r_w', 'Finalized Workout.pdf', NULL, 'te_d2_6'),
-  ('d1000000-0000-0000-0000-000000000016', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000016', 7, NULL, NULL, 'plank', 'https://youtube.com/shorts/7mO1K9n3p4Y?si=Q9p1W6r0N8nO4s_x', 'Finalized Workout.pdf', NULL, 'te_d2_7')
+  ('d1000000-0000-0000-0000-000000000009', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000009', 0, NULL, NULL, 'incline dumbell press', 'https://www.youtube.com/watch?v=GHcAIiL9J_Y', 'Renaissance Periodization', NULL, 'te_d2_0'),
+  ('d1000000-0000-0000-0000-000000000010', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000010', 1, NULL, NULL, 'flat dumbell press', 'https://www.youtube.com/watch?v=QsYre__-aro', 'Jeremy Ethier', NULL, 'te_d2_1'),
+  ('d1000000-0000-0000-0000-000000000011', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000011', 2, NULL, NULL, 'pec fly machine', 'https://www.youtube.com/shorts/a9vQ_hwIksU', 'DeltaBolic', NULL, 'te_d2_2'),
+  ('d1000000-0000-0000-0000-000000000012', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000012', 3, 4, NULL, 'skull crushers ×4', 'https://www.youtube.com/watch?v=8t2a93BjDec', 'Renaissance Periodization', '×4', 'te_d2_3'),
+  ('d1000000-0000-0000-0000-000000000013', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000013', 4, 4, NULL, 'Cable pushdown ×4', 'https://www.youtube.com/watch?v=lIqJXGQYyvM', 'Scott Herman Fitness', '×4', 'te_d2_4'),
+  ('d1000000-0000-0000-0000-000000000014', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000014', 5, NULL, NULL, 'overhead tricep extension', 'https://www.youtube.com/watch?v=IaJWPqP-Bjo', 'Renaissance Periodization', NULL, 'te_d2_5'),
+  ('d1000000-0000-0000-0000-000000000015', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000015', 6, NULL, NULL, 'crunches', 'https://www.youtube.com/watch?v=Evhyg6Fs9Q8', 'Scott Herman Fitness', NULL, 'te_d2_6'),
+  ('d1000000-0000-0000-0000-000000000016', 'b1000000-0000-0000-0000-000000000002', 'c1000000-0000-0000-0000-000000000016', 7, NULL, NULL, 'plank', 'https://www.youtube.com/shorts/vmxWjL0LjV4', 'Squat University', NULL, 'te_d2_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
 -- 7.7 Template Entries (Day 3 - Wednesday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000017', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000017', 0, NULL, NULL, 'Shoulder press', 'https://youtube.com/shorts/1bV3X5k7m9Y?si=L1m2N3p4Q5r6S7t8', 'Finalized Workout.pdf', 'te_d3_0'),
-  ('d1000000-0000-0000-0000-000000000018', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000018', 1, NULL, NULL, 'lateral rises', 'https://youtube.com/shorts/2cV4Y6l8n0Z?si=M2n3O4q5R6s7T8u9', 'Finalized Workout.pdf', 'te_d3_1'),
-  ('d1000000-0000-0000-0000-000000000019', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000019', 2, NULL, NULL, 'Face pull', 'https://youtube.com/shorts/3dW5Z7m9o1A?si=N3o4P5r6S7t8U9v0', 'Finalized Workout.pdf', 'te_d3_2'),
-  ('d1000000-0000-0000-0000-000000000020', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000020', 3, NULL, NULL, 'squats', 'https://youtube.com/shorts/4eX6A8n0p2B?si=O4p5Q6s7T8u9V0w1', 'Finalized Workout.pdf', 'te_d3_3'),
-  ('d1000000-0000-0000-0000-000000000021', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000021', 4, NULL, NULL, 'leg press', 'https://youtube.com/shorts/5fY7B9o1q3C?si=P5q6R7t8U9v0W1x2', 'Finalized Workout.pdf', 'te_d3_4'),
-  ('d1000000-0000-0000-0000-000000000022', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000022', 5, NULL, NULL, 'leg extension', 'https://youtube.com/shorts/6gZ8C0p2r4D?si=Q6r7S8u9V0w1X2y3', 'Finalized Workout.pdf', 'te_d3_5'),
-  ('d1000000-0000-0000-0000-000000000023', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000023', 6, NULL, NULL, 'hamstring curls', 'https://youtube.com/shorts/7hA9D1q3s5E?si=R7s8T9v0W1x2Y3z4', 'Finalized Workout.pdf', 'te_d3_6'),
-  ('d1000000-0000-0000-0000-000000000024', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000024', 7, NULL, NULL, 'calves', 'https://youtube.com/shorts/8iB0E2r4t6F?si=S8t9U0w1X2y3Z4a5', 'Finalized Workout.pdf', 'te_d3_7')
+  ('d1000000-0000-0000-0000-000000000017', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000017', 0, NULL, NULL, 'Shoulder press', 'https://www.youtube.com/watch?v=GFblCmuEE18', 'Scott Herman Fitness', 'te_d3_0'),
+  ('d1000000-0000-0000-0000-000000000018', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000018', 1, NULL, NULL, 'lateral rises', 'https://www.youtube.com/watch?v=n5dsI9qQXwY', 'Renaissance Periodization', 'te_d3_1'),
+  ('d1000000-0000-0000-0000-000000000019', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000019', 2, NULL, NULL, 'Face pull', 'https://www.youtube.com/watch?v=ljgqer1ZpXg', 'ATHLEAN-X™', 'te_d3_2'),
+  ('d1000000-0000-0000-0000-000000000020', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000020', 3, NULL, NULL, 'squats', 'https://www.youtube.com/watch?v=5alpa1IikQM', 'Squat University', 'te_d3_3'),
+  ('d1000000-0000-0000-0000-000000000021', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000021', 4, NULL, NULL, 'leg press', 'https://www.youtube.com/watch?v=IZxyjW7MPJQ', 'Scott Herman Fitness', 'te_d3_4'),
+  ('d1000000-0000-0000-0000-000000000022', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000022', 5, NULL, NULL, 'leg extension', 'https://www.youtube.com/watch?v=ljO4jkwv8wQ', 'Jeff Nippard', 'te_d3_5'),
+  ('d1000000-0000-0000-0000-000000000023', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000023', 6, NULL, NULL, 'hamstring curls', 'https://www.youtube.com/watch?v=jobEeklwrrs', 'Renaissance Periodization', 'te_d3_6'),
+  ('d1000000-0000-0000-0000-000000000024', 'b1000000-0000-0000-0000-000000000003', 'c1000000-0000-0000-0000-000000000024', 7, NULL, NULL, 'calves', 'https://www.youtube.com/shorts/xK6DoHBXTdw', 'Jeff Nippard', 'te_d3_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
 -- 7.8 Template Entries (Day 4 - Thursday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000025', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000001', 0, NULL, NULL, 'barbell row', 'https://youtube.com/shorts/pYcpY3sA42I?si=Wp3X0H33m4E4L2U1', 'Finalized Workout.pdf', 'te_d4_0'),
-  ('d1000000-0000-0000-0000-000000000026', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000002', 1, NULL, NULL, 'lat pull down', 'https://youtube.com/shorts/Jgnb6xH_8Q4?si=q8Z-eW7kXJ29g2wS', 'Finalized Workout.pdf', 'te_d4_1'),
-  ('d1000000-0000-0000-0000-000000000027', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000003', 2, NULL, NULL, 'lat focused row', 'https://youtube.com/shorts/5uH_Q2oXp0Q?si=7qU_iWdZ3b0DqD-r', 'Finalized Workout.pdf', 'te_d4_2'),
-  ('d1000000-0000-0000-0000-000000000028', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000004', 3, NULL, NULL, 'close grip lat pulldown', 'https://youtube.com/shorts/a0B_u4Vj4Y0?si=Fw0pG4c3r4F9v2A_', 'Finalized Workout.pdf', 'te_d4_3'),
-  ('d1000000-0000-0000-0000-000000000029', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000005', 4, NULL, NULL, 'dumbell hammer curl', 'https://youtube.com/shorts/0Z8hYQ6H-zI?si=M3c5gC0A6gU5vG7y', 'Finalized Workout.pdf', 'te_d4_4'),
-  ('d1000000-0000-0000-0000-000000000030', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000006', 5, NULL, NULL, 'incline dumbell curl', 'https://youtube.com/shorts/soxrZlIl35U?si=GzK1e9GvY_DqP4j_', 'Finalized Workout.pdf', 'te_d4_5'),
-  ('d1000000-0000-0000-0000-000000000031', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000007', 6, NULL, NULL, 'wrist curl', 'https://youtube.com/shorts/8UeR9oQ9T6g?si=J0fW5fD0L2mN_Q7v', 'Finalized Workout.pdf', 'te_d4_6'),
-  ('d1000000-0000-0000-0000-000000000032', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000008', 7, NULL, NULL, 'reverse wrist curl', 'https://youtube.com/shorts/bF6s0X_T8e8?si=Z_K7e3m_J5yU6bF8', 'Finalized Workout.pdf', 'te_d4_7')
+  ('d1000000-0000-0000-0000-000000000025', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000001', 0, NULL, NULL, 'barbell row', 'https://www.youtube.com/shorts/HRo7m_Dfpxw', 'DeltaBolic', 'te_d4_0'),
+  ('d1000000-0000-0000-0000-000000000026', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000002', 1, NULL, NULL, 'lat pull down', 'https://www.youtube.com/watch?v=O94yEoGXtBY', 'Jeff Nippard', 'te_d4_1'),
+  ('d1000000-0000-0000-0000-000000000027', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000003', 2, NULL, NULL, 'lat focused row', 'https://www.youtube.com/shorts/q8E9XaizZpY', 'DeltaBolic', 'te_d4_2'),
+  ('d1000000-0000-0000-0000-000000000028', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000004', 3, NULL, NULL, 'close grip lat pulldown', 'https://www.youtube.com/watch?v=hkZWmvkbNNQ', 'ThriveTraining', 'te_d4_3'),
+  ('d1000000-0000-0000-0000-000000000029', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000005', 4, NULL, NULL, 'dumbell hammer curl', 'https://www.youtube.com/watch?v=8XLxfXROrTo', 'Scott Herman Fitness', 'te_d4_4'),
+  ('d1000000-0000-0000-0000-000000000030', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000006', 5, NULL, NULL, 'incline dumbell curl', 'https://www.youtube.com/watch?v=soxrZlIl35U', 'Scott Herman Fitness', 'te_d4_5'),
+  ('d1000000-0000-0000-0000-000000000031', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000007', 6, NULL, NULL, 'wrist curl', 'https://www.youtube.com/watch?v=2wPpcJBe03o', 'Renaissance Periodization', 'te_d4_6'),
+  ('d1000000-0000-0000-0000-000000000032', 'b1000000-0000-0000-0000-000000000004', 'c1000000-0000-0000-0000-000000000008', 7, NULL, NULL, 'reverse wrist curl', 'https://www.youtube.com/watch?v=FW7URAaC-vE', 'Scott Herman Fitness', 'te_d4_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
 -- 7.9 Template Entries (Day 5 - Friday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_prescription_text, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000033', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000009', 0, NULL, NULL, 'incline dumbell press', 'https://youtube.com/shorts/0G2_k9X0k8Y?si=U1w4V4P0M9pQ3r_s', 'Finalized Workout.pdf', NULL, 'te_d5_0'),
-  ('d1000000-0000-0000-0000-000000000034', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000010', 1, NULL, NULL, 'flat dumbell press', 'https://youtube.com/shorts/X6L_j7H0fM0?si=L7qZ8k0rM3nP6bV_', 'Finalized Workout.pdf', NULL, 'te_d5_1'),
-  ('d1000000-0000-0000-0000-000000000035', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000011', 2, NULL, NULL, 'pec fly machine', 'https://youtube.com/shorts/2K9V8m4P7w0?si=Q3kZ9pL0M7nB5cV_', 'Finalized Workout.pdf', NULL, 'te_d5_2'),
-  ('d1000000-0000-0000-0000-000000000036', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000012', 3, 4, NULL, 'skull crushers ×4', 'https://youtube.com/shorts/8bW0M6j4k2Y?si=S0w3V7p0N9qL5r_t', 'Finalized Workout.pdf', '×4', 'te_d5_3'),
-  ('d1000000-0000-0000-0000-000000000037', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000013', 4, 4, NULL, 'Cable pushdown ×4', 'https://youtube.com/shorts/9fT0L5k3m1Y?si=R9p2X6q0N8oM4r_u', 'Finalized Workout.pdf', '×4', 'te_d5_4'),
-  ('d1000000-0000-0000-0000-000000000038', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000014', 5, NULL, NULL, 'overhead tricep extension', 'https://youtube.com/shorts/4jP0K8m2n3Y?si=P8o1V5q0M7nL3r_v', 'Finalized Workout.pdf', NULL, 'te_d5_5'),
-  ('d1000000-0000-0000-0000-000000000039', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000015', 6, NULL, NULL, 'crunches', 'https://youtube.com/shorts/3hN0J7l1m2Y?si=O7n0U4p0L6mM2r_w', 'Finalized Workout.pdf', NULL, 'te_d5_6'),
-  ('d1000000-0000-0000-0000-000000000040', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000016', 7, NULL, NULL, 'plank', 'https://youtube.com/shorts/7mO1K9n3p4Y?si=Q9p1W6r0N8nO4s_x', 'Finalized Workout.pdf', NULL, 'te_d5_7')
+  ('d1000000-0000-0000-0000-000000000033', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000009', 0, NULL, NULL, 'incline dumbell press', 'https://www.youtube.com/watch?v=GHcAIiL9J_Y', 'Renaissance Periodization', NULL, 'te_d5_0'),
+  ('d1000000-0000-0000-0000-000000000034', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000010', 1, NULL, NULL, 'flat dumbell press', 'https://www.youtube.com/watch?v=QsYre__-aro', 'Jeremy Ethier', NULL, 'te_d5_1'),
+  ('d1000000-0000-0000-0000-000000000035', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000011', 2, NULL, NULL, 'pec fly machine', 'https://www.youtube.com/shorts/a9vQ_hwIksU', 'DeltaBolic', NULL, 'te_d5_2'),
+  ('d1000000-0000-0000-0000-000000000036', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000012', 3, 4, NULL, 'skull crushers ×4', 'https://www.youtube.com/watch?v=8t2a93BjDec', 'Renaissance Periodization', '×4', 'te_d5_3'),
+  ('d1000000-0000-0000-0000-000000000037', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000013', 4, 4, NULL, 'Cable pushdown ×4', 'https://www.youtube.com/watch?v=lIqJXGQYyvM', 'Scott Herman Fitness', '×4', 'te_d5_4'),
+  ('d1000000-0000-0000-0000-000000000038', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000014', 5, NULL, NULL, 'overhead tricep extension', 'https://www.youtube.com/watch?v=IaJWPqP-Bjo', 'Renaissance Periodization', NULL, 'te_d5_5'),
+  ('d1000000-0000-0000-0000-000000000039', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000015', 6, NULL, NULL, 'crunches', 'https://www.youtube.com/watch?v=Evhyg6Fs9Q8', 'Scott Herman Fitness', NULL, 'te_d5_6'),
+  ('d1000000-0000-0000-0000-000000000040', 'b1000000-0000-0000-0000-000000000005', 'c1000000-0000-0000-0000-000000000016', 7, NULL, NULL, 'plank', 'https://www.youtube.com/shorts/vmxWjL0LjV4', 'Squat University', NULL, 'te_d5_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
 -- 7.10 Template Entries (Day 6 - Saturday)
 INSERT INTO public.template_entries (id, template_day_id, exercise_id, sort_order, sets, reps, source_label, video_url, source_reference, source_key)
 VALUES
-  ('d1000000-0000-0000-0000-000000000041', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000017', 0, NULL, NULL, 'Shoulder press', 'https://youtube.com/shorts/1bV3X5k7m9Y?si=L1m2N3p4Q5r6S7t8', 'Finalized Workout.pdf', 'te_d6_0'),
-  ('d1000000-0000-0000-0000-000000000042', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000018', 1, NULL, NULL, 'lateral rises', 'https://youtube.com/shorts/2cV4Y6l8n0Z?si=M2n3O4q5R6s7T8u9', 'Finalized Workout.pdf', 'te_d6_1'),
-  ('d1000000-0000-0000-0000-000000000043', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000019', 2, NULL, NULL, 'Face pull', 'https://youtube.com/shorts/3dW5Z7m9o1A?si=N3o4P5r6S7t8U9v0', 'Finalized Workout.pdf', 'te_d6_2'),
-  ('d1000000-0000-0000-0000-000000000044', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000020', 3, NULL, NULL, 'squats', 'https://youtube.com/shorts/4eX6A8n0p2B?si=O4p5Q6s7T8u9V0w1', 'Finalized Workout.pdf', 'te_d6_3'),
-  ('d1000000-0000-0000-0000-000000000045', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000021', 4, NULL, NULL, 'leg press', 'https://youtube.com/shorts/5fY7B9o1q3C?si=P5q6R7t8U9v0W1x2', 'Finalized Workout.pdf', 'te_d6_4'),
-  ('d1000000-0000-0000-0000-000000000046', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000022', 5, NULL, NULL, 'leg extension', 'https://youtube.com/shorts/6gZ8C0p2r4D?si=Q6r7S8u9V0w1X2y3', 'Finalized Workout.pdf', 'te_d6_5'),
-  ('d1000000-0000-0000-0000-000000000047', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000023', 6, NULL, NULL, 'hamstring curls', 'https://youtube.com/shorts/7hA9D1q3s5E?si=R7s8T9v0W1x2Y3z4', 'Finalized Workout.pdf', 'te_d6_6'),
-  ('d1000000-0000-0000-0000-000000000048', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000024', 7, NULL, NULL, 'calves', 'https://youtube.com/shorts/8iB0E2r4t6F?si=S8t9U0w1X2y3Z4a5', 'Finalized Workout.pdf', 'te_d6_7')
+  ('d1000000-0000-0000-0000-000000000041', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000017', 0, NULL, NULL, 'Shoulder press', 'https://www.youtube.com/watch?v=GFblCmuEE18', 'Scott Herman Fitness', 'te_d6_0'),
+  ('d1000000-0000-0000-0000-000000000042', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000018', 1, NULL, NULL, 'lateral rises', 'https://www.youtube.com/watch?v=n5dsI9qQXwY', 'Renaissance Periodization', 'te_d6_1'),
+  ('d1000000-0000-0000-0000-000000000043', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000019', 2, NULL, NULL, 'Face pull', 'https://www.youtube.com/watch?v=ljgqer1ZpXg', 'ATHLEAN-X™', 'te_d3_2'),
+  ('d1000000-0000-0000-0000-000000000044', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000020', 3, NULL, NULL, 'squats', 'https://www.youtube.com/watch?v=5alpa1IikQM', 'Squat University', 'te_d6_3'),
+  ('d1000000-0000-0000-0000-000000000045', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000021', 4, NULL, NULL, 'leg press', 'https://www.youtube.com/watch?v=IZxyjW7MPJQ', 'Scott Herman Fitness', 'te_d6_4'),
+  ('d1000000-0000-0000-0000-000000000046', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000022', 5, NULL, NULL, 'leg extension', 'https://www.youtube.com/watch?v=ljO4jkwv8wQ', 'Jeff Nippard', 'te_d6_5'),
+  ('d1000000-0000-0000-0000-000000000047', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000023', 6, NULL, NULL, 'hamstring curls', 'https://www.youtube.com/watch?v=jobEeklwrrs', 'Renaissance Periodization', 'te_d6_6'),
+  ('d1000000-0000-0000-0000-000000000048', 'b1000000-0000-0000-0000-000000000006', 'c1000000-0000-0000-0000-000000000024', 7, NULL, NULL, 'calves', 'https://www.youtube.com/shorts/xK6DoHBXTdw', 'Jeff Nippard', 'te_d6_7')
 ON CONFLICT (source_key) DO UPDATE
-SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url;
+SET sets = EXCLUDED.sets, reps = EXCLUDED.reps, source_label = EXCLUDED.source_label, video_url = EXCLUDED.video_url, source_reference = EXCLUDED.source_reference;
 
