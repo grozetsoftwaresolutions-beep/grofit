@@ -12,6 +12,9 @@ import {
   Filter,
   Award,
   Sparkles,
+  Play,
+  ExternalLink,
+  Video,
 } from 'lucide-react';
 
 interface WorkoutTemplate {
@@ -28,6 +31,8 @@ interface Exercise {
   description: string | null;
   muscleGroup: string | null;
   sourceReference: string | null;
+  videoUrl?: string | null;
+  videoCredit?: string | null;
   rank?: number | null;
   tier?: string | null;
   targetHead?: string | null;
@@ -263,7 +268,7 @@ export default function WorkoutPlansPage() {
                     Evidence-Based Hypertrophy Directory
                   </h3>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                    Peer-reviewed rankings with at least 5 top-ranked workouts per muscle group.
+                    Peer-reviewed rankings with at least 5 top workouts per muscle group, with verified YouTube tutorials & credits.
                   </p>
                 </div>
               </div>
@@ -401,6 +406,35 @@ export default function WorkoutPlansPage() {
                       <p className="mt-2 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
                         {ex.evidenceRationale}
                       </p>
+                    )}
+
+                    {/* YouTube Tutorial & Creator Credits */}
+                    {ex.videoUrl && (
+                      <div className="mt-3.5 flex items-center justify-between gap-2.5 rounded-xl border border-red-500/20 bg-red-950/25 p-2.5 sm:p-3 transition-colors hover:border-red-500/40">
+                        <div className="flex items-center gap-2.5 min-w-0">
+                          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-red-600 text-white shadow-sm shadow-red-600/30">
+                            <Play className="h-3.5 w-3.5 fill-current ml-0.5" />
+                          </span>
+                          <div className="min-w-0">
+                            <span className="block text-[10px] font-bold uppercase tracking-wider text-red-400">
+                              Tutorial Video
+                            </span>
+                            <span className="block text-xs font-semibold text-zinc-100 truncate" title={`Credit: ${ex.videoCredit || 'Fitness Educator'}`}>
+                              Credit: {ex.videoCredit || 'Fitness Educator'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <a
+                          href={ex.videoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg bg-red-600 hover:bg-red-500 active:scale-95 px-3 py-1.5 text-xs font-bold text-white shadow transition-all duration-150 min-h-[32px]"
+                        >
+                          <span>Watch</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      </div>
                     )}
                   </div>
 

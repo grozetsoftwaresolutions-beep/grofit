@@ -96,3 +96,18 @@ test('Evidence-Based Workout Library: WORKOUT_MUSCLE_GROUPS includes all 12 cate
   assert.ok(WORKOUT_MUSCLE_GROUPS.includes('Abs'));
   assert.ok(WORKOUT_MUSCLE_GROUPS.includes('Forearms'));
 });
+
+test('Evidence-Based Workout Library: Every exercise has a verified YouTube tutorial URL and creator credit', () => {
+  assert.ok(EVIDENCE_BASED_EXERCISES.length > 0);
+  for (const ex of EVIDENCE_BASED_EXERCISES) {
+    assert.ok(
+      typeof ex.videoUrl === 'string' && ex.videoUrl.startsWith('https://www.youtube.com/'),
+      `Exercise ${ex.name} (${ex.sourceKey}) must have a valid YouTube videoUrl, got: ${ex.videoUrl}`
+    );
+    assert.ok(
+      typeof ex.videoCredit === 'string' && ex.videoCredit.trim().length > 0,
+      `Exercise ${ex.name} (${ex.sourceKey}) must have a creator videoCredit, got: ${ex.videoCredit}`
+    );
+  }
+});
+

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedSupabaseClient } from '@/lib/supabase/auth-helper';
-import { EVIDENCE_BASED_EXERCISES } from '@/lib/workout/evidence-exercises';
+import { EVIDENCE_BASED_EXERCISES, EXERCISE_VIDEO_MAP } from '@/lib/workout/evidence-exercises';
 
 export async function GET(request: Request) {
   try {
@@ -56,6 +56,7 @@ export async function GET(request: Request) {
 
     let mapped = (data || []).map((e) => {
       const evidence = evidenceMapById.get(e.id) || evidenceMapByName.get(e.name.toLowerCase().trim());
+      const video = (e.source_key && EXERCISE_VIDEO_MAP[e.source_key]) || (evidence?.videoUrl ? { videoUrl: evidence.videoUrl, videoCredit: evidence.videoCredit } : null);
       return {
         id: e.id,
         name: e.name,
@@ -63,6 +64,8 @@ export async function GET(request: Request) {
         muscleGroup: evidence ? evidence.muscleGroup : e.muscle_group,
         sourceReference: e.source_reference,
         sourceKey: e.source_key,
+        videoUrl: video?.videoUrl ?? null,
+        videoCredit: video?.videoCredit ?? null,
         rank: evidence?.rank ?? null,
         tier: evidence?.tier ?? null,
         targetHead: evidence?.targetHead ?? null,
