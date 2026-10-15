@@ -1,7 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { createClient } from '@/lib/supabase/client'
 import {
   Dumbbell,
   Flame,
@@ -24,9 +26,47 @@ import {
 } from 'lucide-react'
 
 export default function HomePage() {
+  const router = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [selectedMuscle, setSelectedMuscle] = useState<'chest' | 'back' | 'legs' | 'arms'>('chest')
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [isRedirecting, setIsRedirecting] = useState(false)
+
+  useEffect(() => {
+    try {
+      const supabase = createClient()
+      supabase.auth.getSession().then(({ data: { session } }) => {
+        if (session?.user) {
+          setIsRedirecting(true)
+          router.replace('/app')
+        }
+      }).catch(() => {})
+
+      const { data: authListener } = supabase.auth.onAuthStateChange((_event, session) => {
+        if (session?.user) {
+          setIsRedirecting(true)
+          router.replace('/app')
+        }
+      })
+
+      return () => {
+        authListener?.subscription?.unsubscribe()
+      }
+    } catch {
+      // Supabase unconfigured or offline
+    }
+  }, [router])
+
+  if (isRedirecting) {
+    return (
+      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          <p className="text-xs text-zinc-400 font-medium">Opening dashboard...</p>
+        </div>
+      </div>
+    )
+  }
 
   const muscleRankings = {
     chest: [

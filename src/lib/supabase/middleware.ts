@@ -45,13 +45,24 @@ export async function updateSession(request: NextRequest) {
   // Basic route protection
   const isAuthRoute = request.nextUrl.pathname.startsWith('/auth');
   const isAppRoute = request.nextUrl.pathname.startsWith('/app');
+  const isRootRoute = request.nextUrl.pathname === '/';
+
+  // Helper to ensure refreshed session cookies are preserved on redirect
+  const createRedirectResponse = (targetPath: string) => {
+    const redirectResponse = NextResponse.redirect(new URL(targetPath, request.url));
+    supabaseResponse.cookies.getAll().forEach((cookie) => {
+      redirectResponse.cookies.set(cookie.name, cookie.value, cookie);
+    });
+    return redirectResponse;
+  };
 
   if (isAppRoute && !user) {
-    return NextResponse.redirect(new URL('/auth/login', request.url));
+    return createRedirectResponse('/auth/login');
   }
 
-  if (isAuthRoute && user) {
-    return NextResponse.redirect(new URL('/app', request.url));
+  // Once authenticated, visiting /auth/* or the root landing page (/) redirects directly to dashboard (/app)
+  if ((isAuthRoute || isRootRoute) && user) {
+    return createRedirectResponse('/app');
   }
 
   return supabaseResponse;
