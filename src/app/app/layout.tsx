@@ -18,7 +18,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       </Suspense>
 
       {/* Main Content with Safe Bottom Padding for Mobile Bottom Bar */}
-      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 p-4 sm:p-6 pb-24 md:pb-8 focus:outline-none">
+      <main id="main-content" className="mx-auto w-full max-w-7xl flex-1 px-3.5 py-4 sm:p-6 pb-24 md:pb-8 focus:outline-none min-w-0 overflow-x-hidden">
         {children}
       </main>
     </div>

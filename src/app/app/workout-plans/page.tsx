@@ -127,83 +127,83 @@ export default function WorkoutPlansPage() {
   });
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-4 sm:space-y-8 min-w-0">
       {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+        <h1 className="text-xl sm:text-3xl font-extrabold tracking-tight text-white">
           Workout Plans
         </h1>
-        <p className="mt-1 text-xs sm:text-sm text-zinc-400">
+        <p className="mt-0.5 sm:mt-1 text-xs sm:text-sm text-zinc-400">
           Discover vetted workout programmes and browse the canonical exercise library.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-zinc-200 dark:border-zinc-800">
+      <div className="flex border-b border-zinc-800 overflow-x-auto no-scrollbar gap-1 sm:gap-2">
         <button
           onClick={() => setActiveTab('templates')}
-          className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs sm:text-sm font-semibold transition-colors min-h-[44px] ${
+          className={`flex items-center gap-1.5 sm:gap-2 border-b-2 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold transition-colors shrink-0 min-h-[38px] sm:min-h-[44px] ${
             activeTab === 'templates'
-              ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white font-bold'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+              ? 'border-white text-white font-bold'
+              : 'border-transparent text-zinc-400 hover:text-white'
           }`}
         >
-          <Calendar className="h-4 w-4" />
+          <Calendar className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           Templates Catalogue
         </button>
         <button
           onClick={() => setActiveTab('library')}
-          className={`flex items-center gap-2 border-b-2 px-4 py-3 text-xs sm:text-sm font-semibold transition-colors min-h-[44px] ${
+          className={`flex items-center gap-1.5 sm:gap-2 border-b-2 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-semibold transition-colors shrink-0 min-h-[38px] sm:min-h-[44px] ${
             activeTab === 'library'
-              ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white font-bold'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+              ? 'border-white text-white font-bold'
+              : 'border-transparent text-zinc-400 hover:text-white'
           }`}
         >
-          <BookOpen className="h-4 w-4" />
+          <BookOpen className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
           Exercise Library
         </button>
       </div>
 
       {/* Templates Content */}
       {activeTab === 'templates' && (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {loadingTemplates ? (
-            <div className="flex h-48 items-center justify-center rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
+            <div className="flex h-48 items-center justify-center rounded-2xl border border-zinc-800 bg-zinc-900/90">
               <div className="text-center">
-                <Dumbbell className="mx-auto h-8 w-8 animate-spin text-zinc-900 dark:text-white" />
-                <p className="mt-2 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+                <Dumbbell className="mx-auto h-8 w-8 animate-spin text-white" />
+                <p className="mt-2 text-xs sm:text-sm text-zinc-400">
                   Loading verified workout templates...
                 </p>
               </div>
             </div>
           ) : templateError ? (
-            <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+            <div className="rounded-2xl border border-red-900/50 bg-red-950/30 p-5 sm:p-6 text-red-400 text-xs sm:text-sm">
               {templateError}
             </div>
           ) : templates.length === 0 ? (
-            <div className="rounded-2xl border border-zinc-200 bg-white p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
-              <Calendar className="mx-auto h-12 w-12 text-zinc-400" />
-              <h3 className="mt-3 text-base font-semibold text-zinc-900 dark:text-white">
+            <div className="rounded-2xl border border-zinc-800 bg-zinc-900/90 p-8 sm:p-12 text-center">
+              <Calendar className="mx-auto h-10 w-10 sm:h-12 sm:w-12 text-zinc-400" />
+              <h3 className="mt-3 text-sm sm:text-base font-semibold text-white">
                 No templates published
               </h3>
-              <p className="mt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+              <p className="mt-1 text-xs sm:text-sm text-zinc-400">
                 Check back soon for curated fitness splits.
               </p>
             </div>
           ) : (
-            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3.5 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
               {templates.map((tpl) => (
                 <div
                   key={tpl.id}
-                  className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="min-w-0 flex flex-col justify-between rounded-2xl border border-zinc-800/90 bg-zinc-900/90 p-4 sm:p-6 shadow-sm transition hover:border-zinc-700"
                 >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
-                        <ShieldCheck className="h-3.5 w-3.5" />
+                  <div className="space-y-2.5 sm:space-y-3 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-700 bg-zinc-800 px-2.5 py-0.5 text-[11px] sm:text-xs font-semibold text-white shrink-0">
+                        <ShieldCheck className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                         Source Verified
                       </span>
-                      <span className="text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                      <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-zinc-400 shrink-0">
                         {tpl.name.includes('3-Day')
                           ? '3-Day Split'
                           : tpl.name.includes('4-Day')
@@ -212,26 +212,26 @@ export default function WorkoutPlansPage() {
                       </span>
                     </div>
 
-                    <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white">
+                    <h2 className="text-base sm:text-lg font-bold text-white break-words">
                       {tpl.name}
                     </h2>
 
                     {tpl.sourceReference && (
-                      <div className="flex items-center gap-1.5 text-xs text-zinc-700 dark:text-zinc-300 bg-zinc-100 dark:bg-zinc-800/80 px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700 font-medium">
-                        <span className="font-semibold text-zinc-900 dark:text-white">Credits:</span>
-                        <span className="truncate">{tpl.sourceReference}</span>
+                      <div className="flex items-center gap-1.5 text-xs text-zinc-300 bg-zinc-800/80 px-2.5 py-1 rounded-lg border border-zinc-700/80 font-medium min-w-0">
+                        <span className="font-semibold text-white shrink-0">Credits:</span>
+                        <span className="truncate min-w-0 text-zinc-300">{tpl.sourceReference}</span>
                       </div>
                     )}
 
-                    <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-400">
+                    <p className="text-xs leading-relaxed text-zinc-400 line-clamp-3 sm:line-clamp-none break-words">
                       {tpl.description || 'Curated workout programme sourced from verified fitness documentation.'}
                     </p>
                   </div>
 
-                  <div className="mt-6 border-t border-zinc-100 pt-4 dark:border-zinc-800/80">
+                  <div className="mt-4 sm:mt-6 border-t border-zinc-800/80 pt-3 sm:pt-4">
                     <Link
                       href={`/app/workout-plans/${tpl.id}`}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-4 py-2.5 text-xs sm:text-sm font-bold text-black shadow-sm transition hover:bg-zinc-200 active:scale-95 min-h-[42px] sm:min-h-[44px]"
                     >
                       View Template Details
                       <ChevronRight className="h-4 w-4" />
@@ -331,13 +331,13 @@ export default function WorkoutPlansPage() {
               </p>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-3.5 sm:gap-4 md:grid-cols-2 lg:grid-cols-3">
               {filteredExercises.map((ex) => (
                 <div
                   key={ex.id}
-                  className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="min-w-0 flex flex-col justify-between rounded-2xl border border-zinc-800/90 bg-zinc-900/90 p-4 sm:p-5 shadow-sm transition hover:border-zinc-700"
                 >
-                  <div>
+                  <div className="min-w-0">
                     {/* Header Badges */}
                     <div className="flex items-center justify-between gap-1.5">
                       <div className="flex items-center gap-1.5 flex-wrap">
