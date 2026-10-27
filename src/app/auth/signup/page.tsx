@@ -16,25 +16,25 @@ async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: 
         </div>
       )}
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400" htmlFor="email">
-          Email
+        <label className="text-xs font-bold uppercase tracking-wider text-zinc-300" htmlFor="email">
+          Email Address
         </label>
         <input
-          className="rounded-xl border border-zinc-800 bg-zinc-900/90 px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors"
+          className="rounded-xl border border-[#1a1a1a] bg-[#000000] px-4 py-2.5 text-sm text-[#ffffff] placeholder:text-zinc-600 focus:border-[#ff2a3b] focus:outline-none focus:ring-1 focus:ring-[#ff2a3b] transition-colors min-h-[44px]"
           id="email"
           name="email"
           type="email"
           autoComplete="email"
-          placeholder="name@example.com"
+          placeholder="athlete@kinetik.app"
           required
         />
       </div>
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs font-semibold uppercase tracking-wider text-zinc-400" htmlFor="password">
+        <label className="text-xs font-bold uppercase tracking-wider text-zinc-300" htmlFor="password">
           Password
         </label>
         <input
-          className="rounded-xl border border-zinc-800 bg-zinc-900/90 px-3.5 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 transition-colors"
+          className="rounded-xl border border-[#1a1a1a] bg-[#000000] px-4 py-2.5 text-sm text-[#ffffff] placeholder:text-zinc-600 focus:border-[#ff2a3b] focus:outline-none focus:ring-1 focus:ring-[#ff2a3b] transition-colors min-h-[44px]"
           id="password"
           name="password"
           type="password"
@@ -46,13 +46,13 @@ async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: 
       <button
         type="submit"
         formAction={signup}
-        className="mt-2 flex min-h-[46px] w-full items-center justify-center rounded-xl bg-white py-2.5 text-sm font-bold text-black transition hover:bg-zinc-200 active:scale-95 shadow-md shadow-white/5 cursor-pointer"
+        className="mt-2 flex min-h-[46px] w-full items-center justify-center rounded-xl bg-[#ff2a3b] py-2.5 text-sm font-bold uppercase tracking-wider text-white transition hover:bg-[#ff4d5e] active:scale-95 shadow-lg shadow-[#ff2a3b]/10 cursor-pointer"
       >
         Create account
       </button>
       <div className="mt-3 text-center text-sm">
         <span className="text-zinc-400">Already have an account? </span>
-        <Link href="/auth/login" className="font-semibold text-white hover:underline">
+        <Link href="/auth/login" className="font-bold text-[#ff2a3b] hover:underline">
           Sign in
         </Link>
       </div>
@@ -62,7 +62,7 @@ async function SignupForm({ searchParams }: { searchParams: Promise<{ message?: 
 
 export default function SignupPage(props: { searchParams: Promise<{ message?: string }> }) {
   return (
-    <Suspense fallback={<div className="text-sm text-zinc-500 text-center py-4">Loading...</div>}>
+    <Suspense fallback={<div className="text-sm font-mono text-zinc-500 text-center py-4">Registering...</div>}>
       <SignupForm searchParams={props.searchParams} />
     </Suspense>
   )

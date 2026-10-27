@@ -118,18 +118,23 @@ export default function DataSettingsPage() {
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8">
+      {/* Back Link */}
       <div className="flex items-center gap-2">
         <Link
           href="/app/settings"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 rounded-lg px-2 py-2 min-h-[44px]"
+          className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-zinc-400 hover:text-[#ff2a3b] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2a3b] rounded-lg px-2 py-2 min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
           <span>{STRINGS.common.backToSettings}</span>
         </Link>
       </div>
 
+      {/* Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+        <span className="eyebrow text-[11px] font-bold text-[#ff2a3b] uppercase tracking-widest block mb-1">
+          Governance &amp; Sovereignty
+        </span>
+        <h1 className="font-display text-3xl sm:text-4xl font-black uppercase tracking-tight text-[#ffffff]">
           {STRINGS.data.title}
         </h1>
         <p className="mt-1 text-xs sm:text-sm text-zinc-400">
@@ -138,16 +143,16 @@ export default function DataSettingsPage() {
       </div>
 
       {/* 1. Data Export Section */}
-      <section aria-labelledby="export-heading" className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <section aria-labelledby="export-heading" className="kinetik-card rounded-2xl p-6 sm:p-7">
         <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white">
-            <Download className="h-5 w-5" aria-hidden="true" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff2a3b]/10 text-[#ff2a3b] border border-[#ff2a3b]/20">
+            <Download className="h-6 w-6" aria-hidden="true" />
           </div>
           <div className="flex-1">
-            <h2 id="export-heading" className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50">
+            <h2 id="export-heading" className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-[#ffffff]">
               {STRINGS.data.exportHeading}
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="mt-1.5 text-xs sm:text-sm text-zinc-400 leading-relaxed">
               {STRINGS.data.exportDesc}
             </p>
 
@@ -157,14 +162,14 @@ export default function DataSettingsPage() {
                 aria-live="polite"
                 className={`mt-4 p-3.5 rounded-xl flex items-start gap-2.5 border text-xs sm:text-sm ${
                   exportMessage.type === 'success'
-                    ? 'bg-zinc-100 border-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:border-zinc-700 dark:text-white'
-                    : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-950/40 dark:border-red-800 dark:text-red-300'
+                    ? 'bg-[#0d0d0d] border-[#ff2a3b]/40 text-[#ff2a3b]'
+                    : 'bg-red-950/40 border-red-800 text-red-300'
                 }`}
               >
                 {exportMessage.type === 'success' ? (
-                  <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0 text-zinc-900 dark:text-white" aria-hidden="true" />
+                  <CheckCircle2 className="h-4 w-4 mt-0.5 shrink-0 text-[#ff2a3b]" aria-hidden="true" />
                 ) : (
-                  <AlertCircle className="h-4 w-4 mt-0.5 shrink-0 text-red-600 dark:text-red-400" aria-hidden="true" />
+                  <AlertCircle className="h-4 w-4 mt-0.5 shrink-0 text-red-400" aria-hidden="true" />
                 )}
                 <span>{exportMessage.text}</span>
               </div>
@@ -175,10 +180,10 @@ export default function DataSettingsPage() {
                 type="button"
                 onClick={handleExport}
                 disabled={isExporting}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-zinc-800 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 dark:focus-visible:ring-white disabled:opacity-50 transition min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#ff2a3b] px-5 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-[#ff4d5e] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2a3b] disabled:opacity-50 transition min-h-[44px] cursor-pointer"
               >
                 {isExporting ? (
-                  <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+                  <Loader2 className="h-4 w-4 animate-spin text-white" aria-hidden="true" />
                 ) : (
                   <Download className="h-4 w-4" aria-hidden="true" />
                 )}
@@ -190,13 +195,13 @@ export default function DataSettingsPage() {
       </section>
 
       {/* 2. Privacy & Health Disclaimer Section */}
-      <section aria-labelledby="privacy-heading" className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <section aria-labelledby="privacy-heading" className="kinetik-card rounded-2xl p-6 sm:p-7">
         <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-white">
-            <ShieldCheck className="h-5 w-5" aria-hidden="true" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ff2a3b]/10 text-[#ff2a3b] border border-[#ff2a3b]/20">
+            <ShieldCheck className="h-6 w-6" aria-hidden="true" />
           </div>
-          <div className="space-y-3 flex-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            <h2 id="privacy-heading" className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50">
+          <div className="space-y-3 flex-1 text-xs sm:text-sm text-zinc-400 leading-relaxed">
+            <h2 id="privacy-heading" className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-[#ffffff]">
               {STRINGS.data.privacyHeading}
             </h2>
             <p>{STRINGS.data.privacyBody1}</p>
@@ -207,16 +212,16 @@ export default function DataSettingsPage() {
       </section>
 
       {/* 3. Account Deletion Section */}
-      <section aria-labelledby="delete-heading" className="rounded-2xl border border-red-200 bg-red-50/40 p-6 shadow-sm dark:border-red-900/60 dark:bg-red-950/20">
+      <section aria-labelledby="delete-heading" className="rounded-2xl border border-red-900/60 bg-red-950/20 p-6 sm:p-7 shadow-sm">
         <div className="flex items-start gap-4">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-700 dark:bg-red-900/60 dark:text-red-300">
-            <AlertTriangle className="h-5 w-5" aria-hidden="true" />
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-red-950/60 text-red-400 border border-red-900/40">
+            <AlertTriangle className="h-6 w-6" aria-hidden="true" />
           </div>
           <div className="flex-1">
-            <h2 id="delete-heading" className="text-base sm:text-lg font-bold text-red-900 dark:text-red-200">
+            <h2 id="delete-heading" className="font-display text-xl sm:text-2xl font-bold uppercase tracking-wide text-red-200">
               {STRINGS.data.deleteHeading}
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-red-800 dark:text-red-300/90 leading-relaxed">
+            <p className="mt-1.5 text-xs sm:text-sm text-red-300/90 leading-relaxed">
               {STRINGS.data.deleteWarningText}
             </p>
 
@@ -229,7 +234,7 @@ export default function DataSettingsPage() {
                   setDeleteError(null);
                   setIsDeleteModalOpen(true);
                 }}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-red-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 transition min-h-[44px] cursor-pointer"
               >
                 <Trash2 className="h-4 w-4" aria-hidden="true" />
                 <span>Request Account Deletion</span>
@@ -245,19 +250,19 @@ export default function DataSettingsPage() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="modal-title"
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md"
         >
-          <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 space-y-5 animate-in fade-in-0 zoom-in-95 max-h-[90vh] overflow-y-auto">
-            <div className="mx-auto mb-2 h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-700 sm:hidden" />
+          <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-red-900/60 bg-[#0d0d0d] p-6 sm:p-7 shadow-2xl space-y-5 animate-in fade-in-0 zoom-in-95 max-h-[90vh] overflow-y-auto">
+            <div className="mx-auto mb-2 h-1.5 w-12 rounded-full bg-zinc-700 sm:hidden" />
             <div className="flex items-start gap-3">
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-100 text-red-600 dark:bg-red-950/80 dark:text-red-400">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-red-950/80 text-red-400 border border-red-900/40">
                 <AlertTriangle className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <h3 id="modal-title" className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-50">
+                <h3 id="modal-title" className="font-display text-xl font-bold uppercase tracking-wide text-red-200">
                   {STRINGS.data.deleteWarningTitle}
                 </h3>
-                <p className="mt-1 text-xs text-zinc-600 dark:text-zinc-400">
+                <p className="mt-1 text-xs text-zinc-400">
                   {STRINGS.data.deleteConfirmInstructions}
                 </p>
               </div>
@@ -266,16 +271,16 @@ export default function DataSettingsPage() {
             {deleteError && (
               <div
                 role="alert"
-                className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-start gap-2.5 dark:bg-red-950/40 dark:border-red-800 dark:text-red-300"
+                className="p-3.5 rounded-xl bg-red-950/60 border border-red-800 text-red-300 text-xs flex items-start gap-2.5"
               >
-                <AlertCircle className="h-4 w-4 mt-0.5 shrink-0 text-red-600 dark:text-red-400" aria-hidden="true" />
+                <AlertCircle className="h-4 w-4 mt-0.5 shrink-0 text-red-400" aria-hidden="true" />
                 <span>{deleteError}</span>
               </div>
             )}
 
             <form onSubmit={handleDeleteAccount} className="space-y-4">
               <div>
-                <label htmlFor={confirmInputId} className="block text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <label htmlFor={confirmInputId} className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-300">
                   {STRINGS.data.confirmInputLabel}
                 </label>
                 <input
@@ -285,42 +290,42 @@ export default function DataSettingsPage() {
                   onChange={(e) => setConfirmationText(e.target.value)}
                   placeholder="DELETE"
                   autoComplete="off"
-                  className="mt-1 block w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 font-mono shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 min-h-[44px]"
+                  className="mt-1.5 block w-full rounded-xl border border-[#1a1a1a] bg-[#000000] px-4 py-2.5 text-xs sm:text-sm text-[#ffffff] font-mono shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 min-h-[44px]"
                 />
               </div>
 
               <div>
-                <label htmlFor={passwordInputId} className="block text-xs sm:text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <label htmlFor={passwordInputId} className="block text-xs sm:text-sm font-semibold uppercase tracking-wider text-zinc-300">
                   {STRINGS.data.passwordInputLabel}
                 </label>
-                <div className="relative mt-1">
+                <div className="relative mt-1.5">
                   <input
                     id={passwordInputId}
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter account password"
-                    className="block w-full rounded-xl border border-zinc-300 bg-white px-3.5 py-2.5 text-xs sm:text-sm text-zinc-900 shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-100 min-h-[44px]"
+                    className="block w-full rounded-xl border border-[#1a1a1a] bg-[#000000] px-4 py-2.5 text-xs sm:text-sm text-[#ffffff] shadow-sm focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500 min-h-[44px]"
                   />
-                  <Lock className="absolute right-3.5 top-3.5 h-4 w-4 text-zinc-400" aria-hidden="true" />
+                  <Lock className="absolute right-3.5 top-3.5 h-4 w-4 text-zinc-500" aria-hidden="true" />
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3 pt-4 border-t border-[#1a1a1a]">
                 <button
                   type="button"
                   onClick={() => setIsDeleteModalOpen(false)}
                   disabled={isDeleting}
-                  className="rounded-xl border border-zinc-300 bg-white px-4 py-2.5 text-xs sm:text-sm font-semibold text-zinc-700 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[44px]"
+                  className="rounded-xl border border-[#1a1a1a] bg-[#000000] px-4 py-2.5 text-xs sm:text-sm font-semibold text-zinc-300 hover:text-white hover:border-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 min-h-[44px] cursor-pointer"
                 >
                   {STRINGS.data.cancelButton}
                 </button>
                 <button
                   type="submit"
                   disabled={confirmationText !== 'DELETE' || !password || isDeleting}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm hover:bg-red-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition min-h-[44px]"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-sm hover:bg-red-700 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition min-h-[44px] cursor-pointer"
                 >
-                  {isDeleting && <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />}
+                  {isDeleting && <Loader2 className="h-4 w-4 animate-spin text-white" aria-hidden="true" />}
                   <span>{isDeleting ? STRINGS.data.deletingButton : STRINGS.data.deleteButton}</span>
                 </button>
               </div>

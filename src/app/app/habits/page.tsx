@@ -526,12 +526,12 @@ function HabitTrackerContent() {
   if ((loading || !selectedDate) && habits.length === 0) {
     return (
       <div className="space-y-6">
-        <div className="h-8 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-        <div className="h-16 w-full animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+        <div className="h-8 w-48 animate-pulse rounded-lg bg-[#0d0d0d] border border-[#1b3d27]" />
+        <div className="h-16 w-full animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/60" />
         <div className="space-y-3">
-          <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-          <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-          <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+          <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+          <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+          <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
         </div>
       </div>
     );
@@ -540,17 +540,17 @@ function HabitTrackerContent() {
   if (error) {
     return (
       <div className="py-12">
-        <div className="mx-auto max-w-md rounded-2xl border border-red-200 bg-red-50 p-8 text-center dark:border-red-900/50 dark:bg-red-950/20">
-          <AlertCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
-          <h2 className="text-xl font-bold text-red-900 dark:text-red-200">Unable to Load Habit Tracker</h2>
-          <p className="mt-2 text-sm text-red-700 dark:text-red-300/80">{error}</p>
+        <div className="kinetik-card mx-auto max-w-md rounded-2xl border border-rose-500/40 bg-rose-950/20 p-8 text-center text-[#ffffff]">
+          <AlertCircle className="mx-auto h-12 w-12 text-rose-400 mb-4" />
+          <h2 className="font-display text-xl font-bold uppercase tracking-wide text-rose-200">Unable to Load Habit Tracker</h2>
+          <p className="mt-2 text-sm text-rose-300/80">{error}</p>
           <button
             type="button"
             onClick={() => {
               setLoading(true);
               setReloadTrigger((prev) => prev + 1);
             }}
-            className="mt-6 rounded-lg bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+            className="kinetik-btn-lime mt-6 px-5 py-2.5 text-xs font-bold uppercase tracking-wider"
           >
             Retry
           </button>
@@ -562,14 +562,14 @@ function HabitTrackerContent() {
   return (
     <div className="space-y-8">
       {/* Top Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-[#1b3d27]/70 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-            <Sparkles className="h-4 w-4" /> Daily Routine &amp; Streaks
+          <div className="eyebrow flex items-center gap-2 text-xs">
+            <Sparkles className="h-4 w-4 text-[#ff2a3b]" /> DISCIPLINE &amp; MOMENTUM
           </div>
-          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">Habit Tracker</h1>
-          <p className="mt-1 text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 max-w-lg">
-            Track daily habits, build momentum, and review continuous streaks in your local timezone.
+          <h1 className="mt-1 font-display text-3xl sm:text-4xl font-extrabold uppercase tracking-tight text-[#ffffff]">HABIT ARCHITECTURE</h1>
+          <p className="mt-1 text-xs sm:text-sm text-[#ffffff]/60 max-w-lg font-light">
+            Track daily training protocols, build momentum, and review continuous streaks in your local timezone.
           </p>
         </div>
 
@@ -577,9 +577,9 @@ function HabitTrackerContent() {
           <button
             type="button"
             onClick={() => handleOpenReport(reportRange)}
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 hover:border-zinc-300 active:scale-95 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800"
+            className="kinetik-btn-dark inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider"
           >
-            <BarChart3 className="h-4 w-4" /> Habit Reports
+            <BarChart3 className="h-4 w-4 text-[#ff2a3b]" /> Habit Reports
           </button>
 
           <button
@@ -590,7 +590,7 @@ function HabitTrackerContent() {
               setFormErrors({});
               setCreateModalOpen(true);
             }}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+            className="kinetik-btn-lime inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider"
           >
             <Plus className="h-4 w-4" /> New Habit
           </button>
@@ -599,19 +599,19 @@ function HabitTrackerContent() {
 
       {/* Action Notice */}
       {actionNotice && (
-        <div className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-xs text-zinc-800 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200">
-          <CheckCircle2 className="h-4 w-4 text-zinc-900 dark:text-white shrink-0" />
+        <div className="flex items-center gap-3 rounded-xl border border-[#ff2a3b]/40 bg-[#1a1a1a] px-4 py-3 text-xs text-[#ffffff] shadow-lg animate-in fade-in">
+          <CheckCircle2 className="h-4 w-4 text-[#ff2a3b] shrink-0" />
           <span>{actionNotice}</span>
         </div>
       )}
 
       {/* Date Navigator Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-zinc-200 bg-white p-4 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+      <div className="kinetik-card flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-4 shadow-sm">
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setSelectedDate(addDays(selectedDate, -1))}
-            className="rounded-lg p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+            className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
             title="Previous Day"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -619,16 +619,16 @@ function HabitTrackerContent() {
 
           <div className="text-left">
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-zinc-900 dark:text-white" />
-              <span className="text-sm font-bold text-zinc-900 dark:text-white">{formattedSelectedDate}</span>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">({selectedDate})</span>
+              <Calendar className="h-4 w-4 text-[#ff2a3b]" />
+              <span className="font-display text-base font-bold uppercase tracking-wide text-[#ffffff]">{formattedSelectedDate}</span>
+              <span className="text-xs font-mono text-[#ffffff]/50">({selectedDate})</span>
             </div>
           </div>
 
           <button
             type="button"
             onClick={() => setSelectedDate(addDays(selectedDate, 1))}
-            className="rounded-lg p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+            className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
             title="Next Day"
           >
             <ChevronRight className="h-5 w-5" />
@@ -639,7 +639,7 @@ function HabitTrackerContent() {
           <button
             type="button"
             onClick={() => setSelectedDate(userToday)}
-            className="rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 transition"
+            className="kinetik-btn-dark px-3 py-1.5 text-xs font-bold uppercase tracking-wider"
           >
             Jump to Today
           </button>
@@ -648,16 +648,16 @@ function HabitTrackerContent() {
 
       {/* Daily Completion Progress Summary */}
       {activeHabits.length > 0 && (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-5 shadow-sm">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-semibold text-zinc-900 dark:text-white">
-              Daily Completion: {completedCount} of {activeHabits.length} habits done
+            <span className="eyebrow text-xs text-[#ff2a3b]">
+              DAILY COMPLETION: {completedCount} OF {activeHabits.length} HABITS LOGGED
             </span>
-            <span className="font-bold text-zinc-900 dark:text-white">{completionPercentage}%</span>
+            <span className="font-display text-base font-bold text-[#ff2a3b]">{completionPercentage}%</span>
           </div>
-          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#000000] border border-[#1b3d27]">
             <div
-              className="h-full bg-zinc-900 dark:bg-white transition-all duration-300"
+              className="h-full bg-[#ff2a3b] transition-all duration-300 shadow-[0_0_10px_rgba(255, 42, 59, 0.3)]"
               style={{ width: `${completionPercentage}%` }}
             />
           </div>
@@ -665,14 +665,14 @@ function HabitTrackerContent() {
       )}
 
       {/* Tabs: Active vs Archived */}
-      <div className="flex items-center gap-4 border-b border-zinc-200 dark:border-zinc-800 text-xs font-semibold">
+      <div className="flex items-center gap-4 border-b border-[#1b3d27]/70 text-xs font-bold uppercase tracking-wider">
         <button
           type="button"
           onClick={() => setActiveTab('active')}
           className={`pb-3 border-b-2 transition ${
             activeTab === 'active'
-              ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+              ? 'border-[#ff2a3b] text-[#ff2a3b]'
+              : 'border-transparent text-[#ffffff]/50 hover:text-[#ffffff]'
           }`}
         >
           Active Habits ({activeHabits.length})
@@ -682,8 +682,8 @@ function HabitTrackerContent() {
           onClick={() => setActiveTab('archived')}
           className={`pb-3 border-b-2 transition ${
             activeTab === 'archived'
-              ? 'border-zinc-900 text-zinc-900 dark:border-white dark:text-white'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+              ? 'border-[#ff2a3b] text-[#ff2a3b]'
+              : 'border-transparent text-[#ffffff]/50 hover:text-[#ffffff]'
           }`}
         >
           Archived ({archivedHabits.length})
@@ -694,11 +694,11 @@ function HabitTrackerContent() {
       {activeTab === 'active' && (
         <div className="space-y-3">
           {activeHabits.length === 0 ? (
-            <div className="rounded-2xl border border-zinc-200 bg-white p-12 text-center shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <Sparkles className="mx-auto h-12 w-12 text-zinc-400 dark:text-zinc-500 mb-3" />
-              <h3 className="text-base font-semibold text-zinc-900 dark:text-white">No active habits yet</h3>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 max-w-sm mx-auto">
-                Add habits like drinking water, meditation, or daily walking to build long-term consistency.
+            <div className="kinetik-card rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/50 p-12 text-center shadow-sm">
+              <Sparkles className="mx-auto h-12 w-12 text-[#ff2a3b] mb-3 opacity-70" />
+              <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">No active habits yet</h3>
+              <p className="mt-1 text-xs text-[#ffffff]/60 max-w-sm mx-auto">
+                Add habits like drinking water, post-workout stretching, or daily walking to build long-term athletic discipline.
               </p>
               <button
                 type="button"
@@ -708,7 +708,7 @@ function HabitTrackerContent() {
                   setFormErrors({});
                   setCreateModalOpen(true);
                 }}
-                className="mt-4 inline-flex items-center gap-2 rounded-lg bg-zinc-900 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100"
+                className="kinetik-btn-lime mt-5 px-4 py-2 text-xs font-bold uppercase tracking-wider"
               >
                 <Plus className="h-4 w-4" /> Create First Habit
               </button>
@@ -720,23 +720,23 @@ function HabitTrackerContent() {
               return (
                 <div
                   key={habit.id}
-                  className={`flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border p-4 transition ${
+                  className={`kinetik-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border p-4 transition-all ${
                     isCompleted
-                      ? 'border-zinc-200/80 bg-zinc-50/70 shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/40'
-                      : 'border-zinc-200 bg-white shadow-sm hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700'
+                      ? 'border-[#1b3d27]/40 bg-[#000000]/60 opacity-80'
+                      : 'border-[#1b3d27]/70 bg-[#0d0d0d]/70 hover:border-[#ff2a3b]/50'
                   }`}
                 >
                   {/* Left: Habit Details */}
                   <div className="flex-1 min-w-0">
                     <h3
-                      className={`text-sm font-semibold transition ${
-                        isCompleted ? 'text-zinc-400 dark:text-zinc-500 line-through' : 'text-zinc-900 dark:text-white'
+                      className={`text-sm font-bold transition ${
+                        isCompleted ? 'text-[#ffffff]/50 line-through' : 'text-[#ffffff]'
                       }`}
                     >
                       {habit.name}
                     </h3>
                     {habit.description && (
-                      <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400 max-w-md">
+                      <p className="mt-0.5 text-xs text-[#ffffff]/60 max-w-md">
                         {habit.description}
                       </p>
                     )}
@@ -745,26 +745,26 @@ function HabitTrackerContent() {
                   {/* Right: Streaks, Actions & Completion Tick */}
                   <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 shrink-0">
                     {/* Current Streak */}
-                    <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
-                      <Flame className="h-3.5 w-3.5 text-zinc-700 dark:text-zinc-300" />
+                    <span className="inline-flex items-center gap-1 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-2.5 py-0.5 text-xs font-mono font-bold text-[#ff2a3b]">
+                      <Flame className="h-3.5 w-3.5 text-[#ff2a3b]" />
                       <span>{habit.currentStreak} d</span>
                     </span>
 
                     {/* Best Streak */}
                     <span
-                      className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-50 px-2.5 py-0.5 text-xs font-semibold text-zinc-600 dark:border-zinc-800 dark:bg-zinc-800/60 dark:text-zinc-400"
+                      className="inline-flex items-center gap-1 rounded-full border border-[#1b3d27] bg-[#000000] px-2.5 py-0.5 text-xs font-mono text-[#ffffff]/60"
                       title="Best Streak"
                     >
-                      <Award className="h-3.5 w-3.5 text-zinc-500 dark:text-zinc-400" />
+                      <Award className="h-3.5 w-3.5 text-[#ffffff]/40" />
                       <span>Best: {habit.bestStreak}</span>
                     </span>
 
                     {/* Action Icons */}
-                    <div className="flex items-center gap-1 border-l border-zinc-200 dark:border-zinc-800 pl-2">
+                    <div className="flex items-center gap-1 border-l border-[#1b3d27] pl-2">
                       <button
                         type="button"
                         onClick={() => handleOpenHistory(habit)}
-                        className="rounded p-1 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="View History"
                       >
                         <History className="h-4 w-4" />
@@ -778,7 +778,7 @@ function HabitTrackerContent() {
                           setFormDescription(habit.description || '');
                           setFormErrors({});
                         }}
-                        className="rounded p-1 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="Edit Habit"
                       >
                         <Edit2 className="h-4 w-4" />
@@ -787,7 +787,7 @@ function HabitTrackerContent() {
                       <button
                         type="button"
                         onClick={() => handleToggleArchive(habit)}
-                        className="rounded p-1 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="Archive Habit"
                       >
                         <Archive className="h-4 w-4" />
@@ -796,7 +796,7 @@ function HabitTrackerContent() {
                       <button
                         type="button"
                         onClick={() => setDeletingHabit(habit)}
-                        className="rounded p-1 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-950/30 transition"
+                        className="rounded p-1 text-[#ffffff]/50 hover:text-rose-400 hover:bg-[#000000] transition"
                         title="Delete Habit"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -804,14 +804,14 @@ function HabitTrackerContent() {
                     </div>
 
                     {/* Completion Tick on the Right */}
-                    <div className="border-l border-zinc-200 dark:border-zinc-800 pl-2">
+                    <div className="border-l border-[#1b3d27] pl-2">
                       <button
                         type="button"
                         onClick={() => handleToggleCompletion(habit.id)}
-                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition ${
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all ${
                           isCompleted
-                            ? 'border-zinc-900 bg-zinc-900 text-white shadow-sm dark:border-white dark:bg-white dark:text-zinc-900'
-                            : 'border-zinc-300 bg-white text-transparent hover:border-zinc-500 dark:border-zinc-700 dark:bg-zinc-800'
+                            ? 'border-[#ff2a3b] bg-[#ff2a3b] text-white shadow-[0_0_12px_rgba(255, 42, 59, 0.3)]'
+                            : 'border-[#1b3d27] bg-[#000000] text-transparent hover:border-[#ff2a3b]/60'
                         }`}
                         title={isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
                       >
@@ -829,34 +829,34 @@ function HabitTrackerContent() {
       {/* Archived Habits List */}
       {activeTab === 'archived' && (
         <div className="space-y-3">
-          <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 text-xs text-zinc-600 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
+          <div className="kinetik-card rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50 p-4 text-xs text-[#ffffff]/70">
             Archived habits preserve their full history and streaks. They can be reactivated anytime.
           </div>
 
           {archivedHabits.length === 0 ? (
-            <p className="py-8 text-center text-xs text-zinc-500 dark:text-zinc-400">No archived habits.</p>
+            <p className="py-8 text-center text-xs text-[#ffffff]/50">No archived habits.</p>
           ) : (
             archivedHabits.map((habit) => (
               <div
                 key={habit.id}
-                className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border border-zinc-200 bg-white p-4 shadow-sm opacity-75 dark:border-zinc-800 dark:bg-zinc-900"
+                className="kinetik-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/70 p-4 shadow-sm opacity-75"
               >
                 <div>
-                  <h3 className="text-sm font-semibold text-zinc-900 dark:text-white">{habit.name}</h3>
+                  <h3 className="text-sm font-bold text-[#ffffff]">{habit.name}</h3>
                   {habit.description && (
-                    <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">{habit.description}</p>
+                    <p className="mt-0.5 text-xs text-[#ffffff]/60">{habit.description}</p>
                   )}
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
-                    Best Streak: <strong className="text-zinc-900 dark:text-white">{habit.bestStreak} days</strong>
+                  <span className="text-xs font-mono text-[#ffffff]/60">
+                    Best Streak: <strong className="text-[#ff2a3b]">{habit.bestStreak} days</strong>
                   </span>
 
                   <button
                     type="button"
                     onClick={() => handleOpenHistory(habit)}
-                    className="rounded p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                    className="rounded p-1.5 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                     title="View History"
                   >
                     <History className="h-4 w-4" />
@@ -865,7 +865,7 @@ function HabitTrackerContent() {
                   <button
                     type="button"
                     onClick={() => handleToggleArchive(habit)}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-medium text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 transition"
+                    className="kinetik-btn-dark inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-wider"
                   >
                     <RotateCcw className="h-3.5 w-3.5" /> Reactivate
                   </button>
@@ -873,7 +873,7 @@ function HabitTrackerContent() {
                   <button
                     type="button"
                     onClick={() => setDeletingHabit(habit)}
-                    className="rounded p-1.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-950/30 transition"
+                    className="rounded p-1.5 text-[#ffffff]/50 hover:text-rose-400 hover:bg-[#000000] transition"
                     title="Delete Habit"
                   >
                     <Trash2 className="h-4 w-4" />
@@ -887,14 +887,14 @@ function HabitTrackerContent() {
 
       {/* Modal: Create Habit */}
       {createModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">Create New Habit</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
+            <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
+              <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Create New Habit</h3>
               <button
                 type="button"
                 onClick={() => setCreateModalOpen(false)}
-                className="rounded-lg p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
+                className="rounded-lg p-1 text-[#ffffff]/50 hover:text-[#ffffff] transition"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -902,13 +902,13 @@ function HabitTrackerContent() {
 
             <form onSubmit={handleCreateHabit} className="mt-4 space-y-4">
               {formErrors.form && (
-                <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-xs text-red-800 dark:bg-red-950/50 dark:border-red-800 dark:text-red-200">
+                <div className="rounded-lg bg-rose-950/40 border border-rose-500/40 p-3 text-xs text-rose-300">
                   {formErrors.form}
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">Habit Name</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Habit Name</label>
                 <input
                   type="text"
                   required
@@ -916,42 +916,42 @@ function HabitTrackerContent() {
                   placeholder="e.g. Read for 20 minutes"
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950 dark:text-white dark:focus:border-white"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] px-3 py-2 text-xs text-[#ffffff] placeholder:text-[#ffffff]/40 focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 />
                 {formErrors.name && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{formErrors.name}</p>
+                  <p className="mt-1 text-xs text-rose-400">{formErrors.name}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
                   Description (optional)
                 </label>
                 <textarea
                   rows={3}
                   maxLength={500}
-                  placeholder="e.g. Read before going to sleep"
+                  placeholder="e.g. Protocol immediately following workout session"
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950 dark:text-white dark:focus:border-white"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] px-3 py-2 text-xs text-[#ffffff] placeholder:text-[#ffffff]/40 focus:border-[#ff2a3b] focus:outline-none"
                 />
                 {formErrors.description && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{formErrors.description}</p>
+                  <p className="mt-1 text-xs text-rose-400">{formErrors.description}</p>
                 )}
               </div>
 
-              <div className="flex justify-end gap-3 pt-2 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#1b3d27]">
                 <button
                   type="button"
                   onClick={() => setCreateModalOpen(false)}
-                  className="rounded-lg border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition"
+                  className="kinetik-btn-dark px-4 py-2 text-xs font-bold uppercase tracking-wider min-h-[40px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 transition"
+                  className="kinetik-btn-lime px-4 py-2 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[40px]"
                 >
                   {submitting ? 'Creating...' : 'Create Habit'}
                 </button>
@@ -963,14 +963,14 @@ function HabitTrackerContent() {
 
       {/* Modal: Edit Habit */}
       {editingHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">Edit Habit</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
+            <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
+              <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Edit Habit</h3>
               <button
                 type="button"
                 onClick={() => setEditingHabit(null)}
-                className="rounded-lg p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
+                className="rounded-lg p-1 text-[#ffffff]/50 hover:text-[#ffffff] transition"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -978,28 +978,28 @@ function HabitTrackerContent() {
 
             <form onSubmit={handleEditHabit} className="mt-4 space-y-4">
               {formErrors.form && (
-                <div className="rounded-lg bg-red-50 border border-red-200 p-3 text-xs text-red-800 dark:bg-red-950/50 dark:border-red-800 dark:text-red-200">
+                <div className="rounded-lg bg-rose-950/40 border border-rose-500/40 p-3 text-xs text-rose-300">
                   {formErrors.form}
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">Habit Name</label>
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Habit Name</label>
                 <input
                   type="text"
                   required
                   maxLength={100}
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950 dark:text-white dark:focus:border-white"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] px-3 py-2 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 />
                 {formErrors.name && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{formErrors.name}</p>
+                  <p className="mt-1 text-xs text-rose-400">{formErrors.name}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
                   Description (optional)
                 </label>
                 <textarea
@@ -1007,14 +1007,14 @@ function HabitTrackerContent() {
                   maxLength={500}
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
-                  className="mt-1 w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-xs text-zinc-900 placeholder:text-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-950 dark:text-white dark:focus:border-white"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] px-3 py-2 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none"
                 />
                 {formErrors.description && (
-                  <p className="mt-1 text-xs text-red-500 dark:text-red-400">{formErrors.description}</p>
+                  <p className="mt-1 text-xs text-rose-400">{formErrors.description}</p>
                 )}
               </div>
 
-              <div className="flex items-center justify-between pt-2 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex items-center justify-between pt-3 border-t border-[#1b3d27]">
                 <button
                   type="button"
                   onClick={() => {
@@ -1022,7 +1022,7 @@ function HabitTrackerContent() {
                     setEditingHabit(null);
                     setDeletingHabit(habitToDelete);
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30 transition"
+                  className="inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-xs font-bold uppercase tracking-wider text-rose-400 hover:bg-[#000000] transition"
                 >
                   <Trash2 className="h-3.5 w-3.5" /> Delete
                 </button>
@@ -1030,14 +1030,14 @@ function HabitTrackerContent() {
                   <button
                     type="button"
                     onClick={() => setEditingHabit(null)}
-                    className="rounded-lg border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition"
+                    className="kinetik-btn-dark px-4 py-2 text-xs font-bold uppercase tracking-wider min-h-[40px]"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 transition"
+                    className="kinetik-btn-lime px-4 py-2 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[40px]"
                   >
                     {submitting ? 'Saving...' : 'Save Changes'}
                   </button>
@@ -1050,17 +1050,17 @@ function HabitTrackerContent() {
 
       {/* Modal: Habit Completion History */}
       {historyHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
-            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+          <div className="w-full max-w-lg rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
+            <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
               <div>
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white">{historyHabit.name}</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">Completion History</p>
+                <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">{historyHabit.name}</h3>
+                <p className="eyebrow text-xs text-[#ff2a3b]">COMPLETION HISTORY</p>
               </div>
               <button
                 type="button"
                 onClick={() => setHistoryHabit(null)}
-                className="rounded-lg p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition"
+                className="rounded-lg p-1 text-[#ffffff]/50 hover:text-[#ffffff] transition"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -1069,34 +1069,34 @@ function HabitTrackerContent() {
             <div className="mt-4 space-y-4">
               {/* Streak Stats */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-800 dark:bg-zinc-800/50">
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">Current Streak</span>
-                  <div className="mt-1 text-xl font-bold text-zinc-900 dark:text-white">
+                <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-3 text-center">
+                  <span className="text-xs uppercase font-mono tracking-wider text-[#ffffff]/50">Current Streak</span>
+                  <div className="mt-1 font-display text-2xl font-bold text-[#ff2a3b]">
                     {historyHabit.currentStreak} days
                   </div>
                 </div>
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-center dark:border-zinc-800 dark:bg-zinc-800/50">
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">Best Streak</span>
-                  <div className="mt-1 text-xl font-bold text-zinc-900 dark:text-white">
+                <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-3 text-center">
+                  <span className="text-xs uppercase font-mono tracking-wider text-[#ffffff]/50">Best Streak</span>
+                  <div className="mt-1 font-display text-2xl font-bold text-[#ffffff]">
                     {historyHabit.bestStreak} days
                   </div>
                 </div>
               </div>
 
               {/* Log List */}
-              <div className="max-h-60 overflow-y-auto space-y-2 border border-zinc-200 rounded-xl p-3 bg-zinc-50/50 dark:border-zinc-800 dark:bg-zinc-950/40">
+              <div className="max-h-60 overflow-y-auto space-y-2 border border-[#1b3d27] rounded-xl p-3 bg-[#000000]/50">
                 {historyLoading ? (
-                  <p className="text-xs text-zinc-500 text-center py-4">Loading history...</p>
+                  <p className="text-xs text-[#ffffff]/50 text-center py-4">Loading history...</p>
                 ) : historyLogs.length === 0 ? (
-                  <p className="text-xs text-zinc-500 text-center py-4">No completions recorded yet.</p>
+                  <p className="text-xs text-[#ffffff]/50 text-center py-4">No completions recorded yet.</p>
                 ) : (
                   historyLogs.map((log) => (
                     <div
                       key={log.id}
-                      className="flex items-center justify-between text-xs py-1.5 px-3 rounded bg-white border border-zinc-200/80 shadow-xs dark:bg-zinc-900 dark:border-zinc-800"
+                      className="flex items-center justify-between text-xs py-2 px-3 rounded-lg bg-[#0d0d0d] border border-[#1b3d27]"
                     >
-                      <span className="font-medium text-zinc-900 dark:text-white">{log.completedOn}</span>
-                      <span className="inline-flex items-center gap-1 font-semibold text-zinc-900 dark:text-white">
+                      <span className="font-mono text-[#ffffff]">{log.completedOn}</span>
+                      <span className="inline-flex items-center gap-1 font-mono font-bold text-[#ff2a3b]">
                         <Check className="h-3 w-3 stroke-[3]" /> Completed
                       </span>
                     </div>
@@ -1104,11 +1104,11 @@ function HabitTrackerContent() {
                 )}
               </div>
 
-              <div className="flex justify-end pt-2 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex justify-end pt-3 border-t border-[#1b3d27]">
                 <button
                   type="button"
                   onClick={() => setHistoryHabit(null)}
-                  className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 transition"
+                  className="kinetik-btn-dark px-4 py-2 text-xs font-bold uppercase tracking-wider"
                 >
                   Close
                 </button>
@@ -1120,19 +1120,19 @@ function HabitTrackerContent() {
 
       {/* Modal: Habit Performance Report (Last Month, 3 Months, 6 Months, 1 Year) */}
       {reportModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-2 sm:p-4 backdrop-blur-sm overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-2 sm:p-4 backdrop-blur-md overflow-y-auto">
           <div
             id="printable-habit-report"
-            className="w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl border border-zinc-200 bg-white shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 overflow-hidden"
+            className="w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] shadow-2xl text-[#ffffff] overflow-hidden"
           >
             {/* Modal Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-zinc-200 dark:border-zinc-800 px-6 py-4 bg-zinc-50/50 dark:bg-zinc-950/30">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#1b3d27] px-6 py-4 bg-[#000000]/60">
               <div>
                 <div className="flex items-center gap-2">
-                  <BarChart3 className="h-5 w-5 text-zinc-900 dark:text-white" />
-                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white">Habit Performance Report</h3>
+                  <BarChart3 className="h-5 w-5 text-[#ff2a3b]" />
+                  <h3 className="font-display text-xl font-bold uppercase tracking-wide text-[#ffffff]">Habit Performance Report</h3>
                 </div>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                <p className="text-xs text-[#ffffff]/60 mt-0.5">
                   {reportData
                     ? `${reportData.period} • ${reportData.from} to ${reportData.to} (${reportData.totalDays} Days) • ${reportData.clientName}`
                     : 'Analytics & consistency overview across tracked habits'}
@@ -1145,24 +1145,24 @@ function HabitTrackerContent() {
                   type="button"
                   onClick={handleDownloadCSV}
                   disabled={!reportData || reportLoading}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-800 shadow-xs hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition"
+                  className="kinetik-btn-dark inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-wider disabled:opacity-40"
                   title="Download CSV Spreadsheet"
                 >
-                  <Download className="h-3.5 w-3.5" /> Export CSV
+                  <Download className="h-3.5 w-3.5 text-[#ff2a3b]" /> Export CSV
                 </button>
                 <button
                   type="button"
                   onClick={handlePrintReport}
                   disabled={!reportData || reportLoading}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-300 bg-white px-3 py-1.5 text-xs font-semibold text-zinc-800 shadow-xs hover:bg-zinc-100 disabled:opacity-40 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition"
+                  className="kinetik-btn-dark inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold uppercase tracking-wider disabled:opacity-40"
                   title="Print or Save as PDF"
                 >
-                  <Printer className="h-3.5 w-3.5" /> Print / PDF
+                  <Printer className="h-3.5 w-3.5 text-[#ff2a3b]" /> Print / PDF
                 </button>
                 <button
                   type="button"
                   onClick={() => setReportModalOpen(false)}
-                  className="rounded-lg p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                  className="rounded-lg p-1.5 text-[#ffffff]/50 hover:text-[#ffffff] hover:bg-[#1a1a1a] transition"
                   title="Close Report"
                 >
                   <X className="h-5 w-5" />
@@ -1171,8 +1171,8 @@ function HabitTrackerContent() {
             </div>
 
             {/* Timeframe Selector Bar (No-Print) */}
-            <div className="flex flex-wrap items-center gap-2 border-b border-zinc-200 px-6 py-3 bg-white dark:border-zinc-800 dark:bg-zinc-900 no-print">
-              <span className="text-xs font-semibold text-zinc-500 dark:text-zinc-400 mr-1">Timeframe:</span>
+            <div className="flex flex-wrap items-center gap-2 border-b border-[#1b3d27] px-6 py-3 bg-[#000000]/40 no-print">
+              <span className="eyebrow text-xs text-[#ffffff]/60 mr-1">Timeframe:</span>
               {[
                 { key: '1m', label: 'Last Month (30d)' },
                 { key: '3m', label: '3 Months (90d)' },
@@ -1186,10 +1186,10 @@ function HabitTrackerContent() {
                     type="button"
                     onClick={() => void loadReport(tf.key as '1m' | '3m' | '6m' | '1y')}
                     disabled={reportLoading}
-                    className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
+                    className={`rounded-lg px-3 py-1.5 text-xs uppercase font-mono font-bold transition ${
                       isActive
-                        ? 'bg-zinc-900 text-white shadow-xs dark:bg-white dark:text-zinc-900'
-                        : 'bg-zinc-100 text-zinc-600 hover:bg-zinc-200 hover:text-zinc-900 dark:bg-zinc-800 dark:text-zinc-400 dark:hover:bg-zinc-700 dark:hover:text-white'
+                        ? 'bg-[#ff2a3b] text-white shadow-[0_0_10px_rgba(255, 42, 59, 0.2)]'
+                        : 'bg-[#1a1a1a]/60 text-[#ffffff]/60 hover:text-[#ffffff] hover:bg-[#1a1a1a]'
                     }`}
                   >
                     {tf.label}
@@ -1202,28 +1202,28 @@ function HabitTrackerContent() {
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               {reportLoading ? (
                 <div className="flex flex-col items-center justify-center py-16 space-y-3">
-                  <Loader2 className="h-8 w-8 animate-spin text-zinc-900 dark:text-white" />
-                  <p className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                  <Loader2 className="h-8 w-8 animate-spin text-[#ff2a3b]" />
+                  <p className="text-xs font-mono uppercase tracking-wider text-[#ffffff]/60">
                     Generating habit report...
                   </p>
                 </div>
               ) : reportError ? (
-                <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-center text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400 space-y-3">
-                  <AlertCircle className="mx-auto h-8 w-8" />
+                <div className="rounded-xl border border-rose-500/40 bg-rose-950/20 p-6 text-center text-rose-300 space-y-3">
+                  <AlertCircle className="mx-auto h-8 w-8 text-rose-400" />
                   <p className="text-sm font-semibold">{reportError}</p>
                   <button
                     type="button"
                     onClick={() => void loadReport(reportRange)}
-                    className="inline-flex items-center gap-2 rounded-lg bg-red-700 px-4 py-1.5 text-xs font-semibold text-white hover:bg-red-800 transition"
+                    className="kinetik-btn-lime inline-flex items-center gap-2 px-4 py-1.5 text-xs font-bold uppercase tracking-wider"
                   >
                     Retry
                   </button>
                 </div>
               ) : !reportData || reportData.habits.length === 0 ? (
                 <div className="text-center py-16 space-y-2">
-                  <Sparkles className="mx-auto h-10 w-10 text-zinc-400" />
-                  <p className="text-sm font-semibold text-zinc-900 dark:text-white">No habit records found</p>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <Sparkles className="mx-auto h-10 w-10 text-[#ff2a3b] opacity-60" />
+                  <p className="font-display text-base font-bold uppercase tracking-wide text-[#ffffff]">No habit records found</p>
+                  <p className="text-xs text-[#ffffff]/50">
                     Create habits and record daily check-ins to view performance analytics.
                   </p>
                 </div>
@@ -1232,66 +1232,66 @@ function HabitTrackerContent() {
                   {/* Executive KPI Metric Cards */}
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                     {/* Card 1: Average Consistency */}
-                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
+                    <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#ffffff]/50">
                           Consistency
                         </span>
-                        <TrendingUp className="h-4 w-4 text-zinc-900 dark:text-white" />
+                        <TrendingUp className="h-4 w-4 text-[#ff2a3b]" />
                       </div>
-                      <div className="mt-2 text-2xl font-black tracking-tight text-zinc-900 dark:text-white">
+                      <div className="mt-2 font-display text-2xl font-black tracking-tight text-[#ff2a3b]">
                         {reportData.summary.averageConsistency}%
                       </div>
-                      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <p className="mt-1 text-[10px] text-[#ffffff]/50">
                         Active habits avg
                       </p>
                     </div>
 
                     {/* Card 2: Total Check-ins */}
-                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
+                    <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#ffffff]/50">
                           Check-ins
                         </span>
-                        <Check className="h-4 w-4 text-zinc-900 dark:text-white" />
+                        <Check className="h-4 w-4 text-[#ff2a3b]" />
                       </div>
-                      <div className="mt-2 text-2xl font-black tracking-tight text-zinc-900 dark:text-white">
+                      <div className="mt-2 font-display text-2xl font-black tracking-tight text-[#ffffff]">
                         {reportData.summary.totalCompletions}
                       </div>
-                      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
+                      <p className="mt-1 text-[10px] text-[#ffffff]/50">
                         In {reportData.totalDays} days
                       </p>
                     </div>
 
                     {/* Card 3: Top Habit */}
-                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
+                    <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#ffffff]/50">
                           Top Habit
                         </span>
-                        <Award className="h-4 w-4 text-zinc-900 dark:text-white" />
+                        <Award className="h-4 w-4 text-[#ff2a3b]" />
                       </div>
-                      <div className="mt-2 text-sm font-bold truncate text-zinc-900 dark:text-white" title={reportData.summary.topHabit?.name || 'None'}>
+                      <div className="mt-2 text-sm font-bold truncate text-[#ffffff]" title={reportData.summary.topHabit?.name || 'None'}>
                         {reportData.summary.topHabit?.name || '—'}
                       </div>
-                      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
-                        {reportData.summary.topHabit ? `${reportData.summary.topHabit.completionRate}% rate (${reportData.summary.topHabit.completedDays}d)` : 'No active habits'}
+                      <p className="mt-1 text-[10px] text-[#ffffff]/50">
+                        {reportData.summary.topHabit ? `${reportData.summary.topHabit.completionRate}% (${reportData.summary.topHabit.completedDays}d)` : 'No active habits'}
                       </p>
                     </div>
 
                     {/* Card 4: Active Habits */}
-                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
+                    <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-4">
                       <div className="flex items-center justify-between">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#ffffff]/50">
                           Active Habits
                         </span>
-                        <Flame className="h-4 w-4 text-zinc-900 dark:text-white" />
+                        <Flame className="h-4 w-4 text-[#ff2a3b]" />
                       </div>
-                      <div className="mt-2 text-2xl font-black tracking-tight text-zinc-900 dark:text-white">
+                      <div className="mt-2 font-display text-2xl font-black tracking-tight text-[#ffffff]">
                         {reportData.summary.activeHabits}
                       </div>
-                      <p className="mt-1 text-[11px] text-zinc-500 dark:text-zinc-400">
-                        Of {reportData.summary.totalHabits} total habits
+                      <p className="mt-1 text-[10px] text-[#ffffff]/50">
+                        Of {reportData.summary.totalHabits} total
                       </p>
                     </div>
                   </div>
@@ -1299,49 +1299,49 @@ function HabitTrackerContent() {
                   {/* Habits Breakdown Table */}
                   <div className="space-y-3">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-bold uppercase tracking-wider text-zinc-700 dark:text-zinc-300">
-                        Individual Habit Performance ({reportData.habits.length})
+                      <h4 className="eyebrow text-xs text-[#ff2a3b]">
+                        INDIVIDUAL HABIT PERFORMANCE ({reportData.habits.length})
                       </h4>
-                      <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                      <span className="text-xs font-mono text-[#ffffff]/50">
                         Period: {reportData.from} to {reportData.to}
                       </span>
                     </div>
 
-                    <div className="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-xs dark:border-zinc-800 dark:bg-zinc-900">
-                      <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+                    <div className="overflow-hidden rounded-xl border border-[#1b3d27] bg-[#000000]">
+                      <div className="divide-y divide-[#1b3d27]">
                         {reportData.habits.map((habit) => (
                           <div key={habit.id} className="p-4 space-y-3">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                               <div>
                                 <div className="flex items-center gap-2">
-                                  <span className="font-bold text-sm text-zinc-900 dark:text-white">
+                                  <span className="font-bold text-sm text-[#ffffff]">
                                     {habit.name}
                                   </span>
                                   <span
-                                    className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-semibold ${
+                                    className={`inline-flex items-center rounded-md px-1.5 py-0.5 text-[10px] font-mono font-bold uppercase ${
                                       habit.isActive
-                                        ? 'bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100'
-                                        : 'bg-zinc-100 text-zinc-400 dark:bg-zinc-800 dark:text-zinc-500'
+                                        ? 'bg-[#1a1a1a] text-[#ff2a3b] border border-[#ff2a3b]/30'
+                                        : 'bg-[#0d0d0d] text-[#ffffff]/40 border border-[#1b3d27]'
                                     }`}
                                   >
                                     {habit.isActive ? 'Active' : 'Archived'}
                                   </span>
                                 </div>
                                 {habit.description && (
-                                  <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+                                  <p className="text-xs text-[#ffffff]/60 mt-0.5">
                                     {habit.description}
                                   </p>
                                 )}
                               </div>
 
-                              <div className="flex items-center gap-4 text-xs">
-                                <div className="flex items-center gap-1 text-zinc-700 dark:text-zinc-300">
-                                  <Flame className="h-3.5 w-3.5 text-zinc-900 dark:text-white" />
-                                  <span>Current: <strong>{habit.currentStreak}d</strong></span>
+                              <div className="flex items-center gap-4 text-xs font-mono">
+                                <div className="flex items-center gap-1 text-[#ffffff]/80">
+                                  <Flame className="h-3.5 w-3.5 text-[#ff2a3b]" />
+                                  <span>Current: <strong className="text-[#ffffff]">{habit.currentStreak}d</strong></span>
                                 </div>
-                                <div className="flex items-center gap-1 text-zinc-700 dark:text-zinc-300">
-                                  <Award className="h-3.5 w-3.5 text-zinc-900 dark:text-white" />
-                                  <span>Best: <strong>{habit.bestStreak}d</strong></span>
+                                <div className="flex items-center gap-1 text-[#ffffff]/80">
+                                  <Award className="h-3.5 w-3.5 text-[#ff2a3b]" />
+                                  <span>Best: <strong className="text-[#ffffff]">{habit.bestStreak}d</strong></span>
                                 </div>
                               </div>
                             </div>
@@ -1349,16 +1349,16 @@ function HabitTrackerContent() {
                             {/* Progress Bar & Rate */}
                             <div className="space-y-1">
                               <div className="flex items-center justify-between text-xs">
-                                <span className="text-zinc-600 dark:text-zinc-400">
+                                <span className="text-[#ffffff]/60 font-mono">
                                   Completed {habit.completedDays} of {habit.totalDays} days
                                 </span>
-                                <span className="font-bold text-zinc-900 dark:text-white">
+                                <span className="font-display font-bold text-[#ff2a3b]">
                                   {habit.completionRate}%
                                 </span>
                               </div>
-                              <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+                              <div className="h-2 w-full overflow-hidden rounded-full bg-[#0d0d0d] border border-[#1b3d27]">
                                 <div
-                                  className="h-full bg-zinc-900 dark:bg-white transition-all duration-300"
+                                  className="h-full bg-[#ff2a3b] transition-all duration-300"
                                   style={{ width: `${Math.min(100, habit.completionRate)}%` }}
                                 />
                               </div>
@@ -1367,15 +1367,15 @@ function HabitTrackerContent() {
                             {/* Monthly Breakdown Badges */}
                             {habit.monthlyBreakdown.length > 0 && (
                               <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                                <span className="text-[10px] font-medium text-zinc-400 dark:text-zinc-500 mr-1">
+                                <span className="text-[10px] font-mono text-[#ffffff]/40 mr-1">
                                   Monthly:
                                 </span>
                                 {habit.monthlyBreakdown.map((m) => (
                                   <span
                                     key={m.month}
-                                    className="inline-flex items-center gap-1 rounded bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-800 dark:bg-zinc-800 dark:text-zinc-300"
+                                    className="inline-flex items-center gap-1 rounded bg-[#0d0d0d] px-2 py-0.5 text-[10px] font-mono border border-[#1b3d27] text-[#ffffff]/80"
                                   >
-                                    <span className="font-semibold">{m.label}:</span>
+                                    <span className="font-bold text-[#ff2a3b]">{m.label}:</span>
                                     <span>{m.completed} check-ins</span>
                                   </span>
                                 ))}
@@ -1388,7 +1388,7 @@ function HabitTrackerContent() {
                   </div>
 
                   {/* Report Footer */}
-                  <div className="border-t border-zinc-200 pt-4 dark:border-zinc-800 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-400">
+                  <div className="border-t border-[#1b3d27] pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-[#ffffff]/40 font-mono">
                     <span>grofit Habit Performance System • Confidential Client Report</span>
                     <span>Generated on {userToday || new Date().toISOString().split('T')[0]}</span>
                   </div>
@@ -1397,14 +1397,14 @@ function HabitTrackerContent() {
             </div>
 
             {/* Bottom Modal Actions (No-Print) */}
-            <div className="flex items-center justify-between border-t border-zinc-200 dark:border-zinc-800 px-6 py-3 bg-zinc-50/50 dark:bg-zinc-950/30 no-print">
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">
+            <div className="flex items-center justify-between border-t border-[#1b3d27] px-6 py-3 bg-[#000000]/60 no-print">
+              <span className="text-xs text-[#ffffff]/50">
                 Tip: You can export this report to CSV or save it as a PDF anytime.
               </span>
               <button
                 type="button"
                 onClick={() => setReportModalOpen(false)}
-                className="rounded-lg bg-zinc-900 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 transition"
+                className="kinetik-btn-lime px-4 py-2 text-xs font-bold uppercase tracking-wider"
               >
                 Close Report
               </button>
@@ -1415,20 +1415,20 @@ function HabitTrackerContent() {
 
       {/* Modal: Confirm Delete Habit */}
       {deletingHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-red-100 text-red-600 dark:bg-red-950/50 dark:text-red-400 shrink-0">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-400 shrink-0">
                 <Trash2 className="h-5 w-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white">Delete Habit?</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">This action cannot be undone.</p>
+                <h3 className="font-display text-base font-bold uppercase tracking-wide text-[#ffffff]">Delete Habit?</h3>
+                <p className="text-xs text-[#ffffff]/50">This action cannot be undone.</p>
               </div>
             </div>
 
-            <p className="mt-3 text-xs text-zinc-600 dark:text-zinc-300">
-              Are you sure you want to permanently delete <strong>{deletingHabit.name}</strong>? All historical check-ins and streaks will be removed.
+            <p className="mt-3 text-xs text-[#ffffff]/70 leading-relaxed">
+              Are you sure you want to permanently delete <strong className="text-[#ffffff]">{deletingHabit.name}</strong>? All historical check-ins and streaks will be removed.
             </p>
 
             <div className="mt-5 flex justify-end gap-3">
@@ -1436,7 +1436,7 @@ function HabitTrackerContent() {
                 type="button"
                 onClick={() => setDeletingHabit(null)}
                 disabled={isDeleting}
-                className="rounded-lg border border-zinc-200 bg-white px-3.5 py-2 text-xs font-semibold text-zinc-700 hover:bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 transition"
+                className="kinetik-btn-dark px-3.5 py-2 text-xs font-bold uppercase tracking-wider"
               >
                 Cancel
               </button>
@@ -1444,7 +1444,7 @@ function HabitTrackerContent() {
                 type="button"
                 onClick={() => void handleDeleteHabit(deletingHabit.id)}
                 disabled={isDeleting}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-red-600 px-3.5 py-2 text-xs font-semibold text-white hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-700 disabled:opacity-50 transition"
+                className="inline-flex items-center gap-1.5 rounded-xl bg-rose-600 px-3.5 py-2 text-xs font-bold uppercase tracking-wider text-white hover:bg-rose-700 disabled:opacity-50 transition"
               >
                 {isDeleting ? 'Deleting...' : 'Delete Permanently'}
               </button>
@@ -1461,12 +1461,12 @@ export default function HabitTrackerPage() {
     <Suspense
       fallback={
         <div className="space-y-6">
-          <div className="h-8 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="h-16 w-full animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+          <div className="h-8 w-48 animate-pulse rounded-lg bg-[#0d0d0d] border border-[#1b3d27]" />
+          <div className="h-16 w-full animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/60" />
           <div className="space-y-3">
-            <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-            <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-            <div className="h-20 animate-pulse rounded-xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+            <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+            <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+            <div className="h-20 animate-pulse rounded-xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
           </div>
         </div>
       }

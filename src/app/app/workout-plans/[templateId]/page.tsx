@@ -176,8 +176,8 @@ function TemplateDetailContent(props: {
     return (
       <div className="flex h-64 items-center justify-center">
         <div className="text-center">
-          <Calendar className="mx-auto h-8 w-8 animate-spin text-zinc-900 dark:text-white" />
-          <p className="mt-2 text-xs sm:text-sm text-zinc-500">Loading template details...</p>
+          <Calendar className="mx-auto h-8 w-8 animate-spin text-[#ff2a3b]" />
+          <p className="mt-2 text-xs font-mono text-[#a1a1aa]">Loading template details...</p>
         </div>
       </div>
     );
@@ -188,12 +188,12 @@ function TemplateDetailContent(props: {
       <div className="space-y-4">
         <Link
           href="/app/workout-plans"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white min-h-[44px] py-2"
+          className="kinetik-btn-dark px-4 py-2 text-xs font-mono font-bold inline-flex items-center gap-1.5 min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Workout Templates
+          <span>Back to Workout Templates</span>
         </Link>
-        <div className="rounded-2xl border border-red-200 bg-red-50 p-6 text-red-700 dark:border-red-900/50 dark:bg-red-950/30 dark:text-red-400">
+        <div className="kinetik-card border-red-500/40 bg-red-950/40 p-6 text-red-300 font-mono text-xs">
           {error || 'Template not found.'}
         </div>
       </div>
@@ -206,53 +206,53 @@ function TemplateDetailContent(props: {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/app/workout-plans"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white min-h-[44px] py-2"
+          className="kinetik-btn-dark px-4 py-2 text-xs font-bold uppercase tracking-wider inline-flex items-center gap-1.5 min-h-[44px]"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to Workout Templates
+          <span>Back to Workout Templates</span>
         </Link>
 
         <button
           onClick={openApplyModal}
-          className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+          className="kinetik-btn-lime px-5 py-2.5 text-xs font-extrabold uppercase shadow-md inline-flex items-center gap-2 min-h-[44px] cursor-pointer"
         >
           <Sparkles className="h-4 w-4" />
-          Apply to My Plan
+          <span>Apply to My Plan</span>
         </button>
       </div>
 
       {/* Header Info */}
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+      <div className="kinetik-card p-6 sm:p-8 shadow-xl">
+        <div className="flex flex-wrap items-center justify-between gap-6">
+          <div className="space-y-2 max-w-2xl">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-3 py-1 text-xs font-mono font-bold text-[#ff2a3b] uppercase">
                 <ShieldCheck className="h-3.5 w-3.5" />
                 Verified Source
               </span>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">Source: {template.sourceReference}</span>
+              <span className="text-xs font-mono text-[#a1a1aa]">Source: {template.sourceReference}</span>
             </div>
-            <h1 className="mt-2 text-xl sm:text-2xl font-extrabold text-white">
+            <h1 className="mt-2 font-display text-2xl sm:text-4xl font-black text-[#ffffff] uppercase tracking-tight">
               {template.name}
             </h1>
-            <p className="mt-1 text-xs sm:text-sm text-zinc-400">
+            <p className="mt-1 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
               {template.description}
             </p>
           </div>
 
-          <div className="flex items-center gap-6 rounded-xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/50">
+          <div className="flex items-center gap-6 rounded-2xl bg-[#000000] border border-[#ffffff]/10 px-5 py-3.5 font-mono">
             <div className="text-center">
-              <span className="block text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white">
+              <span className="block font-display text-2xl sm:text-3xl font-black text-[#ffffff]">
                 {template.days.length}
               </span>
-              <span className="text-xs font-medium text-zinc-500">Days</span>
+              <span className="text-[10px] uppercase text-[#a1a1aa]">Days</span>
             </div>
-            <div className="h-8 w-px bg-zinc-200 dark:bg-zinc-700" />
+            <div className="h-8 w-px bg-[#ffffff]/10" />
             <div className="text-center">
-              <span className="block text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white">
+              <span className="block font-display text-2xl sm:text-3xl font-black text-[#ff2a3b]">
                 {template.days.reduce((acc, d) => acc + d.entries.length, 0)}
               </span>
-              <span className="text-xs font-medium text-zinc-500">Exercises</span>
+              <span className="text-[10px] uppercase text-[#a1a1aa]">Exercises</span>
             </div>
           </div>
         </div>
@@ -261,22 +261,22 @@ function TemplateDetailContent(props: {
       {/* DADBODS Attribution & Credits Banner */}
       {(template.sourceReference?.toLowerCase().includes('dadbods') ||
         template.name.toLowerCase().includes('dadbods')) && (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="kinetik-card p-6 border-[#ff2a3b]/20">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-bold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                <span className="eyebrow border border-[#ff2a3b]/30 bg-[#1a1a1a] text-[#ff2a3b]">
                   Creator Attribution
                 </span>
-                <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
-                  Programming credit: <strong className="text-zinc-900 dark:text-white">DADBODS</strong>
+                <span className="text-xs font-mono text-[#a1a1aa]">
+                  Programming credit: <strong className="text-[#ffffff]">DADBODS</strong>
                 </span>
               </div>
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+              <h3 className="font-display text-lg font-black uppercase tracking-tight text-[#ffffff]">
                 Sourced from the DADBODS Science-Based Workout Series
               </h3>
-              <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
-                Special credits and gratitude to <strong>DADBODS</strong> for designing this science-based 4-day split routine. All movement demonstrations and technical cues link directly to their official YouTube episodes and timestamps.
+              <p className="text-xs leading-relaxed text-[#a1a1aa]">
+                Special credits and gratitude to <strong className="text-[#ffffff]">DADBODS</strong> for designing this science-based 4-day split routine. All movement demonstrations and technical cues link directly to their official YouTube episodes and timestamps.
               </p>
             </div>
 
@@ -285,21 +285,21 @@ function TemplateDetailContent(props: {
                 href="https://www.youtube.com/watch?v=vU4KMMlhtNI"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[40px]"
+                className="kinetik-btn-dark px-3.5 py-2 text-xs font-mono font-bold inline-flex items-center gap-1.5 min-h-[40px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>Episode 1 (Upper/Lower 1)</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=VeMVWBfRs4M"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3.5 py-2 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[40px]"
+                className="kinetik-btn-dark px-3.5 py-2 text-xs font-mono font-bold inline-flex items-center gap-1.5 min-h-[40px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>Episode 2 (Upper/Lower 2)</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
             </div>
           </div>
@@ -310,21 +310,21 @@ function TemplateDetailContent(props: {
       {(template.sourceReference?.toLowerCase().includes('calisthenic') ||
         template.name.toLowerCase().includes('calisthenics') ||
         template.name.toLowerCase().includes('home')) && (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="kinetik-card p-6 border-[#ff2a3b]/20">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-bold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                <span className="eyebrow border border-[#ff2a3b]/30 bg-[#1a1a1a] text-[#ff2a3b]">
                   Creator Credits & Attribution
                 </span>
-                <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                <span className="text-xs font-mono text-[#a1a1aa]">
                   Evidence-Based Calisthenics Creators
                 </span>
               </div>
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+              <h3 className="font-display text-lg font-black uppercase tracking-tight text-[#ffffff]">
                 Curated Calisthenics Tutorial Video Demonstrations
               </h3>
-              <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
+              <p className="text-xs leading-relaxed text-[#a1a1aa]">
                 Full credits and gratitude to the top evidence-based calisthenics educators whose verified tutorials power this home routine. Each exercise card links directly to their comprehensive video demonstrations.
               </p>
             </div>
@@ -334,41 +334,41 @@ function TemplateDetailContent(props: {
                 href="https://www.youtube.com/watch?v=IODxDxX7oi4"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[38px]"
+                className="kinetik-btn-dark px-3 py-1.5 text-xs font-mono inline-flex items-center gap-1.5 min-h-[38px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>Calisthenicmovement</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=MhokcbRLP5w"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[38px]"
+                className="kinetik-btn-dark px-3 py-1.5 text-xs font-mono inline-flex items-center gap-1.5 min-h-[38px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>FitnessFAQs</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=SkNsa3eBwLA"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[38px]"
+                className="kinetik-btn-dark px-3 py-1.5 text-xs font-mono inline-flex items-center gap-1.5 min-h-[38px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>Max Euceda</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
               <a
                 href="https://www.youtube.com/watch?v=BElgcWsChSs"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-1.5 text-xs font-semibold text-zinc-900 shadow-sm transition hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:hover:bg-zinc-700 min-h-[38px]"
+                className="kinetik-btn-dark px-3 py-1.5 text-xs font-mono inline-flex items-center gap-1.5 min-h-[38px]"
               >
-                <Play className="h-3.5 w-3.5 text-red-600 fill-red-600" />
+                <Play className="h-3.5 w-3.5 text-[#ff2a3b] fill-[#ff2a3b]" />
                 <span>Chris Heria</span>
-                <ExternalLink className="h-3 w-3 text-zinc-400" />
+                <ExternalLink className="h-3 w-3 text-[#a1a1aa]" />
               </a>
             </div>
           </div>
@@ -378,47 +378,31 @@ function TemplateDetailContent(props: {
       {/* 6-Day Split Form Demonstrations & Channel Credits Banner */}
       {(template.name.toLowerCase().includes('6-day') ||
         template.name.toLowerCase().includes('finalized')) && (
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
+        <div className="kinetik-card p-6 border-[#ff2a3b]/20">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-1.5 max-w-2xl">
               <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-1 rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-bold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                <span className="eyebrow border border-[#ff2a3b]/30 bg-[#1a1a1a] text-[#ff2a3b]">
                   Verified Video Demonstrations
                 </span>
-                <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                <span className="text-xs font-mono text-[#a1a1aa]">
                   Evidence-Based Coach Credits
                 </span>
               </div>
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+              <h3 className="font-display text-lg font-black uppercase tracking-tight text-[#ffffff]">
                 Curated Form Tutorials & Channel Attribution
               </h3>
-              <p className="text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">
-                All exercise form demonstrations and biomechanical cues in this 6-day split link directly to high-definition tutorials by premier fitness educators: <strong>Jeff Nippard</strong>, <strong>Renaissance Periodization</strong>, <strong>Scott Herman Fitness</strong>, <strong>Jeremy Ethier</strong>, <strong>Squat University</strong>, <strong>ATHLEAN-X™</strong>, and <strong>DeltaBolic</strong>.
+              <p className="text-xs leading-relaxed text-[#a1a1aa]">
+                All exercise form demonstrations and biomechanical cues in this split link directly to high-definition tutorials by premier fitness educators: <strong className="text-[#ffffff]">Jeff Nippard</strong>, <strong className="text-[#ffffff]">Renaissance Periodization</strong>, <strong className="text-[#ffffff]">Scott Herman Fitness</strong>, <strong className="text-[#ffffff]">Jeremy Ethier</strong>, <strong className="text-[#ffffff]">Squat University</strong>, <strong className="text-[#ffffff]">ATHLEAN-X™</strong>, and <strong className="text-[#ffffff]">DeltaBolic</strong>.
               </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                Jeff Nippard
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                Renaissance Periodization
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                Scott Herman
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                Squat University
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                ATHLEAN-X™
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                Jeremy Ethier
-              </span>
-              <span className="inline-flex items-center gap-1 rounded-lg border border-zinc-700 bg-zinc-800/80 px-2.5 py-1 text-[11px] font-semibold text-zinc-300">
-                DeltaBolic
-              </span>
+              {['Jeff Nippard', 'Renaissance Periodization', 'Scott Herman', 'Squat University', 'ATHLEAN-X™', 'Jeremy Ethier', 'DeltaBolic'].map((coach) => (
+                <span key={coach} className="inline-flex items-center rounded-lg border border-[#ffffff]/10 bg-[#000000] px-2.5 py-1 text-[11px] font-mono font-medium text-[#a1a1aa]">
+                  {coach}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -426,39 +410,49 @@ function TemplateDetailContent(props: {
 
       {/* Days Breakdown */}
       <div className="space-y-6">
-        <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
-          Programme Structure & Daily Splits
-        </h2>
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-2xl font-black uppercase tracking-tight text-[#ffffff]">
+            Programme Structure & Daily Splits
+          </h2>
+          <span className="text-xs font-mono text-[#a1a1aa]">
+            {template.days.length} Training Days
+          </span>
+        </div>
 
         <div className="grid gap-6">
           {template.days.map((day) => (
             <div
               key={day.id}
-              className="rounded-2xl border border-zinc-200 bg-white p-5 sm:p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+              className="kinetik-card p-5 sm:p-6 shadow-lg"
             >
-              <div className="border-b border-zinc-100 pb-3 dark:border-zinc-800">
-                <span className="text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                  Day {day.dayNumber}
+              <div className="flex items-center justify-between border-b border-[#ffffff]/10 pb-3">
+                <div>
+                  <span className="eyebrow text-[#ff2a3b]">
+                    Day {day.dayNumber}
+                  </span>
+                  <h3 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff] mt-1">
+                    {day.name}
+                  </h3>
+                </div>
+                <span className="text-xs font-mono text-[#a1a1aa] rounded-md bg-[#000000] px-2.5 py-1 border border-[#ffffff]/10">
+                  {day.entries.length} Exercises
                 </span>
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-                  {day.name}
-                </h3>
               </div>
 
               {/* Warm-ups if any */}
               {day.warmups && day.warmups.length > 0 && (
-                <div className="mt-4 rounded-xl bg-zinc-50 p-3.5 border border-zinc-200 dark:bg-zinc-800/40 dark:border-zinc-700">
-                  <div className="flex items-center gap-1.5 text-xs font-semibold text-zinc-900 dark:text-white">
+                <div className="mt-4 rounded-xl bg-[#000000] p-3.5 border border-[#ff2a3b]/20">
+                  <div className="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-[#ff2a3b]">
                     <Flame className="h-3.5 w-3.5" />
-                    Warm-up Instructions
+                    Warm-up Protocol
                   </div>
                   <div className="mt-2 flex flex-wrap gap-2">
                     {day.warmups.map((w) => (
                       <span
                         key={w.id}
-                        className="inline-flex items-center gap-1 rounded-lg bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 shadow-sm border border-zinc-200 dark:bg-zinc-900 dark:text-zinc-200 dark:border-zinc-700"
+                        className="inline-flex items-center gap-1 rounded-lg bg-[#0d0d0d] px-2.5 py-1 text-xs text-[#ffffff] border border-[#ffffff]/10"
                       >
-                        <strong>{w.name}:</strong> {w.description || 'As prescribed'}
+                        <strong className="text-[#ff2a3b]">{w.name}:</strong> <span className="text-[#a1a1aa]">{w.description || 'As prescribed'}</span>
                       </span>
                     ))}
                   </div>
@@ -466,7 +460,7 @@ function TemplateDetailContent(props: {
               )}
 
               {/* Exercises List */}
-              <div className="mt-4 divide-y divide-zinc-100 dark:divide-zinc-800/60">
+              <div className="mt-4 divide-y divide-[#ffffff]/5">
                 {day.entries.map((entry, idx) => {
                   const EXERCISE_CREATOR_CREDITS: Record<string, string> = {
                     'barbell row': 'DeltaBolic',
@@ -506,30 +500,30 @@ function TemplateDetailContent(props: {
                   return (
                     <div
                       key={entry.id}
-                      className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:justify-between"
+                      className="flex flex-col gap-2 py-3.5 sm:flex-row sm:items-center sm:justify-between transition-colors hover:bg-[#1a1a1a]/20 px-2 rounded-xl"
                     >
                       <div className="flex items-start gap-3">
-                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-xs font-bold text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300 mt-0.5">
+                        <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-[#000000] text-xs font-mono font-bold text-[#ff2a3b] border border-[#ffffff]/10 mt-0.5">
                           {idx + 1}
                         </span>
                         <div>
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                            <span className="text-sm font-bold text-[#ffffff]">
                               {entry.exerciseName}
                             </span>
                             {entry.muscleGroup && (
-                              <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-[10px] font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300">
+                              <span className="rounded-full bg-[#1a1a1a] border border-[#ff2a3b]/20 px-2 py-0.5 text-[10px] font-mono uppercase text-[#ff2a3b]">
                                 {entry.muscleGroup}
                               </span>
                             )}
                           </div>
                           {entry.sourceLabel && entry.sourceLabel !== entry.exerciseName && (
-                            <div className="text-xs text-zinc-400">
+                            <div className="text-xs font-mono text-[#a1a1aa]">
                               Source label: {entry.sourceLabel}
                             </div>
                           )}
                           {entry.sourcePrescriptionText && (
-                            <div className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300 font-medium">
+                            <div className="mt-1 text-xs leading-relaxed text-[#a1a1aa]">
                               {entry.sourcePrescriptionText}
                             </div>
                           )}
@@ -539,42 +533,43 @@ function TemplateDetailContent(props: {
                       <div className="flex items-center gap-2 pl-9 sm:pl-0 flex-wrap">
                         {/* Sets & Reps Prescriptions */}
                         {entry.sets !== null || entry.reps !== null ? (
-                          <span className="rounded-lg border border-zinc-200 bg-zinc-50 px-2.5 py-1 text-xs font-semibold text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+                          <span className="rounded-lg border border-[#ffffff]/10 bg-[#000000] px-2.5 py-1 text-xs font-mono font-bold text-[#ff2a3b]">
                             {entry.sets ? `${entry.sets} sets` : ''}{' '}
                             {entry.reps ? `× ${entry.reps} reps` : ''}
                           </span>
                         ) : (
-                          <span className="text-[11px] font-medium italic text-zinc-400">
-                            Prescription unset in source
+                          <span className="text-[11px] font-mono italic text-[#71717a]">
+                            Prescription unset
                           </span>
                         )}
 
-                        {/* Video Demonstration Link with Channel Credit */}
+                        {/* Video Demonstration Link */}
                         {entry.videoUrl && (
                           <a
                             href={entry.videoUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-semibold text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px] transition"
+                            className="kinetik-btn-dark px-2.5 py-1 text-xs font-mono inline-flex items-center gap-1.5 min-h-[34px]"
                             title={`Watch tutorial video${credit && credit !== 'Finalized Workout.pdf' ? ` (${credit})` : ''}`}
                           >
-                            <Play className="h-3 w-3 text-red-600 fill-red-600 shrink-0" />
+                            <Play className="h-3 w-3 text-[#ff2a3b] fill-[#ff2a3b] shrink-0" />
                             <span>Video</span>
                             {credit && credit !== 'Finalized Workout.pdf' && (
-                              <span className="text-[11px] font-normal text-zinc-500 dark:text-zinc-400">
+                              <span className="text-[10px] text-[#a1a1aa]">
                                 ({credit})
                               </span>
                             )}
-                            <ExternalLink className="h-3 w-3 text-zinc-400 shrink-0" />
+                            <ExternalLink className="h-3 w-3 text-[#a1a1aa] shrink-0" />
                           </a>
                         )}
+
                         {/* View Progress History */}
                         <Link
                           href={`/app/workout-progress/${entry.exerciseId}`}
-                          className="inline-flex items-center gap-1 rounded-lg border border-zinc-200 bg-white px-2.5 py-1 text-xs font-medium text-zinc-800 hover:bg-zinc-100 active:scale-95 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 min-h-[34px]"
+                          className="kinetik-btn-dark px-2.5 py-1 text-xs font-mono inline-flex items-center gap-1 min-h-[34px]"
                           title="View performance progress"
                         >
-                          <TrendingUp className="h-3 w-3" />
+                          <TrendingUp className="h-3 w-3 text-[#ff2a3b]" />
                           <span>Progress</span>
                         </Link>
                       </div>
@@ -589,35 +584,35 @@ function TemplateDetailContent(props: {
 
       {/* Apply Template Modal (Mobile Bottom-Sheet on small screens) */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-          <div className="relative w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
-            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-700 sm:hidden" />
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="relative w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute right-4 top-4 text-zinc-400 hover:text-zinc-600 dark:hover:text-white"
+              className="absolute right-4 top-4 text-[#a1a1aa] hover:text-[#ffffff] p-1"
             >
               <X className="h-5 w-5" />
             </button>
 
-            <div className="flex items-center gap-2.5 text-zinc-900 dark:text-white">
-              <Layers className="h-5 w-5" />
-              <h2 className="text-base sm:text-lg font-bold">
+            <div className="flex items-center gap-2.5 text-[#ffffff]">
+              <Layers className="h-5 w-5 text-[#ff2a3b]" />
+              <h2 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff]">
                 Apply Template to Personal Plan
               </h2>
             </div>
-            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+            <p className="mt-1 text-xs text-[#a1a1aa]">
               Apply this programme directly to your personal editable workout workspace.
             </p>
 
             {applyError && (
-              <div className="mt-4 flex items-center gap-2 rounded-xl bg-red-50 p-3 text-xs text-red-700 dark:bg-red-950/40 dark:text-red-400">
-                <AlertCircle className="h-4 w-4 shrink-0" />
+              <div className="mt-4 flex items-center gap-2 rounded-xl bg-red-950/60 border border-red-500/40 p-3 text-xs text-red-300">
+                <AlertCircle className="h-4 w-4 shrink-0 text-red-400" />
                 <span>{applyError}</span>
               </div>
             )}
 
             {applySuccess && (
-              <div className="mt-4 flex items-center gap-2 rounded-xl bg-zinc-100 p-3 text-xs font-semibold text-zinc-900 dark:bg-zinc-800 dark:text-white">
+              <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#1a1a1a] border border-[#ff2a3b]/50 p-3 text-xs font-semibold text-[#ff2a3b]">
                 <CheckCircle2 className="h-4 w-4 shrink-0" />
                 <span>{applySuccess}</span>
               </div>
@@ -626,13 +621,13 @@ function TemplateDetailContent(props: {
             <div className="mt-5 space-y-4">
               {/* Target Plan Selection */}
               <div>
-                <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                   Target Personal Workout Plan
                 </label>
                 <select
                   value={selectedPlanId}
                   onChange={(e) => setSelectedPlanId(e.target.value)}
-                  className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                  className="mt-1.5 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3 py-2.5 text-xs sm:text-sm text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 >
                   <option value="new">+ Create as New Personal Plan</option>
                   {userPlans.map((p) => (
@@ -645,7 +640,7 @@ function TemplateDetailContent(props: {
 
               {selectedPlanId === 'new' && (
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                     New Plan Name
                   </label>
                   <input
@@ -653,14 +648,14 @@ function TemplateDetailContent(props: {
                     value={newPlanName}
                     onChange={(e) => setNewPlanName(e.target.value)}
                     placeholder="e.g. My Workout Plan"
-                    className="mt-1.5 w-full rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-xs sm:text-sm text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-800 dark:text-white dark:focus:border-white min-h-[44px]"
+                    className="mt-1.5 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3 py-2.5 text-xs sm:text-sm text-[#ffffff] placeholder-[#71717a] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                   />
                 </div>
               )}
 
               {/* Mode Selection (Replace vs Merge) */}
               <div>
-                <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                   Application Mode
                 </label>
                 <div className="mt-2 grid grid-cols-2 gap-3">
@@ -669,14 +664,14 @@ function TemplateDetailContent(props: {
                     onClick={() => setApplyMode('replace')}
                     className={`rounded-xl border p-3 text-left transition ${
                       applyMode === 'replace'
-                        ? 'border-zinc-900 bg-zinc-100 dark:border-white dark:bg-zinc-800'
-                        : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800'
+                        ? 'border-[#ff2a3b] bg-[#1a1a1a]'
+                        : 'border-[#ffffff]/15 bg-[#000000] hover:border-[#ffffff]/30'
                     }`}
                   >
-                    <span className="block text-xs font-bold text-zinc-900 dark:text-white">
+                    <span className="block text-xs font-bold uppercase text-[#ffffff]">
                       Replace
                     </span>
-                    <span className="mt-1 block text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    <span className="mt-1 block text-[11px] text-[#a1a1aa] leading-tight">
                       Overwrites existing days in plan with this split.
                     </span>
                   </button>
@@ -686,14 +681,14 @@ function TemplateDetailContent(props: {
                     onClick={() => setApplyMode('merge')}
                     className={`rounded-xl border p-3 text-left transition ${
                       applyMode === 'merge'
-                        ? 'border-zinc-900 bg-zinc-100 dark:border-white dark:bg-zinc-800'
-                        : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800'
+                        ? 'border-[#ff2a3b] bg-[#1a1a1a]'
+                        : 'border-[#ffffff]/15 bg-[#000000] hover:border-[#ffffff]/30'
                     }`}
                   >
-                    <span className="block text-xs font-bold text-zinc-900 dark:text-white">
+                    <span className="block text-xs font-bold uppercase text-[#ffffff]">
                       Merge
                     </span>
-                    <span className="mt-1 block text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    <span className="mt-1 block text-[11px] text-[#a1a1aa] leading-tight">
                       Appends template content while preserving existing days.
                     </span>
                   </button>
@@ -701,11 +696,11 @@ function TemplateDetailContent(props: {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-end gap-3 border-t border-zinc-100 pt-4 dark:border-zinc-800">
+            <div className="mt-6 flex items-center justify-end gap-3 border-t border-[#ffffff]/10 pt-4">
               <button
                 type="button"
                 onClick={() => setModalOpen(false)}
-                className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 min-h-[44px]"
+                className="kinetik-btn-dark px-4 py-2.5 text-xs font-mono font-bold min-h-[44px]"
               >
                 Cancel
               </button>
@@ -713,7 +708,7 @@ function TemplateDetailContent(props: {
                 type="button"
                 disabled={applying || Boolean(applySuccess)}
                 onClick={handleApplyTemplate}
-                className="inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white shadow transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                className="kinetik-btn-lime px-4 py-2.5 text-xs font-extrabold uppercase disabled:opacity-50 min-h-[44px]"
               >
                 {applying ? 'Applying Transaction...' : 'Confirm & Apply'}
               </button>
@@ -731,7 +726,7 @@ export default function TemplateDetailPage(props: {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center text-zinc-500">
+        <div className="min-h-screen bg-[#000000] flex items-center justify-center text-[#a1a1aa] font-mono text-xs">
           Loading workout template...
         </div>
       }

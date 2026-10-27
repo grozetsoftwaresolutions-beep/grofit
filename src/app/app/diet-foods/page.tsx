@@ -470,16 +470,16 @@ function DietFoodsContent() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-zinc-200 dark:border-zinc-800 pb-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-b border-[#1b3d27]/70 pb-6">
         <div>
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-            <Utensils className="h-4 w-4 text-zinc-900 dark:text-white" /> Nutrition & Planning
+          <div className="eyebrow flex items-center gap-2 text-xs">
+            <Utensils className="h-4 w-4 text-[#ff2a3b]" /> NUTRITION &amp; FUEL PROTOCOLS
           </div>
-          <h1 className="mt-1 text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
-            Diet Foods Catalogue & Meal Planning
+          <h1 className="mt-1 font-display text-3xl font-extrabold uppercase tracking-tight text-[#ffffff] sm:text-4xl">
+            DIET FOODS &amp; MEAL ARCHITECTURE
           </h1>
-          <p className="mt-1 text-xs sm:text-sm text-zinc-400 max-w-2xl">
-            Verified Indian Food Composition Tables (IFCT 2017) and USDA nutrition records tailored for authentic Tamil Nadu eating patterns.
+          <p className="mt-1 text-xs sm:text-sm text-[#ffffff]/60 max-w-2xl font-light">
+            Verified Indian Food Composition Tables (IFCT 2017) &amp; USDA records calibrated for authentic Tamil Nadu training diets.
           </p>
         </div>
 
@@ -491,7 +491,7 @@ function DietFoodsContent() {
               setFormError(null);
               setCreatePlanModal(true);
             }}
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+            className="kinetik-btn-lime inline-flex w-full sm:w-auto items-center justify-center gap-2 px-5 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
           >
             <Plus className="h-4 w-4" /> Create Meal Plan
           </button>
@@ -499,31 +499,31 @@ function DietFoodsContent() {
       </div>
 
       {/* Nutritional Guidance Notice */}
-      <div className="flex items-start gap-3 rounded-2xl border border-zinc-200 bg-white p-4 text-xs text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
-        <Info className="h-4 w-4 flex-shrink-0 text-zinc-500 dark:text-zinc-400 mt-0.5" />
+      <div className="kinetik-card flex items-start gap-3 rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/50 p-4 text-xs text-[#ffffff]/70 shadow-sm backdrop-blur-md">
+        <Info className="h-4 w-4 flex-shrink-0 text-[#ff2a3b] mt-0.5" />
         <p className="leading-relaxed">
-          <strong>Nutritional Guidance Notice:</strong> Meal plans and nutrition calculations are provided for educational and fitness planning purposes only. They do not constitute individualized clinical dietary prescriptions or medical advice. Exact nutrition may vary based on specific recipe preparation.
+          <strong className="text-[#ffffff] uppercase tracking-wide">Nutritional Guidance Notice:</strong> Meal plans and macro computations are provided for educational and athletic planning purposes. They do not constitute individualized clinical prescriptions. Exact nutrient yields vary slightly by regional preparation and cooking method.
         </p>
       </div>
 
       {/* Action Notice Toast */}
       {actionNotice && (
-        <div className="flex items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-4 py-3 text-xs font-medium text-zinc-900 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-white">
-          <CheckCircle2 className="h-4 w-4 text-zinc-900 dark:text-white" />
+        <div className="flex items-center gap-2 rounded-xl border border-[#ff2a3b]/50 bg-[#1a1a1a] px-4 py-3 text-xs font-semibold text-[#ffffff] shadow-lg animate-in fade-in">
+          <CheckCircle2 className="h-4 w-4 text-[#ff2a3b]" />
           {actionNotice}
         </div>
       )}
 
       {/* Tab Navigation - Horizontally scrollable on mobile */}
-      <div className="flex border-b border-zinc-200 dark:border-zinc-800 overflow-x-auto no-scrollbar gap-2 -mx-4 px-4 sm:mx-0 sm:px-0">
+      <div className="flex border-b border-[#1b3d27]/70 overflow-x-auto no-scrollbar gap-2 -mx-4 px-4 sm:mx-0 sm:px-0">
         <button
           type="button"
           id="tab-catalogue"
           onClick={() => setActiveTab('catalogue')}
-          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs tracking-wide transition-colors whitespace-nowrap min-h-[44px] ${
+          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs uppercase tracking-wider transition-all whitespace-nowrap min-h-[44px] ${
             activeTab === 'catalogue'
-              ? 'border-zinc-900 text-zinc-900 font-bold dark:border-white dark:text-white'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium'
+              ? 'border-[#ff2a3b] text-[#ff2a3b] font-bold shadow-[0_4px_12px_rgba(255, 42, 59, 0.15)]'
+              : 'border-transparent text-[#ffffff]/50 hover:text-[#ffffff] font-medium'
           }`}
         >
           <BookOpen className="h-4 w-4" /> Food Catalogue ({foods.length})
@@ -532,10 +532,10 @@ function DietFoodsContent() {
           type="button"
           id="tab-samples"
           onClick={() => setActiveTab('samples')}
-          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs tracking-wide transition-colors whitespace-nowrap min-h-[44px] ${
+          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs uppercase tracking-wider transition-all whitespace-nowrap min-h-[44px] ${
             activeTab === 'samples'
-              ? 'border-zinc-900 text-zinc-900 font-bold dark:border-white dark:text-white'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium'
+              ? 'border-[#ff2a3b] text-[#ff2a3b] font-bold shadow-[0_4px_12px_rgba(255, 42, 59, 0.15)]'
+              : 'border-transparent text-[#ffffff]/50 hover:text-[#ffffff] font-medium'
           }`}
         >
           <Sparkles className="h-4 w-4" /> Sample Meal Plans ({samplePlans.length})
@@ -544,10 +544,10 @@ function DietFoodsContent() {
           type="button"
           id="tab-my-plans"
           onClick={() => setActiveTab('my-plans')}
-          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs tracking-wide transition-colors whitespace-nowrap min-h-[44px] ${
+          className={`flex items-center gap-2 border-b-2 px-4 sm:px-5 py-3 text-xs uppercase tracking-wider transition-all whitespace-nowrap min-h-[44px] ${
             activeTab === 'my-plans'
-              ? 'border-zinc-900 text-zinc-900 font-bold dark:border-white dark:text-white'
-              : 'border-transparent text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white font-medium'
+              ? 'border-[#ff2a3b] text-[#ff2a3b] font-bold shadow-[0_4px_12px_rgba(255, 42, 59, 0.15)]'
+              : 'border-transparent text-[#ffffff]/50 hover:text-[#ffffff] font-medium'
           }`}
         >
           <Layers className="h-4 w-4" /> My Meal Plans ({userPlans.length})
@@ -560,13 +560,13 @@ function DietFoodsContent() {
           {/* Filter Bar */}
           <div className="grid gap-3 sm:grid-cols-3">
             <div className="relative sm:col-span-1">
-              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-zinc-400" />
+              <Search className="absolute left-3.5 top-3.5 h-4 w-4 text-[#ffffff]/40" />
               <input
                 type="text"
                 placeholder="Search foods (e.g. Idli, Chicken, Paneer)..."
                 value={foodSearch}
                 onChange={(e) => setFoodSearch(e.target.value)}
-                className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-4 text-xs text-zinc-900 placeholder-zinc-400 focus:border-zinc-900 focus:outline-none dark:border-zinc-800 dark:bg-zinc-900 dark:text-white dark:focus:border-white min-h-[44px]"
+                className="w-full rounded-xl border border-[#1b3d27] bg-[#0d0d0d] py-2.5 pl-10 pr-4 text-xs text-[#ffffff] placeholder-[#ffffff]/40 focus:border-[#ff2a3b] focus:outline-none focus:ring-1 focus:ring-[#ff2a3b] min-h-[44px]"
               />
             </div>
 
@@ -574,10 +574,10 @@ function DietFoodsContent() {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white focus:border-zinc-900 focus:outline-none dark:focus:border-white min-h-[44px]"
+                className="w-full rounded-xl border border-[#1b3d27] bg-[#0d0d0d] py-2.5 px-3 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none focus:ring-1 focus:ring-[#ff2a3b] min-h-[44px]"
               >
                 {CATEGORY_OPTIONS.map((c) => (
-                  <option key={c.value} value={c.value}>
+                  <option key={c.value} value={c.value} className="bg-[#000000] text-[#ffffff]">
                     {c.label}
                   </option>
                 ))}
@@ -588,10 +588,10 @@ function DietFoodsContent() {
               <select
                 value={selectedDiet}
                 onChange={(e) => setSelectedDiet(e.target.value)}
-                className="w-full rounded-xl border border-zinc-200 bg-white py-2.5 px-3 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white focus:border-zinc-900 focus:outline-none dark:focus:border-white min-h-[44px]"
+                className="w-full rounded-xl border border-[#1b3d27] bg-[#0d0d0d] py-2.5 px-3 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none focus:ring-1 focus:ring-[#ff2a3b] min-h-[44px]"
               >
                 {DIETARY_OPTIONS.map((d) => (
-                  <option key={d.value} value={d.value}>
+                  <option key={d.value} value={d.value} className="bg-[#000000] text-[#ffffff]">
                     {d.label}
                   </option>
                 ))}
@@ -603,85 +603,85 @@ function DietFoodsContent() {
           {loadingFoods ? (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[1, 2, 3, 4, 5, 6].map((k) => (
-                <div key={k} className="h-48 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+                <div key={k} className="h-56 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
               ))}
             </div>
           ) : filteredFoods.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-zinc-200 p-12 text-center text-xs text-zinc-500 dark:border-zinc-800 dark:text-zinc-400">
-              No foods matched your search criteria. Try clearing search filters.
+            <div className="kinetik-card rounded-2xl border border-dashed border-[#1b3d27] p-12 text-center text-xs text-[#ffffff]/50">
+              No foods matched your search criteria. Try adjusting or clearing search filters.
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredFoods.map((food) => (
                 <div
                   key={food.id}
-                  className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition-all hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                  className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-5 shadow-sm transition-all hover:border-[#ff2a3b]/50 group"
                 >
                   <div>
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                        <span className="eyebrow text-[10px]">
                           {food.category.replace('_', ' ')}
                         </span>
-                        <h3 className="mt-0.5 text-base font-bold text-zinc-900 dark:text-white">{food.name}</h3>
+                        <h3 className="mt-1 text-base font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">{food.name}</h3>
                       </div>
                       {food.foodForm && (
-                        <span className="rounded-md border border-zinc-200 bg-zinc-50 px-2 py-0.5 text-[10px] text-zinc-700 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-300 capitalize">
+                        <span className="rounded-md border border-[#1b3d27] bg-[#1a1a1a]/60 px-2 py-0.5 text-[10px] text-[#ff2a3b] uppercase font-mono tracking-wider">
                           {food.foodForm}
                         </span>
                       )}
                     </div>
 
                     {food.description && (
-                      <p className="mt-1.5 text-xs text-zinc-600 dark:text-zinc-400 line-clamp-2">
+                      <p className="mt-2 text-xs text-[#ffffff]/60 line-clamp-2 leading-relaxed">
                         {food.description}
                       </p>
                     )}
 
                     {/* Macronutrients Display */}
-                    <div className="mt-4 rounded-xl border border-zinc-100 bg-zinc-50/80 p-3 dark:border-zinc-800/80 dark:bg-zinc-950/60">
-                      <div className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 mb-2">
-                        Per Reference Portion: <strong className="text-zinc-900 dark:text-zinc-100">{food.referenceQuantity} {food.referenceUnit}</strong>
+                    <div className="mt-4 rounded-xl border border-[#1b3d27]/60 bg-[#000000]/70 p-3">
+                      <div className="text-[10px] font-medium text-[#ffffff]/50 mb-2">
+                        Per Reference Portion: <strong className="text-[#ffffff] font-mono">{food.referenceQuantity} {food.referenceUnit}</strong>
                       </div>
-                      <div className="grid grid-cols-4 gap-2 text-center text-xs">
-                        <div className="rounded-lg bg-white p-1.5 border border-zinc-200/60 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Calories</span>
-                          <span className="font-extrabold text-zinc-900 dark:text-white">
-                            {food.energyKcal !== null ? `${food.energyKcal}` : 'null'}
+                      <div className="grid grid-cols-4 gap-1.5 text-center text-xs">
+                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Calories</span>
+                          <span className="font-display text-sm font-bold text-[#ff2a3b]">
+                            {food.energyKcal !== null ? `${food.energyKcal}` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-1.5 border border-zinc-200/60 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Protein</span>
-                          <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                            {food.proteinG !== null ? `${food.proteinG}g` : 'null'}
+                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Protein</span>
+                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                            {food.proteinG !== null ? `${food.proteinG}g` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-1.5 border border-zinc-200/60 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Carbs</span>
-                          <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                            {food.carbohydratesG !== null ? `${food.carbohydratesG}g` : 'null'}
+                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Carbs</span>
+                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                            {food.carbohydratesG !== null ? `${food.carbohydratesG}g` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-1.5 border border-zinc-200/60 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Fat</span>
-                          <span className="font-semibold text-zinc-800 dark:text-zinc-200">
-                            {food.fatG !== null ? `${food.fatG}g` : 'null'}
+                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Fat</span>
+                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                            {food.fatG !== null ? `${food.fatG}g` : '—'}
                           </span>
                         </div>
                       </div>
                     </div>
 
                     {/* Provenance Metadata */}
-                    <div className="mt-3 flex items-center justify-between text-[10px] text-zinc-500 dark:text-zinc-400">
-                      <span>Source: <strong className="text-zinc-700 dark:text-zinc-300">{food.sourceName}</strong></span>
-                      <span className="px-1.5 py-0.5 rounded text-[9px] font-medium border border-zinc-200 bg-zinc-100 text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+                    <div className="mt-3 flex items-center justify-between text-[10px] text-[#ffffff]/40">
+                      <span>Source: <strong className="text-[#ffffff]/70">{food.sourceName}</strong></span>
+                      <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold border border-[#1b3d27] bg-[#1a1a1a]/40 text-[#ff2a3b]">
                         {food.matchStatus}
                       </span>
                     </div>
                   </div>
 
                   {/* Action */}
-                  <div className="mt-5 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                  <div className="mt-5 pt-3 border-t border-[#1b3d27]/70">
                     <button
                       type="button"
                       onClick={() => {
@@ -693,7 +693,7 @@ function DietFoodsContent() {
                           setTargetPlanIdForAdd(selectedPlanId || userPlans[0].id);
                         }
                       }}
-                      className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-xs font-semibold text-zinc-900 hover:bg-zinc-900 hover:text-white dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-100 dark:hover:bg-white dark:hover:text-zinc-900 transition-colors min-h-[44px] active:scale-95"
+                      className="kinetik-btn-dark w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold uppercase tracking-wider hover:border-[#ff2a3b]/60 hover:text-[#ff2a3b] transition-all min-h-[44px]"
                     >
                       <Plus className="h-3.5 w-3.5" /> Add to Meal Plan
                     </button>
@@ -708,37 +708,37 @@ function DietFoodsContent() {
       {/* TAB 2: SAMPLE MEAL PLANS */}
       {activeTab === 'samples' && (
         <div className="space-y-6">
-          <div className="rounded-xl border border-zinc-200 bg-white p-4 text-xs text-zinc-600 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400">
-            These sample days illustrate balanced meal structures using authentic Tamil Nadu staples. All nutritional totals are <strong>dynamically calculated</strong> from the verified food items and portion references below.
+          <div className="kinetik-card rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/50 p-4 text-xs text-[#ffffff]/70 shadow-sm">
+            These sample days illustrate balanced macros using authentic Tamil Nadu staples. All nutritional totals are <strong className="text-[#ffffff]">dynamically calculated</strong> from the verified food items and portion references below.
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
             {samplePlans.map((sample) => (
               <div
                 key={sample.id}
-                className="flex flex-col justify-between rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900"
+                className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-6 shadow-sm transition-all hover:border-[#ff2a3b]/40"
               >
                 <div>
-                  <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+                  <div className="flex items-center justify-between border-b border-[#1b3d27]/70 pb-3">
                     <div>
-                      <span className="rounded bg-zinc-100 px-2.5 py-0.5 text-[10px] font-bold text-zinc-900 dark:bg-zinc-800 dark:text-white border border-zinc-200 dark:border-zinc-700">
+                      <span className="rounded-full bg-[#1a1a1a] px-2.5 py-0.5 text-[10px] font-mono font-bold text-[#ff2a3b] border border-[#ff2a3b]/30 uppercase tracking-wider">
                         {sample.badge}
                       </span>
-                      <h3 className="mt-1 text-base font-bold text-zinc-900 dark:text-white">
+                      <h3 className="mt-2 font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">
                         {sample.name}
                       </h3>
                     </div>
                     <div className="text-right">
-                      <div className="text-lg font-extrabold text-zinc-900 dark:text-white">
-                        {sample.dailyTotals.isApproximate ? '~' : ''}{sample.dailyTotals.energyKcal} kcal
+                      <div className="font-display text-2xl font-extrabold text-[#ff2a3b]">
+                        {sample.dailyTotals.isApproximate ? '~' : ''}{sample.dailyTotals.energyKcal} <span className="text-xs font-mono text-[#ffffff]/60">KCAL</span>
                       </div>
-                      <div className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                      <div className="text-[10px] font-mono text-[#ffffff]/60">
                         P: {sample.dailyTotals.proteinG}g | C: {sample.dailyTotals.carbohydratesG}g | F: {sample.dailyTotals.fatG}g
                       </div>
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs text-zinc-600 dark:text-zinc-400">{sample.description}</p>
+                  <p className="mt-3 text-xs text-[#ffffff]/60 leading-relaxed">{sample.description}</p>
 
                   {/* Meal Slots with calculated subtotals */}
                   <div className="mt-4 space-y-3 text-xs">
@@ -748,20 +748,20 @@ function DietFoodsContent() {
                       if (slotItems.length === 0) return null;
 
                       return (
-                        <div key={slot} className="rounded-xl bg-zinc-50 p-3 border border-zinc-100 dark:bg-zinc-950/60 dark:border-zinc-800/80">
-                          <div className="flex justify-between items-center mb-1">
-                            <span className="font-semibold text-zinc-900 dark:text-white capitalize">
+                        <div key={slot} className="rounded-xl bg-[#000000]/70 p-3.5 border border-[#1b3d27]/70">
+                          <div className="flex justify-between items-center mb-1.5">
+                            <span className="eyebrow text-xs text-[#ff2a3b]">
                               {slot}
                             </span>
-                            <span className="text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
+                            <span className="text-[11px] font-mono text-[#ffffff]/70 font-semibold">
                               {slotTotal.isApproximate ? '~' : ''}{slotTotal.energyKcal} kcal
                             </span>
                           </div>
-                          <ul className="text-zinc-700 dark:text-zinc-300 space-y-0.5 text-[11px]">
+                          <ul className="text-[#ffffff]/80 space-y-1 text-[11px]">
                             {slotItems.map((item, idx) => (
-                              <li key={idx} className="flex justify-between">
-                                <span>• {item.food.name} ({item.quantity}{item.quantityUnit})</span>
-                                <span className="text-zinc-500">{item.scaled.energyKcal} kcal</span>
+                              <li key={idx} className="flex justify-between items-center">
+                                <span className="truncate pr-2">• {item.food.name} <span className="text-[#ffffff]/50 font-mono">({item.quantity}{item.quantityUnit})</span></span>
+                                <span className="font-mono text-[#ff2a3b]/80 text-[10px] flex-shrink-0">{item.scaled.energyKcal} kcal</span>
                               </li>
                             ))}
                           </ul>
@@ -771,12 +771,12 @@ function DietFoodsContent() {
                   </div>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                <div className="mt-6 pt-4 border-t border-[#1b3d27]/70">
                   <button
                     type="button"
                     disabled={submitting}
                     onClick={() => handleCopySamplePlan(sample)}
-                    className="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white shadow-sm hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                    className="kinetik-btn-lime w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[44px]"
                   >
                     <Copy className="h-4 w-4" /> Copy into My Meal Plans
                   </button>
@@ -791,11 +791,11 @@ function DietFoodsContent() {
       {activeTab === 'my-plans' && (
         <div className="space-y-6">
           {userPlans.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-zinc-200 bg-white p-12 text-center dark:border-zinc-800 dark:bg-zinc-900">
-              <Utensils className="mx-auto h-8 w-8 text-zinc-400 mb-3" />
-              <h3 className="font-bold text-zinc-900 dark:text-white text-base">No Saved Meal Plans Yet</h3>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
-                Create a custom meal plan or copy one of our authentic Tamil Nadu sample days to start tracking your daily nutrition.
+            <div className="kinetik-card rounded-2xl border border-dashed border-[#1b3d27] bg-[#0d0d0d]/50 p-12 text-center">
+              <Utensils className="mx-auto h-8 w-8 text-[#ff2a3b] mb-3 opacity-70" />
+              <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">No Saved Meal Plans Yet</h3>
+              <p className="mt-1 text-xs text-[#ffffff]/60 max-w-md mx-auto">
+                Create a custom nutrition plan or copy one of our authentic Tamil Nadu sample days to start tracking your daily macronutrients.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <button
@@ -804,14 +804,14 @@ function DietFoodsContent() {
                     setFormError(null);
                     setCreatePlanModal(true);
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+                  className="kinetik-btn-lime inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                 >
                   <Plus className="h-3.5 w-3.5" /> Create Plan
                 </button>
                 <button
                   type="button"
                   onClick={() => setActiveTab('samples')}
-                  className="inline-flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-900 hover:bg-zinc-100 active:scale-95 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 dark:hover:bg-zinc-800 min-h-[44px]"
+                  className="kinetik-btn-dark inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                 >
                   Browse Samples
                 </button>
@@ -821,16 +821,16 @@ function DietFoodsContent() {
             <div className="grid gap-6 lg:grid-cols-4">
               {/* Plan Selector Sidebar */}
               <div className="space-y-2 lg:col-span-1">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-2">
-                  Your Saved Plans
+                <div className="eyebrow text-xs text-[#ffffff]/50 mb-2">
+                  YOUR SAVED PLANS
                 </div>
                 {userPlans.map((plan) => (
                   <div
                     key={plan.id}
-                    className={`group flex items-center justify-between rounded-xl border p-3 transition-colors ${
+                    className={`group flex items-center justify-between rounded-xl border p-3 transition-all ${
                       selectedPlanId === plan.id
-                        ? 'border-zinc-900 bg-zinc-100 text-zinc-900 dark:border-white dark:bg-zinc-800 dark:text-white font-semibold'
-                        : 'border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800'
+                        ? 'border-[#ff2a3b] bg-[#1a1a1a] text-[#ffffff] shadow-[0_0_15px_rgba(255, 42, 59, 0.1)]'
+                        : 'border-[#1b3d27] bg-[#0d0d0d]/70 text-[#ffffff]/70 hover:border-[#ff2a3b]/40 hover:text-[#ffffff]'
                     }`}
                   >
                     <button
@@ -838,8 +838,8 @@ function DietFoodsContent() {
                       onClick={() => setSelectedPlanId(plan.id)}
                       className="flex-1 text-left min-h-[40px]"
                     >
-                      <div className="text-xs font-semibold truncate">{plan.name}</div>
-                      <div className="text-[10px] text-zinc-500 dark:text-zinc-400 mt-0.5">
+                      <div className="text-xs font-bold truncate text-[#ffffff]">{plan.name}</div>
+                      <div className="text-[10px] font-mono text-[#ffffff]/50 mt-0.5">
                         {plan.itemCount} foods • {plan.targetKcal ? `${plan.targetKcal} kcal target` : 'No target'}
                       </div>
                     </button>
@@ -848,7 +848,7 @@ function DietFoodsContent() {
                       <Link
                         href={`/app/diet-foods/plans/${plan.id}`}
                         title="Open Plan Page"
-                        className="rounded p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-700"
+                        className="rounded p-1.5 text-[#ffffff]/40 hover:text-[#ff2a3b] hover:bg-[#000000] transition-colors"
                       >
                         <ExternalLink className="h-3.5 w-3.5" />
                       </Link>
@@ -856,7 +856,7 @@ function DietFoodsContent() {
                         type="button"
                         onClick={() => handleDeletePlan(plan.id)}
                         title="Delete Plan"
-                        className="rounded p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-200 dark:hover:text-white dark:hover:bg-zinc-700"
+                        className="rounded p-1.5 text-[#ffffff]/40 hover:text-rose-400 hover:bg-[#000000] transition-colors"
                       >
                         <Trash2 className="h-3.5 w-3.5" />
                       </button>
@@ -868,23 +868,23 @@ function DietFoodsContent() {
               {/* Active Plan Detail View */}
               <div className="lg:col-span-3">
                 {loadingPlan ? (
-                  <div className="h-96 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+                  <div className="h-96 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
                 ) : activePlanDetail ? (
-                  <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 space-y-6">
+                  <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm space-y-6">
                     {/* Plan Header */}
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-zinc-100 dark:border-zinc-800 pb-4 gap-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-[#1b3d27]/70 pb-4 gap-3">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h2 className="text-lg font-bold text-zinc-900 dark:text-white">{activePlanDetail.name}</h2>
+                          <h2 className="font-display text-xl font-bold uppercase tracking-wide text-[#ffffff]">{activePlanDetail.name}</h2>
                           <Link
                             href={`/app/diet-foods/plans/${activePlanDetail.id}`}
-                            className="inline-flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:underline"
+                            className="inline-flex items-center gap-1 text-[11px] font-mono text-[#ff2a3b] hover:underline"
                           >
                             Dedicated URL <ArrowRight className="h-3 w-3" />
                           </Link>
                         </div>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
-                          Daily Target: <strong className="text-zinc-900 dark:text-zinc-100">{activePlanDetail.targetKcal ? `${activePlanDetail.targetKcal} kcal` : 'None'}</strong>
+                        <p className="text-xs text-[#ffffff]/60 mt-0.5">
+                          Daily Target: <strong className="text-[#ffffff] font-mono">{activePlanDetail.targetKcal ? `${activePlanDetail.targetKcal} kcal` : 'None'}</strong>
                         </p>
                       </div>
 
@@ -895,14 +895,14 @@ function DietFoodsContent() {
                             setActiveTab('catalogue');
                             setTargetPlanIdForAdd(activePlanDetail.id);
                           }}
-                          className="inline-flex items-center gap-1.5 rounded-xl bg-zinc-900 px-3 py-2 text-xs font-semibold text-white hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[40px]"
+                          className="kinetik-btn-lime inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider min-h-[40px]"
                         >
                           <Plus className="h-3.5 w-3.5" /> Add Foods
                         </button>
                         <button
                           type="button"
                           onClick={() => handleDeletePlan(activePlanDetail.id)}
-                          className="rounded-xl border border-zinc-200 p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 min-h-[40px] min-w-[40px] flex items-center justify-center"
+                          className="rounded-xl border border-[#1b3d27] p-2 text-[#ffffff]/50 hover:text-rose-400 hover:bg-[#000000] min-h-[40px] min-w-[40px] flex items-center justify-center transition-colors"
                           title="Delete Plan"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -911,71 +911,71 @@ function DietFoodsContent() {
                     </div>
 
                     {/* Daily Nutrition Totals Card */}
-                    <div className="rounded-xl border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-950/60">
+                    <div className="rounded-xl border border-[#1b3d27] bg-[#000000]/80 p-5">
                       <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-wider">
-                          Daily Nutrition Totals
+                        <span className="eyebrow text-xs text-[#ff2a3b]">
+                          DAILY NUTRITION TOTALS
                         </span>
-                        <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                        <span className="text-[10px] font-mono text-[#ffffff]/50">
                           {activePlanDetail.dailyTotals.isComplete ? 'Complete Calculation' : 'Incomplete Totals'}
                         </span>
                       </div>
 
                       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-center">
-                        <div className="rounded-lg bg-white p-2.5 border border-zinc-200/80 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Energy</span>
-                          <span className="text-base font-extrabold text-zinc-900 dark:text-white">
+                        <div className="rounded-xl bg-[#0d0d0d] p-3 border border-[#1b3d27]">
+                          <span className="block text-[10px] uppercase font-mono tracking-wider text-[#ffffff]/50">Energy</span>
+                          <span className="font-display text-lg font-extrabold text-[#ff2a3b]">
                             {activePlanDetail.dailyTotals.energyKcal !== null ? `${activePlanDetail.dailyTotals.energyKcal} kcal` : 'Incomplete'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-2.5 border border-zinc-200/80 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Protein</span>
-                          <span className="text-base font-bold text-zinc-900 dark:text-white">
-                            {activePlanDetail.dailyTotals.proteinG !== null ? `${activePlanDetail.dailyTotals.proteinG}g` : 'null'}
+                        <div className="rounded-xl bg-[#0d0d0d] p-3 border border-[#1b3d27]">
+                          <span className="block text-[10px] uppercase font-mono tracking-wider text-[#ffffff]/50">Protein</span>
+                          <span className="font-mono text-base font-bold text-[#ffffff]">
+                            {activePlanDetail.dailyTotals.proteinG !== null ? `${activePlanDetail.dailyTotals.proteinG}g` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-2.5 border border-zinc-200/80 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Carbohydrates</span>
-                          <span className="text-base font-bold text-zinc-900 dark:text-white">
-                            {activePlanDetail.dailyTotals.carbohydratesG !== null ? `${activePlanDetail.dailyTotals.carbohydratesG}g` : 'null'}
+                        <div className="rounded-xl bg-[#0d0d0d] p-3 border border-[#1b3d27]">
+                          <span className="block text-[10px] uppercase font-mono tracking-wider text-[#ffffff]/50">Carbs</span>
+                          <span className="font-mono text-base font-bold text-[#ffffff]">
+                            {activePlanDetail.dailyTotals.carbohydratesG !== null ? `${activePlanDetail.dailyTotals.carbohydratesG}g` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-2.5 border border-zinc-200/80 dark:bg-zinc-900 dark:border-zinc-800">
-                          <span className="block text-[10px] text-zinc-500">Fat</span>
-                          <span className="text-base font-bold text-zinc-900 dark:text-white">
-                            {activePlanDetail.dailyTotals.fatG !== null ? `${activePlanDetail.dailyTotals.fatG}g` : 'null'}
+                        <div className="rounded-xl bg-[#0d0d0d] p-3 border border-[#1b3d27]">
+                          <span className="block text-[10px] uppercase font-mono tracking-wider text-[#ffffff]/50">Fat</span>
+                          <span className="font-mono text-base font-bold text-[#ffffff]">
+                            {activePlanDetail.dailyTotals.fatG !== null ? `${activePlanDetail.dailyTotals.fatG}g` : '—'}
                           </span>
                         </div>
-                        <div className="rounded-lg bg-white p-2.5 border border-zinc-200/80 dark:bg-zinc-900 dark:border-zinc-800 col-span-2 sm:col-span-1">
-                          <span className="block text-[10px] text-zinc-500">Dietary Fibre</span>
-                          <span className="text-base font-bold text-zinc-900 dark:text-white">
-                            {activePlanDetail.dailyTotals.fibreG !== null ? `${activePlanDetail.dailyTotals.fibreG}g` : 'null'}
+                        <div className="rounded-xl bg-[#0d0d0d] p-3 border border-[#1b3d27] col-span-2 sm:col-span-1">
+                          <span className="block text-[10px] uppercase font-mono tracking-wider text-[#ffffff]/50">Fibre</span>
+                          <span className="font-mono text-base font-bold text-[#ffffff]">
+                            {activePlanDetail.dailyTotals.fibreG !== null ? `${activePlanDetail.dailyTotals.fibreG}g` : '—'}
                           </span>
                         </div>
                       </div>
 
                       {/* Calorie Target Comparison */}
                       {activePlanDetail.targetComparison.canCompare ? (
-                        <div className="mt-4 pt-3 border-t border-zinc-200 dark:border-zinc-800 flex items-center justify-between text-xs">
+                        <div className="mt-4 pt-3 border-t border-[#1b3d27] flex items-center justify-between text-xs">
                           <div>
-                            <span className="text-zinc-500 dark:text-zinc-400">Target Variance:</span>{' '}
-                            <span className="font-semibold text-zinc-900 dark:text-white">
-                              {activePlanDetail.targetComparison.status.toUpperCase()}
+                            <span className="text-[#ffffff]/50">Target Variance:</span>{' '}
+                            <span className="font-mono font-bold text-[#ff2a3b] uppercase">
+                              {activePlanDetail.targetComparison.status}
                             </span>
                           </div>
                           <div className="text-right">
-                            <span className="text-base font-extrabold text-zinc-900 dark:text-white">
+                            <span className="font-display text-base font-extrabold text-[#ffffff]">
                               {(activePlanDetail.targetComparison.differenceKcal ?? 0) > 0 ? '+' : ''}
                               {activePlanDetail.targetComparison.differenceKcal} kcal
                             </span>
-                            <span className="ml-2 text-xs text-zinc-500 dark:text-zinc-400">
+                            <span className="ml-2 font-mono text-xs text-[#ff2a3b]">
                               ({((activePlanDetail.targetComparison.differencePercent ?? 0) > 0 ? '+' : '')}
                               {activePlanDetail.targetComparison.differencePercent}%)
                             </span>
                           </div>
                         </div>
                       ) : (
-                        <div className="mt-4 text-[10px] text-zinc-500 dark:text-zinc-400">
+                        <div className="mt-4 text-[10px] text-[#ffffff]/50">
                           {activePlanDetail.targetKcal
                             ? 'Comparison unavailable: energy data is missing from one or more items.'
                             : 'Set a target calorie goal when creating or renaming this plan to review variance.'}
@@ -990,22 +990,22 @@ function DietFoodsContent() {
                         const slotTotal = activePlanDetail.slotTotals[slot];
 
                         return (
-                          <div key={slot} className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900">
-                            <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-2 mb-3">
+                          <div key={slot} className="kinetik-card rounded-xl border border-[#1b3d27]/70 bg-[#0d0d0d]/60 p-4">
+                            <div className="flex items-center justify-between border-b border-[#1b3d27]/60 pb-2 mb-3">
                               <div>
-                                <h3 className="font-bold text-sm text-zinc-900 dark:text-white capitalize">{slot}</h3>
-                                <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
+                                <h3 className="eyebrow text-xs text-[#ff2a3b]">{slot}</h3>
+                                <span className="text-[10px] font-mono text-[#ffffff]/50">
                                   {slotItems.length} food{slotItems.length !== 1 ? 's' : ''}
                                 </span>
                               </div>
                               <div className="text-right text-xs">
-                                <span className="font-bold text-zinc-900 dark:text-white">
+                                <span className="font-display font-bold text-[#ffffff]">
                                   {slotTotal?.energyKcal !== null && slotTotal?.energyKcal !== undefined
                                     ? `${slotTotal.energyKcal} kcal`
                                     : 'Incomplete'}
                                 </span>
                                 {slotTotal?.proteinG !== null && slotTotal?.proteinG !== undefined && (
-                                  <span className="text-zinc-500 dark:text-zinc-400 text-[10px] ml-2">
+                                  <span className="text-[#ff2a3b] font-mono text-[10px] ml-2">
                                     P: {slotTotal.proteinG}g
                                   </span>
                                 )}
@@ -1013,20 +1013,20 @@ function DietFoodsContent() {
                             </div>
 
                             {slotItems.length === 0 ? (
-                              <div className="py-2 text-center text-xs text-zinc-400 dark:text-zinc-500">
+                              <div className="py-2 text-center text-xs text-[#ffffff]/40">
                                 No foods in this meal slot.
                               </div>
                             ) : (
-                              <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
+                              <div className="divide-y divide-[#1b3d27]/60">
                                 {slotItems.map((item) => (
                                   <div
                                     key={item.id}
                                     className="flex items-center justify-between py-3 text-xs"
                                   >
                                     <div>
-                                      <div className="font-semibold text-zinc-900 dark:text-white">{item.food.name}</div>
-                                      <div className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
-                                        Portion: <strong className="text-zinc-800 dark:text-zinc-200">{item.quantity} {item.quantityUnit}</strong>
+                                      <div className="font-semibold text-[#ffffff]">{item.food.name}</div>
+                                      <div className="text-[11px] text-[#ffffff]/60 mt-0.5">
+                                        Portion: <strong className="text-[#ffffff] font-mono">{item.quantity} {item.quantityUnit}</strong>
                                         {item.scaledNutrients && item.scaledNutrients.energyKcal !== null
                                           ? ` (${item.scaledNutrients.energyKcal} kcal)`
                                           : ' (kcal missing)'}
@@ -1036,7 +1036,7 @@ function DietFoodsContent() {
                                       </div>
                                     </div>
 
-                                    <div className="flex items-center gap-2">
+                                    <div className="flex items-center gap-1">
                                       <button
                                         type="button"
                                         onClick={() => {
@@ -1044,7 +1044,7 @@ function DietFoodsContent() {
                                           setEditPortion(item.quantity);
                                           setEditSlot(item.mealSlot);
                                         }}
-                                        className="rounded-lg p-2 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white min-h-[36px] min-w-[36px] flex items-center justify-center"
+                                        className="rounded-lg p-2 text-[#ffffff]/50 hover:bg-[#1a1a1a] hover:text-[#ff2a3b] min-h-[36px] min-w-[36px] flex items-center justify-center transition-colors"
                                         title="Edit Portion"
                                       >
                                         <Edit2 className="h-3.5 w-3.5" />
@@ -1052,7 +1052,7 @@ function DietFoodsContent() {
                                       <button
                                         type="button"
                                         onClick={() => handleDeleteItem(item.id)}
-                                        className="rounded-lg p-2 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white min-h-[36px] min-w-[36px] flex items-center justify-center"
+                                        className="rounded-lg p-2 text-[#ffffff]/50 hover:bg-[#1a1a1a] hover:text-rose-400 min-h-[36px] min-w-[36px] flex items-center justify-center transition-colors"
                                         title="Remove Food"
                                       >
                                         <Trash2 className="h-3.5 w-3.5" />
@@ -1076,17 +1076,17 @@ function DietFoodsContent() {
 
       {/* MODAL: ADD FOOD TO MEAL PLAN (Mobile Bottom-Sheet on small screens) */}
       {addFoodModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
               <div>
-                <h3 className="font-bold text-zinc-900 dark:text-white text-base">Add to Meal Plan</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{addFoodModal.name}</p>
+                <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Add to Meal Plan</h3>
+                <p className="text-xs text-[#ff2a3b] mt-0.5">{addFoodModal.name}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setAddFoodModal(null)}
-                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="rounded-lg p-1.5 text-[#ffffff]/50 hover:bg-[#1a1a1a] hover:text-[#ffffff]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -1094,7 +1094,7 @@ function DietFoodsContent() {
 
             {userPlans.length === 0 ? (
               <div className="mt-4 text-center">
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-4">
+                <p className="text-xs text-[#ffffff]/60 mb-4">
                   You do not have any meal plans yet. Create one first!
                 </p>
                 <button
@@ -1103,7 +1103,7 @@ function DietFoodsContent() {
                     setAddFoodModal(null);
                     setCreatePlanModal(true);
                   }}
-                  className="rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+                  className="kinetik-btn-lime px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                 >
                   Create a Meal Plan
                 </button>
@@ -1111,14 +1111,14 @@ function DietFoodsContent() {
             ) : (
               <form onSubmit={handleAddItemToPlan} className="mt-4 space-y-4">
                 <div>
-                  <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Select Plan</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Select Plan</label>
                   <select
                     value={targetPlanIdForAdd}
                     onChange={(e) => setTargetPlanIdForAdd(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white min-h-[44px]"
+                    className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                   >
                     {userPlans.map((p) => (
-                      <option key={p.id} value={p.id}>
+                      <option key={p.id} value={p.id} className="bg-[#000000] text-[#ffffff]">
                         {p.name}
                       </option>
                     ))}
@@ -1126,14 +1126,14 @@ function DietFoodsContent() {
                 </div>
 
                 <div>
-                  <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Meal Slot</label>
+                  <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Meal Slot</label>
                   <select
                     value={addSlot}
                     onChange={(e) => setAddSlot(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white capitalize min-h-[44px]"
+                    className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] capitalize focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                   >
                     {SUPPORTED_MEAL_SLOTS.map((s) => (
-                      <option key={s} value={s}>
+                      <option key={s} value={s} className="bg-[#000000] text-[#ffffff]">
                         {s}
                       </option>
                     ))}
@@ -1142,39 +1142,39 @@ function DietFoodsContent() {
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Portion Quantity</label>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Portion Quantity</label>
                     <input
                       type="number"
                       min="1"
                       max="5000"
                       value={addPortion}
                       onChange={(e) => setAddPortion(Number(e.target.value))}
-                      className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white min-h-[44px]"
+                      className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Unit</label>
+                    <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Unit</label>
                     <input
                       type="text"
                       disabled
                       value={addUnit}
-                      className="mt-1 w-full rounded-xl border border-zinc-200 bg-zinc-50 p-2.5 text-xs text-zinc-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400 min-h-[44px]"
+                      className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000]/50 p-2.5 text-xs text-[#ffffff]/40 min-h-[44px]"
                     />
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                <div className="flex justify-end gap-3 pt-3 border-t border-[#1b3d27]">
                   <button
                     type="button"
                     onClick={() => setAddFoodModal(null)}
-                    className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 min-h-[44px]"
+                    className="kinetik-btn-dark px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                    className="kinetik-btn-lime px-4 py-2.5 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[44px]"
                   >
                     {submitting ? 'Adding...' : 'Add to Plan'}
                   </button>
@@ -1187,40 +1187,40 @@ function DietFoodsContent() {
 
       {/* MODAL: CREATE MEAL PLAN */}
       {createPlanModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
-              <h3 className="font-bold text-zinc-900 dark:text-white text-base">Create New Meal Plan</h3>
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
+              <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Create New Meal Plan</h3>
               <button
                 type="button"
                 onClick={() => setCreatePlanModal(false)}
-                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="rounded-lg p-1.5 text-[#ffffff]/50 hover:bg-[#1a1a1a] hover:text-[#ffffff]"
               >
                 <X className="h-4 w-4" />
               </button>
             </div>
 
             {formError && (
-              <div className="mt-3 rounded-xl border border-zinc-200 bg-zinc-50 p-3 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-800 dark:text-white">
+              <div className="mt-3 rounded-xl border border-rose-500/50 bg-rose-950/40 p-3 text-xs text-rose-300">
                 {formError}
               </div>
             )}
 
             <form onSubmit={handleCreatePlan} className="mt-4 space-y-4">
               <div>
-                <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Meal Plan Name</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Meal Plan Name</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Tamil Nadu Muscle Gain Plan"
                   value={newPlanName}
                   onChange={(e) => setNewPlanName(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white min-h-[44px]"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] placeholder-[#ffffff]/40 focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Daily Calorie Target (kcal, Optional)</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Daily Calorie Target (kcal, Optional)</label>
                 <input
                   type="number"
                   min="500"
@@ -1228,25 +1228,25 @@ function DietFoodsContent() {
                   placeholder="2000"
                   value={newPlanTarget}
                   onChange={(e) => setNewPlanTarget(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white min-h-[44px]"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] placeholder-[#ffffff]/40 focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 />
-                <p className="mt-1 text-[10px] text-zinc-500 dark:text-zinc-400">
-                  Used to show calorie variance against your goal.
+                <p className="mt-1 text-[10px] text-[#ffffff]/50">
+                  Used to calculate daily calorie variance against your goal.
                 </p>
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#1b3d27]">
                 <button
                   type="button"
                   onClick={() => setCreatePlanModal(false)}
-                  className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 min-h-[44px]"
+                  className="kinetik-btn-dark px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                  className="kinetik-btn-lime px-4 py-2.5 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[44px]"
                 >
                   {submitting ? 'Creating...' : 'Create Plan'}
                 </button>
@@ -1258,17 +1258,17 @@ function DietFoodsContent() {
 
       {/* MODAL: EDIT PORTION */}
       {editItemModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
-            <div className="flex items-start justify-between border-b border-zinc-100 dark:border-zinc-800 pb-3">
+        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
               <div>
-                <h3 className="font-bold text-zinc-900 dark:text-white text-base">Edit Portion</h3>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">{editItemModal.food.name}</p>
+                <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Edit Portion</h3>
+                <p className="text-xs text-[#ff2a3b] mt-0.5">{editItemModal.food.name}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setEditItemModal(null)}
-                className="rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="rounded-lg p-1.5 text-[#ffffff]/50 hover:bg-[#1a1a1a] hover:text-[#ffffff]"
               >
                 <X className="h-4 w-4" />
               </button>
@@ -1276,7 +1276,7 @@ function DietFoodsContent() {
 
             <form onSubmit={handleUpdateItem} className="mt-4 space-y-4">
               <div>
-                <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">
+                <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
                   Quantity ({editItemModal.quantityUnit})
                 </label>
                 <input
@@ -1285,37 +1285,37 @@ function DietFoodsContent() {
                   max="5000"
                   value={editPortion}
                   onChange={(e) => setEditPortion(Number(e.target.value))}
-                  className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white min-h-[44px]"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 />
               </div>
 
               <div>
-                <label className="text-xs font-medium text-zinc-700 dark:text-zinc-300">Meal Slot</label>
+                <label className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">Meal Slot</label>
                 <select
                   value={editSlot}
                   onChange={(e) => setEditSlot(e.target.value)}
-                  className="mt-1 w-full rounded-xl border border-zinc-200 bg-white p-2.5 text-xs text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-white capitalize min-h-[44px]"
+                  className="mt-1 w-full rounded-xl border border-[#1b3d27] bg-[#000000] p-2.5 text-xs text-[#ffffff] capitalize focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                 >
                   {SUPPORTED_MEAL_SLOTS.map((s) => (
-                    <option key={s} value={s}>
+                    <option key={s} value={s} className="bg-[#000000] text-[#ffffff]">
                       {s}
                     </option>
                   ))}
                 </select>
               </div>
 
-              <div className="flex justify-end gap-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+              <div className="flex justify-end gap-3 pt-3 border-t border-[#1b3d27]">
                 <button
                   type="button"
                   onClick={() => setEditItemModal(null)}
-                  className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 min-h-[44px]"
+                  className="kinetik-btn-dark px-4 py-2.5 text-xs font-bold uppercase tracking-wider min-h-[44px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                  className="kinetik-btn-lime px-4 py-2.5 text-xs font-bold uppercase tracking-wider disabled:opacity-50 min-h-[44px]"
                 >
                   {submitting ? 'Saving...' : 'Save Portion'}
                 </button>
@@ -1333,12 +1333,12 @@ export default function DietFoodsPage() {
     <Suspense
       fallback={
         <div className="space-y-6">
-          <div className="h-8 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="h-16 w-full animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+          <div className="h-8 w-48 animate-pulse rounded-lg bg-[#0d0d0d] border border-[#1b3d27]" />
+          <div className="h-16 w-full animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/60" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="h-48 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-            <div className="h-48 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
-            <div className="h-48 animate-pulse rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-900" />
+            <div className="h-56 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+            <div className="h-56 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
+            <div className="h-56 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
           </div>
         </div>
       }

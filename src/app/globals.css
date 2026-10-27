@@ -5,34 +5,48 @@
 :root {
   --background: #000000;
   --foreground: #ffffff;
+  --forest: #000000;
+  --forest-2: #0d0d0d;
+  --forest-3: #1a1a1a;
+  --lime: #ff2a3b;
+  --lime-hover: #ff4d5e;
+  --lime-dark: #cc1b29;
+  --lime-pale: #ffe5e7;
+  --paper: #ffffff;
+  --paper-2: #f0f0f0;
+  --ink: #000000;
+  --muted: #888888;
+  --muted-light: #cccccc;
+  --line: rgba(255, 255, 255, 0.12);
+  --line-dark: rgba(255, 255, 255, 0.1);
+  --line-lime: rgba(255, 42, 59, 0.4);
+  --kinetik-depth-shadow: 0 1px 0 #ff2a3b3d, 0 2px 0 #00000080, 0 4px 0 #00000060, 0 8px 22px #000000cc;
+  --surface-glow: rgba(255, 42, 59, 0.18);
   color-scheme: dark;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-forest: #000000;
+  --color-forest-2: #0d0d0d;
+  --color-forest-3: #1a1a1a;
+  --color-lime: #ff2a3b;
+  --color-lime-hover: #ff4d5e;
+  --color-lime-dark: #cc1b29;
+  --color-lime-pale: #ffe5e7;
+  --color-paper: #ffffff;
+  --color-paper-2: #f0f0f0;
+  --color-muted: #888888;
+  --color-muted-light: #cccccc;
+  --font-display: var(--font-display), "Barlow Condensed", Impact, sans-serif;
+  --font-sans: var(--font-sans), "Space Grotesk", sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-/* Enforce crisp high-contrast headings and text */
-h1, h2, h3, h4, h5, h6 {
-  color: #ffffff !important;
-}
-
-h1[class*="text-zinc-"],
-h2[class*="text-zinc-"],
-h3[class*="text-zinc-"],
-h4[class*="text-zinc-"],
-h5[class*="text-zinc-"],
-h6[class*="text-zinc-"] {
-  color: #ffffff !important;
-}
-
-.dark p.text-zinc-900,
-.dark span.text-zinc-900,
-.dark div.text-zinc-900 {
-  color: #ffffff !important;
+/* Base Body & HTML */
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -41,32 +55,119 @@ body {
   max-width: 100vw;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: #27272a;
+  background: #ff2a3b;
   color: #ffffff;
 }
 
-/* Custom Sleek Dark Scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: #09090b;
-}
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+/* Headings Typography */
+h1, h2, h3, h4, h5, h6 {
+  color: #ffffff;
 }
 
+h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
+  color: #ff2a3b !important;
+  font-style: italic;
+}
+
+/* Kinetik Display Class */
+.font-display {
+  font-family: var(--font-display), "Barlow Condensed", Impact, sans-serif;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ff2a3b;
+}
+
+/* Reusable Kinetik UI Cards & Buttons */
+.kinetik-card {
+  background: #0d0d0d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.kinetik-card:hover {
+  border-color: rgba(255, 42, 59, 0.45);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 42, 59, 0.15);
+}
+
+.kinetik-btn-lime {
+  background: #ff2a3b;
+  color: #ffffff;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0.875rem;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kinetik-btn-lime:hover {
+  background: #ff4d5e;
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(255, 42, 59, 0.5);
+}
+
+.kinetik-btn-dark {
+  background: #0d0d0d;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 0.875rem;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kinetik-btn-dark:hover {
+  background: #1a1a1a;
+  border-color: rgba(255, 42, 59, 0.45);
+  color: #ffffff;
+}
+
+/* Custom Black/Red Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a1a;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff2a3b;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
 @media print {
   body * {
     visibility: hidden;

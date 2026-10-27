@@ -17,6 +17,7 @@ import {
   Plus,
   Scale,
   Loader2,
+  ArrowUpRight,
 } from 'lucide-react';
 
 interface ProfileData {
@@ -108,20 +109,28 @@ export default function AppPage() {
         fetch('/api/workout-plans')
           .then((res) => (res.ok ? res.json() : null))
           .then(async (json) => {
-            const plans = json?.data || [];
-            if (plans.length > 0) {
-              // Fetch details of the active/first plan
-              const detailRes = await fetch(`/api/workout-plans/${plans[0].id}`);
+            if (json?.data && json.data.length > 0) {
+              const firstPlan = json.data[0];
+              const detailRes = await fetch(`/api/workout-plans/${firstPlan.id}`);
               if (detailRes.ok) {
                 const detailJson = await detailRes.json();
                 const planDetail = detailJson.data;
-                const firstDay = planDetail.days?.[0];
+
+                const dayIndex = new Date().getDay();
+                const days = planDetail.days || [];
+                const dayToUse =
+                  days.length > 0
+                    ? days[dayIndex % days.length] || days[0]
+                    : null;
+
+                const entriesList = dayToUse?.entries || [];
+
                 setWorkoutPlan({
                   id: planDetail.id,
                   name: planDetail.name,
-                  dayCount: planDetail.days?.length || 0,
-                  todayDayName: firstDay?.name || 'Day 1',
-                  entries: (firstDay?.entries || []).map((e: any) => ({
+                  dayCount: days.length,
+                  todayDayName: dayToUse ? dayToUse.name : 'Today',
+                  entries: entriesList.map((e: any) => ({
                     id: e.id,
                     exerciseName: e.exerciseName,
                     muscleGroup: e.muscleGroup,
@@ -140,13 +149,14 @@ export default function AppPage() {
         fetch('/api/meal-plans')
           .then((res) => (res.ok ? res.json() : null))
           .then(async (json) => {
-            const plans = json?.data || [];
-            if (plans.length > 0) {
-              const detailRes = await fetch(`/api/meal-plans/${plans[0].id}`);
+            if (json?.data && json.data.length > 0) {
+              const firstMealPlan = json.data[0];
+              const detailRes = await fetch(`/api/meal-plans/${firstMealPlan.id}`);
               if (detailRes.ok) {
                 const detailJson = await detailRes.json();
                 const plan = detailJson.data;
                 const items = plan.items || [];
+
                 const sampleFoodNames = items
                   .slice(0, 4)
                   .map((item: any) => item.food?.name)
@@ -170,7 +180,7 @@ export default function AppPage() {
           })
           .catch(() => {});
 
-        // 4. Fetch User Habits (To-Do List)
+        // 4. Fetch User Habits
         fetch('/api/habits')
           .then((res) => (res.ok ? res.json() : null))
           .then((json) => {
@@ -223,11 +233,9 @@ export default function AppPage() {
       const method = willBeCompleted ? 'POST' : 'DELETE';
       const res = await fetch(`/api/habits/${habitId}/logs/${todayDate}`, { method });
       if (!res.ok) {
-        // Revert on error
         setHabits((prev) => prev.map((h) => (h.id === habitId ? habit : h)));
       }
     } catch {
-      // Revert on network error
       setHabits((prev) => prev.map((h) => (h.id === habitId ? habit : h)));
     }
   }
@@ -264,43 +272,42 @@ export default function AppPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8 pb-12 min-w-0">
-      {/* Dashboard Hero Greeting & Quick Actions */}
-      <section className="relative overflow-hidden rounded-3xl border border-zinc-800 bg-gradient-to-b from-zinc-900/90 via-zinc-950 to-black p-5 sm:p-8 shadow-2xl">
-        <div className="pointer-events-none absolute -top-24 right-0 -z-10 h-64 w-96 rounded-full bg-white/5 blur-3xl" />
+      {/* ─── DASHBOARD HERO GREETING & STREAK BANNER ─── */}
+      <section className="relative overflow-hidden rounded-3xl border border-[#ffffff]/10 bg-gradient-to-b from-[#0d0d0d] via-[#000000] to-[#000000] p-5 sm:p-8 shadow-2xl">
+        <div className="pointer-events-none absolute -top-24 right-0 -z-10 h-64 w-96 rounded-full bg-[#ff2a3b]/10 blur-3xl" />
 
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900/80 px-2.5 py-0.5 text-[11px] font-semibold text-zinc-300">
-                <Sparkles className="h-3 w-3 text-white" />
-                Evidence-Based Member Dashboard
+              <span className="eyebrow flex items-center gap-1.5">
+                <span className="text-[#ff2a3b]">✳</span> MEMBER DASHBOARD / 001
               </span>
-              <span className="text-xs text-zinc-500 font-medium">
+              <span className="text-xs font-mono text-[#71717a]">
                 {currentDateStr || 'Today'}
               </span>
             </div>
 
-            <h1 className="mt-2 text-xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white capitalize">
-              {greeting}, {clientGreetingName}!
+            <h1 className="mt-2.5 font-display text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#ffffff] uppercase leading-[0.95]">
+              {greeting}, <em>{clientGreetingName}.</em>
             </h1>
-            <p className="mt-1 max-w-xl text-xs sm:text-sm text-zinc-400 leading-relaxed">
-              Track your calibrated splits, log IFCT lab-verified foods, maintain daily streaks, and maximize hypertrophy with sports biomechanics.
+            <p className="mt-2 max-w-xl text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+              Track calibrated splits, log IFCT lab-verified foods, maintain daily streaks, and maximize hypertrophy with sports biomechanics.
             </p>
           </div>
 
-          {/* Dynamic Client Consistency Streak Card */}
-          <div className="flex items-center gap-3.5 rounded-2xl border border-zinc-800 bg-black/60 p-3.5 sm:p-5 backdrop-blur shrink-0 self-start md:self-auto">
-            <div className="flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
-              <Flame className="h-5 w-5 sm:h-6 sm:w-6 fill-amber-400" />
+          {/* Dynamic Consistency Streak Card */}
+          <div className="flex items-center gap-4 rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d] p-4 sm:p-5 backdrop-blur shrink-0 self-start md:self-auto shadow-md">
+            <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-[#1a1a1a] border border-[#ff2a3b]/30 text-[#ff2a3b]">
+              <Flame className="h-6 w-6 sm:h-7 sm:w-7 fill-[#ff2a3b]" />
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="text-xl sm:text-2xl font-black text-white">{maxStreak}</span>
-                <span className="text-xs font-semibold text-amber-400">
+                <span className="font-display text-3xl sm:text-4xl font-black text-[#ffffff]">{maxStreak}</span>
+                <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#ff2a3b]">
                   {maxStreak === 1 ? 'Day Active' : 'Days Active'}
                 </span>
               </div>
-              <p className="text-[10px] sm:text-[11px] text-zinc-400 mt-0.5">
+              <p className="text-[10px] sm:text-[11px] font-mono tracking-wider uppercase text-[#a1a1aa] mt-0.5">
                 Current Consistency Streak
               </p>
             </div>
@@ -308,74 +315,74 @@ export default function AppPage() {
         </div>
 
         {/* Quick Action Navigation Buttons */}
-        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-zinc-800/80 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-[#ffffff]/10 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
           <Link
             href="/app/workout-plans"
-            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-xs font-semibold text-zinc-200 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-white group min-w-0"
+            className="kinetik-card px-3.5 py-3 text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ffffff] flex items-center justify-between group min-w-0"
           >
             <span className="flex items-center gap-2 truncate">
-              <Dumbbell className="h-4 w-4 text-white shrink-0" />
+              <Dumbbell className="h-4 w-4 text-[#ff2a3b] shrink-0" />
               <span className="truncate">Workout Templates</span>
             </span>
-            <ChevronRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-white shrink-0 ml-1" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#71717a] group-hover:text-[#ff2a3b] group-hover:translate-x-0.5 transition shrink-0 ml-1" />
           </Link>
 
           <Link
             href="/app/my-workout-plan"
-            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-xs font-semibold text-zinc-200 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-white group min-w-0"
+            className="kinetik-card px-3.5 py-3 text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ffffff] flex items-center justify-between group min-w-0"
           >
             <span className="flex items-center gap-2 truncate">
-              <CalendarCheck className="h-4 w-4 text-white shrink-0" />
+              <CalendarCheck className="h-4 w-4 text-[#ff2a3b] shrink-0" />
               <span className="truncate">My Workout Plan</span>
             </span>
-            <ChevronRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-white shrink-0 ml-1" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#71717a] group-hover:text-[#ff2a3b] group-hover:translate-x-0.5 transition shrink-0 ml-1" />
           </Link>
 
           <Link
             href="/app/diet-foods"
-            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-xs font-semibold text-zinc-200 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-white group min-w-0"
+            className="kinetik-card px-3.5 py-3 text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ffffff] flex items-center justify-between group min-w-0"
           >
             <span className="flex items-center gap-2 truncate">
-              <Utensils className="h-4 w-4 text-white shrink-0" />
+              <Utensils className="h-4 w-4 text-[#ff2a3b] shrink-0" />
               <span className="truncate">Diet &amp; Foods</span>
             </span>
-            <ChevronRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-white shrink-0 ml-1" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#71717a] group-hover:text-[#ff2a3b] group-hover:translate-x-0.5 transition shrink-0 ml-1" />
           </Link>
 
           <Link
             href="/app/calorie-calculator"
-            className="flex items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-xs font-semibold text-zinc-200 transition hover:border-zinc-700 hover:bg-zinc-800 hover:text-white group min-w-0"
+            className="kinetik-card px-3.5 py-3 text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ffffff] flex items-center justify-between group min-w-0"
           >
             <span className="flex items-center gap-2 truncate">
-              <Scale className="h-4 w-4 text-white shrink-0" />
+              <Scale className="h-4 w-4 text-[#ff2a3b] shrink-0" />
               <span className="truncate">Macro Calculator</span>
             </span>
-            <ChevronRight className="h-3.5 w-3.5 text-zinc-500 transition group-hover:translate-x-0.5 group-hover:text-white shrink-0 ml-1" />
+            <ChevronRight className="h-3.5 w-3.5 text-[#71717a] group-hover:text-[#ff2a3b] group-hover:translate-x-0.5 transition shrink-0 ml-1" />
           </Link>
         </div>
       </section>
 
-      {/* Two-Column Core Status Cards: Client's Customized Workout Routine & Client's Customized Nutrition */}
+      {/* ─── TWO-COLUMN CORE STATUS CARDS ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-        {/* Client's Customized Workout Routine Card */}
-        <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
+        {/* Active Workout Routine Card */}
+        <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
           <div>
-            <div className="flex items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900 px-2.5 py-0.5 text-xs font-semibold text-zinc-300 shrink-0">
-                <Dumbbell className="h-3.5 w-3.5 text-white" />
+            <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#ffffff]/10">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ffffff]/10 bg-[#000000] px-3 py-1 text-xs font-bold font-mono tracking-wider text-[#ff2a3b] uppercase shrink-0">
+                <Dumbbell className="h-3.5 w-3.5 text-[#ff2a3b]" />
                 {workoutPlan ? `Active Split (${workoutPlan.dayCount} Days)` : 'Active Workout Split'}
               </span>
-              <span className="text-xs font-mono text-zinc-400 shrink-0 truncate">
+              <span className="text-xs font-mono text-[#a1a1aa] shrink-0 truncate">
                 {workoutPlan?.todayDayName || 'Personalized Routine'}
               </span>
             </div>
 
-            <h2 className="mt-3.5 text-lg sm:text-xl font-bold text-white break-words">
+            <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-[#ffffff] break-words">
               {workoutPlan ? workoutPlan.name : 'Start Your First Workout Split'}
             </h2>
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs text-[#a1a1aa]">
               {workoutPlan
-                ? `Customized workout split with target prescriptions and volume tracking`
+                ? 'Customized workout split with target prescriptions and volume tracking'
                 : 'Select from vetted scientific splits or create your own custom exercise routine.'}
             </p>
 
@@ -385,88 +392,90 @@ export default function AppPage() {
                   workoutPlan.entries.slice(0, 3).map((entry, idx) => (
                     <div
                       key={entry.id || idx}
-                      className="flex items-center justify-between rounded-xl border border-zinc-800/80 bg-zinc-900/50 p-3 transition hover:border-zinc-700 min-w-0 gap-2"
+                      className="flex items-center justify-between rounded-xl border border-[#ffffff]/10 bg-[#000000] p-3 transition hover:border-[#ff2a3b]/40 min-w-0 gap-2"
                     >
-                      <div className="flex items-center gap-2.5 min-w-0">
-                        <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-lg bg-white/10 text-xs font-bold text-white shrink-0">
-                          {idx + 1}
+                      <div className="flex items-center gap-3 min-w-0">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-[#1a1a1a] border border-[#ffffff]/10 font-display font-black text-xs text-[#ff2a3b] shrink-0">
+                          #{idx + 1}
                         </div>
                         <div className="min-w-0">
-                          <p className="text-xs sm:text-sm font-semibold text-white truncate">
+                          <p className="text-xs sm:text-sm font-bold text-[#ffffff] truncate">
                             {entry.exerciseName}
                           </p>
-                          <p className="text-[11px] text-zinc-400 truncate">
+                          <p className="text-[11px] font-mono text-[#a1a1aa] truncate">
                             {entry.muscleGroup || 'Target Muscle'}
                           </p>
                         </div>
                       </div>
-                      <span className="text-[11px] sm:text-xs font-mono font-medium text-zinc-300 bg-black/60 px-2.5 py-1 rounded-md border border-zinc-800 shrink-0">
-                        {entry.sets || 3} × {entry.reps || 10} reps
+                      <span className="text-[11px] font-mono font-bold text-[#ff2a3b] bg-[#1a1a1a] px-2.5 py-1 rounded-md border border-[#ffffff]/10 shrink-0">
+                        {entry.sets || 3} × {entry.reps || 10} REPS
                       </span>
                     </div>
                   ))
                 ) : (
-                  <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-4 text-center text-xs text-zinc-400">
+                  <div className="rounded-xl border border-[#ffffff]/10 bg-[#000000] p-4 text-center text-xs text-[#a1a1aa]">
                     No exercises added to this split yet. Customize your routine in My Workout Plan.
                   </div>
                 )}
                 {workoutPlan.entries.length > 3 && (
-                  <p className="text-center text-[11px] text-zinc-500 pt-1">
-                    +{workoutPlan.entries.length - 3} more exercises in this session
+                  <p className="text-center text-[11px] font-mono text-[#71717a] pt-1">
+                    +{workoutPlan.entries.length - 3} MORE MOVEMENTS IN THIS SESSION
                   </p>
                 )}
               </div>
             ) : (
-              <div className="mt-4 rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/30 p-5 text-center">
-                <Dumbbell className="mx-auto h-8 w-8 text-zinc-500" />
-                <p className="mt-2 text-xs font-semibold text-white">No active workout plan yet</p>
-                <p className="mt-1 text-[11px] text-zinc-400 max-w-sm mx-auto">
+              <div className="mt-4 rounded-2xl border border-dashed border-[#ffffff]/15 bg-[#000000]/50 p-6 text-center">
+                <Dumbbell className="mx-auto h-8 w-8 text-[#71717a]" />
+                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
+                  No active workout plan yet
+                </p>
+                <p className="mt-1 text-[11px] text-[#a1a1aa] max-w-sm mx-auto">
                   Browse science-based splits or create a custom workout plan tailored to your goals.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-zinc-900 flex items-center justify-between gap-3">
+          <div className="mt-5 pt-4 border-t border-[#ffffff]/10 flex items-center justify-between gap-3">
             <Link
               href={workoutPlan ? `/app/my-workout-plan?planId=${workoutPlan.id}` : '/app/workout-plans'}
-              className="text-xs text-zinc-400 hover:text-white transition font-medium truncate"
+              className="text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ff2a3b] transition truncate"
             >
-              {workoutPlan ? 'Customize in My Workout Plan →' : 'Browse Templates →'}
+              {workoutPlan ? 'Customize Split →' : 'Browse Templates →'}
             </Link>
             <Link
               href={workoutPlan ? '/app/my-workout-plan' : '/app/workout-plans'}
-              className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-black transition hover:bg-zinc-200 active:scale-95 shadow-sm shrink-0"
+              className="kinetik-btn-lime px-4 py-2 text-xs font-extrabold shadow-sm flex items-center gap-1.5 shrink-0"
             >
               <span>{workoutPlan ? 'Manage Routine' : 'Choose Plan'}</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
 
-        {/* Client's Customized Nutrition & Macro Targets Card */}
-        <div className="rounded-3xl border border-zinc-800 bg-zinc-950 p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
+        {/* Active Nutrition & Macros Card */}
+        <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
           <div>
-            <div className="flex items-center justify-between gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900 px-2.5 py-0.5 text-xs font-semibold text-zinc-300 shrink-0">
-                <Utensils className="h-3.5 w-3.5 text-white" />
+            <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#ffffff]/10">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ffffff]/10 bg-[#000000] px-3 py-1 text-xs font-bold font-mono tracking-wider text-[#ff2a3b] uppercase shrink-0">
+                <Utensils className="h-3.5 w-3.5 text-[#ff2a3b]" />
                 {mealPlan ? `Active Diet (${mealPlan.itemCount} Foods)` : 'Diet & Nutrition'}
               </span>
-              <span className="text-xs font-mono text-emerald-400 font-semibold shrink-0">
+              <span className="text-xs font-mono text-[#ff2a3b] font-bold shrink-0">
                 {mealPlan?.targetKcal
-                  ? `Target: ${mealPlan.targetKcal.toLocaleString()} kcal`
+                  ? `TARGET: ${mealPlan.targetKcal.toLocaleString()} KCAL`
                   : mealPlan
-                  ? `${Math.round(mealPlan.calories).toLocaleString()} kcal`
-                  : 'IFCT 2017 Verified'}
+                  ? `${Math.round(mealPlan.calories).toLocaleString()} KCAL`
+                  : 'IFCT 2017 VERIFIED'}
               </span>
             </div>
 
-            <h2 className="mt-3.5 text-lg sm:text-xl font-bold text-white break-words">
+            <h2 className="mt-4 font-display text-2xl font-bold tracking-tight text-[#ffffff] break-words">
               {mealPlan ? mealPlan.name : 'Build Your Customized Diet Plan'}
             </h2>
-            <p className="mt-1 text-xs text-zinc-400">
+            <p className="mt-1 text-xs text-[#a1a1aa]">
               {mealPlan
-                ? `Gram-accurate macronutrient distribution calculated from lab-verified IFCT foods`
+                ? 'Gram-accurate macronutrient distribution calculated from lab-verified IFCT foods'
                 : 'Calculate your TDEE calories and assemble meal plans from 40+ lab-tested foods.'}
             </p>
 
@@ -474,158 +483,160 @@ export default function AppPage() {
               <div className="mt-4">
                 {/* Real Macro Breakdown Bars */}
                 <div className="grid grid-cols-3 gap-2.5 sm:gap-3">
-                  <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 text-center">
-                    <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <div className="rounded-2xl border border-[#ffffff]/10 bg-[#000000] p-3 text-center">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                       Protein
                     </span>
-                    <p className="mt-1 text-base sm:text-xl font-black text-white">
+                    <p className="mt-1 font-display text-2xl font-black text-[#ff2a3b]">
                       {Math.round(mealPlan.protein)}g
                     </p>
-                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
+                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-[#1a1a1a] overflow-hidden">
                       <div
-                        className="h-full bg-emerald-400 rounded-full"
+                        className="h-full bg-[#ff2a3b] rounded-full"
                         style={{
                           width: `${Math.min(100, Math.max(10, (mealPlan.protein * 4 / (mealPlan.calories || 1)) * 100))}%`,
                         }}
                       />
                     </div>
-                    <span className="text-[10px] text-zinc-500 mt-1 block">
+                    <span className="text-[10px] font-mono text-[#71717a] mt-1 block">
                       {Math.round(mealPlan.protein * 4)} kcal
                     </span>
                   </div>
 
-                  <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 text-center">
-                    <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <div className="rounded-2xl border border-[#ffffff]/10 bg-[#000000] p-3 text-center">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                       Carbs
                     </span>
-                    <p className="mt-1 text-base sm:text-xl font-black text-white">
+                    <p className="mt-1 font-display text-2xl font-black text-[#ffffff]">
                       {Math.round(mealPlan.carbs)}g
                     </p>
-                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
+                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-[#1a1a1a] overflow-hidden">
                       <div
-                        className="h-full bg-blue-400 rounded-full"
+                        className="h-full bg-[#9da991] rounded-full"
                         style={{
                           width: `${Math.min(100, Math.max(10, (mealPlan.carbs * 4 / (mealPlan.calories || 1)) * 100))}%`,
                         }}
                       />
                     </div>
-                    <span className="text-[10px] text-zinc-500 mt-1 block">
+                    <span className="text-[10px] font-mono text-[#71717a] mt-1 block">
                       {Math.round(mealPlan.carbs * 4)} kcal
                     </span>
                   </div>
 
-                  <div className="rounded-2xl border border-zinc-800 bg-zinc-900/60 p-3 text-center">
-                    <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-zinc-400">
+                  <div className="rounded-2xl border border-[#ffffff]/10 bg-[#000000] p-3 text-center">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                       Fats
                     </span>
-                    <p className="mt-1 text-base sm:text-xl font-black text-white">
+                    <p className="mt-1 font-display text-2xl font-black text-[#ffffff]">
                       {Math.round(mealPlan.fats)}g
                     </p>
-                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-zinc-800 overflow-hidden">
+                    <div className="mt-1.5 h-1.5 w-full rounded-full bg-[#1a1a1a] overflow-hidden">
                       <div
-                        className="h-full bg-amber-400 rounded-full"
+                        className="h-full bg-[#71717a] rounded-full"
                         style={{
                           width: `${Math.min(100, Math.max(10, (mealPlan.fats * 9 / (mealPlan.calories || 1)) * 100))}%`,
                         }}
                       />
                     </div>
-                    <span className="text-[10px] text-zinc-500 mt-1 block">
+                    <span className="text-[10px] font-mono text-[#71717a] mt-1 block">
                       {Math.round(mealPlan.fats * 9)} kcal
                     </span>
                   </div>
                 </div>
 
-                {/* Sample Client Food Items */}
-                <div className="mt-3.5 rounded-xl border border-zinc-800/80 bg-zinc-900/40 p-2.5 sm:p-3 text-xs flex items-center justify-between text-zinc-300 min-w-0">
-                  <span className="flex items-center gap-2 min-w-0 truncate">
-                    <Sparkles className="h-3.5 w-3.5 text-white shrink-0" />
+                {/* Sample Food Items */}
+                <div className="mt-3.5 rounded-xl border border-[#ffffff]/10 bg-[#000000] p-2.5 sm:p-3 text-xs flex items-center justify-between text-[#a1a1aa] min-w-0">
+                  <span className="flex items-center gap-2 min-w-0 truncate font-mono text-[11px]">
+                    <Sparkles className="h-3.5 w-3.5 text-[#ff2a3b] shrink-0" />
                     <span className="truncate">
                       {mealPlan.sampleFoods.length > 0
                         ? mealPlan.sampleFoods.join(', ')
                         : 'Custom ingredients tracked'}
                     </span>
                   </span>
-                  <span className="font-semibold text-white shrink-0 ml-2">
-                    {mealPlan.itemCount} Items
+                  <span className="font-mono font-bold text-[#ff2a3b] shrink-0 ml-2">
+                    {mealPlan.itemCount} ITEMS
                   </span>
                 </div>
               </div>
             ) : (
-              <div className="mt-4 rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/30 p-5 text-center">
-                <Utensils className="mx-auto h-8 w-8 text-zinc-500" />
-                <p className="mt-2 text-xs font-semibold text-white">No custom meal plan created yet</p>
-                <p className="mt-1 text-[11px] text-zinc-400 max-w-sm mx-auto">
+              <div className="mt-4 rounded-2xl border border-dashed border-[#ffffff]/15 bg-[#000000]/50 p-6 text-center">
+                <Utensils className="mx-auto h-8 w-8 text-[#71717a]" />
+                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
+                  No custom meal plan created yet
+                </p>
+                <p className="mt-1 text-[11px] text-[#a1a1aa] max-w-sm mx-auto">
                   Build custom daily meal plans or calculate precise energy needs with the Macro Calculator.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="mt-5 pt-4 border-t border-zinc-900 flex items-center justify-between gap-3">
+          <div className="mt-5 pt-4 border-t border-[#ffffff]/10 flex items-center justify-between gap-3">
             <Link
               href="/app/calorie-calculator"
-              className="text-xs text-zinc-400 hover:text-white transition font-medium truncate"
+              className="text-xs font-bold uppercase tracking-wider text-[#a1a1aa] hover:text-[#ff2a3b] transition truncate"
             >
               Recalculate BMR / TDEE →
             </Link>
             <Link
               href="/app/diet-foods"
-              className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-bold text-black transition hover:bg-zinc-200 active:scale-95 shadow-sm shrink-0"
+              className="kinetik-btn-lime px-4 py-2 text-xs font-extrabold shadow-sm flex items-center gap-1.5 shrink-0"
             >
               <span>{mealPlan ? 'Manage Diet' : 'Build Meal Plan'}</span>
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowUpRight className="h-3.5 w-3.5" />
             </Link>
           </div>
         </div>
       </div>
 
-      {/* Client Customized Daily Habits Interactive Checklist (To-Do List) */}
-      <section className="rounded-3xl border border-zinc-800 bg-zinc-950 p-5 sm:p-8 shadow-xl min-w-0">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      {/* ─── DAILY HABIT ROUTINE TO-DO CHECKLIST ─── */}
+      <section className="kinetik-card p-5 sm:p-8 shadow-xl min-w-0">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#ffffff]/10">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-800 bg-zinc-900 px-3 py-1 text-xs font-semibold text-zinc-300">
-                <CheckSquare className="h-3.5 w-3.5 text-white" />
-                Daily Habit Routine
+              <span className="eyebrow flex items-center gap-1.5">
+                <CheckSquare className="h-3.5 w-3.5 text-[#ff2a3b]" />
+                DAILY HABIT MOMENTUM
               </span>
-              <span className="text-xs font-semibold text-emerald-400">
-                {completedCount} of {habits.length} Completed Today
+              <span className="text-xs font-mono font-bold text-[#ff2a3b]">
+                {completedCount} OF {habits.length} COMPLETED TODAY
               </span>
             </div>
-            <h2 className="mt-2.5 text-lg sm:text-2xl font-bold text-white">
-              Consistency Builds The Physique
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl font-black text-[#ffffff] uppercase">
+              CONSISTENCY BUILDS <em>THE PHYSIQUE.</em>
             </h2>
-            <p className="mt-0.5 text-xs sm:text-sm text-zinc-400">
-              Tap any habit below to mark your progress for today. Streaks update automatically.
+            <p className="mt-1 text-xs text-[#a1a1aa]">
+              Tap any habit below to mark your check-in. Streaks update automatically.
             </p>
           </div>
 
           <Link
             href="/app/habits"
-            className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-zinc-800 bg-zinc-900 px-3.5 py-2 text-xs font-semibold text-zinc-300 transition hover:bg-zinc-800 hover:text-white self-start sm:self-auto shrink-0"
+            className="kinetik-btn-dark px-4 py-2 text-xs font-bold uppercase tracking-wider shrink-0"
           >
-            <span>Full Streak History &amp; PDF Reports</span>
-            <ChevronRight className="h-3.5 w-3.5" />
+            <span>Full History &amp; PDF</span>
+            <ChevronRight className="h-3.5 w-3.5 ml-1" />
           </Link>
         </div>
 
         {habits.length > 0 ? (
-          <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
             {habits.map((habit) => (
               <button
                 key={habit.id}
                 onClick={() => toggleHabit(habit.id)}
-                className={`flex items-start gap-3 rounded-2xl border p-3.5 sm:p-4 text-left transition-all cursor-pointer min-w-0 ${
+                className={`flex items-start gap-3.5 rounded-2xl border p-4 text-left transition-all cursor-pointer min-w-0 ${
                   habit.isCompletedToday
-                    ? 'border-emerald-500/40 bg-emerald-950/20 text-white shadow-sm'
-                    : 'border-zinc-800 bg-zinc-900/60 text-zinc-300 hover:border-zinc-700 hover:bg-zinc-900'
+                    ? 'border-[#ff2a3b]/50 bg-[#ff2a3b]/10 text-[#ffffff] shadow-[0_0_15px_rgba(255, 42, 59, 0.15)]'
+                    : 'border-[#ffffff]/10 bg-[#000000] text-[#a1a1aa] hover:border-[#ff2a3b]/30 hover:bg-[#1a1a1a]'
                 }`}
               >
                 <div
                   className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border transition mt-0.5 ${
                     habit.isCompletedToday
-                      ? 'border-emerald-400 bg-emerald-500 text-black'
-                      : 'border-zinc-700 bg-zinc-800'
+                      ? 'border-[#ff2a3b] bg-[#ff2a3b] text-white'
+                      : 'border-[#ffffff]/20 bg-[#0d0d0d]'
                   }`}
                 >
                   {habit.isCompletedToday && <Check className="h-4 w-4 stroke-[3]" />}
@@ -633,36 +644,38 @@ export default function AppPage() {
 
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-1">
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-zinc-400 truncate">
-                      {habit.currentStreak > 0 ? `${habit.currentStreak} Day Streak` : 'Daily Habit'}
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#71717a] truncate">
+                      {habit.currentStreak > 0 ? `${habit.currentStreak} DAY STREAK` : 'DAILY HABIT'}
                     </span>
                     {habit.currentStreak > 0 && (
-                      <span className="flex items-center text-[10px] font-bold text-amber-400 shrink-0">
-                        <Flame className="h-2.5 w-2.5 mr-0.5 fill-amber-400" />
+                      <span className="flex items-center text-[10px] font-mono font-bold text-[#ff2a3b] shrink-0">
+                        <Flame className="h-3 w-3 mr-0.5 fill-[#ff2a3b]" />
                         {habit.currentStreak}
                       </span>
                     )}
                   </div>
-                  <p className="text-xs sm:text-sm font-semibold text-white mt-0.5 leading-snug break-words">
+                  <p className="text-xs sm:text-sm font-bold text-[#ffffff] mt-1 leading-snug break-words">
                     {habit.name}
                   </p>
-                  <p className="text-[11px] text-zinc-500 mt-1">
-                    {habit.isCompletedToday ? '✓ Logged for today' : 'Tap to check-in'}
+                  <p className="text-[10px] font-mono text-[#ff2a3b] mt-1">
+                    {habit.isCompletedToday ? '✓ LOGGED FOR TODAY' : 'TAP TO LOG'}
                   </p>
                 </div>
               </button>
             ))}
           </div>
         ) : (
-          <div className="mt-5 rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/30 p-6 text-center">
-            <CheckSquare className="mx-auto h-8 w-8 text-zinc-500" />
-            <p className="mt-2 text-xs font-semibold text-white">No habits in your to-do list yet</p>
-            <p className="mt-1 text-[11px] text-zinc-400 max-w-sm mx-auto">
+          <div className="mt-6 rounded-2xl border border-dashed border-[#ffffff]/15 bg-[#000000]/50 p-6 text-center">
+            <CheckSquare className="mx-auto h-8 w-8 text-[#71717a]" />
+            <p className="mt-2 text-xs font-bold uppercase tracking-wider text-[#ffffff]">
+              No habits in your to-do list yet
+            </p>
+            <p className="mt-1 text-[11px] text-[#a1a1aa] max-w-sm mx-auto">
               Build daily momentum by tracking your hydration, sleep, protein intake, or workout sessions.
             </p>
             <Link
               href="/app/habits"
-              className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-white px-4 py-2 text-xs font-bold text-black transition hover:bg-zinc-200"
+              className="mt-4 kinetik-btn-lime px-4 py-2 text-xs font-bold inline-flex items-center gap-1.5"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Your First Habit</span>
@@ -671,31 +684,29 @@ export default function AppPage() {
         )}
       </section>
 
-      {/* Top 5 Ranked Biomechanical Exercises Explorer */}
-      <section className="rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-8 shadow-xl">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      {/* ─── CANONICAL EXERCISE EMG EXPLORER ─── */}
+      <section className="kinetik-card p-6 sm:p-8 shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#ffffff]/10">
           <div>
-            <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-              Sports Science Biomechanics
-            </span>
-            <h2 className="mt-1 text-xl sm:text-2xl font-bold text-white">
-              Canonical Exercise Rankings
+            <span className="eyebrow">SPORTS SCIENCE BIOMECHANICS</span>
+            <h2 className="mt-2 font-display text-2xl sm:text-3xl font-black text-[#ffffff] uppercase">
+              CANONICAL EXERCISE <em>RANKINGS.</em>
             </h2>
-            <p className="mt-1 text-xs sm:text-sm text-zinc-400">
+            <p className="mt-1 text-xs text-[#a1a1aa]">
               Peer-reviewed EMG tension ratings to select exercises with guaranteed hypertrophic return.
             </p>
           </div>
 
           {/* Muscle Switcher Tabs */}
-          <div className="flex items-center gap-1.5 rounded-2xl border border-zinc-800 bg-zinc-900/80 p-1">
+          <div className="flex items-center gap-1.5 rounded-2xl border border-[#ffffff]/10 bg-[#000000] p-1">
             {(['chest', 'back', 'legs', 'arms'] as const).map((tab) => (
               <button
                 key={tab}
                 onClick={() => setRankedTab(tab)}
-                className={`rounded-xl px-3.5 py-1.5 text-xs font-semibold capitalize transition ${
+                className={`rounded-xl px-4 py-1.5 text-xs font-bold uppercase tracking-wider transition cursor-pointer ${
                   rankedTab === tab
-                    ? 'bg-white text-black font-bold shadow-sm'
-                    : 'text-zinc-400 hover:text-white'
+                    ? 'bg-[#ff2a3b] text-white font-extrabold shadow-sm'
+                    : 'text-[#a1a1aa] hover:text-[#ffffff]'
                 }`}
               >
                 {tab}
@@ -708,30 +719,30 @@ export default function AppPage() {
           {exerciseRankings[rankedTab].map((item) => (
             <div
               key={item.rank}
-              className="flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-4 transition hover:border-zinc-700"
+              className="flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-[#ffffff]/10 bg-[#000000] p-4 transition hover:border-[#ff2a3b]/40"
             >
               <div className="flex items-start sm:items-center gap-3.5">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-white/10 font-mono font-bold text-white text-xs">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#1a1a1a] border border-[#ffffff]/10 font-display font-black text-[#ff2a3b] text-sm">
                   #{item.rank}
                 </div>
                 <div>
-                  <h3 className="text-xs sm:text-sm font-bold text-white">{item.name}</h3>
-                  <p className="text-[11px] text-zinc-400 mt-0.5">{item.tag}</p>
+                  <h3 className="text-xs sm:text-sm font-bold text-[#ffffff]">{item.name}</h3>
+                  <p className="text-[11px] text-[#a1a1aa] mt-0.5">{item.tag}</p>
                 </div>
               </div>
 
-              <div className="mt-2 sm:mt-0 flex items-center gap-1.5 self-end sm:self-center text-[10px] font-mono text-zinc-400 bg-black/60 px-2.5 py-1 rounded-md border border-zinc-800">
-                <ShieldCheck className="h-3 w-3 text-zinc-400" />
+              <div className="mt-2 sm:mt-0 flex items-center gap-1.5 self-end sm:self-center text-[10px] font-mono text-[#ff2a3b] bg-[#0d0d0d] px-2.5 py-1 rounded-md border border-[#ffffff]/10">
+                <ShieldCheck className="h-3 w-3 text-[#ff2a3b]" />
                 <span>{item.source}</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-6 pt-4 border-t border-zinc-900 text-center">
+        <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-center">
           <Link
             href="/app/workout-plans"
-            className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-zinc-300 underline underline-offset-4"
+            className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b] hover:text-[#ff4d5e] transition"
           >
             <span>Explore all 24 canonical exercises and video form tutorials in the Workout Library</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -739,30 +750,32 @@ export default function AppPage() {
         </div>
       </section>
 
-      {/* Complete Platform Navigation Cards */}
+      {/* ─── PLATFORM MODULES GRID ─── */}
       <section>
         <div className="mb-4">
-          <h2 className="text-lg font-bold text-white">Platform Modules</h2>
-          <p className="text-xs text-zinc-400">Everything you need to sculpt and optimize your body</p>
+          <span className="eyebrow">CORE ARCHITECTURE</span>
+          <h2 className="mt-1 font-display text-2xl font-black text-[#ffffff] uppercase">
+            PLATFORM <em>MODULES.</em>
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <Link
             href="/app/workout-plans"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <Dumbbell className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
                 Workout Templates
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Browse canonical exercise rankings, EMG studies, and full routine templates with video tutorials.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>Explore Templates</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
@@ -770,20 +783,20 @@ export default function AppPage() {
 
           <Link
             href="/app/my-workout-plan"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <CalendarCheck className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
                 My Workout Plan
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Build your custom daily splits with warmups, target rep ranges, load tracking, and supersets.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>Open My Plan</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
@@ -791,20 +804,20 @@ export default function AppPage() {
 
           <Link
             href="/app/diet-foods"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <Utensils className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
                 Diet &amp; Foods
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Track meals using lab-analyzed ICMR-NIN nutritional databases with gram-level portion scaling.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>View Food Database</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
@@ -812,20 +825,20 @@ export default function AppPage() {
 
           <Link
             href="/app/habits"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <CheckSquare className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
                 Habit Tracker
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Log daily check-ins in your timezone, build unbreakable streaks, and generate printable reports.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>Track Habits</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
@@ -833,20 +846,20 @@ export default function AppPage() {
 
           <Link
             href="/app/calorie-calculator"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <Scale className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
-                Calorie &amp; Macro Calculator
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                Calorie Calculator
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Mifflin-St Jeor clinical BMR/TDEE math with safety guardrails and personalized macro splits.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>Calculate Macros</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>
@@ -854,20 +867,20 @@ export default function AppPage() {
 
           <Link
             href="/app/settings"
-            className="group rounded-2xl border border-zinc-800 bg-zinc-950 p-5 transition hover:border-zinc-700 hover:bg-zinc-900/50 flex flex-col justify-between"
+            className="kinetik-card p-5 flex flex-col justify-between group"
           >
             <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black font-bold">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
                 <Award className="h-5 w-5" />
               </div>
-              <h3 className="mt-4 text-base font-bold text-white group-hover:text-zinc-200">
-                Account &amp; Settings
+              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                Settings &amp; Data
               </h3>
-              <p className="mt-1 text-xs text-zinc-400 leading-relaxed">
+              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
                 Manage profile name, application timezone, measurement units, and download full data export.
               </p>
             </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-semibold text-white">
+            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
               <span>Manage Settings</span>
               <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
             </div>

@@ -361,16 +361,16 @@ function ProgressContent(props: {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-[#000000] px-4 py-8 text-[#ffffff] sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl space-y-6">
-          <div className="h-6 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-          <div className="h-10 w-72 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
+          <div className="h-6 w-48 animate-pulse rounded bg-[#0d0d0d]" />
+          <div className="h-10 w-72 animate-pulse rounded bg-[#0d0d0d]" />
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="h-24 animate-pulse rounded-2xl bg-zinc-100 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800" />
-            <div className="h-24 animate-pulse rounded-2xl bg-zinc-100 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800" />
-            <div className="h-24 animate-pulse rounded-2xl bg-zinc-100 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800" />
+            <div className="h-24 animate-pulse rounded-2xl bg-[#0d0d0d] border border-[#ffffff]/10" />
+            <div className="h-24 animate-pulse rounded-2xl bg-[#0d0d0d] border border-[#ffffff]/10" />
+            <div className="h-24 animate-pulse rounded-2xl bg-[#0d0d0d] border border-[#ffffff]/10" />
           </div>
-          <div className="h-64 animate-pulse rounded-2xl bg-zinc-100 border border-zinc-200 dark:bg-zinc-900 dark:border-zinc-800" />
+          <div className="h-64 animate-pulse rounded-2xl bg-[#0d0d0d] border border-[#ffffff]/10" />
         </div>
       </div>
     );
@@ -378,21 +378,21 @@ function ProgressContent(props: {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl rounded-2xl border border-red-200 bg-red-50 p-8 text-center dark:border-red-900/50 dark:bg-red-950/20">
-          <AlertCircle className="mx-auto h-12 w-12 text-red-500 mb-4" />
-          <h2 className="text-xl font-bold text-red-900 dark:text-red-200">Unable to Load Workout Progress</h2>
-          <p className="mt-2 text-xs sm:text-sm text-red-700 dark:text-red-300/80">{error}</p>
+      <div className="min-h-screen bg-[#000000] px-4 py-8 text-[#ffffff] sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl rounded-2xl border border-red-500/30 bg-red-950/30 p-8 text-center">
+          <AlertCircle className="mx-auto h-12 w-12 text-red-400 mb-4" />
+          <h2 className="font-display text-xl font-bold uppercase tracking-tight text-red-200">Unable to Load Workout Progress</h2>
+          <p className="mt-2 text-xs sm:text-sm font-mono text-red-300/80">{error}</p>
           <div className="mt-6 flex justify-center gap-3">
             <Link
               href="/app/workout-plans"
-              className="rounded-xl border border-zinc-200 bg-white px-4 py-2 text-xs font-semibold text-zinc-900 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+              className="kinetik-btn-dark px-4 py-2 text-xs font-mono font-bold"
             >
               Browse Workouts
             </Link>
             <Link
               href="/app/my-workout-plan"
-              className="rounded-xl bg-zinc-900 px-4 py-2 text-xs font-semibold text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900"
+              className="kinetik-btn-lime px-4 py-2 text-xs font-extrabold uppercase"
             >
               My Workout Plan
             </Link>
@@ -403,27 +403,27 @@ function ProgressContent(props: {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 px-4 py-8 text-zinc-900 dark:text-zinc-100 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#000000] px-4 py-8 text-[#ffffff] sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-6 sm:space-y-8">
         {/* Breadcrumb Navigation */}
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 dark:border-zinc-800 pb-4">
-          <div className="flex items-center gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400">
-            <Link href="/app/workout-plans" className="transition hover:text-zinc-900 dark:hover:text-white">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#ffffff]/10 pb-4">
+          <div className="flex items-center gap-2 text-xs font-mono text-[#a1a1aa]">
+            <Link href="/app/workout-plans" className="transition hover:text-[#ff2a3b]">
               Workouts
             </Link>
             <span>/</span>
-            <Link href="/app/my-workout-plan" className="transition hover:text-zinc-900 dark:hover:text-white">
+            <Link href="/app/my-workout-plan" className="transition hover:text-[#ff2a3b]">
               My Plan
             </Link>
             <span>/</span>
-            <span className="text-zinc-900 dark:text-white font-semibold">Exercise Progress</span>
+            <span className="text-[#ffffff] font-bold">Exercise Progress</span>
           </div>
 
           <Link
             href="/app/my-workout-plan"
-            className="inline-flex items-center gap-2 text-xs font-semibold text-zinc-600 dark:text-zinc-400 transition hover:text-zinc-900 dark:hover:text-white min-h-[44px] py-2"
+            className="kinetik-btn-dark px-3 py-1.5 text-xs font-mono inline-flex items-center gap-2 min-h-[38px]"
           >
-            <ArrowLeft className="h-4 w-4" /> Back to My Plan
+            <ArrowLeft className="h-4 w-4" /> <span>Back to My Plan</span>
           </Link>
         </div>
 
@@ -431,82 +431,82 @@ function ProgressContent(props: {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <div className="flex items-center gap-3">
-              <span className="rounded-full border border-zinc-200 bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+              <span className="rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-2.5 py-0.5 text-xs font-mono font-bold uppercase text-[#ff2a3b]">
                 {exercise?.muscleGroup || 'Exercise'}
               </span>
-              <span className="text-xs text-zinc-500 dark:text-zinc-400">Independent Performance History</span>
+              <span className="text-xs font-mono text-[#a1a1aa]">Independent Performance History</span>
             </div>
-            <h1 className="mt-2 text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+            <h1 className="mt-2 font-display text-2xl sm:text-4xl font-black uppercase tracking-tight text-[#ffffff]">
               {exercise?.name || 'Exercise Progress'}
             </h1>
             {exercise?.description && (
-              <p className="mt-1 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-2xl">{exercise.description}</p>
+              <p className="mt-1 text-xs sm:text-sm text-[#a1a1aa] max-w-2xl">{exercise.description}</p>
             )}
           </div>
 
           <button
             type="button"
             onClick={handleOpenCreateModal}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-zinc-900 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 min-h-[44px]"
+            className="kinetik-btn-lime px-5 py-2.5 text-xs font-extrabold uppercase inline-flex items-center justify-center gap-2 min-h-[44px]"
           >
-            <Plus className="h-4 w-4" /> Log Performance
+            <Plus className="h-4 w-4" /> <span>Log Performance</span>
           </button>
         </div>
 
         {/* Notification Toast */}
         {actionSuccess && (
-          <div className="flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 text-xs sm:text-sm text-zinc-900 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 dark:text-white">
-            <CheckCircle2 className="h-5 w-5 text-zinc-900 dark:text-white shrink-0" />
-            <span>{actionSuccess}</span>
+          <div className="flex items-center gap-3 rounded-xl border border-[#ff2a3b]/40 bg-[#1a1a1a] px-4 py-3 text-xs sm:text-sm text-[#ff2a3b] shadow-lg">
+            <CheckCircle2 className="h-5 w-5 text-[#ff2a3b] shrink-0" />
+            <span className="font-mono font-bold">{actionSuccess}</span>
           </div>
         )}
 
         {/* Performance Summary Cards */}
         {summaryMetrics && (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Total Recorded</span>
-                <Activity className="h-4 w-4 text-zinc-900 dark:text-white" />
+            <div className="kinetik-card p-5">
+              <div className="flex items-center justify-between text-[#a1a1aa]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Total Recorded</span>
+                <Activity className="h-4 w-4 text-[#ff2a3b]" />
               </div>
-              <div className="mt-2 text-2xl font-bold text-zinc-900 dark:text-white">
+              <div className="mt-2 font-display text-3xl font-black text-[#ffffff]">
                 {summaryMetrics.totalSessions}{' '}
-                <span className="text-xs font-normal text-zinc-500">sessions</span>
+                <span className="text-xs font-mono font-normal text-[#a1a1aa]">sessions</span>
               </div>
-              <p className="mt-1 text-xs text-zinc-500">Across recorded workout dates</p>
+              <p className="mt-1 text-xs font-mono text-[#71717a]">Across recorded workout dates</p>
             </div>
 
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Latest Session</span>
-                <Calendar className="h-4 w-4 text-zinc-900 dark:text-white" />
+            <div className="kinetik-card p-5">
+              <div className="flex items-center justify-between text-[#a1a1aa]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Latest Session</span>
+                <Calendar className="h-4 w-4 text-[#ff2a3b]" />
               </div>
-              <div className="mt-2 text-lg font-bold text-zinc-900 dark:text-white">
+              <div className="mt-2 font-display text-2xl font-black text-[#ffffff]">
                 {summaryMetrics.latest.isBodyweight
                   ? 'Bodyweight'
                   : summaryMetrics.latest.externalLoad !== null
                   ? `${summaryMetrics.latest.externalLoad} ${summaryMetrics.latest.externalLoadUnit}`
                   : 'No load recorded'}
               </div>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              <p className="mt-1 text-xs font-mono text-[#a1a1aa]">
                 {summaryMetrics.latest.loggedOn}
                 {summaryMetrics.latest.setsCompleted !== null &&
                   summaryMetrics.latest.repsCompleted !== null &&
-                  ` • ${summaryMetrics.latest.setsCompleted} sets × ${summaryMetrics.latest.repsCompleted} reps`}
+                  ` • ${summaryMetrics.latest.setsCompleted}s × ${summaryMetrics.latest.repsCompleted}r`}
               </p>
             </div>
 
-            <div className="rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-              <div className="flex items-center justify-between text-zinc-500 dark:text-zinc-400">
-                <span className="text-xs font-semibold uppercase tracking-wider">Personal Best Load</span>
-                <TrendingUp className="h-4 w-4 text-zinc-900 dark:text-white" />
+            <div className="kinetik-card p-5">
+              <div className="flex items-center justify-between text-[#a1a1aa]">
+                <span className="text-xs font-mono font-bold uppercase tracking-wider">Personal Best Load</span>
+                <TrendingUp className="h-4 w-4 text-[#ff2a3b]" />
               </div>
-              <div className="mt-2 text-lg font-bold text-zinc-900 dark:text-white">
+              <div className="mt-2 font-display text-2xl font-black text-[#ff2a3b]">
                 {summaryMetrics.maxLoad
                   ? `${summaryMetrics.maxLoad.value} ${summaryMetrics.maxLoad.unit}`
                   : 'N/A'}
               </div>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
+              <p className="mt-1 text-xs font-mono text-[#a1a1aa]">
                 {summaryMetrics.maxLoad
                   ? `Achieved on ${summaryMetrics.maxLoad.date}`
                   : 'Bodyweight or no load sessions'}
@@ -516,26 +516,26 @@ function ProgressContent(props: {
         )}
 
         {/* Progress Visualization Section */}
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="kinetik-card p-6">
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#ffffff]/10 pb-4">
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-                <TrendingUp className="h-5 w-5" /> Progression Trend
+              <h2 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff] flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-[#ff2a3b]" /> <span>Progression Trend</span>
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              <p className="text-xs font-mono text-[#a1a1aa] mt-0.5">
                 Plots real historical sessions chronologically. Bodyweight entries are explicitly marked.
               </p>
             </div>
 
             {/* Unit Toggle */}
-            <div className="flex items-center gap-1.5 rounded-xl border border-zinc-200 bg-zinc-50 p-1 text-xs font-semibold dark:border-zinc-700 dark:bg-zinc-800">
+            <div className="flex items-center gap-1.5 rounded-xl border border-[#ffffff]/15 bg-[#000000] p-1 text-xs font-mono font-bold">
               <button
                 type="button"
                 onClick={() => setDisplayUnit('kg')}
                 className={`rounded-lg px-3 py-1 transition ${
                   displayUnit === 'kg'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm'
-                    : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    ? 'bg-[#ff2a3b] text-white'
+                    : 'text-[#a1a1aa] hover:text-[#ffffff]'
                 }`}
               >
                 kg
@@ -545,8 +545,8 @@ function ProgressContent(props: {
                 onClick={() => setDisplayUnit('lbs')}
                 className={`rounded-lg px-3 py-1 transition ${
                   displayUnit === 'lbs'
-                    ? 'bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-sm'
-                    : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                    ? 'bg-[#ff2a3b] text-white'
+                    : 'text-[#a1a1aa] hover:text-[#ffffff]'
                 }`}
               >
                 lbs
@@ -558,30 +558,30 @@ function ProgressContent(props: {
           <div className="mt-6">
             {logs.length === 0 ? (
               <div className="py-12 text-center">
-                <Dumbbell className="mx-auto h-12 w-12 text-zinc-400 mb-3" />
-                <h3 className="text-base font-semibold text-zinc-900 dark:text-white">No workout logs recorded yet</h3>
-                <p className="mt-1 text-xs text-zinc-500 max-w-sm mx-auto">
+                <Dumbbell className="mx-auto h-12 w-12 text-[#ff2a3b]/40 mb-3" />
+                <h3 className="font-display text-lg font-bold uppercase tracking-tight text-[#ffffff]">No workout logs recorded yet</h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] max-w-sm mx-auto">
                   Start logging your sets, reps, and external load or bodyweight workouts to track progression over time.
                 </p>
                 <button
                   type="button"
                   onClick={handleOpenCreateModal}
-                  className="mt-4 inline-flex items-center gap-2 rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 min-h-[44px]"
+                  className="mt-4 kinetik-btn-lime px-4 py-2 text-xs font-extrabold uppercase inline-flex items-center gap-2 min-h-[44px]"
                 >
-                  <Plus className="h-4 w-4" /> Record First Log
+                  <Plus className="h-4 w-4" /> <span>Record First Log</span>
                 </button>
               </div>
             ) : logs.length === 1 ? (
-              <div className="rounded-2xl border border-zinc-200 bg-zinc-50 p-8 text-center dark:border-zinc-800 dark:bg-zinc-950/60">
-                <Sparkles className="mx-auto h-10 w-10 text-zinc-900 dark:text-white mb-2" />
-                <h3 className="text-base font-semibold text-zinc-900 dark:text-white">Baseline Session Established</h3>
-                <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
+              <div className="rounded-2xl border border-[#ff2a3b]/20 bg-[#000000] p-8 text-center">
+                <Sparkles className="mx-auto h-10 w-10 text-[#ff2a3b] mb-2" />
+                <h3 className="font-display text-lg font-bold uppercase tracking-tight text-[#ffffff]">Baseline Session Established</h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] max-w-md mx-auto">
                   One workout logged on {logs[0].loggedOn}. Record at least two sessions to visualize a continuous progress line.
                 </p>
-                <div className="mt-4 inline-flex items-center gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-2 text-xs text-zinc-800 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200">
+                <div className="mt-4 inline-flex items-center gap-3 rounded-xl border border-[#ffffff]/10 bg-[#0d0d0d] px-4 py-2 text-xs font-mono text-[#ffffff]">
                   <span>
                     Performance:{' '}
-                    <strong>
+                    <strong className="text-[#ff2a3b]">
                       {logs[0].isBodyweight
                         ? 'Bodyweight'
                         : logs[0].externalLoad !== null
@@ -590,10 +590,10 @@ function ProgressContent(props: {
                     </strong>
                   </span>
                   {logs[0].setsCompleted !== null && (
-                    <span>• {logs[0].setsCompleted} sets</span>
+                    <span className="text-[#a1a1aa]">• {logs[0].setsCompleted} sets</span>
                   )}
                   {logs[0].repsCompleted !== null && (
-                    <span>• {logs[0].repsCompleted} reps</span>
+                    <span className="text-[#a1a1aa]">• {logs[0].repsCompleted} reps</span>
                   )}
                 </div>
               </div>
@@ -611,7 +611,7 @@ function ProgressContent(props: {
                     y1={chartSvg.padding.top}
                     x2={chartSvg.width - chartSvg.padding.right}
                     y2={chartSvg.padding.top}
-                    stroke="#e4e4e7"
+                    stroke="rgba(244, 246, 238, 0.1)"
                     strokeDasharray="4"
                     strokeWidth="1"
                   />
@@ -620,7 +620,7 @@ function ProgressContent(props: {
                     y1={chartSvg.height - chartSvg.padding.bottom}
                     x2={chartSvg.width - chartSvg.padding.right}
                     y2={chartSvg.height - chartSvg.padding.bottom}
-                    stroke="#e4e4e7"
+                    stroke="rgba(244, 246, 238, 0.1)"
                     strokeWidth="1"
                   />
 
@@ -628,8 +628,9 @@ function ProgressContent(props: {
                   <text
                     x={chartSvg.padding.left - 8}
                     y={chartSvg.padding.top + 4}
-                    fill="#71717a"
+                    fill="#a1a1aa"
                     fontSize="10"
+                    fontFamily="monospace"
                     textAnchor="end"
                   >
                     {Math.round(chartSvg.maxLoad)} {displayUnit}
@@ -637,8 +638,9 @@ function ProgressContent(props: {
                   <text
                     x={chartSvg.padding.left - 8}
                     y={chartSvg.height - chartSvg.padding.bottom}
-                    fill="#71717a"
+                    fill="#a1a1aa"
                     fontSize="10"
+                    fontFamily="monospace"
                     textAnchor="end"
                   >
                     {Math.round(chartSvg.minLoad)} {displayUnit}
@@ -648,11 +650,10 @@ function ProgressContent(props: {
                   <path
                     d={chartSvg.linePath}
                     fill="none"
-                    stroke="#18181b"
-                    strokeWidth="2.5"
+                    stroke="#ff2a3b"
+                    strokeWidth="3"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="dark:stroke-white"
                   />
 
                   {/* Data Points */}
@@ -664,10 +665,10 @@ function ProgressContent(props: {
                             cx={p.x}
                             cy={p.y}
                             r="5"
-                            fill="#18181b"
-                            stroke="#ffffff"
+                            fill="#ff2a3b"
+                            stroke="#000000"
                             strokeWidth="2"
-                            className="cursor-pointer transition hover:r-7 dark:fill-white dark:stroke-zinc-900"
+                            className="cursor-pointer transition hover:r-7"
                           >
                             <title>
                               {`${p.date}: ${p.load} ${displayUnit}${
@@ -679,8 +680,9 @@ function ProgressContent(props: {
                           <text
                             x={p.x}
                             y={chartSvg.height - chartSvg.padding.bottom + 16}
-                            fill="#71717a"
+                            fill="#a1a1aa"
                             fontSize="9"
+                            fontFamily="monospace"
                             textAnchor="middle"
                           >
                             {p.date.slice(5)}
@@ -688,14 +690,13 @@ function ProgressContent(props: {
                         </g>
                       );
                     } else if (p.isBodyweight) {
-                      // Distinct diamond marker for Bodyweight entries
                       const baseY = chartSvg.height - chartSvg.padding.bottom - 10;
                       return (
                         <g key={p.id}>
                           <polygon
                             points={`${p.x},${baseY - 5} ${p.x + 5},${baseY} ${p.x},${baseY + 5} ${p.x - 5},${baseY}`}
-                            fill="#71717a"
-                            stroke="#ffffff"
+                            fill="#a1a1aa"
+                            stroke="#000000"
                             strokeWidth="1.5"
                           >
                             <title>{`${p.date}: Bodyweight session`}</title>
@@ -705,6 +706,7 @@ function ProgressContent(props: {
                             y={chartSvg.height - chartSvg.padding.bottom + 16}
                             fill="#71717a"
                             fontSize="9"
+                            fontFamily="monospace"
                             textAnchor="middle"
                           >
                             BW
@@ -717,7 +719,7 @@ function ProgressContent(props: {
                 </svg>
               </div>
             ) : (
-              <div className="p-6 text-center text-xs text-zinc-500">
+              <div className="p-6 text-center text-xs font-mono text-[#a1a1aa]">
                 Historical records consist primarily of bodyweight or unweighted entries. View full details in the table below.
               </div>
             )}
@@ -725,25 +727,27 @@ function ProgressContent(props: {
         </div>
 
         {/* History Data Table Section */}
-        <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900">
-          <div className="flex items-center justify-between border-b border-zinc-100 dark:border-zinc-800 pb-4">
+        <div className="kinetik-card p-6">
+          <div className="flex items-center justify-between border-b border-[#ffffff]/10 pb-4">
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-                <Layers className="h-5 w-5" /> Detailed Session History
+              <h2 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff] flex items-center gap-2">
+                <Layers className="h-5 w-5 text-[#ff2a3b]" /> <span>Detailed Session History</span>
               </h2>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">
+              <p className="text-xs font-mono text-[#a1a1aa] mt-0.5">
                 Chronological list of all performance entries.
               </p>
             </div>
-            <span className="text-xs text-zinc-500 dark:text-zinc-400">{logs.length} entries recorded</span>
+            <span className="text-xs font-mono text-[#a1a1aa] bg-[#000000] px-2.5 py-1 rounded-lg border border-[#ffffff]/10">
+              {logs.length} entries
+            </span>
           </div>
 
           {logs.length === 0 ? (
-            <p className="py-8 text-center text-xs text-zinc-500">No session history to display.</p>
+            <p className="py-8 text-center text-xs font-mono text-[#71717a]">No session history to display.</p>
           ) : (
             <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-left text-xs text-zinc-700 dark:text-zinc-300">
-                <thead className="border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950/60 text-zinc-500 dark:text-zinc-400 font-semibold uppercase tracking-wider">
+              <table className="w-full text-left text-xs font-mono text-[#ffffff]">
+                <thead className="border-b border-[#ffffff]/10 bg-[#000000] text-[#a1a1aa] uppercase tracking-wider">
                   <tr>
                     <th scope="col" className="py-3 px-4">Date</th>
                     <th scope="col" className="py-3 px-4">Type</th>
@@ -753,31 +757,31 @@ function ProgressContent(props: {
                     <th scope="col" className="py-3 px-4 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800/60">
+                <tbody className="divide-y divide-[#ffffff]/5">
                   {logs.map((log) => (
-                    <tr key={log.id} className="transition hover:bg-zinc-50 dark:hover:bg-zinc-800/40">
-                      <td className="py-3 px-4 font-semibold text-zinc-900 dark:text-white">{log.loggedOn}</td>
+                    <tr key={log.id} className="transition hover:bg-[#1a1a1a]/20">
+                      <td className="py-3 px-4 font-bold text-[#ffffff]">{log.loggedOn}</td>
                       <td className="py-3 px-4">
                         {log.isBodyweight ? (
-                          <span className="rounded-md border border-zinc-200 bg-zinc-100 px-2 py-0.5 text-zinc-800 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
+                          <span className="rounded-md border border-[#ffffff]/10 bg-[#000000] px-2 py-0.5 text-[#a1a1aa]">
                             Bodyweight
                           </span>
                         ) : log.externalLoad !== null ? (
-                          <span className="rounded-md border border-zinc-900/10 bg-zinc-900 text-white px-2 py-0.5 dark:bg-white dark:text-zinc-900">
+                          <span className="rounded-md border border-[#ff2a3b]/30 bg-[#1a1a1a] text-[#ff2a3b] font-bold px-2 py-0.5">
                             External Load
                           </span>
                         ) : (
-                          <span className="rounded-md border border-zinc-200 bg-zinc-100 px-2 py-0.5 text-zinc-500 dark:border-zinc-800 dark:bg-zinc-800 dark:text-zinc-400">
+                          <span className="rounded-md border border-[#ffffff]/10 bg-[#000000] px-2 py-0.5 text-[#71717a]">
                             No Load
                           </span>
                         )}
                       </td>
-                      <td className="py-3 px-4 font-medium">
+                      <td className="py-3 px-4 font-bold text-[#ff2a3b]">
                         {log.externalLoad !== null
                           ? `${log.externalLoad} ${log.externalLoadUnit}`
                           : '—'}
                       </td>
-                      <td className="py-3 px-4">
+                      <td className="py-3 px-4 text-[#ffffff]">
                         {log.setsCompleted !== null || log.repsCompleted !== null ? (
                           <span>
                             {log.setsCompleted !== null ? `${log.setsCompleted} sets` : '—'} ×{' '}
@@ -787,14 +791,14 @@ function ProgressContent(props: {
                           '—'
                         )}
                       </td>
-                      <td className="py-3 px-4 text-zinc-500 max-w-xs truncate">
+                      <td className="py-3 px-4 text-[#a1a1aa] max-w-xs truncate">
                         {log.notes || '—'}
                       </td>
                       <td className="py-3 px-4 text-right space-x-1">
                         <button
                           type="button"
                           onClick={() => handleOpenEditModal(log)}
-                          className="rounded-lg p-1.5 text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 dark:hover:text-white dark:hover:bg-zinc-800 transition"
+                          className="rounded-lg p-1.5 text-[#a1a1aa] hover:text-[#ff2a3b] hover:bg-[#000000] transition"
                           title="Edit log"
                         >
                           <Edit2 className="h-4 w-4" />
@@ -802,7 +806,7 @@ function ProgressContent(props: {
                         <button
                           type="button"
                           onClick={() => setDeleteConfirmId(log.id)}
-                          className="rounded-lg p-1.5 text-zinc-400 hover:text-red-600 hover:bg-red-50 dark:hover:text-red-400 dark:hover:bg-red-950/30 transition"
+                          className="rounded-lg p-1.5 text-[#a1a1aa] hover:text-red-400 hover:bg-[#000000] transition"
                           title="Delete log"
                         >
                           <Trash2 className="h-4 w-4" />
@@ -818,17 +822,17 @@ function ProgressContent(props: {
 
         {/* Modal: Log Workout (Bottom-sheet on mobile) */}
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-            <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 max-h-[90vh] overflow-y-auto">
-              <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-700 sm:hidden" />
-              <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-3">
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+              <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
+              <div className="flex items-center justify-between border-b border-[#ffffff]/10 pb-3">
+                <h3 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff]">
                   {editingLogId ? 'Edit Workout Session' : 'Record Workout Session'}
                 </h3>
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="rounded-lg p-1 text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
+                  className="rounded-lg p-1 text-[#a1a1aa] hover:text-[#ffffff]"
                 >
                   <X className="h-5 w-5" />
                 </button>
@@ -836,14 +840,14 @@ function ProgressContent(props: {
 
               <form onSubmit={handleSubmitLog} className="mt-4 space-y-4">
                 {formErrors.form && (
-                  <div className="rounded-xl bg-red-50 border border-red-200 p-3 text-xs text-red-700 dark:bg-red-950/50 dark:border-red-800 dark:text-red-200">
+                  <div className="rounded-xl bg-red-950/60 border border-red-500/40 p-3 text-xs font-mono text-red-300">
                     {formErrors.form}
                   </div>
                 )}
 
                 {/* Date Input */}
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                     Workout Date (YYYY-MM-DD)
                   </label>
                   <input
@@ -851,24 +855,24 @@ function ProgressContent(props: {
                     required
                     value={formDate}
                     onChange={(e) => setFormDate(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white min-h-[44px]"
+                    className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                   />
                   {formErrors.loggedOn && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.loggedOn}</p>
+                    <p className="mt-1 text-xs font-mono text-red-400">{formErrors.loggedOn}</p>
                   )}
                 </div>
 
                 {/* Resistance Mode Selector */}
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">Load Classification</label>
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">Load Classification</label>
                   <div className="mt-1 grid grid-cols-3 gap-2">
                     <button
                       type="button"
                       onClick={() => setFormMode('load')}
-                      className={`rounded-xl py-2 px-3 text-xs font-semibold border transition min-h-[44px] ${
+                      className={`rounded-xl py-2 px-3 text-xs font-mono font-bold uppercase border transition min-h-[44px] ${
                         formMode === 'load'
-                          ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                          : 'border-zinc-200 bg-zinc-50 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+                          ? 'border-[#ff2a3b] bg-[#1a1a1a] text-[#ff2a3b]'
+                          : 'border-[#ffffff]/15 bg-[#000000] text-[#a1a1aa] hover:border-[#ffffff]/30'
                       }`}
                     >
                       External Load
@@ -876,10 +880,10 @@ function ProgressContent(props: {
                     <button
                       type="button"
                       onClick={() => setFormMode('bodyweight')}
-                      className={`rounded-xl py-2 px-3 text-xs font-semibold border transition min-h-[44px] ${
+                      className={`rounded-xl py-2 px-3 text-xs font-mono font-bold uppercase border transition min-h-[44px] ${
                         formMode === 'bodyweight'
-                          ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                          : 'border-zinc-200 bg-zinc-50 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+                          ? 'border-[#ff2a3b] bg-[#1a1a1a] text-[#ff2a3b]'
+                          : 'border-[#ffffff]/15 bg-[#000000] text-[#a1a1aa] hover:border-[#ffffff]/30'
                       }`}
                     >
                       Bodyweight
@@ -887,10 +891,10 @@ function ProgressContent(props: {
                     <button
                       type="button"
                       onClick={() => setFormMode('none')}
-                      className={`rounded-xl py-2 px-3 text-xs font-semibold border transition min-h-[44px] ${
+                      className={`rounded-xl py-2 px-3 text-xs font-mono font-bold uppercase border transition min-h-[44px] ${
                         formMode === 'none'
-                          ? 'border-zinc-900 bg-zinc-900 text-white dark:border-white dark:bg-white dark:text-zinc-900'
-                          : 'border-zinc-200 bg-zinc-50 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300'
+                          ? 'border-[#ff2a3b] bg-[#1a1a1a] text-[#ff2a3b]'
+                          : 'border-[#ffffff]/15 bg-[#000000] text-[#a1a1aa] hover:border-[#ffffff]/30'
                       }`}
                     >
                       No Load
@@ -902,7 +906,7 @@ function ProgressContent(props: {
                 {formMode === 'load' && (
                   <div className="grid grid-cols-3 gap-3">
                     <div className="col-span-2">
-                      <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                      <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                         Weight / Load
                       </label>
                       <input
@@ -912,24 +916,24 @@ function ProgressContent(props: {
                         placeholder="e.g. 25"
                         value={formLoad}
                         onChange={(e) => setFormLoad(e.target.value)}
-                        className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white min-h-[44px]"
+                        className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                       />
                       {formErrors.externalLoad && (
-                        <p className="mt-1 text-xs text-red-500">{formErrors.externalLoad}</p>
+                        <p className="mt-1 text-xs font-mono text-red-400">{formErrors.externalLoad}</p>
                       )}
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">Unit</label>
+                      <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">Unit</label>
                       <select
                         value={formUnit}
                         onChange={(e) => setFormUnit(e.target.value as 'kg' | 'lbs')}
-                        className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white min-h-[44px]"
+                        className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                       >
                         <option value="kg">kg</option>
                         <option value="lbs">lbs</option>
                       </select>
                       {formErrors.externalLoadUnit && (
-                        <p className="mt-1 text-xs text-red-500">{formErrors.externalLoadUnit}</p>
+                        <p className="mt-1 text-xs font-mono text-red-400">{formErrors.externalLoadUnit}</p>
                       )}
                     </div>
                   </div>
@@ -938,7 +942,7 @@ function ProgressContent(props: {
                 {/* Sets & Reps Inputs */}
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                       Completed Sets (1–20)
                     </label>
                     <input
@@ -948,14 +952,14 @@ function ProgressContent(props: {
                       placeholder="Optional"
                       value={formSets}
                       onChange={(e) => setFormSets(e.target.value)}
-                      className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white min-h-[44px]"
+                      className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                     />
                     {formErrors.setsCompleted && (
-                      <p className="mt-1 text-xs text-red-500">{formErrors.setsCompleted}</p>
+                      <p className="mt-1 text-xs font-mono text-red-400">{formErrors.setsCompleted}</p>
                     )}
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                    <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                       Completed Reps (1–200)
                     </label>
                     <input
@@ -965,17 +969,17 @@ function ProgressContent(props: {
                       placeholder="Optional"
                       value={formReps}
                       onChange={(e) => setFormReps(e.target.value)}
-                      className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white min-h-[44px]"
+                      className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
                     />
                     {formErrors.repsCompleted && (
-                      <p className="mt-1 text-xs text-red-500">{formErrors.repsCompleted}</p>
+                      <p className="mt-1 text-xs font-mono text-red-400">{formErrors.repsCompleted}</p>
                     )}
                   </div>
                 </div>
 
                 {/* Notes Input */}
                 <div>
-                  <label className="block text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                  <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                     Session Notes (max 500 chars)
                   </label>
                   <textarea
@@ -984,26 +988,26 @@ function ProgressContent(props: {
                     placeholder="Optional form notes, RPE, or tempo..."
                     value={formNotes}
                     onChange={(e) => setFormNotes(e.target.value)}
-                    className="mt-1 w-full rounded-xl border border-zinc-200 bg-white px-3.5 py-2.5 text-xs text-zinc-900 focus:border-zinc-900 focus:outline-none dark:border-zinc-700 dark:bg-zinc-800 dark:text-white"
+                    className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs text-[#ffffff] placeholder-[#71717a] focus:border-[#ff2a3b] focus:outline-none"
                   />
                   {formErrors.notes && (
-                    <p className="mt-1 text-xs text-red-500">{formErrors.notes}</p>
+                    <p className="mt-1 text-xs font-mono text-red-400">{formErrors.notes}</p>
                   )}
                 </div>
 
                 {/* Modal Footer */}
-                <div className="flex justify-end gap-3 pt-3 border-t border-zinc-200 dark:border-zinc-800">
+                <div className="flex justify-end gap-3 pt-3 border-t border-[#ffffff]/10">
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 min-h-[44px]"
+                    className="kinetik-btn-dark px-4 py-2.5 text-xs font-mono font-bold min-h-[44px]"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="rounded-xl bg-zinc-900 px-4 py-2.5 text-xs font-semibold text-white hover:bg-zinc-800 active:scale-95 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100 disabled:opacity-50 min-h-[44px]"
+                    className="kinetik-btn-lime px-4 py-2.5 text-xs font-extrabold uppercase disabled:opacity-50 min-h-[44px]"
                   >
                     {submitting ? 'Saving...' : editingLogId ? 'Save Changes' : 'Record Entry'}
                   </button>
@@ -1015,19 +1019,19 @@ function ProgressContent(props: {
 
         {/* Modal: Confirm Delete */}
         {deleteConfirmId && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/60 p-0 sm:p-4 backdrop-blur-sm">
-            <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-zinc-200 bg-white p-6 shadow-2xl dark:border-zinc-800 dark:bg-zinc-900 text-center">
-              <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-zinc-300 dark:bg-zinc-700 sm:hidden" />
-              <AlertCircle className="mx-auto h-10 w-10 text-red-500 mb-2" />
-              <h3 className="text-base font-bold text-zinc-900 dark:text-white">Delete Workout Record?</h3>
-              <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
+          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-red-500/30 bg-[#0d0d0d] p-6 shadow-2xl text-center">
+              <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
+              <AlertCircle className="mx-auto h-10 w-10 text-red-400 mb-2" />
+              <h3 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff]">Delete Workout Record?</h3>
+              <p className="mt-2 text-xs font-mono text-[#a1a1aa]">
                 Are you sure you want to permanently delete this workout log? This action cannot be undone.
               </p>
               <div className="mt-5 flex justify-center gap-3">
                 <button
                   type="button"
                   onClick={() => setDeleteConfirmId(null)}
-                  className="rounded-xl border border-zinc-200 bg-white px-4 py-2.5 text-xs font-semibold text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-800 dark:text-zinc-300 min-h-[44px]"
+                  className="kinetik-btn-dark px-4 py-2.5 text-xs font-mono font-bold min-h-[44px]"
                 >
                   Cancel
                 </button>
@@ -1035,7 +1039,7 @@ function ProgressContent(props: {
                   type="button"
                   disabled={submitting}
                   onClick={() => handleDeleteLog(deleteConfirmId)}
-                  className="rounded-xl bg-red-600 px-4 py-2.5 text-xs font-semibold text-white hover:bg-red-700 active:scale-95 disabled:opacity-50 min-h-[44px]"
+                  className="rounded-xl bg-red-600 px-4 py-2.5 text-xs font-mono font-bold text-white hover:bg-red-700 active:scale-95 disabled:opacity-50 min-h-[44px]"
                 >
                   {submitting ? 'Deleting...' : 'Confirm Delete'}
                 </button>
@@ -1054,7 +1058,7 @@ export default function WorkoutProgressPage(props: {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center text-zinc-500">
+        <div className="min-h-screen bg-[#000000] flex items-center justify-center text-[#a1a1aa] font-mono text-xs">
           Loading workout progress...
         </div>
       }

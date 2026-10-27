@@ -164,26 +164,29 @@ export default function CalorieCalculatorPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 pb-12">
       {/* Header Banner */}
-      <div className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 md:p-8">
+      <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8">
         <div className="flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-orange-500/10 text-orange-600 dark:bg-orange-500/20 dark:text-orange-400">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#1a1a1a] border border-[#ff2a3b]/30 text-[#ff2a3b]">
             <Flame className="h-6 w-6" />
           </div>
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-              Calorie Calculator
+            <div className="eyebrow flex items-center gap-2 text-xs">
+              <Activity className="h-3.5 w-3.5 text-[#ff2a3b]" /> METABOLIC EXPENDITURE &amp; TDEE
+            </div>
+            <h1 className="font-display text-3xl font-extrabold uppercase tracking-tight text-[#ffffff] md:text-4xl">
+              CALORIE ARCHITECTURE
             </h1>
-            <p className="text-sm text-zinc-400 md:text-base">
-              Calculate your basal metabolic rate (BMR), maintenance energy (TDEE), and daily nutrition targets using the scientific Mifflin–St Jeor equation.
+            <p className="text-xs sm:text-sm text-[#ffffff]/60 max-w-2xl font-light">
+              Calculate your basal metabolic rate (BMR), total daily energy expenditure (TDEE), and precision macronutrient caloric targets using the Mifflin–St Jeor formula.
             </p>
           </div>
         </div>
 
         {/* Notice & Adult-Only Banner */}
-        <div className="mt-6 flex items-start gap-3 rounded-xl border border-blue-200 bg-blue-50/70 p-4 text-xs text-blue-900 dark:border-blue-900/50 dark:bg-blue-950/40 dark:text-blue-300 md:text-sm">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
+        <div className="mt-6 flex items-start gap-3 rounded-xl border border-[#1b3d27]/70 bg-[#000000]/60 p-4 text-xs text-[#ffffff]/70">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-[#ff2a3b]" />
           <p>
-            <strong>Adult Fitness Tool:</strong> This calculator provides educational energy estimates for adults aged 18 and older. These calculations are mathematical estimates, not individualized medical prescriptions.
+            <strong className="text-[#ffffff] uppercase tracking-wide">Adult Fitness Protocol:</strong> This tool provides educational baseline energy estimates for adults aged 18 and older. Calculations represent biological mathematical estimates, not individualized medical prescriptions.
           </p>
         </div>
       </div>
@@ -194,20 +197,20 @@ export default function CalorieCalculatorPage() {
         <div className={result ? 'lg:col-span-7' : 'lg:col-span-12'}>
           <form
             onSubmit={handleCalculate}
-            className="space-y-6 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-900 md:p-8"
+            className="kinetik-card space-y-6 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8"
             noValidate
           >
-            <h2 className="text-lg font-semibold text-zinc-900 dark:text-white">
-              Your Measurements & Goals
+            <h2 className="font-display text-xl font-bold uppercase tracking-wide text-[#ffffff]">
+              YOUR MEASUREMENTS &amp; GOALS
             </h2>
 
             {/* Error Announcement */}
             {serverError && (
               <div
                 role="alert"
-                className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-300"
+                className="flex items-start gap-3 rounded-xl border border-rose-500/40 bg-rose-950/20 p-4 text-xs text-rose-300"
               >
-                <AlertTriangle className="h-5 w-5 shrink-0 text-red-600 dark:text-red-400" />
+                <AlertTriangle className="h-5 w-5 shrink-0 text-rose-400" />
                 <span>{serverError}</span>
               </div>
             )}
@@ -216,9 +219,9 @@ export default function CalorieCalculatorPage() {
             <div className="space-y-2">
               <label
                 htmlFor="calculator-age"
-                className="block text-sm font-medium text-zinc-900 dark:text-zinc-200"
+                className="block text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70"
               >
-                Age <span className="text-zinc-400">(years, 18–120)</span>
+                Age <span className="text-[#ffffff]/40 font-mono">(years, 18–120)</span>
               </label>
               <input
                 id="calculator-age"
@@ -231,14 +234,14 @@ export default function CalorieCalculatorPage() {
                 aria-describedby={clientErrors.age ? 'age-error' : undefined}
                 aria-invalid={Boolean(clientErrors.age)}
                 required
-                className={`w-full rounded-xl border bg-zinc-50 px-4 py-2.5 text-zinc-900 transition focus:bg-white focus:outline-none focus:ring-2 dark:bg-zinc-800/50 dark:text-white dark:focus:bg-zinc-800 ${
+                className={`w-full rounded-xl border bg-[#000000] px-4 py-2.5 text-xs text-[#ffffff] transition focus:outline-none focus:ring-1 min-h-[44px] ${
                   clientErrors.age
-                    ? 'border-red-500 focus:ring-red-500'
-                    : 'border-zinc-300 focus:border-orange-500 focus:ring-orange-500/20 dark:border-zinc-700'
+                    ? 'border-rose-500 focus:ring-rose-500'
+                    : 'border-[#1b3d27] focus:border-[#ff2a3b] focus:ring-[#ff2a3b]'
                 }`}
               />
               {clientErrors.age && (
-                <p id="age-error" className="text-xs text-red-600 dark:text-red-400">
+                <p id="age-error" className="text-xs text-rose-400">
                   {clientErrors.age}
                 </p>
               )}
@@ -251,19 +254,19 @@ export default function CalorieCalculatorPage() {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="calculator-height"
-                    className="flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-200"
+                    className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70"
                   >
-                    <Ruler className="h-4 w-4 text-zinc-500" />
+                    <Ruler className="h-4 w-4 text-[#ff2a3b]" />
                     Height
                   </label>
-                  <div className="inline-flex rounded-lg border border-zinc-200 p-0.5 text-xs dark:border-zinc-700">
+                  <div className="inline-flex rounded-lg border border-[#1b3d27] bg-[#000000] p-0.5 text-xs font-mono">
                     <button
                       type="button"
                       onClick={() => setHeightUnit('cm')}
-                      className={`rounded px-2 py-0.5 font-medium transition ${
+                      className={`rounded px-2 py-0.5 font-bold transition ${
                         heightUnit === 'cm'
-                          ? 'bg-orange-500 text-white shadow-xs'
-                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                          ? 'bg-[#ff2a3b] text-white shadow-xs'
+                          : 'text-[#ffffff]/50 hover:text-[#ffffff]'
                       }`}
                     >
                       cm
@@ -271,10 +274,10 @@ export default function CalorieCalculatorPage() {
                     <button
                       type="button"
                       onClick={() => setHeightUnit('in')}
-                      className={`rounded px-2 py-0.5 font-medium transition ${
+                      className={`rounded px-2 py-0.5 font-bold transition ${
                         heightUnit === 'in'
-                          ? 'bg-orange-500 text-white shadow-xs'
-                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                          ? 'bg-[#ff2a3b] text-white shadow-xs'
+                          : 'text-[#ffffff]/50 hover:text-[#ffffff]'
                       }`}
                     >
                       in
@@ -291,18 +294,18 @@ export default function CalorieCalculatorPage() {
                   aria-invalid={Boolean(clientErrors.height)}
                   required
                   placeholder={heightUnit === 'cm' ? '180' : '71'}
-                  className={`w-full rounded-xl border bg-zinc-50 px-4 py-2.5 text-zinc-900 transition focus:bg-white focus:outline-none focus:ring-2 dark:bg-zinc-800/50 dark:text-white dark:focus:bg-zinc-800 ${
+                  className={`w-full rounded-xl border bg-[#000000] px-4 py-2.5 text-xs text-[#ffffff] transition focus:outline-none focus:ring-1 min-h-[44px] ${
                     clientErrors.height
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'border-zinc-300 focus:border-orange-500 focus:ring-orange-500/20 dark:border-zinc-700'
+                      ? 'border-rose-500 focus:ring-rose-500'
+                      : 'border-[#1b3d27] focus:border-[#ff2a3b] focus:ring-[#ff2a3b]'
                   }`}
                 />
                 {clientErrors.height && (
-                  <p id="height-error" className="text-xs text-red-600 dark:text-red-400">
+                  <p id="height-error" className="text-xs text-rose-400">
                     {clientErrors.height}
                   </p>
                 )}
-                <p className="text-xs text-zinc-500">
+                <p className="text-[10px] font-mono text-[#ffffff]/40">
                   {heightUnit === 'cm' ? 'Accepted: 100–250 cm' : 'Accepted: 39.4–98.4 inches'}
                 </p>
               </div>
@@ -312,19 +315,19 @@ export default function CalorieCalculatorPage() {
                 <div className="flex items-center justify-between">
                   <label
                     htmlFor="calculator-weight"
-                    className="flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-200"
+                    className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70"
                   >
-                    <Scale className="h-4 w-4 text-zinc-500" />
+                    <Scale className="h-4 w-4 text-[#ff2a3b]" />
                     Weight
                   </label>
-                  <div className="inline-flex rounded-lg border border-zinc-200 p-0.5 text-xs dark:border-zinc-700">
+                  <div className="inline-flex rounded-lg border border-[#1b3d27] bg-[#000000] p-0.5 text-xs font-mono">
                     <button
                       type="button"
                       onClick={() => setWeightUnit('kg')}
-                      className={`rounded px-2 py-0.5 font-medium transition ${
+                      className={`rounded px-2 py-0.5 font-bold transition ${
                         weightUnit === 'kg'
-                          ? 'bg-orange-500 text-white shadow-xs'
-                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                          ? 'bg-[#ff2a3b] text-white shadow-xs'
+                          : 'text-[#ffffff]/50 hover:text-[#ffffff]'
                       }`}
                     >
                       kg
@@ -332,10 +335,10 @@ export default function CalorieCalculatorPage() {
                     <button
                       type="button"
                       onClick={() => setWeightUnit('lbs')}
-                      className={`rounded px-2 py-0.5 font-medium transition ${
+                      className={`rounded px-2 py-0.5 font-bold transition ${
                         weightUnit === 'lbs'
-                          ? 'bg-orange-500 text-white shadow-xs'
-                          : 'text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white'
+                          ? 'bg-[#ff2a3b] text-white shadow-xs'
+                          : 'text-[#ffffff]/50 hover:text-[#ffffff]'
                       }`}
                     >
                       lbs
@@ -352,18 +355,18 @@ export default function CalorieCalculatorPage() {
                   aria-invalid={Boolean(clientErrors.weight)}
                   required
                   placeholder={weightUnit === 'kg' ? '90' : '198'}
-                  className={`w-full rounded-xl border bg-zinc-50 px-4 py-2.5 text-zinc-900 transition focus:bg-white focus:outline-none focus:ring-2 dark:bg-zinc-800/50 dark:text-white dark:focus:bg-zinc-800 ${
+                  className={`w-full rounded-xl border bg-[#000000] px-4 py-2.5 text-xs text-[#ffffff] transition focus:outline-none focus:ring-1 min-h-[44px] ${
                     clientErrors.weight
-                      ? 'border-red-500 focus:ring-red-500'
-                      : 'border-zinc-300 focus:border-orange-500 focus:ring-orange-500/20 dark:border-zinc-700'
+                      ? 'border-rose-500 focus:ring-rose-500'
+                      : 'border-[#1b3d27] focus:border-[#ff2a3b] focus:ring-[#ff2a3b]'
                   }`}
                 />
                 {clientErrors.weight && (
-                  <p id="weight-error" className="text-xs text-red-600 dark:text-red-400">
+                  <p id="weight-error" className="text-xs text-rose-400">
                     {clientErrors.weight}
                   </p>
                 )}
-                <p className="text-xs text-zinc-500">
+                <p className="text-[10px] font-mono text-[#ffffff]/40">
                   {weightUnit === 'kg' ? 'Accepted: 25–350 kg' : 'Accepted: 55.1–771.6 lbs'}
                 </p>
               </div>
@@ -372,18 +375,18 @@ export default function CalorieCalculatorPage() {
             {/* Formula Coefficient Selection */}
             <div className="space-y-2">
               <fieldset>
-                <legend className="text-sm font-medium text-zinc-900 dark:text-zinc-200">
+                <legend className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
                   Calculation Formula Coefficient
                 </legend>
-                <p className="mt-0.5 text-xs text-zinc-500 dark:text-zinc-400">
-                  The Mifflin–St Jeor formula uses a mathematical coefficient parameter. Select the formula parameter that best reflects your metabolic baseline. (This is a mathematical parameter, not a declaration of gender identity).
+                <p className="mt-0.5 text-xs text-[#ffffff]/50 font-light">
+                  The Mifflin–St Jeor formula utilizes an empirical metabolic baseline parameter. (This is a mathematical metabolic coefficient, not a declaration of gender identity).
                 </p>
                 <div className="mt-3 grid gap-3 sm:grid-cols-2">
                   <label
-                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition ${
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-all ${
                       bmrVariant === 'plus_5'
-                        ? 'border-orange-500 bg-orange-50/40 dark:border-orange-500 dark:bg-orange-950/20'
-                        : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700'
+                        ? 'border-[#ff2a3b] bg-[#1a1a1a] shadow-[0_0_12px_rgba(255, 42, 59, 0.1)]'
+                        : 'border-[#1b3d27] bg-[#000000]/60 hover:border-[#ff2a3b]/40'
                     }`}
                   >
                     <input
@@ -392,23 +395,23 @@ export default function CalorieCalculatorPage() {
                       value="plus_5"
                       checked={bmrVariant === 'plus_5'}
                       onChange={() => setBmrVariant('plus_5')}
-                      className="mt-1 text-orange-600 focus:ring-orange-500"
+                      className="mt-1 accent-[#ff2a3b]"
                     />
                     <div className="space-y-0.5">
-                      <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                      <span className="font-display text-sm font-bold uppercase tracking-wide text-[#ffffff]">
                         Coefficient +5
                       </span>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                      <p className="text-xs text-[#ffffff]/60">
                         Conventional male-equation baseline parameter.
                       </p>
                     </div>
                   </label>
 
                   <label
-                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition ${
+                    className={`flex cursor-pointer items-start gap-3 rounded-xl border p-3.5 transition-all ${
                       bmrVariant === 'minus_161'
-                        ? 'border-orange-500 bg-orange-50/40 dark:border-orange-500 dark:bg-orange-950/20'
-                        : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700'
+                        ? 'border-[#ff2a3b] bg-[#1a1a1a] shadow-[0_0_12px_rgba(255, 42, 59, 0.1)]'
+                        : 'border-[#1b3d27] bg-[#000000]/60 hover:border-[#ff2a3b]/40'
                     }`}
                   >
                     <input
@@ -417,13 +420,13 @@ export default function CalorieCalculatorPage() {
                       value="minus_161"
                       checked={bmrVariant === 'minus_161'}
                       onChange={() => setBmrVariant('minus_161')}
-                      className="mt-1 text-orange-600 focus:ring-orange-500"
+                      className="mt-1 accent-[#ff2a3b]"
                     />
                     <div className="space-y-0.5">
-                      <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                      <span className="font-display text-sm font-bold uppercase tracking-wide text-[#ffffff]">
                         Coefficient −161
                       </span>
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                      <p className="text-xs text-[#ffffff]/60">
                         Conventional female-equation baseline parameter.
                       </p>
                     </div>
@@ -435,9 +438,9 @@ export default function CalorieCalculatorPage() {
             {/* Activity Level Selector */}
             <div className="space-y-2">
               <fieldset>
-                <legend className="flex items-center gap-1.5 text-sm font-medium text-zinc-900 dark:text-zinc-200">
-                  <Activity className="h-4 w-4 text-zinc-500" />
-                  Activity Level
+                <legend className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
+                  <Activity className="h-4 w-4 text-[#ff2a3b]" />
+                  Activity Multiplier
                 </legend>
                 <div className="mt-2 space-y-2">
                   {[
@@ -464,15 +467,15 @@ export default function CalorieCalculatorPage() {
                     {
                       id: 'extra_active',
                       label: 'Extra Active (1.9×)',
-                      desc: 'Very intense daily exercise or physically demanding job',
+                      desc: 'Very intense daily athletic training or physically demanding trade',
                     },
                   ].map((level) => (
                     <label
                       key={level.id}
-                      className={`flex cursor-pointer items-center justify-between rounded-xl border p-3 transition ${
+                      className={`flex cursor-pointer items-center justify-between rounded-xl border p-3 transition-all ${
                         activityLevel === level.id
-                          ? 'border-orange-500 bg-orange-50/40 dark:border-orange-500 dark:bg-orange-950/20'
-                          : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700'
+                          ? 'border-[#ff2a3b] bg-[#1a1a1a] shadow-[0_0_12px_rgba(255, 42, 59, 0.08)]'
+                          : 'border-[#1b3d27] bg-[#000000]/50 hover:border-[#ff2a3b]/40'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -482,13 +485,13 @@ export default function CalorieCalculatorPage() {
                           value={level.id}
                           checked={activityLevel === level.id}
                           onChange={() => setActivityLevel(level.id as ActivityLevel)}
-                          className="text-orange-600 focus:ring-orange-500"
+                          className="accent-[#ff2a3b]"
                         />
                         <div>
-                          <div className="text-sm font-medium text-zinc-900 dark:text-white">
+                          <div className="font-display text-sm font-bold uppercase tracking-wide text-[#ffffff]">
                             {level.label}
                           </div>
-                          <div className="text-xs text-zinc-500 dark:text-zinc-400">
+                          <div className="text-xs text-[#ffffff]/60">
                             {level.desc}
                           </div>
                         </div>
@@ -502,14 +505,14 @@ export default function CalorieCalculatorPage() {
             {/* Goal Selector */}
             <div className="space-y-2">
               <fieldset>
-                <legend className="text-sm font-medium text-zinc-900 dark:text-zinc-200">
-                  Primary Fitness Goal
+                <legend className="text-xs font-semibold uppercase tracking-wider text-[#ffffff]/70">
+                  Primary Caloric Target Goal
                 </legend>
                 <div className="mt-2 grid gap-3 sm:grid-cols-3">
                   {[
                     {
                       id: 'lose',
-                      title: 'Weight Loss',
+                      title: 'Fat Loss',
                       badge: '−15% Deficit',
                       desc: 'Sustainable fat reduction',
                     },
@@ -517,25 +520,25 @@ export default function CalorieCalculatorPage() {
                       id: 'maintain',
                       title: 'Maintenance',
                       badge: '0% Balance',
-                      desc: 'Maintain current weight',
+                      desc: 'Maintain current body mass',
                     },
                     {
                       id: 'gain',
-                      title: 'Weight Gain',
+                      title: 'Hypertrophy Surplus',
                       badge: '+10% Surplus',
-                      desc: 'Muscle building & recovery',
+                      desc: 'Muscle building & performance',
                     },
                   ].map((g) => (
                     <label
                       key={g.id}
-                      className={`flex cursor-pointer flex-col justify-between rounded-xl border p-3.5 transition ${
+                      className={`flex cursor-pointer flex-col justify-between rounded-xl border p-3.5 transition-all ${
                         goal === g.id
-                          ? 'border-orange-500 bg-orange-50/40 dark:border-orange-500 dark:bg-orange-950/20'
-                          : 'border-zinc-200 hover:border-zinc-300 dark:border-zinc-800 dark:hover:border-zinc-700'
+                          ? 'border-[#ff2a3b] bg-[#1a1a1a] shadow-[0_0_12px_rgba(255, 42, 59, 0.08)]'
+                          : 'border-[#1b3d27] bg-[#000000]/50 hover:border-[#ff2a3b]/40'
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2">
-                        <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+                        <span className="font-display text-sm font-bold uppercase tracking-wide text-[#ffffff]">
                           {g.title}
                         </span>
                         <input
@@ -544,14 +547,14 @@ export default function CalorieCalculatorPage() {
                           value={g.id}
                           checked={goal === g.id}
                           onChange={() => setGoal(g.id as Goal)}
-                          className="mt-0.5 text-orange-600 focus:ring-orange-500"
+                          className="mt-0.5 accent-[#ff2a3b]"
                         />
                       </div>
                       <div className="mt-2 space-y-1">
-                        <span className="inline-block rounded-md bg-zinc-100 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                        <span className="inline-block rounded-md bg-[#000000] border border-[#1b3d27] px-2 py-0.5 text-[10px] font-mono font-bold text-[#ff2a3b]">
                           {g.badge}
                         </span>
-                        <p className="text-xs text-zinc-500 dark:text-zinc-400">{g.desc}</p>
+                        <p className="text-xs text-[#ffffff]/60">{g.desc}</p>
                       </div>
                     </label>
                   ))}
@@ -564,11 +567,11 @@ export default function CalorieCalculatorPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-orange-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-zinc-900"
+                className="kinetik-btn-lime flex flex-1 items-center justify-center gap-2 px-6 py-3 text-xs font-bold uppercase tracking-wider disabled:cursor-not-allowed disabled:opacity-50 min-h-[46px]"
               >
                 {isLoading ? (
                   <>
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-[#000000] border-t-transparent" />
                     Calculating...
                   </>
                 ) : (
@@ -583,7 +586,7 @@ export default function CalorieCalculatorPage() {
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex items-center gap-1.5 rounded-xl border border-zinc-300 px-4 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                  className="kinetik-btn-dark flex items-center gap-1.5 px-4 py-3 text-xs font-bold uppercase tracking-wider min-h-[46px]"
                 >
                   <RotateCcw className="h-4 w-4" />
                   Reset
@@ -597,123 +600,123 @@ export default function CalorieCalculatorPage() {
         {result && (
           <div className="space-y-6 lg:col-span-5">
             {result.status === 'calculated' && (
-              <div className="space-y-6 rounded-2xl border border-orange-200 bg-gradient-to-br from-white to-orange-50/50 p-6 shadow-sm dark:border-orange-950 dark:from-zinc-900 dark:to-orange-950/20 md:p-8">
+              <div className="kinetik-card space-y-6 rounded-2xl border border-[#ff2a3b]/40 bg-[#0d0d0d]/90 p-6 shadow-xl md:p-8">
                 {/* Status Badge */}
                 <div className="flex items-center justify-between">
-                  <span className="inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-zinc-100 px-3 py-1 text-xs font-semibold text-zinc-900 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-[#ff2a3b]">
                     <CheckCircle2 className="h-3.5 w-3.5" />
                     Calculated Result
                   </span>
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400">
+                  <span className="text-[11px] font-mono text-[#ffffff]/50">
                     Mifflin–St Jeor
                   </span>
                 </div>
 
                 {/* Main Calorie Target Hero */}
-                <div className="rounded-xl border border-orange-200/60 bg-white/80 p-6 text-center shadow-xs backdrop-blur-xs dark:border-orange-900/40 dark:bg-zinc-900/80">
-                  <span className="text-xs font-medium uppercase tracking-wider text-orange-600 dark:text-orange-400">
-                    Recommended Daily Intake
+                <div className="rounded-2xl border border-[#1b3d27] bg-[#000000] p-6 text-center shadow-lg">
+                  <span className="eyebrow text-xs text-[#ff2a3b]">
+                    RECOMMENDED DAILY INTAKE
                   </span>
-                  <div className="mt-2 text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white md:text-5xl">
+                  <div className="mt-2 font-display text-5xl font-black tracking-tight text-[#ff2a3b] md:text-6xl">
                     {result.targetKcalPerDay?.toLocaleString()}
-                    <span className="ml-1.5 text-lg font-medium text-zinc-500 dark:text-zinc-400">
+                    <span className="ml-2 font-mono text-base font-bold text-[#ffffff]/60">
                       kcal/day
                     </span>
                   </div>
-                  <p className="mt-2 text-xs text-zinc-500">
-                    Rounded to the nearest 10 kcal/day for practical dietary tracking.
+                  <p className="mt-2 text-[10px] font-mono text-[#ffffff]/50">
+                    Calibrated to the nearest 10 kcal/day for dietary adherence.
                   </p>
                 </div>
 
                 {/* Breakdown Metrics */}
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl border border-zinc-200 bg-white/60 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
-                    <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                  <div className="rounded-xl border border-[#1b3d27] bg-[#000000]/80 p-4">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#ffffff]/50">
                       Basal Metabolic Rate (BMR)
                     </div>
-                    <div className="mt-1 text-xl font-bold text-zinc-900 dark:text-white">
+                    <div className="mt-1 font-display text-2xl font-bold text-[#ffffff]">
                       {result.bmrKcalPerDay.toLocaleString()}
-                      <span className="ml-1 text-xs font-normal text-zinc-500">kcal/day</span>
+                      <span className="ml-1 text-xs font-mono font-normal text-[#ffffff]/50">kcal/day</span>
                     </div>
-                    <p className="mt-1 text-[11px] text-zinc-500">
+                    <p className="mt-1 text-[10px] text-[#ffffff]/50">
                       Energy expended at complete resting baseline.
                     </p>
                   </div>
 
-                  <div className="rounded-xl border border-zinc-200 bg-white/60 p-4 dark:border-zinc-800 dark:bg-zinc-800/40">
-                    <div className="text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                  <div className="rounded-xl border border-[#1b3d27] bg-[#000000]/80 p-4">
+                    <div className="text-[10px] font-mono uppercase tracking-wider text-[#ffffff]/50">
                       Maintenance (TDEE)
                     </div>
-                    <div className="mt-1 text-xl font-bold text-zinc-900 dark:text-white">
+                    <div className="mt-1 font-display text-2xl font-bold text-[#ffffff]">
                       {result.maintenanceKcalPerDay.toLocaleString()}
-                      <span className="ml-1 text-xs font-normal text-zinc-500">kcal/day</span>
+                      <span className="ml-1 text-xs font-mono font-normal text-[#ffffff]/50">kcal/day</span>
                     </div>
-                    <p className="mt-1 text-[11px] text-zinc-500">
+                    <p className="mt-1 text-[10px] text-[#ffffff]/50">
                       Daily expenditure based on activity multiplier.
                     </p>
                   </div>
                 </div>
 
                 {/* Estimate Disclaimer */}
-                <div className="rounded-xl border border-zinc-200 bg-zinc-50/80 p-4 text-xs text-zinc-600 dark:border-zinc-800 dark:bg-zinc-800/50 dark:text-zinc-400">
-                  <p className="font-medium text-zinc-900 dark:text-zinc-200">
+                <div className="rounded-xl border border-[#1b3d27] bg-[#000000]/60 p-4 text-xs text-[#ffffff]/60">
+                  <p className="font-bold text-[#ffffff]">
                     Estimate Disclaimer:
                   </p>
-                  <p className="mt-0.5">{result.estimateDisclaimer}</p>
+                  <p className="mt-0.5 leading-relaxed">{result.estimateDisclaimer}</p>
                 </div>
 
                 {/* Next Step Action to Diet Foods */}
                 <Link
-                  href="/app/diet"
-                  className="flex items-center justify-between rounded-xl bg-zinc-900 p-4 text-white transition hover:bg-zinc-800 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-100"
+                  href="/app/diet-foods"
+                  className="kinetik-btn-lime flex items-center justify-between p-4 font-bold uppercase tracking-wider min-h-[48px]"
                 >
                   <div>
-                    <div className="text-sm font-semibold">Explore Suitable Diet Foods</div>
-                    <div className="text-xs text-zinc-400 dark:text-zinc-600">
-                      Find South Indian foods matched to your target
+                    <div className="text-xs font-bold text-white">Explore Verified Diet Foods</div>
+                    <div className="text-[10px] text-white/80 font-normal">
+                      Match Tamil Nadu staples to your calculated target
                     </div>
                   </div>
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-5 w-5 text-white" />
                 </Link>
               </div>
             )}
 
             {/* Target Withheld Guardrail View */}
             {result.status === 'target_withheld' && (
-              <div className="space-y-6 rounded-2xl border border-amber-300 bg-amber-50/70 p-6 shadow-sm dark:border-amber-900/60 dark:bg-amber-950/20 md:p-8">
+              <div className="kinetik-card space-y-6 rounded-2xl border border-amber-500/40 bg-amber-950/20 p-6 shadow-sm md:p-8 text-[#ffffff]">
                 <div className="flex items-start gap-3">
-                  <ShieldAlert className="h-6 w-6 shrink-0 text-amber-600 dark:text-amber-400" />
+                  <ShieldAlert className="h-6 w-6 shrink-0 text-amber-400" />
                   <div className="space-y-1">
-                    <h3 className="text-lg font-bold text-amber-950 dark:text-amber-200">
+                    <h3 className="font-display text-lg font-bold uppercase tracking-wide text-amber-200">
                       Target Withheld for Safety
                     </h3>
-                    <p className="text-xs text-amber-800 dark:text-amber-300/80">
+                    <p className="text-xs font-mono text-amber-300/80">
                       Reason Code: {result.reasonCode}
                     </p>
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-amber-200 bg-white/80 p-4 text-sm text-zinc-700 dark:border-amber-900/40 dark:bg-zinc-900/80 dark:text-zinc-300">
+                <div className="rounded-xl border border-amber-500/30 bg-[#000000]/80 p-4 text-xs text-[#ffffff]/80 leading-relaxed">
                   <p>{result.message}</p>
                 </div>
 
                 {/* Informational Breakdown */}
                 <div className="grid gap-3 sm:grid-cols-2">
-                  <div className="rounded-xl border border-amber-200/60 bg-white/60 p-3.5 dark:border-amber-900/30 dark:bg-zinc-900/60">
-                    <div className="text-xs text-zinc-500">Estimated BMR</div>
-                    <div className="text-base font-bold text-zinc-900 dark:text-white">
+                  <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-3.5">
+                    <div className="text-[10px] font-mono text-[#ffffff]/50">Estimated BMR</div>
+                    <div className="font-display text-lg font-bold text-[#ffffff]">
                       {result.bmrKcalPerDay} kcal/day
                     </div>
                   </div>
-                  <div className="rounded-xl border border-amber-200/60 bg-white/60 p-3.5 dark:border-amber-900/30 dark:bg-zinc-900/60">
-                    <div className="text-xs text-zinc-500">Estimated TDEE</div>
-                    <div className="text-base font-bold text-zinc-900 dark:text-white">
+                  <div className="rounded-xl border border-[#1b3d27] bg-[#000000] p-3.5">
+                    <div className="text-[10px] font-mono text-[#ffffff]/50">Estimated TDEE</div>
+                    <div className="font-display text-lg font-bold text-[#ffffff]">
                       {result.maintenanceKcalPerDay} kcal/day
                     </div>
                   </div>
                 </div>
 
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                <p className="text-[11px] text-[#ffffff]/50 leading-relaxed">
                   The application adheres to an unyielding minimum safety floor (1,200 kcal/day) and will not automatically recommend deficits below this threshold without professional medical guidance.
                 </p>
               </div>
