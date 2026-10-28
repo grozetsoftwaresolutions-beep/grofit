@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ElectricBorder from '@/components/ElectricBorder';
 import {
   Dumbbell,
   BookOpen,
@@ -200,10 +201,10 @@ export default function WorkoutPlansPage() {
           ) : (
             <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
               {templates.map((tpl) => (
-                <div
-                  key={tpl.id}
-                  className="kinetik-card p-5 sm:p-6 flex flex-col justify-between"
-                >
+                <ElectricBorder key={tpl.id} borderRadius={20} className="h-full">
+                  <div
+                    className="kinetik-card p-5 sm:p-6 flex flex-col justify-between h-full"
+                  >
                   <div className="space-y-3 min-w-0">
                     <div className="flex items-center justify-between gap-2 pb-2 border-b border-[#ffffff]/10">
                       <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-2.5 py-0.5 text-[11px] font-mono font-bold text-[#ff2a3b] uppercase shrink-0">
@@ -249,7 +250,8 @@ export default function WorkoutPlansPage() {
                     </Link>
                   </div>
                 </div>
-              ))}
+              </ElectricBorder>
+            ))}
             </div>
           )}
         </div>
@@ -344,10 +346,10 @@ export default function WorkoutPlansPage() {
           ) : (
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {filteredExercises.map((ex) => (
-                <div
-                  key={ex.id}
-                  className="kinetik-card p-5 flex flex-col justify-between"
-                >
+                <ElectricBorder key={ex.id} borderRadius={20} className="h-full">
+                  <div
+                    className="kinetik-card p-5 flex flex-col justify-between h-full"
+                  >
                   <div className="min-w-0">
                     {/* Header Badges */}
                     <div className="flex items-center justify-between gap-1.5 pb-2 border-b border-[#ffffff]/10">
@@ -456,7 +458,8 @@ export default function WorkoutPlansPage() {
                     </div>
                   </div>
                 </div>
-              ))}
+              </ElectricBorder>
+            ))}
             </div>
           )}
         </div>

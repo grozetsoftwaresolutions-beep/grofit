@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import { createClient } from '@/lib/supabase/client';
+import ElectricBorder from '@/components/ElectricBorder';
 import {
   Dumbbell,
   Flame,
@@ -182,7 +183,7 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#000000] text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white">
+    <div className="min-h-screen bg-transparent text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white">
       {/* ─── STICKY MINIMAL HEADER (Matching Kinetik Header) ─── */}
       <header className="sticky top-0 z-50 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -403,7 +404,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION #APPROACH: THE KINETIK METHOD / 001 ─── */}
-      <section id="approach" className="py-20 lg:py-28 border-b border-[#ffffff]/10 bg-[#000000]">
+      <section id="approach" className="py-20 lg:py-28 border-b border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#ffffff]/10">
             <div>
@@ -419,52 +420,58 @@ export default function HomePage() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Pillar 01 */}
-            <div className="kinetik-card p-7 flex flex-col justify-between">
-              <div>
-                <span className="font-display text-3xl font-black text-[#ff2a3b]">01</span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
-                  MECHANICAL TENSION & EMG
-                </h3>
-                <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                  Every exercise in GroFit is ranked from peer-reviewed biomechanical literature (Schoenfeld, Contreras, Maeo). We select movements that maximize motor unit recruitment throughout deep stretch positions.
-                </p>
+            <ElectricBorder borderRadius={20} className="h-full">
+              <div className="kinetik-card p-7 flex flex-col justify-between h-full">
+                <div>
+                  <span className="font-display text-3xl font-black text-[#ff2a3b]">01</span>
+                  <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
+                    MECHANICAL TENSION & EMG
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                    Every exercise in GroFit is ranked from peer-reviewed biomechanical literature (Schoenfeld, Contreras, Maeo). We select movements that maximize motor unit recruitment throughout deep stretch positions.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
+                  SCIENTIFIC OVERLOAD
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
-                SCIENTIFIC OVERLOAD
-              </div>
-            </div>
+            </ElectricBorder>
 
             {/* Pillar 02 */}
-            <div className="kinetik-card p-7 flex flex-col justify-between">
-              <div>
-                <span className="font-display text-3xl font-black text-[#ff2a3b]">02</span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
-                  IFCT 2017 NUTRITIONAL ACCURACY
-                </h3>
-                <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                  No generic estimates. We use official ICMR-NIN Indian Food Composition Tables data. Scale staple foods like cooked ponni rice, lentils, chicken breast, and eggs down to the exact gram.
-                </p>
+            <ElectricBorder borderRadius={20} className="h-full">
+              <div className="kinetik-card p-7 flex flex-col justify-between h-full">
+                <div>
+                  <span className="font-display text-3xl font-black text-[#ff2a3b]">02</span>
+                  <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
+                    IFCT 2017 NUTRITIONAL ACCURACY
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                    No generic estimates. We use official ICMR-NIN Indian Food Composition Tables data. Scale staple foods like cooked ponni rice, lentils, chicken breast, and eggs down to the exact gram.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
+                  LAB-VERIFIED DATA
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
-                LAB-VERIFIED DATA
-              </div>
-            </div>
+            </ElectricBorder>
 
             {/* Pillar 03 */}
-            <div className="kinetik-card p-7 flex flex-col justify-between">
-              <div>
-                <span className="font-display text-3xl font-black text-[#ff2a3b]">03</span>
-                <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
-                  HABIT REPETITION & RHYTHM
-                </h3>
-                <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                  Fitness is built by daily consistency, not periodic bursts. Log hydration, sleep, protein, and sessions with one tap. Visual streaks and printable reports give you accountability.
-                </p>
+            <ElectricBorder borderRadius={20} className="h-full">
+              <div className="kinetik-card p-7 flex flex-col justify-between h-full">
+                <div>
+                  <span className="font-display text-3xl font-black text-[#ff2a3b]">03</span>
+                  <h3 className="mt-4 font-display text-2xl font-bold text-[#ffffff]">
+                    HABIT REPETITION & RHYTHM
+                  </h3>
+                  <p className="mt-3 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                    Fitness is built by daily consistency, not periodic bursts. Log hydration, sleep, protein, and sessions with one tap. Visual streaks and printable reports give you accountability.
+                  </p>
+                </div>
+                <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
+                  DAILY REPETITION
+                </div>
               </div>
-              <div className="mt-6 pt-4 border-t border-[#ffffff]/10 text-[11px] font-mono text-[#ff2a3b]">
-                DAILY REPETITION
-              </div>
-            </div>
+            </ElectricBorder>
           </div>
         </div>
       </section>
@@ -473,7 +480,7 @@ export default function HomePage() {
       <EquipmentLab />
 
       {/* ─── SECTION #PROGRAMS: TRAINING PATHS ─── */}
-      <section id="programs" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-[#000000]">
+      <section id="programs" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#ffffff]/10">
             <div>
@@ -489,49 +496,51 @@ export default function HomePage() {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             {trainingPaths.map((path, idx) => (
-              <div key={idx} className="kinetik-card p-7 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between pb-3 border-b border-[#ffffff]/10">
-                    <span className="text-[11px] font-mono text-[#a1a1aa]">{path.code}</span>
-                    <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-1 rounded-md bg-[#ff2a3b]/15 text-[#ff2a3b] border border-[#ff2a3b]/30">
-                      {path.tag} · {path.duration}
-                    </span>
+              <ElectricBorder key={idx} borderRadius={20} className="h-full">
+                <div className="kinetik-card p-7 flex flex-col justify-between h-full">
+                  <div>
+                    <div className="flex items-center justify-between pb-3 border-b border-[#ffffff]/10">
+                      <span className="text-[11px] font-mono text-[#a1a1aa]">{path.code}</span>
+                      <span className="text-[10px] font-mono font-bold tracking-wider uppercase px-2.5 py-1 rounded-md bg-[#ff2a3b]/15 text-[#ff2a3b] border border-[#ff2a3b]/30">
+                        {path.tag} · {path.duration}
+                      </span>
+                    </div>
+
+                    <h3 className="mt-5 font-display text-2xl font-bold tracking-tight text-[#ffffff]">
+                      {path.title}
+                    </h3>
+                    <p className="mt-2.5 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                      {path.description}
+                    </p>
+
+                    <ul className="mt-5 space-y-2 text-xs text-[#f0f0f0] font-medium">
+                      {path.points.map((pt, pIdx) => (
+                        <li key={pIdx} className="flex items-center gap-2">
+                          <Check className="h-3.5 w-3.5 text-[#ff2a3b] shrink-0" />
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <h3 className="mt-5 font-display text-2xl font-bold tracking-tight text-[#ffffff]">
-                    {path.title}
-                  </h3>
-                  <p className="mt-2.5 text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
-                    {path.description}
-                  </p>
-
-                  <ul className="mt-5 space-y-2 text-xs text-[#f0f0f0] font-medium">
-                    {path.points.map((pt, pIdx) => (
-                      <li key={pIdx} className="flex items-center gap-2">
-                        <Check className="h-3.5 w-3.5 text-[#ff2a3b] shrink-0" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-8 pt-4 border-t border-[#ffffff]/10">
+                    <Link
+                      href="/auth/signup"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#ff2a3b] hover:text-[#ff4d5e] transition"
+                    >
+                      <span>{path.linkText}</span>
+                      <ArrowRight className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
                 </div>
-
-                <div className="mt-8 pt-4 border-t border-[#ffffff]/10">
-                  <Link
-                    href="/auth/signup"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider uppercase text-[#ff2a3b] hover:text-[#ff4d5e] transition"
-                  >
-                    <span>{path.linkText}</span>
-                    <ArrowRight className="h-3.5 w-3.5" />
-                  </Link>
-                </div>
-              </div>
+              </ElectricBorder>
             ))}
           </div>
         </div>
       </section>
 
       {/* ─── SECTION #SESSION-GUIDE: EMG RANKED EXERCISES ─── */}
-      <section id="rankings" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-[#0d0d0d]/50">
+      <section id="rankings" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="eyebrow">04 / MOVEMENT INDEX</span>
@@ -565,7 +574,7 @@ export default function HomePage() {
             {muscleRankings[selectedMuscle].map((item) => (
               <div
                 key={item.rank}
-                className="flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d] p-4.5 transition hover:border-[#ff2a3b]/40"
+                className="flex flex-col sm:flex-row sm:items-center justify-between rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d]/75 backdrop-blur-md p-4.5 transition hover:border-[#ff2a3b]/40"
               >
                 <div className="flex items-start sm:items-center gap-4">
                   <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1a1a1a] border border-[#ffffff]/10 font-display font-black text-[#ff2a3b] text-lg">
@@ -597,7 +606,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION #WEEKLY: WEEKLY PLAN BUILDER ─── */}
-      <section id="weekly" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-[#000000]">
+      <section id="weekly" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#ffffff]/10">
             <div>
@@ -622,22 +631,23 @@ export default function HomePage() {
               { day: 'SAT', label: 'Conditioning', type: 'MOVE', focus: 'Calisthenics Split' },
               { day: 'SUN', label: 'Weekly Check-in', type: 'RESET', focus: 'Weight & Habits' },
             ].map((schedule, i) => (
-              <div
-                key={i}
-                className="kinetik-card p-4 flex flex-col justify-between text-left min-h-[170px]"
-              >
-                <div>
-                  <div className="flex items-center justify-between pb-2 border-b border-[#ffffff]/10 text-[10px] font-mono">
-                    <span className="font-bold text-[#ff2a3b]">{schedule.day}</span>
-                    <span className="text-[#71717a]">{schedule.type}</span>
+              <ElectricBorder key={i} borderRadius={16} className="h-full">
+                <div
+                  className="kinetik-card p-4 flex flex-col justify-between text-left min-h-[170px] h-full"
+                >
+                  <div>
+                    <div className="flex items-center justify-between pb-2 border-b border-[#ffffff]/10 text-[10px] font-mono">
+                      <span className="font-bold text-[#ff2a3b]">{schedule.day}</span>
+                      <span className="text-[#71717a]">{schedule.type}</span>
+                    </div>
+                    <h4 className="mt-2.5 text-xs font-bold text-[#ffffff]">{schedule.label}</h4>
+                    <p className="mt-1 text-[11px] text-[#a1a1aa]">{schedule.focus}</p>
                   </div>
-                  <h4 className="mt-2.5 text-xs font-bold text-[#ffffff]">{schedule.label}</h4>
-                  <p className="mt-1 text-[11px] text-[#a1a1aa]">{schedule.focus}</p>
+                  <div className="pt-2 border-t border-[#ffffff]/10 text-[10px] font-mono text-[#ff2a3b]">
+                    DAY 0{i + 1}
+                  </div>
                 </div>
-                <div className="pt-2 border-t border-[#ffffff]/10 text-[10px] font-mono text-[#ff2a3b]">
-                  DAY 0{i + 1}
-                </div>
-              </div>
+              </ElectricBorder>
             ))}
           </div>
 
@@ -654,7 +664,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── MOBILE-FIRST SPOTLIGHT ─── */}
-      <section className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-[#0d0d0d]/40">
+      <section className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -721,7 +731,7 @@ export default function HomePage() {
             <div className="flex justify-center">
               <div className="w-[300px] sm:w-[320px] rounded-[42px] border-4 border-[#ffffff]/15 bg-[#000000] p-3 shadow-2xl shadow-[#ff2a3b]/10">
                 <div className="mx-auto h-4 w-28 rounded-full bg-[#1a1a1a] mb-3" />
-                <div className="rounded-[30px] border border-[#ffffff]/10 bg-[#0d0d0d] p-4 space-y-3">
+                <div className="rounded-[30px] border border-[#ffffff]/10 bg-[#0d0d0d]/80 backdrop-blur-md p-4 space-y-3">
                   <div className="flex items-center justify-between">
                     <span className="font-display font-black text-sm text-[#ffffff]">GROFIT</span>
                     <span className="h-2 w-2 rounded-full bg-[#ff2a3b] animate-pulse" />
@@ -759,7 +769,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── SECTION #FAQ ─── */}
-      <section id="faq" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-[#000000]">
+      <section id="faq" className="py-20 lg:py-28 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto">
             <span className="eyebrow">QUESTIONS & ANSWERS</span>
@@ -772,7 +782,7 @@ export default function HomePage() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d] overflow-hidden transition"
+                className="rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d]/75 backdrop-blur-md overflow-hidden transition"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -797,7 +807,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FINAL ATHLETIC CTA ─── */}
-      <section className="py-20 border-t border-[#ffffff]/10 bg-[#000000]">
+      <section className="py-20 border-t border-[#ffffff]/10 bg-transparent">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-[#ffffff]/15 bg-gradient-to-b from-[#0d0d0d] to-[#000000] p-8 sm:p-14 text-center shadow-2xl relative overflow-hidden">
             <div className="pointer-events-none absolute -top-24 left-1/2 -z-10 h-48 w-96 -translate-x-1/2 rounded-full bg-[#ff2a3b]/15 blur-2xl" />
@@ -830,7 +840,7 @@ export default function HomePage() {
       </section>
 
       {/* ─── FOOTER (Matching Kinetik Minimal Athletic Footer) ─── */}
-      <footer className="border-t border-[#ffffff]/10 py-10 bg-[#000000] text-[#71717a] text-xs">
+      <footer className="border-t border-[#ffffff]/10 py-10 bg-black/60 text-[#71717a] text-xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2 font-mono">
             <span className="font-display font-black text-base text-[#ffffff]">GROFIT</span>

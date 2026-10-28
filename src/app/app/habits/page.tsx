@@ -25,6 +25,7 @@ import {
   Trash2,
 } from 'lucide-react';
 import { addDays } from '@/lib/habits/domain';
+import ElectricBorder from '@/components/ElectricBorder';
 
 interface HabitItem {
   id: string;
@@ -606,62 +607,66 @@ function HabitTrackerContent() {
       )}
 
       {/* Date Navigator Bar */}
-      <div className="kinetik-card flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-4 shadow-sm">
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            onClick={() => setSelectedDate(addDays(selectedDate, -1))}
-            className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
-            title="Previous Day"
-          >
-            <ChevronLeft className="h-5 w-5" />
-          </button>
+      <ElectricBorder borderRadius={20}>
+        <div className="kinetik-card flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-4 shadow-sm">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedDate(addDays(selectedDate, -1))}
+              className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
+              title="Previous Day"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
 
-          <div className="text-left">
-            <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-[#ff2a3b]" />
-              <span className="font-display text-base font-bold uppercase tracking-wide text-[#ffffff]">{formattedSelectedDate}</span>
-              <span className="text-xs font-mono text-[#ffffff]/50">({selectedDate})</span>
+            <div className="text-left">
+              <div className="flex items-center gap-2">
+                <Calendar className="h-4 w-4 text-[#ff2a3b]" />
+                <span className="font-display text-base font-bold uppercase tracking-wide text-[#ffffff]">{formattedSelectedDate}</span>
+                <span className="text-xs font-mono text-[#ffffff]/50">({selectedDate})</span>
+              </div>
             </div>
+
+            <button
+              type="button"
+              onClick={() => setSelectedDate(addDays(selectedDate, 1))}
+              className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
+              title="Next Day"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setSelectedDate(addDays(selectedDate, 1))}
-            className="rounded-lg p-2 text-[#ffffff]/60 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition min-h-[40px] min-w-[40px] flex items-center justify-center"
-            title="Next Day"
-          >
-            <ChevronRight className="h-5 w-5" />
-          </button>
+          {selectedDate !== userToday && (
+            <button
+              type="button"
+              onClick={() => setSelectedDate(userToday)}
+              className="kinetik-btn-dark px-3 py-1.5 text-xs font-bold uppercase tracking-wider"
+            >
+              Jump to Today
+            </button>
+          )}
         </div>
-
-        {selectedDate !== userToday && (
-          <button
-            type="button"
-            onClick={() => setSelectedDate(userToday)}
-            className="kinetik-btn-dark px-3 py-1.5 text-xs font-bold uppercase tracking-wider"
-          >
-            Jump to Today
-          </button>
-        )}
-      </div>
+      </ElectricBorder>
 
       {/* Daily Completion Progress Summary */}
       {activeHabits.length > 0 && (
-        <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-5 shadow-sm">
-          <div className="flex items-center justify-between text-xs">
-            <span className="eyebrow text-xs text-[#ff2a3b]">
-              DAILY COMPLETION: {completedCount} OF {activeHabits.length} HABITS LOGGED
-            </span>
-            <span className="font-display text-base font-bold text-[#ff2a3b]">{completionPercentage}%</span>
+        <ElectricBorder borderRadius={20}>
+          <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-5 shadow-sm">
+            <div className="flex items-center justify-between text-xs">
+              <span className="eyebrow text-xs text-[#ff2a3b]">
+                DAILY COMPLETION: {completedCount} OF {activeHabits.length} HABITS LOGGED
+              </span>
+              <span className="font-display text-base font-bold text-[#ff2a3b]">{completionPercentage}%</span>
+            </div>
+            <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#000000] border border-[#1b3d27]">
+              <div
+                className="h-full bg-[#ff2a3b] transition-all duration-300 shadow-[0_0_10px_rgba(255, 42, 59, 0.3)]"
+                style={{ width: `${completionPercentage}%` }}
+              />
+            </div>
           </div>
-          <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-[#000000] border border-[#1b3d27]">
-            <div
-              className="h-full bg-[#ff2a3b] transition-all duration-300 shadow-[0_0_10px_rgba(255, 42, 59, 0.3)]"
-              style={{ width: `${completionPercentage}%` }}
-            />
-          </div>
-        </div>
+        </ElectricBorder>
       )}
 
       {/* Tabs: Active vs Archived */}

@@ -104,7 +104,7 @@ export default function EquipmentLab() {
   return (
     <section
       id="kinetic-lab"
-      className="relative py-20 lg:py-28 border-t border-white/10 bg-[#000000]"
+      className="relative py-20 lg:py-28 border-t border-white/10 bg-transparent"
       aria-labelledby="kinetic-lab-title"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -218,7 +218,7 @@ export default function EquipmentLab() {
           {/* Right Column: Lab Control Customizer & Detail Card */}
           <div className="lg:col-span-4 space-y-6">
             {/* Equipment Narrative Card */}
-            <div className="rounded-3xl bg-[#0d0d0d] border border-white/12 p-6">
+            <div className="rounded-3xl bg-[#0d0d0d]/80 backdrop-blur-md border border-white/12 p-6">
               <span className="eyebrow">{activeInfo.descriptor}</span>
               <h3 className="mt-2 text-2xl font-bold font-display tracking-tight text-white">
                 {activeInfo.title}
@@ -229,7 +229,7 @@ export default function EquipmentLab() {
             </div>
 
             {/* Control Panel: Finishes */}
-            <div className="rounded-3xl bg-[#0d0d0d] border border-white/12 p-5 space-y-3">
+            <div className="rounded-3xl bg-[#0d0d0d]/80 backdrop-blur-md border border-white/12 p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
                   <Layers className="h-3.5 w-3.5 text-[#ff2a3b]" />
@@ -258,7 +258,7 @@ export default function EquipmentLab() {
             </div>
 
             {/* Control Panel: Lighting Rigs */}
-            <div className="rounded-3xl bg-[#0d0d0d] border border-white/12 p-5 space-y-3">
+            <div className="rounded-3xl bg-[#0d0d0d]/80 backdrop-blur-md border border-white/12 p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
                   <Sun className="h-3.5 w-3.5 text-[#ff2a3b]" />
@@ -287,7 +287,7 @@ export default function EquipmentLab() {
             </div>
 
             {/* Control Panel: Camera View */}
-            <div className="rounded-3xl bg-[#0d0d0d] border border-white/12 p-5 space-y-3">
+            <div className="rounded-3xl bg-[#0d0d0d]/80 backdrop-blur-md border border-white/12 p-5 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold uppercase tracking-wider text-zinc-300 flex items-center gap-1.5">
                   <Camera className="h-3.5 w-3.5 text-[#ff2a3b]" />

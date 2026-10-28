@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import ElectricBorder from '@/components/ElectricBorder';
 import {
   Dumbbell,
   CalendarCheck,
@@ -273,10 +274,10 @@ export default function AppPage() {
   return (
     <div className="space-y-6 sm:space-y-8 pb-12 min-w-0">
       {/* ─── DASHBOARD HERO GREETING & STREAK BANNER ─── */}
-      <section className="relative overflow-hidden rounded-3xl border border-[#ffffff]/10 bg-gradient-to-b from-[#0d0d0d] via-[#000000] to-[#000000] p-5 sm:p-8 shadow-2xl">
+      <section className="relative overflow-hidden rounded-3xl border border-[#ffffff]/10 bg-black/65 backdrop-blur-xl p-5 sm:p-8 shadow-2xl">
         <div className="pointer-events-none absolute -top-24 right-0 -z-10 h-64 w-96 rounded-full bg-[#ff2a3b]/10 blur-3xl" />
 
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5 sm:gap-6">
           <div>
             <div className="flex items-center gap-2">
               <span className="eyebrow flex items-center gap-1.5">
@@ -296,7 +297,7 @@ export default function AppPage() {
           </div>
 
           {/* Dynamic Consistency Streak Card */}
-          <div className="flex items-center gap-4 rounded-2xl border border-[#ffffff]/10 bg-[#0d0d0d] p-4 sm:p-5 backdrop-blur shrink-0 self-start md:self-auto shadow-md">
+          <div className="flex items-center gap-4 rounded-2xl border border-[#ffffff]/10 bg-black/60 backdrop-blur-lg p-4 sm:p-5 shrink-0 self-start md:self-auto shadow-md">
             <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-[#1a1a1a] border border-[#ff2a3b]/30 text-[#ff2a3b]">
               <Flame className="h-6 w-6 sm:h-7 sm:w-7 fill-[#ff2a3b]" />
             </div>
@@ -365,7 +366,8 @@ export default function AppPage() {
       {/* ─── TWO-COLUMN CORE STATUS CARDS ─── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         {/* Active Workout Routine Card */}
-        <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
+        <ElectricBorder borderRadius={20} className="h-full">
+          <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0 h-full">
           <div>
             <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#ffffff]/10">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ffffff]/10 bg-[#000000] px-3 py-1 text-xs font-bold font-mono tracking-wider text-[#ff2a3b] uppercase shrink-0">
@@ -452,9 +454,11 @@ export default function AppPage() {
             </Link>
           </div>
         </div>
+        </ElectricBorder>
 
         {/* Active Nutrition & Macros Card */}
-        <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0">
+        <ElectricBorder borderRadius={20} className="h-full">
+          <div className="kinetik-card p-5 sm:p-6 flex flex-col justify-between shadow-xl min-w-0 h-full">
           <div>
             <div className="flex items-center justify-between gap-2 pb-3 border-b border-[#ffffff]/10">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ffffff]/10 bg-[#000000] px-3 py-1 text-xs font-bold font-mono tracking-wider text-[#ff2a3b] uppercase shrink-0">
@@ -588,10 +592,12 @@ export default function AppPage() {
             </Link>
           </div>
         </div>
+        </ElectricBorder>
       </div>
 
       {/* ─── DAILY HABIT ROUTINE TO-DO CHECKLIST ─── */}
-      <section className="kinetik-card p-5 sm:p-8 shadow-xl min-w-0">
+      <ElectricBorder borderRadius={20}>
+        <section className="kinetik-card p-5 sm:p-8 shadow-xl min-w-0">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#ffffff]/10">
           <div>
             <div className="flex items-center gap-2">
@@ -683,9 +689,11 @@ export default function AppPage() {
           </div>
         )}
       </section>
+      </ElectricBorder>
 
       {/* ─── CANONICAL EXERCISE EMG EXPLORER ─── */}
-      <section className="kinetik-card p-6 sm:p-8 shadow-xl">
+      <ElectricBorder borderRadius={20}>
+        <section className="kinetik-card p-6 sm:p-8 shadow-xl">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-[#ffffff]/10">
           <div>
             <span className="eyebrow">SPORTS SCIENCE BIOMECHANICS</span>
@@ -749,6 +757,7 @@ export default function AppPage() {
           </Link>
         </div>
       </section>
+      </ElectricBorder>
 
       {/* ─── PLATFORM MODULES GRID ─── */}
       <section>
@@ -760,131 +769,143 @@ export default function AppPage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link
-            href="/app/workout-plans"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <Dumbbell className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/workout-plans"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <Dumbbell className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  Workout Templates
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Browse canonical exercise rankings, EMG studies, and full routine templates with video tutorials.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                Workout Templates
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Browse canonical exercise rankings, EMG studies, and full routine templates with video tutorials.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>Explore Templates</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>Explore Templates</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
 
-          <Link
-            href="/app/my-workout-plan"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <CalendarCheck className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/my-workout-plan"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <CalendarCheck className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  My Workout Plan
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Build your custom daily splits with warmups, target rep ranges, load tracking, and supersets.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                My Workout Plan
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Build your custom daily splits with warmups, target rep ranges, load tracking, and supersets.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>Open My Plan</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>Open My Plan</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
 
-          <Link
-            href="/app/diet-foods"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <Utensils className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/diet-foods"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <Utensils className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  Diet &amp; Foods
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Track meals using lab-analyzed ICMR-NIN nutritional databases with gram-level portion scaling.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                Diet &amp; Foods
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Track meals using lab-analyzed ICMR-NIN nutritional databases with gram-level portion scaling.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>View Food Database</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>View Food Database</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
 
-          <Link
-            href="/app/habits"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <CheckSquare className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/habits"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <CheckSquare className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  Habit Tracker
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Log daily check-ins in your timezone, build unbreakable streaks, and generate printable reports.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                Habit Tracker
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Log daily check-ins in your timezone, build unbreakable streaks, and generate printable reports.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>Track Habits</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>Track Habits</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
 
-          <Link
-            href="/app/calorie-calculator"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <Scale className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/calorie-calculator"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <Scale className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  Calorie Calculator
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Mifflin-St Jeor clinical BMR/TDEE math with safety guardrails and personalized macro splits.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                Calorie Calculator
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Mifflin-St Jeor clinical BMR/TDEE math with safety guardrails and personalized macro splits.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>Calculate Macros</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>Calculate Macros</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
 
-          <Link
-            href="/app/settings"
-            className="kinetik-card p-5 flex flex-col justify-between group"
-          >
-            <div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
-                <Award className="h-5 w-5" />
+          <ElectricBorder borderRadius={20} className="h-full">
+            <Link
+              href="/app/settings"
+              className="kinetik-card p-5 flex flex-col justify-between group h-full"
+            >
+              <div>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-bold">
+                  <Award className="h-5 w-5" />
+                </div>
+                <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
+                  Settings &amp; Data
+                </h3>
+                <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
+                  Manage profile name, application timezone, measurement units, and download full data export.
+                </p>
               </div>
-              <h3 className="mt-4 font-display text-xl font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">
-                Settings &amp; Data
-              </h3>
-              <p className="mt-1 text-xs text-[#a1a1aa] leading-relaxed">
-                Manage profile name, application timezone, measurement units, and download full data export.
-              </p>
-            </div>
-            <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
-              <span>Manage Settings</span>
-              <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
-            </div>
-          </Link>
+              <div className="mt-4 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-[#ff2a3b]">
+                <span>Manage Settings</span>
+                <ChevronRight className="h-3.5 w-3.5 transition group-hover:translate-x-1" />
+              </div>
+            </Link>
+          </ElectricBorder>
         </div>
       </section>
     </div>

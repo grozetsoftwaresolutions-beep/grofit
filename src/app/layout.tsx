@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, Space_Grotesk, Geist_Mono } from "next/font/google";
+import { Barlow_Condensed, Inter, Geist_Mono } from "next/font/google";
+import IntroOverlay from "@/components/IntroOverlay";
 import "./globals.css";
 
 const barlowCondensed = Barlow_Condensed({
@@ -8,10 +9,11 @@ const barlowCondensed = Barlow_Condensed({
   weight: ["500", "600", "700", "800", "900"],
 });
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -35,11 +37,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${barlowCondensed.variable} ${spaceGrotesk.variable} ${geistMono.variable} dark h-full antialiased`}
+      className={`${barlowCondensed.variable} ${inter.variable} ${geistMono.variable} dark h-full antialiased`}
       style={{ colorScheme: 'dark' }}
     >
-      <body className="min-h-full flex flex-col bg-[#000000] text-white selection:bg-[#ff2a3b] selection:text-white">
-        {children}
+      <body className="min-h-full flex flex-col text-white selection:bg-[#ff2a3b] selection:text-white relative bg-[#000000]">
+        <IntroOverlay />
+        <div className="relative flex min-h-full flex-col">
+          {children}
+        </div>
       </body>
     </html>
   );

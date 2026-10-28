@@ -25,6 +25,7 @@ import {
 } from '@/lib/nutrition/domain';
 import { VERIFIED_FOOD_SEEDS } from '@/lib/nutrition/seed-data';
 import { getAllComputedSamplePlans, ComputedSamplePlan } from '@/lib/nutrition/sample-plans';
+import ElectricBorder from '@/components/ElectricBorder';
 
 interface FoodItem {
   id: string;
@@ -499,12 +500,14 @@ function DietFoodsContent() {
       </div>
 
       {/* Nutritional Guidance Notice */}
-      <div className="kinetik-card flex items-start gap-3 rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/50 p-4 text-xs text-[#ffffff]/70 shadow-sm backdrop-blur-md">
-        <Info className="h-4 w-4 flex-shrink-0 text-[#ff2a3b] mt-0.5" />
-        <p className="leading-relaxed">
-          <strong className="text-[#ffffff] uppercase tracking-wide">Nutritional Guidance Notice:</strong> Meal plans and macro computations are provided for educational and athletic planning purposes. They do not constitute individualized clinical prescriptions. Exact nutrient yields vary slightly by regional preparation and cooking method.
-        </p>
-      </div>
+      <ElectricBorder borderRadius={16}>
+        <div className="kinetik-card flex items-start gap-3 rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/50 p-4 text-xs text-[#ffffff]/70 shadow-sm backdrop-blur-md">
+          <Info className="h-4 w-4 flex-shrink-0 text-[#ff2a3b] mt-0.5" />
+          <p className="leading-relaxed">
+            <strong className="text-[#ffffff] uppercase tracking-wide">Nutritional Guidance Notice:</strong> Meal plans and macro computations are provided for educational and athletic planning purposes. They do not constitute individualized clinical prescriptions. Exact nutrient yields vary slightly by regional preparation and cooking method.
+          </p>
+        </div>
+      </ElectricBorder>
 
       {/* Action Notice Toast */}
       {actionNotice && (
@@ -613,92 +616,97 @@ function DietFoodsContent() {
           ) : (
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {filteredFoods.map((food) => (
-                <div
+                <ElectricBorder
                   key={food.id}
-                  className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-5 shadow-sm transition-all hover:border-[#ff2a3b]/50 group"
+                  borderRadius={19}
+                  className="h-full"
                 >
-                  <div>
-                    <div className="flex items-start justify-between gap-2">
-                      <div>
-                        <span className="eyebrow text-[10px]">
-                          {food.category.replace('_', ' ')}
-                        </span>
-                        <h3 className="mt-1 text-base font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">{food.name}</h3>
+                  <div
+                    className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-5 shadow-sm transition-all hover:border-[#ff2a3b]/50 group h-full"
+                  >
+                    <div>
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="eyebrow text-[10px]">
+                            {food.category.replace('_', ' ')}
+                          </span>
+                          <h3 className="mt-1 text-base font-bold text-[#ffffff] group-hover:text-[#ff2a3b] transition-colors">{food.name}</h3>
+                        </div>
+                        {food.foodForm && (
+                          <span className="rounded-md border border-[#1b3d27] bg-[#1a1a1a]/60 px-2 py-0.5 text-[10px] text-[#ff2a3b] uppercase font-mono tracking-wider">
+                            {food.foodForm}
+                          </span>
+                        )}
                       </div>
-                      {food.foodForm && (
-                        <span className="rounded-md border border-[#1b3d27] bg-[#1a1a1a]/60 px-2 py-0.5 text-[10px] text-[#ff2a3b] uppercase font-mono tracking-wider">
-                          {food.foodForm}
-                        </span>
+
+                      {food.description && (
+                        <p className="mt-2 text-xs text-[#ffffff]/60 line-clamp-2 leading-relaxed">
+                          {food.description}
+                        </p>
                       )}
-                    </div>
 
-                    {food.description && (
-                      <p className="mt-2 text-xs text-[#ffffff]/60 line-clamp-2 leading-relaxed">
-                        {food.description}
-                      </p>
-                    )}
-
-                    {/* Macronutrients Display */}
-                    <div className="mt-4 rounded-xl border border-[#1b3d27]/60 bg-[#000000]/70 p-3">
-                      <div className="text-[10px] font-medium text-[#ffffff]/50 mb-2">
-                        Per Reference Portion: <strong className="text-[#ffffff] font-mono">{food.referenceQuantity} {food.referenceUnit}</strong>
-                      </div>
-                      <div className="grid grid-cols-4 gap-1.5 text-center text-xs">
-                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
-                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Calories</span>
-                          <span className="font-display text-sm font-bold text-[#ff2a3b]">
-                            {food.energyKcal !== null ? `${food.energyKcal}` : '—'}
-                          </span>
+                      {/* Macronutrients Display */}
+                      <div className="mt-4 rounded-xl border border-[#1b3d27]/60 bg-[#000000]/70 p-3">
+                        <div className="text-[10px] font-medium text-[#ffffff]/50 mb-2">
+                          Per Reference Portion: <strong className="text-[#ffffff] font-mono">{food.referenceQuantity} {food.referenceUnit}</strong>
                         </div>
-                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
-                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Protein</span>
-                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
-                            {food.proteinG !== null ? `${food.proteinG}g` : '—'}
-                          </span>
-                        </div>
-                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
-                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Carbs</span>
-                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
-                            {food.carbohydratesG !== null ? `${food.carbohydratesG}g` : '—'}
-                          </span>
-                        </div>
-                        <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
-                          <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Fat</span>
-                          <span className="font-mono text-xs font-semibold text-[#ffffff]">
-                            {food.fatG !== null ? `${food.fatG}g` : '—'}
-                          </span>
+                        <div className="grid grid-cols-4 gap-1.5 text-center text-xs">
+                          <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                            <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Calories</span>
+                            <span className="font-display text-sm font-bold text-[#ff2a3b]">
+                              {food.energyKcal !== null ? `${food.energyKcal}` : '—'}
+                            </span>
+                          </div>
+                          <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                            <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Protein</span>
+                            <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                              {food.proteinG !== null ? `${food.proteinG}g` : '—'}
+                            </span>
+                          </div>
+                          <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                            <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Carbs</span>
+                            <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                              {food.carbohydratesG !== null ? `${food.carbohydratesG}g` : '—'}
+                            </span>
+                          </div>
+                          <div className="rounded-lg bg-[#0d0d0d] p-2 border border-[#1b3d27]/70">
+                            <span className="block text-[9px] uppercase tracking-wider text-[#ffffff]/50">Fat</span>
+                            <span className="font-mono text-xs font-semibold text-[#ffffff]">
+                              {food.fatG !== null ? `${food.fatG}g` : '—'}
+                            </span>
+                          </div>
                         </div>
                       </div>
+
+                      {/* Provenance Metadata */}
+                      <div className="mt-3 flex items-center justify-between text-[10px] text-[#ffffff]/40">
+                        <span>Source: <strong className="text-[#ffffff]/70">{food.sourceName}</strong></span>
+                        <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold border border-[#1b3d27] bg-[#1a1a1a]/40 text-[#ff2a3b]">
+                          {food.matchStatus}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* Provenance Metadata */}
-                    <div className="mt-3 flex items-center justify-between text-[10px] text-[#ffffff]/40">
-                      <span>Source: <strong className="text-[#ffffff]/70">{food.sourceName}</strong></span>
-                      <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold border border-[#1b3d27] bg-[#1a1a1a]/40 text-[#ff2a3b]">
-                        {food.matchStatus}
-                      </span>
+                    {/* Action */}
+                    <div className="mt-5 pt-3 border-t border-[#1b3d27]/70">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setAddFoodModal(food);
+                          setAddPortion(food.referenceQuantity);
+                          setAddUnit(food.referenceUnit);
+                          setAddSlot('breakfast');
+                          if (userPlans.length > 0) {
+                            setTargetPlanIdForAdd(selectedPlanId || userPlans[0].id);
+                          }
+                        }}
+                        className="kinetik-btn-dark w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold uppercase tracking-wider hover:border-[#ff2a3b]/60 hover:text-[#ff2a3b] transition-all min-h-[44px]"
+                      >
+                        <Plus className="h-3.5 w-3.5" /> Add to Meal Plan
+                      </button>
                     </div>
                   </div>
-
-                  {/* Action */}
-                  <div className="mt-5 pt-3 border-t border-[#1b3d27]/70">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setAddFoodModal(food);
-                        setAddPortion(food.referenceQuantity);
-                        setAddUnit(food.referenceUnit);
-                        setAddSlot('breakfast');
-                        if (userPlans.length > 0) {
-                          setTargetPlanIdForAdd(selectedPlanId || userPlans[0].id);
-                        }
-                      }}
-                      className="kinetik-btn-dark w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold uppercase tracking-wider hover:border-[#ff2a3b]/60 hover:text-[#ff2a3b] transition-all min-h-[44px]"
-                    >
-                      <Plus className="h-3.5 w-3.5" /> Add to Meal Plan
-                    </button>
-                  </div>
-                </div>
+                </ElectricBorder>
               ))}
             </div>
           )}
@@ -714,10 +722,14 @@ function DietFoodsContent() {
 
           <div className="grid gap-6 lg:grid-cols-2">
             {samplePlans.map((sample) => (
-              <div
+              <ElectricBorder
                 key={sample.id}
-                className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-6 shadow-sm transition-all hover:border-[#ff2a3b]/40"
+                borderRadius={19}
+                className="h-full"
               >
+                <div
+                  className="kinetik-card flex flex-col justify-between rounded-2xl border border-[#1b3d27]/70 bg-[#0d0d0d]/70 p-6 shadow-sm transition-all hover:border-[#ff2a3b]/40 h-full"
+                >
                 <div>
                   <div className="flex items-center justify-between border-b border-[#1b3d27]/70 pb-3">
                     <div>
@@ -782,7 +794,8 @@ function DietFoodsContent() {
                   </button>
                 </div>
               </div>
-            ))}
+            </ElectricBorder>
+          ))}
           </div>
         </div>
       )}
@@ -870,7 +883,8 @@ function DietFoodsContent() {
                 {loadingPlan ? (
                   <div className="h-96 animate-pulse rounded-2xl border border-[#1b3d27] bg-[#0d0d0d]/50" />
                 ) : activePlanDetail ? (
-                  <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm space-y-6">
+                  <ElectricBorder borderRadius={19}>
+                    <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm space-y-6">
                     {/* Plan Header */}
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-[#1b3d27]/70 pb-4 gap-3">
                       <div>
@@ -1067,7 +1081,8 @@ function DietFoodsContent() {
                       })}
                     </div>
                   </div>
-                ) : null}
+                </ElectricBorder>
+              ) : null}
               </div>
             </div>
           )}

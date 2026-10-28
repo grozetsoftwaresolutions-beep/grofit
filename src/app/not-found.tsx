@@ -3,7 +3,7 @@ import { ArrowLeft, Home } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <div className="relative flex min-h-screen items-center justify-center bg-[#000000] p-4 text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white overflow-hidden">
+    <div className="relative flex min-h-screen items-center justify-center bg-transparent p-4 text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white overflow-hidden">
       {/* Ambient background glow */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#ff2a3b]/15 via-[#1a1a1a]/20 to-transparent blur-3xl" />
       <div className="pointer-events-none absolute bottom-0 right-0 -z-10 h-[400px] w-[500px] rounded-full bg-[#1a1a1a]/30 blur-3xl" />

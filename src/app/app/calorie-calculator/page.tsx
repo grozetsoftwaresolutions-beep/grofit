@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import ElectricBorder from '@/components/ElectricBorder';
 import {
   Flame,
   Activity,
@@ -164,7 +165,8 @@ export default function CalorieCalculatorPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-8 pb-12">
       {/* Header Banner */}
-      <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8">
+      <ElectricBorder borderRadius={20}>
+        <div className="kinetik-card rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8">
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#1a1a1a] border border-[#ff2a3b]/30 text-[#ff2a3b]">
             <Flame className="h-6 w-6" />
@@ -190,16 +192,18 @@ export default function CalorieCalculatorPage() {
           </p>
         </div>
       </div>
+      </ElectricBorder>
 
       {/* Main Grid: Form & Results */}
       <div className="grid gap-8 lg:grid-cols-12">
         {/* Form Column */}
         <div className={result ? 'lg:col-span-7' : 'lg:col-span-12'}>
-          <form
-            onSubmit={handleCalculate}
-            className="kinetik-card space-y-6 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8"
-            noValidate
-          >
+          <ElectricBorder borderRadius={20} className="h-full">
+            <form
+              onSubmit={handleCalculate}
+              className="kinetik-card space-y-6 rounded-2xl border border-[#1b3d27]/80 bg-[#0d0d0d]/80 p-6 shadow-sm md:p-8 h-full"
+              noValidate
+            >
             <h2 className="font-display text-xl font-bold uppercase tracking-wide text-[#ffffff]">
               YOUR MEASUREMENTS &amp; GOALS
             </h2>
@@ -594,13 +598,15 @@ export default function CalorieCalculatorPage() {
               )}
             </div>
           </form>
+          </ElectricBorder>
         </div>
 
         {/* Results Column */}
         {result && (
           <div className="space-y-6 lg:col-span-5">
             {result.status === 'calculated' && (
-              <div className="kinetik-card space-y-6 rounded-2xl border border-[#ff2a3b]/40 bg-[#0d0d0d]/90 p-6 shadow-xl md:p-8">
+              <ElectricBorder borderRadius={20}>
+                <div className="kinetik-card space-y-6 rounded-2xl border border-[#ff2a3b]/40 bg-[#0d0d0d]/90 p-6 shadow-xl md:p-8">
                 {/* Status Badge */}
                 <div className="flex items-center justify-between">
                   <span className="inline-flex items-center gap-1.5 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-[#ff2a3b]">
@@ -679,6 +685,7 @@ export default function CalorieCalculatorPage() {
                   <ArrowRight className="h-5 w-5 text-white" />
                 </Link>
               </div>
+              </ElectricBorder>
             )}
 
             {/* Target Withheld Guardrail View */}

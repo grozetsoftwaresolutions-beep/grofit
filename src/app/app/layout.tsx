@@ -4,7 +4,7 @@ import { STRINGS } from '@/lib/i18n/strings';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col bg-[#000000] text-white antialiased selection:bg-[#ff2a3b] selection:text-white">
+    <div className="flex min-h-screen flex-col bg-transparent text-white antialiased selection:bg-[#ff2a3b] selection:text-white">
       {/* Skip to Main Content Link for Keyboard and Screen Reader Accessibility (WCAG 2.2 AA) */}
       <a
         href="#main-content"
