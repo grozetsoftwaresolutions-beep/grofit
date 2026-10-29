@@ -56,6 +56,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${barlowCondensed.variable} ${inter.variable} ${geistMono.variable} dark h-full antialiased`}
       style={{ colorScheme: 'dark', backgroundColor: '#000000' }}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(sessionStorage.getItem('grofit_intro_seen')==='true'||window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('intro-seen');}}catch(e){}`,
+          }}
+        />
+      </head>
       <body
         className="min-h-full flex flex-col text-white selection:bg-[#ff2a3b] selection:text-white relative bg-[#000000]"
         style={{ backgroundColor: '#000000' }}

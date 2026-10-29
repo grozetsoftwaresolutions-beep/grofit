@@ -62,6 +62,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Instant Zero-Latency Intro Overlay Hide for Returning Users */
+html.intro-seen #grofit-intro-overlay {
+  display: none !important;
+}
+
 ::selection {
   background: #ff2a3b;
   color: #ffffff;

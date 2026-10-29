@@ -10,7 +10,7 @@ const SHOW_INTRO_EVERY_TIME = false;
 const SESSION_STORAGE_KEY = 'grofit_intro_seen';
 
 export default function IntroOverlay() {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
   const dismissIntro = useCallback(() => {
@@ -18,6 +18,7 @@ export default function IntroOverlay() {
     try {
       document.body.style.overflow = '';
       sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+      document.documentElement.classList.add('intro-seen');
     } catch {
       // Ignore storage errors in private browsing modes
     }
@@ -40,23 +41,19 @@ export default function IntroOverlay() {
       alreadySeen = false;
     }
 
-    if (!SHOW_INTRO_EVERY_TIME && alreadySeen) {
-      // Already seen in this session, do not show
-      return;
-    }
-
-    if (prefersReducedMotion) {
-      // Respect user's motion preference: immediately mark seen and do not play full intro
+    if ((!SHOW_INTRO_EVERY_TIME && alreadySeen) || prefersReducedMotion) {
+      // Already seen in this session or prefers reduced motion: immediately hide
+      setIsVisible(false);
       try {
-        sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
+        document.body.style.overflow = '';
+        document.documentElement.classList.add('intro-seen');
       } catch {
         // no-op
       }
       return;
     }
 
-    // First time in this session: display overlay and lock background scrolling
-    setIsVisible(true);
+    // First time in this session: ensure background scrolling is locked
     try {
       document.body.style.overflow = 'hidden';
     } catch {
@@ -117,6 +114,7 @@ export default function IntroOverlay() {
 
   return (
     <div
+      id="grofit-intro-overlay"
       onClick={dismissIntro}
       className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000000] transition-opacity duration-600 select-none ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
