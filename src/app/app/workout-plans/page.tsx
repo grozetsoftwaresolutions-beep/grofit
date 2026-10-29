@@ -47,6 +47,19 @@ interface Exercise {
   recommendedRepRange?: string | null;
 }
 
+function getFullCredits(tpl: WorkoutTemplate): string {
+  if (tpl.name.includes('6-Day')) {
+    return 'Jeff Nippard • Renaissance Periodization (Dr. Mike Israetel) • Scott Herman • Squat University • Sean Nalewanyj';
+  }
+  if (tpl.name.includes('4-Day')) {
+    return 'DADBODS • Science-Based Hypertrophy & Verified Biomechanics';
+  }
+  if (tpl.name.includes('3-Day') || tpl.name.toLowerCase().includes('calisthenic')) {
+    return 'Calisthenicmovement • FitnessFAQs • SaturnoMovement • Minus The Gym';
+  }
+  return tpl.sourceReference || 'Verified Sports Science Documentation';
+}
+
 export default function WorkoutPlansPage() {
   const [activeTab, setActiveTab] = useState<'templates' | 'library'>('templates');
 
@@ -224,16 +237,33 @@ export default function WorkoutPlansPage() {
                       {tpl.name}
                     </h2>
 
-                    {tpl.sourceReference && (
-                      <div className="flex items-center gap-1.5 text-xs text-[#a1a1aa] bg-[#000000] px-3 py-1.5 rounded-xl border border-[#ffffff]/10 font-mono min-w-0">
-                        <span className="font-bold text-[#ff2a3b] shrink-0">Credits:</span>
-                        <span className="truncate min-w-0 text-[#ffffff]">
-                          {tpl.name.includes('6-Day')
-                            ? 'Jeff Nippard, RP, Scott Herman, Squat Univ & more'
-                            : tpl.sourceReference}
-                        </span>
-                      </div>
-                    )}
+                    {tpl.sourceReference && (() => {
+                      const fullCredits = getFullCredits(tpl);
+                      return (
+                        <div
+                          className="group/credit relative flex items-center bg-[#000000] px-3 py-1.5 rounded-xl border border-[#ffffff]/10 font-mono text-xs overflow-hidden cursor-default shadow-sm"
+                          title={`Full Credits: ${fullCredits}`}
+                        >
+                          {/* Pinned Red Credits Label */}
+                          <div className="z-10 bg-[#000000] pr-2 flex items-center gap-1 shrink-0 font-bold text-[#ff2a3b] border-r border-[#ffffff]/10 mr-2">
+                            <span>Credits:</span>
+                          </div>
+
+                          {/* Smooth Right Edge Gradient Mask */}
+                          <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-6 bg-gradient-to-l from-black to-transparent z-10" />
+
+                          {/* Continuous Marquee Ticker Track */}
+                          <div className="overflow-hidden flex-1 relative flex items-center">
+                            <div className="animate-credit-marquee flex items-center gap-6 shrink-0 text-[#ffffff]">
+                              <span>{fullCredits}</span>
+                              <span className="text-[#ff2a3b]">✦</span>
+                              <span>{fullCredits}</span>
+                              <span className="text-[#ff2a3b]">✦</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
 
                     <p className="text-xs leading-relaxed text-[#a1a1aa] line-clamp-3 sm:line-clamp-none break-words">
                       {tpl.description || 'Curated workout programme sourced from verified fitness documentation.'}

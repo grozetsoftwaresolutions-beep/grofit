@@ -186,7 +186,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-transparent text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white">
       {/* ─── STICKY MINIMAL HEADER (Matching Kinetik Header) ─── */}
-      <header className="sticky top-0 z-50 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 w-full border-b border-[#ffffff]/10 bg-[#000000]/95 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.8)]">
         <div className="mx-auto flex max-w-[1720px] w-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 py-3">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative flex items-center justify-center transition-transform duration-200 group-hover:scale-110">

@@ -51,7 +51,7 @@ html {
 
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100vw;
   background: #000000;
   color: var(--foreground);
@@ -198,3 +198,26 @@ h1 em, h2 em, h3 em, h4 em, h5 em, h6 em {
     display: none !important;
   }
 }
+
+/* Continuous Credits Marquee Ticker */
+@keyframes creditMarquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-credit-marquee {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: creditMarquee 20s linear infinite;
+  will-change: transform;
+}
+
+.animate-credit-marquee:hover,
+.group\/credit:hover .animate-credit-marquee {
+  animation-play-state: paused;
+}
+
