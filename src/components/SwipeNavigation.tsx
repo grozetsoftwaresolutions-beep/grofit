@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback, Suspense } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 const DOCK_TABS = [
@@ -15,7 +15,7 @@ interface SwipeNavigationProps {
   children: React.ReactNode;
 }
 
-export default function SwipeNavigation({ children }: SwipeNavigationProps) {
+function SwipeNavigationInner({ children }: SwipeNavigationProps) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -147,5 +147,13 @@ export default function SwipeNavigation({ children }: SwipeNavigationProps) {
     >
       {children}
     </div>
+  );
+}
+
+export default function SwipeNavigation({ children }: SwipeNavigationProps) {
+  return (
+    <Suspense fallback={<div className="w-full flex-1 flex flex-col min-h-0">{children}</div>}>
+      <SwipeNavigationInner>{children}</SwipeNavigationInner>
+    </Suspense>
   );
 }
