@@ -187,7 +187,7 @@ export default function HomePage() {
     <div className="min-h-screen bg-transparent text-[#ffffff] selection:bg-[#ff2a3b] selection:text-white">
       {/* ─── STICKY MINIMAL HEADER (Matching Kinetik Header) ─── */}
       <header className="sticky top-0 z-50 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-[1720px] w-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 py-3">
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="relative flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
               <Image
@@ -852,7 +852,7 @@ export default function HomePage() {
 
       {/* ─── FOOTER (Matching Kinetik Minimal Athletic Footer) ─── */}
       <footer className="border-t border-[#ffffff]/10 py-10 bg-black/60 text-[#71717a] text-xs">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mx-auto max-w-[1720px] w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2.5 font-mono">
             <div className="relative h-8 w-8 flex items-center justify-center">
               <Image

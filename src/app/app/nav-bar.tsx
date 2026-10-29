@@ -81,8 +81,8 @@ export function AppNavBar() {
   return (
     <>
       {/* Top Header Navigation */}
-      <header className="sticky top-0 z-30 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl px-4 sm:px-6 py-3 shadow-md transition-colors">
-        <div className="mx-auto flex max-w-7xl items-center justify-between">
+      <header className="sticky top-0 z-30 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 py-3 shadow-md transition-colors">
+        <div className="mx-auto flex max-w-[1720px] w-full items-center justify-between">
           {/* Brand & Desktop Links */}
           <div className="flex items-center gap-6 lg:gap-8">
             <Link
