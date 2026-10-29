@@ -143,19 +143,19 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
     if (absDeltaX < 40 || deltaTime > 600) return;
 
     // Determine target index based on user's exact specification:
-    // SWIPE RIGHT (deltaX > 0): Advance forward along the dock (Home -> Workouts -> My Plan -> Diet -> Habits)
-    // SWIPE LEFT (deltaX < 0): Move backward along the dock (Habits -> Diet -> My Plan -> Workouts -> Home)
+    // 1. Drag RIGHT-TO-LEFT (deltaX < 0): Advance forward along the dock (Home -> Workouts -> My Plan -> Diet -> Habits)
+    // 2. Drag LEFT-TO-RIGHT (deltaX > 0): Step backward along the dock in reverse (Habits -> Diet -> My Plan -> Workouts -> Home)
     let nextIndex = -1;
     let direction: 'forward' | 'backward' | null = null;
 
-    if (deltaX > 0) {
-      // Swiping rightward moves to next tab
+    if (deltaX < 0) {
+      // Finger drags right to left -> advance to next tab
       if (currentIndex < DOCK_TABS.length - 1) {
         nextIndex = currentIndex + 1;
         direction = 'forward';
       }
-    } else if (deltaX < 0) {
-      // Swiping leftward moves to previous tab
+    } else if (deltaX > 0) {
+      // Finger drags left to right -> step back to previous tab
       if (currentIndex > 0) {
         nextIndex = currentIndex - 1;
         direction = 'backward';
