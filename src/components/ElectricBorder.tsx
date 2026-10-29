@@ -549,7 +549,13 @@ const ElectricBorder = ({
       powerPreference: 'default'
     });
     const program = gl ? link(gl) : null;
-    if (!gl || !program) return;
+    if (!gl || !program) {
+      if (canvas) {
+        canvas.style.opacity = '0';
+        canvas.style.display = 'none';
+      }
+      return;
+    }
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const vao = gl.createVertexArray();
@@ -573,6 +579,7 @@ const ElectricBorder = ({
     let visible = true;
     let pageVisible = document.visibilityState !== 'hidden';
     let lost = false;
+    let hasRenderedFirstFrame = false;
 
     const resize = () => {
       const s = settingsRef.current;
@@ -625,6 +632,10 @@ const ElectricBorder = ({
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
+      if (!hasRenderedFirstFrame) {
+        hasRenderedFirstFrame = true;
+        canvas.style.opacity = '1';
+      }
       if (power <= 0.001 && !sparks.length) return;
       gl.useProgram(program.program);
       gl.uniform2f(u.uSize, width, height);
@@ -798,6 +809,10 @@ const ElectricBorder = ({
       lost = true;
       cancelAnimationFrame(raf);
       raf = 0;
+      if (canvas) {
+        canvas.style.opacity = '0';
+        canvas.style.display = 'none';
+      }
     };
     const onRestored = () => setGeneration(value => value + 1);
     canvas.addEventListener('webglcontextlost', onLost);
@@ -835,6 +850,9 @@ const ElectricBorder = ({
       document.removeEventListener('visibilitychange', onVisibility);
       canvas.removeEventListener('webglcontextlost', onLost);
       canvas.removeEventListener('webglcontextrestored', onRestored);
+      if (canvas) {
+        canvas.style.opacity = '0';
+      }
       if (!gl.isContextLost()) {
         gl.deleteVertexArray(vao);
         gl.deleteProgram(program.program);
@@ -849,8 +867,13 @@ const ElectricBorder = ({
       {isInView && (
         <canvas
           ref={canvasRef}
-          className="pointer-events-none absolute z-[1] block"
-          style={{ top: -MARGIN, left: -MARGIN }}
+          className="pointer-events-none absolute z-[1] block transition-opacity duration-300 opacity-0"
+          style={{
+            top: -MARGIN,
+            left: -MARGIN,
+            backgroundColor: 'transparent',
+            background: 'transparent',
+          }}
           aria-hidden="true"
         />
       )}
