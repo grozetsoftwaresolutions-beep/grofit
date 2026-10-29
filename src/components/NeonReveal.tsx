@@ -190,7 +190,7 @@ export default function NeonReveal({
       ref={containerRef}
       onClick={handleContainerClick}
       className={`relative overflow-hidden ${interactive ? 'cursor-pointer' : ''} ${className}`}
-      style={{ background }}
+      style={{ background, willChange: 'contents', transform: 'translateZ(0)' }}
       role="region"
       aria-label="Neon Reveal Animation"
     >
@@ -201,11 +201,12 @@ export default function NeonReveal({
           top: direction === 'down' ? `${inset}px` : undefined,
           bottom: direction === 'up' ? `${inset}px` : undefined,
           left: '50%',
-          transform: `translateX(-50%) scaleX(${tubeScale})`,
+          transform: `translateX(-50%) scaleX(${tubeScale}) translateZ(0)`,
           transformOrigin: tubeOrigin,
           width: tubeWidth,
           height: `${thickness}px`,
           opacity: flickerState,
+          willChange: 'transform, opacity',
         }}
       >
         {/* Core hot-white gas discharge filament */}
@@ -263,6 +264,8 @@ export default function NeonReveal({
         style={{
           WebkitMaskImage: contentMask,
           maskImage: contentMask,
+          willChange: 'mask-image, -webkit-mask-image',
+          transform: 'translateZ(0)',
         }}
       >
         {children}

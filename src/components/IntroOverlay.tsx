@@ -16,6 +16,7 @@ export default function IntroOverlay() {
   const dismissIntro = useCallback(() => {
     setIsFadingOut(true);
     try {
+      document.body.style.overflow = '';
       sessionStorage.setItem(SESSION_STORAGE_KEY, 'true');
     } catch {
       // Ignore storage errors in private browsing modes
@@ -54,8 +55,13 @@ export default function IntroOverlay() {
       return;
     }
 
-    // First time in this session: display overlay
+    // First time in this session: display overlay and lock background scrolling
     setIsVisible(true);
+    try {
+      document.body.style.overflow = 'hidden';
+    } catch {
+      // no-op
+    }
 
     // Auto-dismiss after 2.8 seconds
     const autoDismissTimer = setTimeout(() => {
@@ -69,11 +75,41 @@ export default function IntroOverlay() {
       }
     };
 
+    // Wheel and touch scroll listener for fluid scroll-to-dismiss without background stutter
+    const handleWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) > 15 || Math.abs(e.deltaX) > 15) {
+        dismissIntro();
+      }
+    };
+
+    let touchStartY = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.touches[0]) {
+        touchStartY = e.touches[0].clientY;
+      }
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches[0] && Math.abs(e.touches[0].clientY - touchStartY) > 20) {
+        dismissIntro();
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
     return () => {
       clearTimeout(autoDismissTimer);
+      try {
+        document.body.style.overflow = '';
+      } catch {
+        // no-op
+      }
       window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, [dismissIntro]);
 
@@ -85,6 +121,11 @@ export default function IntroOverlay() {
       className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#000000] transition-opacity duration-600 select-none ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
+      style={{
+        contain: 'strict',
+        willChange: 'opacity',
+        transform: 'translateZ(0)',
+      }}
       role="dialog"
       aria-modal="true"
       aria-label="Welcome to GROFIT"
