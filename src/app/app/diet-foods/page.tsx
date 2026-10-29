@@ -211,8 +211,11 @@ function DietFoodsContent() {
           const json = await res.json();
           if (!unmounted && json.data) {
             setUserPlans(json.data);
-            if (json.data.length > 0 && !selectedPlanId) {
-              setSelectedPlanId(json.data[0].id);
+            if (json.data.length > 0) {
+              if (!selectedPlanId) {
+                setSelectedPlanId(json.data[0].id);
+              }
+              setTargetPlanIdForAdd((prev) => prev || json.data[0].id);
             }
           }
         }
@@ -320,11 +323,15 @@ function DietFoodsContent() {
 
   async function handleAddItemToPlan(e: React.FormEvent) {
     e.preventDefault();
-    if (!addFoodModal || !targetPlanIdForAdd) return;
+    const planIdToUse = targetPlanIdForAdd || selectedPlanId || (userPlans[0]?.id ?? '');
+    if (!addFoodModal || !planIdToUse) {
+      alert('Please select or create a meal plan first.');
+      return;
+    }
 
     try {
       setSubmitting(true);
-      const res = await fetch(`/api/meal-plans/${targetPlanIdForAdd}/items`, {
+      const res = await fetch(`/api/meal-plans/${planIdToUse}/items`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -342,7 +349,7 @@ function DietFoodsContent() {
       }
 
       setAddFoodModal(null);
-      setSelectedPlanId(targetPlanIdForAdd);
+      setSelectedPlanId(planIdToUse);
       setPlanReloadTrigger((k) => k + 1);
       setActiveTab('my-plans');
       setActionNotice(`Added ${addFoodModal.name} (${addPortion}${addUnit}) to ${addSlot}.`);
@@ -696,9 +703,8 @@ function DietFoodsContent() {
                           setAddPortion(food.referenceQuantity);
                           setAddUnit(food.referenceUnit);
                           setAddSlot('breakfast');
-                          if (userPlans.length > 0) {
-                            setTargetPlanIdForAdd(selectedPlanId || userPlans[0].id);
-                          }
+                          const planIdToUse = targetPlanIdForAdd || selectedPlanId || (userPlans.length > 0 ? userPlans[0].id : '');
+                          setTargetPlanIdForAdd(planIdToUse);
                         }}
                         className="kinetik-btn-dark w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 text-xs font-bold uppercase tracking-wider hover:border-[#ff2a3b]/60 hover:text-[#ff2a3b] transition-all min-h-[44px]"
                       >
@@ -1091,8 +1097,8 @@ function DietFoodsContent() {
 
       {/* MODAL: ADD FOOD TO MEAL PLAN (Mobile Bottom-Sheet on small screens) */}
       {addFoodModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
               <div>
                 <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Add to Meal Plan</h3>
@@ -1202,8 +1208,8 @@ function DietFoodsContent() {
 
       {/* MODAL: CREATE MEAL PLAN */}
       {createPlanModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
               <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Create New Meal Plan</h3>
               <button
@@ -1273,8 +1279,8 @@ function DietFoodsContent() {
 
       {/* MODAL: EDIT PORTION */}
       {editItemModal && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
             <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
               <div>
                 <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Edit Portion</h3>

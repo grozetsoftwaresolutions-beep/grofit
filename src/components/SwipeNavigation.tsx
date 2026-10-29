@@ -203,13 +203,17 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
 
       {/* Main Tab Content with GPU-Accelerated Hardware Smooth Slide */}
       <div
-        className="w-full flex-1 flex flex-col min-h-0 transition-all duration-200 ease-out will-change-[transform,opacity]"
+        className={`w-full flex-1 flex flex-col min-h-0 ${
+          isTransitionActive
+            ? 'transition-all duration-200 ease-out will-change-[transform,opacity]'
+            : ''
+        }`}
         style={{
           transform: isTransitionActive
             ? navDirection === 'forward'
               ? 'translate3d(-24px, 0, 0)'
               : 'translate3d(24px, 0, 0)'
-            : 'translate3d(0, 0, 0)',
+            : undefined,
           opacity: isTransitionActive ? 0.65 : 1,
         }}
       >

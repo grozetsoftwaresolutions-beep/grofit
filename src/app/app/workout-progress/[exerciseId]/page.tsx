@@ -822,8 +822,8 @@ function ProgressContent(props: {
 
         {/* Modal: Log Workout (Bottom-sheet on mobile) */}
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
-            <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-lg rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl max-h-[90vh] overflow-y-auto">
               <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
               <div className="flex items-center justify-between border-b border-[#ffffff]/10 pb-3">
                 <h3 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff]">
@@ -1019,8 +1019,8 @@ function ProgressContent(props: {
 
         {/* Modal: Confirm Delete */}
         {deleteConfirmId && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
-            <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-red-500/30 bg-[#0d0d0d] p-6 shadow-2xl text-center">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-red-500/30 bg-[#0d0d0d] p-6 pb-20 sm:pb-6 shadow-2xl text-center">
               <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
               <AlertCircle className="mx-auto h-10 w-10 text-red-400 mb-2" />
               <h3 className="font-display text-xl font-bold uppercase tracking-tight text-[#ffffff]">Delete Workout Record?</h3>

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedSupabaseClient } from '@/lib/supabase/auth-helper';
+import { getAdminSupabaseClient } from '@/lib/supabase/admin';
 import {
   isValidUUID,
   validateMealSlot,
@@ -143,6 +144,35 @@ export async function POST(
       const seedMatch = VERIFIED_FOOD_SEEDS.find((f) => f.id === foodId && f.isActive);
       if (seedMatch) {
         foodData = seedMatch as FoodRecordLike;
+        // Auto-upsert verified food seed into public.foods so foreign key constraint is satisfied
+        try {
+          const adminClient = getAdminSupabaseClient();
+          await adminClient.from('foods').upsert({
+            id: seedMatch.id,
+            name: seedMatch.name,
+            description: seedMatch.description,
+            category: seedMatch.category,
+            food_form: seedMatch.foodForm,
+            dietary_preference: seedMatch.dietaryPreference,
+            meal_types: seedMatch.mealTypes,
+            reference_quantity: seedMatch.referenceQuantity,
+            reference_unit: seedMatch.referenceUnit,
+            energy_kcal: seedMatch.energyKcal,
+            protein_g: seedMatch.proteinG,
+            carbohydrates_g: seedMatch.carbohydratesG,
+            fat_g: seedMatch.fatG,
+            fibre_g: seedMatch.fibreG,
+            source_name: seedMatch.sourceName,
+            source_record_id: seedMatch.sourceRecordId,
+            source_reference: seedMatch.sourceReference,
+            source_url: seedMatch.sourceUrl,
+            match_status: seedMatch.matchStatus,
+            value_method: seedMatch.valueMethod,
+            is_active: seedMatch.isActive,
+          });
+        } catch (seedUpsertErr) {
+          console.error('Failed to auto-upsert food seed:', seedUpsertErr);
+        }
       }
     }
 

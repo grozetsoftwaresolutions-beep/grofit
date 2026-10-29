@@ -482,8 +482,8 @@ function SavedPlanContent({ planId }: { planId: string }) {
 
         {/* MODAL / BOTTOM SHEET: EDIT PLAN SETTINGS */}
         {editPlanModal && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
               <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#1b3d27] sm:hidden" />
               <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
                 <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Edit Plan Settings</h3>
@@ -544,8 +544,8 @@ function SavedPlanContent({ planId }: { planId: string }) {
 
         {/* MODAL / BOTTOM SHEET: EDIT PORTION */}
         {editItemModal && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
               <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#1b3d27] sm:hidden" />
               <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
                 <div>
@@ -614,8 +614,8 @@ function SavedPlanContent({ planId }: { planId: string }) {
 
         {/* MODAL / BOTTOM SHEET: ADD FOOD */}
         {addFoodModal && (
-          <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
-            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
+          <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-[#000000]/80 p-0 sm:p-4 backdrop-blur-md">
+            <div className="w-full max-w-md rounded-t-3xl sm:rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl text-[#ffffff] max-h-[90vh] overflow-y-auto">
               <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#1b3d27] sm:hidden" />
               <div className="flex items-start justify-between border-b border-[#1b3d27] pb-3">
                 <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Add Food to Plan</h3>

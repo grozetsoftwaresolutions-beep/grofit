@@ -725,51 +725,68 @@ function HabitTrackerContent() {
               return (
                 <div
                   key={habit.id}
-                  className={`kinetik-card flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border p-4 transition-all ${
+                  className={`kinetik-card rounded-xl border p-4 transition-all ${
                     isCompleted
                       ? 'border-[#1b3d27]/40 bg-[#000000]/60 opacity-80'
                       : 'border-[#1b3d27]/70 bg-[#0d0d0d]/70 hover:border-[#ff2a3b]/50'
                   }`}
                 >
-                  {/* Left: Habit Details */}
-                  <div className="flex-1 min-w-0">
-                    <h3
-                      className={`text-sm font-bold transition ${
-                        isCompleted ? 'text-[#ffffff]/50 line-through' : 'text-[#ffffff]'
+                  {/* Top Row: Habit Details on Left, Primary Completion Tick on Right */}
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex-1 min-w-0">
+                      <h3
+                        className={`text-sm font-bold transition ${
+                          isCompleted ? 'text-[#ffffff]/50 line-through' : 'text-[#ffffff]'
+                        }`}
+                      >
+                        {habit.name}
+                      </h3>
+                      {habit.description && (
+                        <p className="mt-0.5 text-xs text-[#ffffff]/60 line-clamp-2">
+                          {habit.description}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* Primary Completion Tick on Same Line */}
+                    <button
+                      type="button"
+                      onClick={() => handleToggleCompletion(habit.id)}
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border transition-all ${
+                        isCompleted
+                          ? 'border-[#ff2a3b] bg-[#ff2a3b] text-white shadow-[0_0_12px_rgba(255,42,59,0.35)]'
+                          : 'border-[#1b3d27] bg-[#000000] text-transparent hover:border-[#ff2a3b]/60'
                       }`}
+                      title={isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
                     >
-                      {habit.name}
-                    </h3>
-                    {habit.description && (
-                      <p className="mt-0.5 text-xs text-[#ffffff]/60 max-w-md">
-                        {habit.description}
-                      </p>
-                    )}
+                      <Check className="h-5 w-5 stroke-[3]" />
+                    </button>
                   </div>
 
-                  {/* Right: Streaks, Actions & Completion Tick */}
-                  <div className="flex flex-wrap items-center justify-between sm:justify-end gap-3 shrink-0">
-                    {/* Current Streak */}
-                    <span className="inline-flex items-center gap-1 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-2.5 py-0.5 text-xs font-mono font-bold text-[#ff2a3b]">
-                      <Flame className="h-3.5 w-3.5 text-[#ff2a3b]" />
-                      <span>{habit.currentStreak} d</span>
-                    </span>
+                  {/* Bottom Row: Streaks on Left, Action Icons on Right */}
+                  <div className="mt-3 pt-3 border-t border-[#1b3d27]/50 flex items-center justify-between gap-2">
+                    {/* Streaks */}
+                    <div className="flex items-center gap-2">
+                      <span className="inline-flex items-center gap-1 rounded-full border border-[#ff2a3b]/30 bg-[#1a1a1a] px-2.5 py-0.5 text-xs font-mono font-bold text-[#ff2a3b]">
+                        <Flame className="h-3.5 w-3.5 text-[#ff2a3b]" />
+                        <span>{habit.currentStreak} d</span>
+                      </span>
 
-                    {/* Best Streak */}
-                    <span
-                      className="inline-flex items-center gap-1 rounded-full border border-[#1b3d27] bg-[#000000] px-2.5 py-0.5 text-xs font-mono text-[#ffffff]/60"
-                      title="Best Streak"
-                    >
-                      <Award className="h-3.5 w-3.5 text-[#ffffff]/40" />
-                      <span>Best: {habit.bestStreak}</span>
-                    </span>
+                      <span
+                        className="inline-flex items-center gap-1 rounded-full border border-[#1b3d27] bg-[#000000] px-2.5 py-0.5 text-xs font-mono text-[#ffffff]/60"
+                        title="Best Streak"
+                      >
+                        <Award className="h-3.5 w-3.5 text-[#ffffff]/40" />
+                        <span>Best: {habit.bestStreak}</span>
+                      </span>
+                    </div>
 
                     {/* Action Icons */}
-                    <div className="flex items-center gap-1 border-l border-[#1b3d27] pl-2">
+                    <div className="flex items-center gap-1">
                       <button
                         type="button"
                         onClick={() => handleOpenHistory(habit)}
-                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
+                        className="rounded p-1.5 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="View History"
                       >
                         <History className="h-4 w-4" />
@@ -783,7 +800,7 @@ function HabitTrackerContent() {
                           setFormDescription(habit.description || '');
                           setFormErrors({});
                         }}
-                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
+                        className="rounded p-1.5 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="Edit Habit"
                       >
                         <Edit2 className="h-4 w-4" />
@@ -792,7 +809,7 @@ function HabitTrackerContent() {
                       <button
                         type="button"
                         onClick={() => handleToggleArchive(habit)}
-                        className="rounded p-1 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
+                        className="rounded p-1.5 text-[#ffffff]/50 hover:text-[#ff2a3b] hover:bg-[#1a1a1a] transition"
                         title="Archive Habit"
                       >
                         <Archive className="h-4 w-4" />
@@ -801,26 +818,10 @@ function HabitTrackerContent() {
                       <button
                         type="button"
                         onClick={() => setDeletingHabit(habit)}
-                        className="rounded p-1 text-[#ffffff]/50 hover:text-rose-400 hover:bg-[#000000] transition"
+                        className="rounded p-1.5 text-[#ffffff]/50 hover:text-rose-400 hover:bg-[#000000] transition"
                         title="Delete Habit"
                       >
                         <Trash2 className="h-4 w-4" />
-                      </button>
-                    </div>
-
-                    {/* Completion Tick on the Right */}
-                    <div className="border-l border-[#1b3d27] pl-2">
-                      <button
-                        type="button"
-                        onClick={() => handleToggleCompletion(habit.id)}
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border transition-all ${
-                          isCompleted
-                            ? 'border-[#ff2a3b] bg-[#ff2a3b] text-white shadow-[0_0_12px_rgba(255, 42, 59, 0.3)]'
-                            : 'border-[#1b3d27] bg-[#000000] text-transparent hover:border-[#ff2a3b]/60'
-                        }`}
-                        title={isCompleted ? 'Mark Incomplete' : 'Mark Complete'}
-                      >
-                        <Check className="h-4 w-4 stroke-[3]" />
                       </button>
                     </div>
                   </div>
@@ -892,7 +893,7 @@ function HabitTrackerContent() {
 
       {/* Modal: Create Habit */}
       {createModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
           <div className="w-full max-w-md rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
             <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
               <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Create New Habit</h3>
@@ -968,7 +969,7 @@ function HabitTrackerContent() {
 
       {/* Modal: Edit Habit */}
       {editingHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
           <div className="w-full max-w-md rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
             <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
               <h3 className="font-display text-lg font-bold uppercase tracking-wide text-[#ffffff]">Edit Habit</h3>
@@ -1055,7 +1056,7 @@ function HabitTrackerContent() {
 
       {/* Modal: Habit Completion History */}
       {historyHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
           <div className="w-full max-w-lg rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
             <div className="flex items-center justify-between border-b border-[#1b3d27] pb-3">
               <div>
@@ -1125,7 +1126,7 @@ function HabitTrackerContent() {
 
       {/* Modal: Habit Performance Report (Last Month, 3 Months, 6 Months, 1 Year) */}
       {reportModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-2 sm:p-4 backdrop-blur-md overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#000000]/80 p-2 sm:p-4 backdrop-blur-md overflow-y-auto">
           <div
             id="printable-habit-report"
             className="w-full max-w-4xl max-h-[92vh] flex flex-col rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] shadow-2xl text-[#ffffff] overflow-hidden"
@@ -1420,7 +1421,7 @@ function HabitTrackerContent() {
 
       {/* Modal: Confirm Delete Habit */}
       {deletingHabit && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#000000]/80 p-4 backdrop-blur-md">
           <div className="w-full max-w-sm rounded-2xl border border-[#1b3d27] bg-[#0d0d0d] p-6 shadow-2xl text-[#ffffff]">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-950/60 border border-rose-500/40 text-rose-400 shrink-0">
