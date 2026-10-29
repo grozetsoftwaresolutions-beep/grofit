@@ -31,6 +31,22 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "grofit — Train With Intent",
   description: "Personalized fitness, science-based workout routines, 3D equipment lab, and nutrition tracking with grofit",
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [
+      { url: "/images/grofit-crest.png", sizes: "415x415", type: "image/png" },
+      { url: "/icon.png", sizes: "415x415", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      { url: "/images/grofit-crest.png", sizes: "415x415", type: "image/png" },
+    ],
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "grofit",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -38,9 +54,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       className={`${barlowCondensed.variable} ${inter.variable} ${geistMono.variable} dark h-full antialiased`}
-      style={{ colorScheme: 'dark' }}
+      style={{ colorScheme: 'dark', backgroundColor: '#000000' }}
     >
-      <body className="min-h-full flex flex-col text-white selection:bg-[#ff2a3b] selection:text-white relative bg-[#000000]">
+      <body
+        className="min-h-full flex flex-col text-white selection:bg-[#ff2a3b] selection:text-white relative bg-[#000000]"
+        style={{ backgroundColor: '#000000' }}
+      >
         <IntroOverlay />
         <div className="relative flex min-h-full flex-col">
           {children}
