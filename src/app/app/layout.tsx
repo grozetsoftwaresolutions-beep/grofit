@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import { AppNavBar } from './nav-bar';
 import { STRINGS } from '@/lib/i18n/strings';
+import SwipeNavigation from '@/components/SwipeNavigation';
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -17,10 +18,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <AppNavBar />
       </Suspense>
 
-      {/* Main Content with Safe Bottom Padding for Mobile Bottom Bar */}
-      <main id="main-content" className="mx-auto w-full max-w-[1720px] flex-1 px-3.5 py-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 pb-24 md:pb-8 focus:outline-none min-w-0 overflow-x-hidden">
-        {children}
-      </main>
+      {/* Main Content with Safe Bottom Padding for Mobile Bottom Bar & Swipe Gesture Navigation */}
+      <SwipeNavigation>
+        <main id="main-content" className="mx-auto w-full max-w-[1720px] flex-1 px-3.5 py-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-14 pb-24 md:pb-8 focus:outline-none min-w-0 overflow-x-hidden">
+          {children}
+        </main>
+      </SwipeNavigation>
     </div>
   );
 }
