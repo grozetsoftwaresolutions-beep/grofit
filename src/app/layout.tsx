@@ -31,15 +31,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "grofit — Train With Intent",
   description: "Personalized fitness, science-based workout routines, 3D equipment lab, and nutrition tracking with grofit",
-  manifest: "/manifest.webmanifest",
+  manifest: "/manifest.webmanifest?v=2",
   icons: {
     icon: [
-      { url: "/images/grofit-crest.png", sizes: "415x415", type: "image/png" },
-      { url: "/icon.png", sizes: "415x415", type: "image/png" },
+      { url: "/images/grofit-crest.png?v=2", sizes: "415x415", type: "image/png" },
+      { url: "/icon.png?v=2", sizes: "415x415", type: "image/png" },
     ],
-    shortcut: "/favicon.ico",
+    shortcut: "/favicon.ico?v=2",
     apple: [
-      { url: "/images/grofit-crest.png", sizes: "415x415", type: "image/png" },
+      { url: "/images/grofit-crest.png?v=2", sizes: "415x415", type: "image/png" },
     ],
   },
   appleWebApp: {

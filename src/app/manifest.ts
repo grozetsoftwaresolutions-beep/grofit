@@ -13,24 +13,24 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: 'portrait',
     icons: [
       {
-        src: '/images/grofit-crest.png',
+        src: '/images/grofit-crest.png?v=2',
         sizes: '415x415',
         type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/images/grofit-crest.png',
+        src: '/images/grofit-crest.png?v=2',
         sizes: '415x415',
         type: 'image/png',
         purpose: 'maskable',
       },
       {
-        src: '/icon.png',
+        src: '/icon.png?v=2',
         sizes: '415x415',
         type: 'image/png',
       },
       {
-        src: '/apple-icon.png',
+        src: '/apple-icon.png?v=2',
         sizes: '415x415',
         type: 'image/png',
       },
