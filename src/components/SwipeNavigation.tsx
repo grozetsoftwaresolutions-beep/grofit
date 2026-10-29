@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useEffect, useCallback, Suspense } from 'react';
+import React, { useRef, useEffect, useState, useTransition, useCallback, Suspense } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 
 const DOCK_TABS = [
@@ -18,6 +18,10 @@ interface SwipeNavigationProps {
 function SwipeNavigationInner({ children }: SwipeNavigationProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const [isPending, startTransition] = useTransition();
+
+  const [isNavigating, setIsNavigating] = useState(false);
+  const [navDirection, setNavDirection] = useState<'forward' | 'backward' | null>(null);
 
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
@@ -37,19 +41,39 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
 
   const currentIndex = getCurrentIndex();
 
-  // Prefetch adjacent routes for instant transitions
+  // Reset transition state whenever pathname finishes updating
   useEffect(() => {
-    if (currentIndex >= 0) {
-      if (currentIndex > 0) {
-        router.prefetch(DOCK_TABS[currentIndex - 1]);
-      }
-      if (currentIndex < DOCK_TABS.length - 1) {
-        router.prefetch(DOCK_TABS[currentIndex + 1]);
-      }
-    }
-  }, [currentIndex, router]);
+    setIsNavigating(false);
+    setNavDirection(null);
+  }, [pathname]);
+
+  // Safety fallback: auto-reset transition if navigation takes longer than 2.5s
+  useEffect(() => {
+    if (!isNavigating) return;
+    const fallbackTimer = setTimeout(() => {
+      setIsNavigating(false);
+      setNavDirection(null);
+    }, 2500);
+    return () => clearTimeout(fallbackTimer);
+  }, [isNavigating]);
+
+  // Aggressive idle prefetching of all 5 dock tabs into Next.js router memory
+  useEffect(() => {
+    const prefetchTimer = setTimeout(() => {
+      DOCK_TABS.forEach((tab) => {
+        router.prefetch(tab);
+      });
+    }, 150);
+
+    return () => clearTimeout(prefetchTimer);
+  }, [router]);
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    // If navigation transition is currently in progress, ignore new touch gestures to avoid queue freezes
+    if (isNavigating || isPending) {
+      return;
+    }
+
     if (e.touches.length !== 1) {
       touchStartX.current = null;
       touchStartY.current = null;
@@ -58,7 +82,7 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
 
     const target = e.target as HTMLElement;
 
-    // Ignore swipes starting inside inputs, sliders, scrollables, or marked elements
+    // Ignore swipes starting inside inputs, sliders, dialogs, or designated containers
     if (
       target.closest('input, textarea, select, [role="slider"], [role="dialog"], [data-no-swipe]') ||
       target.closest('.no-swipe')
@@ -67,11 +91,11 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
       return;
     }
 
-    // Check if target or ancestor has horizontal scroll enabled
+    // Check if target or any ancestor has horizontal scroll enabled
     let el: HTMLElement | null = target;
     while (el && el !== e.currentTarget) {
-      const overflowX = window.getComputedStyle(el).overflowX;
-      if (overflowX === 'auto' || overflowX === 'scroll') {
+      const style = window.getComputedStyle(el);
+      if (style.overflowX === 'auto' || style.overflowX === 'scroll') {
         if (el.scrollWidth > el.clientWidth) {
           isExcludedTarget.current = true;
           return;
@@ -88,6 +112,8 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
 
   const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
     if (
+      isNavigating ||
+      isPending ||
       isExcludedTarget.current ||
       touchStartX.current === null ||
       touchStartY.current === null
@@ -110,13 +136,37 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
     const absDeltaX = Math.abs(deltaX);
     const absDeltaY = Math.abs(deltaY);
 
-    // 1. Gesture must be predominantly horizontal (at least 1.5x larger than vertical)
-    if (absDeltaX < absDeltaY * 1.5) return;
+    // Gesture must be predominantly horizontal (at least 1.4x larger than vertical)
+    if (absDeltaX < absDeltaY * 1.4) return;
 
-    // 2. Minimum distance threshold (55px) and max duration (650ms) to avoid slow drags
-    if (absDeltaX < 55 || deltaTime > 650) return;
+    // Minimum distance threshold (40px) and max duration (600ms)
+    if (absDeltaX < 40 || deltaTime > 600) return;
 
-    // Haptic tap feedback on supported mobile devices
+    // Determine target index based on user's exact specification:
+    // SWIPE RIGHT (deltaX > 0): Advance forward along the dock (Home -> Workouts -> My Plan -> Diet -> Habits)
+    // SWIPE LEFT (deltaX < 0): Move backward along the dock (Habits -> Diet -> My Plan -> Workouts -> Home)
+    let nextIndex = -1;
+    let direction: 'forward' | 'backward' | null = null;
+
+    if (deltaX > 0) {
+      // Swiping rightward moves to next tab
+      if (currentIndex < DOCK_TABS.length - 1) {
+        nextIndex = currentIndex + 1;
+        direction = 'forward';
+      }
+    } else if (deltaX < 0) {
+      // Swiping leftward moves to previous tab
+      if (currentIndex > 0) {
+        nextIndex = currentIndex - 1;
+        direction = 'backward';
+      }
+    }
+
+    if (nextIndex === -1 || !direction) return;
+
+    const targetUrl = DOCK_TABS[nextIndex];
+
+    // Trigger immediate haptic tap feedback if supported
     if (typeof window !== 'undefined' && 'vibrate' in navigator) {
       try {
         navigator.vibrate?.(12);
@@ -125,27 +175,46 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
       }
     }
 
-    // Swipe Left (finger moves right to left): Navigate to NEXT tab
-    if (deltaX < 0) {
-      if (currentIndex < DOCK_TABS.length - 1) {
-        router.push(DOCK_TABS[currentIndex + 1]);
-      }
-    }
-    // Swipe Right (finger moves left to right): Navigate to PREVIOUS tab
-    else if (deltaX > 0) {
-      if (currentIndex > 0) {
-        router.push(DOCK_TABS[currentIndex - 1]);
-      }
-    }
+    // Trigger instant visual state transition (0ms UI feedback eliminates "struck" feeling)
+    setIsNavigating(true);
+    setNavDirection(direction);
+
+    // React 19 non-blocking transition for smooth 60fps route push
+    startTransition(() => {
+      router.push(targetUrl);
+    });
   };
+
+  const isTransitionActive = isNavigating || isPending;
 
   return (
     <div
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
-      className="w-full flex-1 flex flex-col min-h-0"
+      className="relative w-full flex-1 flex flex-col min-h-0"
     >
-      {children}
+      {/* Sleek Top Glow Loader during Tab Transition */}
+      {isTransitionActive && (
+        <div
+          className="fixed top-0 inset-x-0 z-50 h-[2.5px] bg-gradient-to-r from-transparent via-[#ff2a3b] to-transparent shadow-[0_0_14px_#ff2a3b] animate-pulse pointer-events-none"
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Main Tab Content with GPU-Accelerated Hardware Smooth Slide */}
+      <div
+        className="w-full flex-1 flex flex-col min-h-0 transition-all duration-200 ease-out will-change-[transform,opacity]"
+        style={{
+          transform: isTransitionActive
+            ? navDirection === 'forward'
+              ? 'translate3d(-24px, 0, 0)'
+              : 'translate3d(24px, 0, 0)'
+            : 'translate3d(0, 0, 0)',
+          opacity: isTransitionActive ? 0.65 : 1,
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
