@@ -32,10 +32,10 @@ function SwipeNavigationInner({ children }: SwipeNavigationProps) {
   const getCurrentIndex = useCallback((): number => {
     if (!pathname) return -1;
     if (pathname === '/app') return 0;
-    if (pathname === '/app/workout-plans') return 1;
-    if (pathname === '/app/my-workout-plan') return 2;
-    if (pathname === '/app/diet-foods') return 3;
-    if (pathname === '/app/habits') return 4;
+    if (pathname.startsWith('/app/workout-plans') || pathname.startsWith('/app/workouts')) return 1;
+    if (pathname.startsWith('/app/my-workout-plan') || pathname.startsWith('/app/my-plan')) return 2;
+    if (pathname.startsWith('/app/diet-foods') || pathname.startsWith('/app/diet')) return 3;
+    if (pathname.startsWith('/app/habits')) return 4;
     return -1;
   }, [pathname]);
 

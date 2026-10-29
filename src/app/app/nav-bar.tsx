@@ -249,7 +249,9 @@ export function AppNavBar() {
       >
         <div className="grid grid-cols-5 h-16 items-center px-1">
           {MOBILE_DOCK_ITEMS.map((item) => {
-            const isActive = pathname.startsWith(item.href);
+            const isActive = item.matchExact
+              ? pathname === item.href
+              : (item.href === '/app' ? pathname === '/app' : pathname.startsWith(item.href));
             const Icon = item.icon;
 
             return (
