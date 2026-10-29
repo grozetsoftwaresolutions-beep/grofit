@@ -1,12 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
 import NeonReveal from '@/components/NeonReveal';
 
 // ─── Set to true to replay the intro animation on every page refresh (useful for testing) ───
 const SHOW_INTRO_EVERY_TIME = false;
 
-const SESSION_STORAGE_KEY = 'groffit_intro_seen';
+const SESSION_STORAGE_KEY = 'grofit_intro_seen';
 
 export default function IntroOverlay() {
   const [isVisible, setIsVisible] = useState(false);
@@ -86,7 +87,7 @@ export default function IntroOverlay() {
       }`}
       role="dialog"
       aria-modal="true"
-      aria-label="Welcome to GROFFIT"
+      aria-label="Welcome to GROFIT"
     >
       {/* Ambient background glow behind the neon reveal */}
       <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-gradient-to-b from-[#ff2a3b]/06 via-[#ff2a3b]/02 to-transparent blur-3xl" />
@@ -119,6 +120,18 @@ export default function IntroOverlay() {
           className="w-full flex flex-col items-center justify-center py-8"
         >
           <div className="flex flex-col items-center text-center">
+            {/* ── Official Brand Emblem ── */}
+            <div className="relative mb-3 h-14 w-14 sm:h-16 sm:w-16 overflow-hidden rounded-2xl bg-[#0a0a0a]/80 border border-[#ff2a3b]/40 p-1.5 shadow-[0_0_25px_rgba(255,42,59,0.35)] flex items-center justify-center">
+              <Image
+                src="/images/grofit-crest.png"
+                alt="GroFit Official Emblem"
+                width={64}
+                height={64}
+                className="h-full w-full object-contain scale-105"
+                priority
+              />
+            </div>
+
             {/* Athletic Brand Monospace Eyebrow */}
             <div className="flex items-center gap-2 mb-3">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff2a3b] animate-pulse" />
@@ -130,7 +143,7 @@ export default function IntroOverlay() {
 
             {/* Main Brand Condensed Typography */}
             <h1 className="font-display text-6xl sm:text-8xl md:text-9xl font-black tracking-tight text-white uppercase leading-none drop-shadow-[0_0_10px_rgba(255,42,59,0.2)]">
-              GROF<span className="text-[#ff2a3b]">FIT</span>
+              GRO<span className="text-[#ff2a3b]">FIT</span>
             </h1>
 
             {/* Subtitle */}

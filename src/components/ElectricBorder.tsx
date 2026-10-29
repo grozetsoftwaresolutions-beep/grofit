@@ -259,22 +259,22 @@ void main() {
   float frameFade = smoothstep(0.0, 14.0, min(inset.x, inset.y));
 
   float edge = abs(d);
-  float inward = d < 0.0 ? exp(d / 14.0) : 1.0;
-  float bloom = (exp(-edge / 3.0) * 0.1 + exp(-edge / 16.0) * 0.05 * inward) * uGlow * (1.0 + heat * 0.6) * shown;
+  float inward = d < 0.0 ? exp(d / 12.0) : 1.0;
+  float bloom = (exp(-edge / 2.5) * 0.12 + exp(-edge / 8.0) * 0.04 * inward) * uGlow * (1.0 + heat * 0.3) * shown;
   light += uGlowColor * bloom;
   energy += bloom;
 
-  float bendAmp = uSpread * 16.0 * (1.0 + heat * 0.35);
-  float rippleAmp = uSpread * 6.0 * (1.0 + heat * 0.3);
-  float crinkleAmp = uChaos * 4.5 * (1.0 + heat * 0.3);
+  float bendAmp = uSpread * 4.0;
+  float rippleAmp = uSpread * 2.0;
+  float crinkleAmp = min(uChaos * 2.5, 0.8);
   float squeeze = min(1.0, 34.0 / max((bendAmp + rippleAmp) * 1.6 + crinkleAmp, 1e-3));
   bendAmp *= squeeze;
   rippleAmp *= squeeze;
   crinkleAmp *= squeeze;
-  float reach = (bendAmp * 1.9 + rippleAmp + crinkleAmp * 1.6) * 1.3 + uThickness * 14.0 + 8.0;
+  float reach = (bendAmp * 1.5 + rippleAmp + crinkleAmp * 1.2) + uThickness * 6.0 + 4.0;
   if (edge < reach && shown > 0.0) {
-    float fade = smoothstep(reach, reach * 0.55, edge);
-    float count = min(uStrands + heat * 1.2, 6.0);
+    float fade = smoothstep(reach, reach * 0.5, edge);
+    float count = min(uStrands, 6.0);
     float slopeScale = 1.0 / uPerimeter;
     for (int i = 0; i < 6; i++) {
       float fi = float(i);
@@ -282,7 +282,7 @@ void main() {
       float present = clamp(count - fi, 0.0, 1.0);
       uint seed = uint(i) * 7u + 3u;
       float lead = i == 0 ? 1.0 : 0.0;
-      float range = mix(1.35 + fi * 0.18, 0.7, lead);
+      float range = mix(1.2, 0.8, lead);
       float x = s * slopeScale;
       vec2 a = ring(vec2(x * uCells.x, t * 0.7 + fi * 3.1), uCells.x, seed);
       vec2 b = ring(vec2(x * uCells.y, t * 1.9 + fi * 1.7), uCells.y, seed + 1u);
@@ -293,18 +293,18 @@ void main() {
         ((a.y * uCells.x * bendAmp + b.y * uCells.y * rippleAmp) * range +
           (c.y * uCells.z + e.y * 0.35 * uCells.w) * crinkleAmp) *
         slopeScale;
-      float drift = lead > 0.5 ? 0.0 : wobble(fi * 7.3, seed + 9u) * 2.5 * uSpread;
+      float drift = lead > 0.5 ? 0.0 : wobble(fi * 7.3, seed + 9u) * 0.5 * uSpread;
       offset += drift;
       float across = (d - offset) / sqrt(1.0 + slope * slope);
       float spread = d - a.x * bendAmp * range - drift;
       float swell = 0.5 + 0.5 * ring(vec2(x * uSoft.y, t * 2.0 + fi * 5.1), uSoft.y, seed + 8u).x;
-      float w = uThickness * mix(0.55, 1.0, lead) * (0.5 + swell);
-      float vis = mix(0.3 + 0.45 * smoothstep(-0.25, 0.2, ring(vec2(x * uSoft.x, t * 0.5 + fi * 3.7), uSoft.x, seed + 5u).x), 1.0, lead);
-      float spark = 1.0 - uFlicker * 0.3 * (0.5 + 0.5 * wobble(t * 13.0 + fi * 2.3, seed + 6u));
-      float weight = max(vis, heat * 0.6) * spark * fade * present * (0.7 + 0.6 * swell);
+      float w = uThickness * mix(0.65, 1.0, lead) * (0.6 + swell * 0.4);
+      float vis = mix(0.4 + 0.4 * smoothstep(-0.25, 0.2, ring(vec2(x * uSoft.x, t * 0.5 + fi * 3.7), uSoft.x, seed + 5u).x), 1.0, lead);
+      float spark = 1.0 - uFlicker * 0.25 * (0.5 + 0.5 * wobble(t * 13.0 + fi * 2.3, seed + 6u));
+      float weight = max(vis, heat * 0.5) * spark * fade * present * (0.8 + 0.4 * swell);
       vec2 g = glowShape(across, spread, w) * weight;
       g.y *= inward;
-      float haze = uGlow * (1.0 + heat * 0.5) * (1.0 - uInk * 0.7);
+      float haze = uGlow * (1.0 + heat * 0.4) * (1.0 - uInk * 0.7);
       light += uCore * g.x + uGlowColor * g.y * haze;
       energy += g.x + g.y * haze;
       hot += exp(-across * across / (w * w * 0.16)) * lead * weight;
@@ -314,7 +314,9 @@ void main() {
     hot *= shown;
   }
 
-  for (int i = 0; i < ${ARCS}; i++) addArc(p, uArcEnds[i], uArcShape[i], t, light, energy, hot);
+  if (uIntensity > 0.0) {
+    for (int i = 0; i < ${ARCS}; i++) addArc(p, uArcEnds[i], uArcShape[i], t, light, energy, hot);
+  }
 
   float breath = 1.0 + uFlicker * 0.5 * wobble(t * 4.6 + 7.0, 3u);
   float gain = uIntensity * breath * (1.0 + heat * 0.25) * 1.4;
@@ -466,15 +468,15 @@ const ElectricBorder = ({
   color = '#f43f5e',
   glowColor,
   speed = 0.5,
-  chaos = 0.25,
-  spread = 0.3,
-  thickness = 0.7,
+  chaos = 0.08,
+  spread = 0,
+  thickness = 0.8,
   strands = 2,
-  glow = 0.6,
+  glow = 0.5,
   intensity = 0.8,
-  arcs = 1,
-  flicker = 0.5,
-  borderRadius = 19,
+  arcs = 0,
+  flicker = 0.3,
+  borderRadius = 20,
   offset = 0,
   active = true,
   intro = true,
@@ -778,7 +780,7 @@ const ElectricBorder = ({
       const along = nearestOn(path, pointer.x - size.width / 2, pointer.y - size.height / 2);
       pulses.push({ s: along, born: performance.now() });
       if (pulses.length > PULSES) pulses.shift();
-      if (sparks.length < ARCS) sparks.push(spawnArc(time, along));
+      if (s.arcs > 0 && sparks.length < ARCS) sparks.push(spawnArc(time, along));
       wake();
     };
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
   Menu,
@@ -88,11 +89,18 @@ export function AppNavBar() {
               href="/app"
               className="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff2a3b] rounded-xl"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#ff2a3b] text-white font-display font-black text-base shadow-sm transition group-hover:scale-105">
-                G
+              <div className="relative flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+                <Image
+                  src="/images/grofit-crest.png"
+                  alt="GroFit Logo"
+                  width={44}
+                  height={44}
+                  className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_0_12px_rgba(255,42,59,0.35)]"
+                  priority
+                />
               </div>
-              <span className="font-display text-xl sm:text-2xl font-black tracking-tight text-[#ffffff]">
-                {STRINGS.app.title}
+              <span className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#ffffff]">
+                GRO<span className="text-[#ff2a3b]">FIT</span>
               </span>
               <span className="hidden rounded-full border border-[#ffffff]/10 bg-[#0d0d0d] px-2 py-0.5 text-[10px] font-mono tracking-widest text-[#ff2a3b] uppercase sm:inline-block">
                 TRAIN WITH INTENT

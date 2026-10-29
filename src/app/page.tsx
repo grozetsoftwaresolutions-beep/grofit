@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { createClient } from '@/lib/supabase/client';
 import ElectricBorder from '@/components/ElectricBorder';
@@ -187,9 +188,19 @@ export default function HomePage() {
       {/* ─── STICKY MINIMAL HEADER (Matching Kinetik Header) ─── */}
       <header className="sticky top-0 z-50 border-b border-[#ffffff]/10 bg-[#000000]/90 backdrop-blur-xl">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <Link href="/" className="flex items-center gap-3 group">
-            <span className="font-display text-2xl font-black tracking-tight text-[#ffffff]">
-              GROFIT
+          <Link href="/" className="flex items-center gap-2.5 group">
+            <div className="relative flex items-center justify-center transition-transform duration-200 group-hover:scale-110">
+              <Image
+                src="/images/grofit-crest.png"
+                alt="GroFit Logo"
+                width={44}
+                height={44}
+                className="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-[0_0_12px_rgba(255,42,59,0.35)]"
+                priority
+              />
+            </div>
+            <span className="font-display text-2xl sm:text-3xl font-black tracking-tight text-[#ffffff]">
+              GRO<span className="text-[#ff2a3b]">FIT</span>
             </span>
             <span className="hidden sm:inline-block text-[11px] font-mono tracking-widest text-[#a1a1aa] uppercase border-l border-[#ffffff]/15 pl-3">
               TRAIN WITH INTENT
@@ -842,8 +853,17 @@ export default function HomePage() {
       {/* ─── FOOTER (Matching Kinetik Minimal Athletic Footer) ─── */}
       <footer className="border-t border-[#ffffff]/10 py-10 bg-black/60 text-[#71717a] text-xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-mono">
-            <span className="font-display font-black text-base text-[#ffffff]">GROFIT</span>
+          <div className="flex items-center gap-2.5 font-mono">
+            <div className="relative h-8 w-8 flex items-center justify-center">
+              <Image
+                src="/images/grofit-crest.png"
+                alt="GroFit Logo"
+                width={32}
+                height={32}
+                className="h-full w-full object-contain"
+              />
+            </div>
+            <span className="font-display font-black text-base text-[#ffffff]">GRO<span className="text-[#ff2a3b]">FIT</span></span>
             <span>/</span>
             <span className="text-[#a1a1aa]">TRAIN WITH INTENT</span>
           </div>
