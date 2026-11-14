@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
 import { getAuthenticatedSupabaseClient } from '@/lib/supabase/auth-helper';
+import { getAdminSupabaseClient } from '@/lib/supabase/admin';
 import {
   isValidUUID,
   validateSets,
   validateReps,
   validateSortOrder,
   validateVideoUrl,
+  validateName,
 } from '@/lib/workout/domain';
 
 export async function PATCH(
@@ -47,14 +49,66 @@ export async function PATCH(
       );
     }
 
-    const { sets, reps, sortOrder, videoUrl } = body as {
+    const { sets, reps, sortOrder, videoUrl, exerciseName, name } = body as {
       sets?: unknown;
       reps?: unknown;
       sortOrder?: unknown;
       videoUrl?: unknown;
+      exerciseName?: unknown;
+      name?: unknown;
     };
 
     const updates: Record<string, unknown> = {};
+
+    const rawName = exerciseName !== undefined ? exerciseName : name;
+    if (rawName !== undefined) {
+      const nameVal = validateName(rawName, 'Workout name');
+      if (!nameVal.valid) {
+        return NextResponse.json(
+          {
+            error: {
+              code: 'VALIDATION_ERROR',
+              message: nameVal.error || 'Invalid workout name.',
+              fieldErrors: { exerciseName: nameVal.error || 'Invalid workout name.' },
+            },
+          },
+          { status: 400 }
+        );
+      }
+      updates.exercise_name_snapshot = nameVal.value;
+
+      // Link exercise_id to existing or newly created custom exercise
+      const { data: existingEx } = await supabase
+        .from('exercises')
+        .select('id, name')
+        .ilike('name', nameVal.value)
+        .limit(1)
+        .maybeSingle();
+
+      if (existingEx?.id) {
+        updates.exercise_id = existingEx.id;
+      } else {
+        try {
+          const adminClient = getAdminSupabaseClient();
+          const { data: createdEx, error: createError } = await adminClient
+            .from('exercises')
+            .insert({
+              name: nameVal.value,
+              muscle_group: 'Full Body',
+              source_reference: 'Custom Workout',
+              is_active: true,
+            })
+            .select('id')
+            .single();
+
+          if (!createError && createdEx?.id) {
+            updates.exercise_id = createdEx.id;
+          }
+        } catch (e) {
+          console.error('Failed to auto-create exercise for renamed workout:', e);
+        }
+      }
+    }
 
     if (sets !== undefined) {
       const setsValidation = validateSets(sets);

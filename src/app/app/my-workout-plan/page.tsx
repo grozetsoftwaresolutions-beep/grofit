@@ -483,10 +483,16 @@ export default function MyWorkoutPlanPage() {
     }
   }
 
-  // Save edited sets, reps & videoUrl
+  // Save edited workout name, sets, reps & videoUrl
   async function handleSaveEditedEntry() {
     if (!currentPlan || !editingEntry) return;
     setEditEntryError(null);
+
+    const nameValidation = validateName(editingEntry.exerciseName, 'Workout name');
+    if (!nameValidation.valid) {
+      setEditEntryError(nameValidation.error || 'Workout name cannot be empty.');
+      return;
+    }
 
     const setsValidation = validateSets(editingEntry.sets);
     if (!setsValidation.valid) {
@@ -507,6 +513,7 @@ export default function MyWorkoutPlanPage() {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            exerciseName: nameValidation.value,
             sets: setsValidation.value,
             reps: repsValidation.value,
             videoUrl: editingEntry.videoUrl ? editingEntry.videoUrl.trim() : null,
@@ -1507,20 +1514,37 @@ export default function MyWorkoutPlanPage() {
         </div>
       )}
 
-      {/* Modal: Edit Sets, Reps & YouTube Tutorial Link */}
+      {/* Modal: Edit Workout Name, Sets, Reps & YouTube Tutorial Link */}
       {editEntryModalOpen && editingEntry && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
-          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center bg-black/80 p-0 sm:p-4 backdrop-blur-md">
+          <div className="w-full max-w-sm rounded-t-3xl sm:rounded-2xl border border-[#ff2a3b]/30 bg-[#0d0d0d] p-6 pb-24 sm:pb-6 shadow-2xl max-h-[90vh] overflow-y-auto">
             <div className="mx-auto mb-3 h-1.5 w-12 rounded-full bg-[#ffffff]/20 sm:hidden" />
             <h3 className="font-display text-lg font-bold uppercase tracking-tight text-[#ffffff]">
-              Edit Prescription: {editingEntry.exerciseName}
+              Edit Workout: {editingEntry.exerciseName}
             </h3>
 
             {editEntryError && (
               <p className="mt-2 text-xs font-mono text-red-400">{editEntryError}</p>
             )}
 
-            <div className="mt-4 grid grid-cols-2 gap-3">
+            {/* Workout Name Field */}
+            <div className="mt-4">
+              <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
+                Workout Name
+              </label>
+              <input
+                type="text"
+                maxLength={100}
+                value={editingEntry.exerciseName}
+                onChange={(e) =>
+                  setEditingEntry({ ...editingEntry, exerciseName: e.target.value })
+                }
+                placeholder="e.g. Lat Pull Down"
+                className="mt-1 w-full rounded-xl border border-[#ffffff]/15 bg-[#000000] px-3.5 py-2.5 text-xs sm:text-sm text-[#ffffff] placeholder-[#71717a] focus:border-[#ff2a3b] focus:outline-none min-h-[44px]"
+              />
+            </div>
+
+            <div className="mt-3.5 grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-xs font-mono font-bold uppercase tracking-wider text-[#a1a1aa]">
                   Sets (1–20)
